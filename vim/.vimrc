@@ -10,21 +10,34 @@ source ~/.vim_runtime/my_configs.vim
 catch
 endtry
 
+set encoding=utf-8
+set t_Co=256
+
+set cursorline
+
+set tabstop=4 softtabstop=0 shiftwidth=4 smarttab
+set backspace=indent,eol,start
+
 " set number lines. When in NORMAL mode is absolute number. When in INSERT
 " isrelative number.
 set number
 set relativenumber
+autocmd InsertEnter * :set norelativenumber 
 autocmd InsertLeave * :set relativenumber
-autocmd InsertEnter * :set norelativenumber
 
 " sets vim's working directory to be the same as the file's directory
 set autochdir
 
 set backspace=indent,eol,start
-
 " for indents that are 4 space characters
 " as for this answer https://stackoverflow.com/a/1878983
-set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab
+" set tabstop=4 softtabstop=4 expandtab shiftwidth=4 smarttab
+set tabstop=4 softtabstop=4 shiftwidth=4
+" Charactere placeholder for tabulation [2 char]
+let _tab_placeholder='»·'
+" Charactere placeholder for space [1 char]
+let _space_placeholder='·'
+execute "set list listchars=tab:". _tab_placeholder .",trail:". _space_placeholder
 
 " adding mouse support
 set mouse=a
@@ -38,6 +51,3 @@ highlight ColorColumn ctermbg=8
 
 set cursorline
 hi CursorLine term=bold cterm=bold guibg=Grey40
-
-" allowing transparecy
-hi Normal guibg=NONE ctermbg=NONE
