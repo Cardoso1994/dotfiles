@@ -51,3 +51,6 @@ highlight ColorColumn ctermbg=8
 
 set cursorline
 hi CursorLine term=bold cterm=bold guibg=Grey40
+
+" allowing transparecy
+hi Normal guibg=NONE ctermbg=NONE
