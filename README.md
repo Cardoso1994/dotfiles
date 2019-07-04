@@ -1,2 +1,2 @@
-# dotfiles
-various configuration files
+# DOTFILES
+Various configuration files
