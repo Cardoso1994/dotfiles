@@ -1,5 +1,16 @@
 # i3config
 ---> va en ~/.config/i3/config
----> usa font awesome
+
+---> [font awesome 4.7](https://github.com/FortAwesome/Font-Awesome/releases/tag/v4.7.0)
+
 ---> usa compton
+
 ---> usa rofi
+
+---> [NERDFonts](https://www.nerdfonts.com/#downloads). Hack y Anonymous
+
+---> ranger file manager
+
+---> w3m para visualizar imagenes con ranger
+
+---> deepin terminal
