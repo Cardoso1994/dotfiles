@@ -110,11 +110,11 @@ bindsym $mod+a focus parent
 set $workspace1 "1: "
 set $workspace2 "2: "
 set $workspace3 "3: "
-set $workspace4 "4:  PDF"
-set $workspace5 "5:  Office"
-set $workspace6 "6: Multimedia"
+set $workspace4 "4: "
+set $workspace5 "5: "
+set $workspace6 "6: "
 set $workspace9 "9:__ __"
-set $workspace10 "0:  Music"
+set $workspace10 "0: "
 
 # switch to workspace
 bindsym $mod+1 workspace $workspace1
@@ -218,7 +218,8 @@ exec_always --no-startup-id nitrogen --restore
 exec_always compton -f
 exec_always --no-startup-id blueman-applet
 exec_always --no-startup-id megasync
-exec_always --no-startup-id dropbox
+exec_always --no-startup-id dropbox start
+exec_always --no-startup-id redshift-gtk
 
 #assigning specific workspace for specific programs
 assign [class="Deepin-terminal"] $workspace1
@@ -228,6 +229,7 @@ assign [class="URxvt"] $workspace1
 assign [class="Spyder"] $workspace2
 assign [class="RStudio"] $workspace2
 assign [class="TeXstudio"] $workspace2
+assign [class="octave-gui"] $workspace2
 
 assign [class="Firefox"] $workspace3
 
@@ -251,3 +253,7 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute s
 # Sreen brightness controls
 bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
+
+bindsym $mod+p exec --no-startup-id xinput set-prop 12 "Device Enabled" 0 #Turn off Touchpad
+
+bindsym $mod+o exec --no-startup-id xinput set-prop 12 "Device Enabled" 1 #Turn on Touchpad
