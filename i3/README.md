@@ -13,4 +13,4 @@
 
 ---> w3m para visualizar imagenes con ranger
 
----> deepin terminal
+---> URXVT
