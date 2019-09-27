@@ -9,12 +9,24 @@
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
+# Defining keys
+# windows = mod4
+# alt = mod1
+# # Control = CTRL key
+# Shift = SHIFT key
+# Escape = ESCAPE key
+# Return = ENTER or RETURN key
+# KP_Enter = Keypad Enter
+# Pause = PAUSE key
+# Print = PRINT key
+# Tab = TAB key
+
 set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
 #font pango:monospace 13
-font pango:Hack Nerd Font 11
+font pango:Hack Nerd Font 13
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -29,6 +41,12 @@ font pango:Hack Nerd Font 11
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
+
+# defining movement keys
+set $left   h
+set $down   j
+set $up     k
+set $right  l
 
 # setting variables for color configuration
 set $bg-color               #343a47
@@ -56,10 +74,10 @@ bindsym $mod+d exec rofi -show drun
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # change focus
-bindsym $mod+h focus left
-bindsym $mod+j focus down
-bindsym $mod+k focus up
-bindsym $mod+l focus right
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -68,10 +86,10 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+h move left
-bindsym $mod+Shift+j move down
-bindsym $mod+Shift+k move up
-bindsym $mod+Shift+l move right
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -107,38 +125,40 @@ bindsym $mod+a focus parent
 
 # setting variable names for workspaces
 # web page for icons https://fontawesome.com/cheatsheet
-set $workspace1 "1: "
-set $workspace2 "2: "
-set $workspace3 "3: "
-set $workspace4 "4: "
-set $workspace5 "5: "
-set $workspace6 "6: "
-set $workspace9 "9:__ __"
-set $workspace10 "0: "
+set $ws1 "1: "
+set $ws2 "2: "
+set $ws3 "3: "
+set $ws4 "4: "
+set $ws5 "5: "
+set $ws6 "6: "
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9:__ __"
+set $ws10 "0: "
 
 # switch to workspace
-bindsym $mod+1 workspace $workspace1
-bindsym $mod+2 workspace $workspace2
-bindsym $mod+3 workspace $workspace3
-bindsym $mod+4 workspace $workspace4
-bindsym $mod+5 workspace $workspace5
-bindsym $mod+6 workspace $workspace6
-bindsym $mod+7 workspace 7
-bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace $workspace9
-bindsym $mod+0 workspace $workspace10
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace $workspace1
-bindsym $mod+Shift+2 move container to workspace $workspace2
-bindsym $mod+Shift+3 move container to workspace $workspace3
-bindsym $mod+Shift+4 move container to workspace $workspace4
-bindsym $mod+Shift+5 move container to workspace $workspace5
-bindsym $mod+Shift+6 move container to workspace $workspace6
-bindsym $mod+Shift+7 move container to workspace 7
-bindsym $mod+Shift+8 move container to workspace 8
-bindsym $mod+Shift+9 move container to workspace $workspace9
-bindsym $mod+Shift+0 move container to workspace $workspace10
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -149,17 +169,18 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # exit with options (lock, , logout, suspend, hibernate, reboot, shutdown)
-bindsyn $mod+X mode "$mode_system"
+bindsym $mod+X mode "$mode_system"
 set $mode_system System (k) lock, (l) logout, (u) suspend, (h) hibernate), (r) reboot, (s) shutdown
 
 mode "$mode_system"{
+        # must give exec permission to i3exit.sh
         bindsym k exec --no-startup-id ~/.config/i3/scripts/i3exit.sh lock, mode "default"
         bindsym l exec --no-startup-id ~/.config/i3/scripts/i3exit.sh logout, mode "default"
         bindsym u exec --no-startup-id ~/.config/i3/scripts/i3exit.sh suspend, mode "default"
         bindsym h exec --no-startup-id ~/.config/i3/scripts/i3exit.sh hibernate, mode "default"
         bindsym r exec --no-startup-id ~/.config/i3/scripts/i3exit.sh reboot, mode "default"
         bindsym s exec --no-startup-id ~/.config/i3/scripts/i3exit.sh shutdown, mode "default"
-        
+
         # back to normal: Enter or Escape
         bindsym Return mode "default"
         bindsym Escape mode "default"
@@ -221,18 +242,15 @@ bar {
         }
 }
 
-
 # custom keybinding for locking screen
 bindysm $mod+shift+x exec i3lock
 bindsym $mod+Shift+m move workspace to output right
 
-# commands to always be executed
+# commands to always be executed at the start of the session
 #
 # current screenlayout
 exec_always $HOME/.screenlayout/twoScreensHome.sh
 exec --no-startup-id nm-applet #network manager
-#exec_always --no-startup-id feh --bg-fill ~/Downloads/black-hole.jpg # wallpaper 
-#exec_always --no-startup-id feh --bg-scale ~/Downloads/6098.jpg # wallpaper 
 exec_always --no-startup-id nitrogen --restore
 exec_always compton -f
 exec_always --no-startup-id blueman-applet
@@ -241,39 +259,39 @@ exec_always --no-startup-id dropbox start
 exec_always --no-startup-id redshift-gtk
 
 #assigning specific workspace for specific programs
-assign [class="Deepin-terminal"] $workspace1
-assign [class="Xfce4-terminal"] $workspace1
-assign [class="URxvt"] $workspace1
+assign [class="URxvt"] $ws1
 
-assign [class="Spyder"] $workspace2
-assign [class="RStudio"] $workspace2
-assign [class="TeXstudio"] $workspace2
-assign [class="octave-gui"] $workspace2
+assign [class="Spyder"] $ws2
+assign [class="RStudio"] $ws2
+assign [class="TeXstudio"] $ws2
+assign [class="octave-gui"] $ws2
 
-assign [class="Firefox"] $workspace3
+assign [class="Firefox"] $ws3
 
-assign [class="Xreader"] $workspace4
+assign [class="Xreader"] $ws4
 
-assign [class="libreoffice-startcenter"] $workspace5
-assign [class="libreoffice-writer"] $workspace5
-assign [class="libreoffice-impress"] $workspace5
-assign [class="libreoffice-calc"] $workspace5
+assign [class="libreoffice-startcenter"] $ws5
+assign [class="libreoffice-writer"] $ws5
+assign [class="libreoffice-impress"] $ws5
+assign [class="libreoffice-calc"] $ws5
 
-assign [class="feh"] $workspace6
-assign [class="Pix"] $workspace6
-assign [class="Matplotlib"] $workspace6
+assign [class="feh"] $ws6
+assign [class="Pix"] $ws6
+assign [class="Matplotlib"] $ws6
 
 # enabling controlvolume and brightness
 # Pulse Audio controls
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
 
 # Sreen brightness controls
-bindsym XF86MonBrightnessUp exec xbacklight -inc 10 # increase screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 10 # decrease screen brightness
+bindsym XF86MonBrightnessUp exec xbacklight -inc 10 # increase brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 10 # decrease brightness
 
 # se obtiene ID con el comando xinput
-bindsym $mod+p exec --no-startup-id xinput set-prop 12 "Device Enabled" 0 #Turn off Touchpad
+# #Turn off Touchpad
+bindsym $mod+p exec --no-startup-id xinput set-prop 12 "Device Enabled" 0
 
-bindsym $mod+o exec --no-startup-id xinput set-prop 12 "Device Enabled" 1 #Turn on Touchpad
+#Turn on Touchpad
+bindsym $mod+o exec --no-startup-id xinput set-prop 12 "Device Enabled" 1
