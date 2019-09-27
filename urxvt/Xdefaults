@@ -41,12 +41,12 @@
 URxvt.intensityStyles:  false
 !Transparecy
 urxvt*transparent:      true
-urxvt*shading:          28
-urxvt*fading:           50
+urxvt*shading:          35
+urxvt*fading:           30
 urxvt*fadeColor:        #000000
-URxvt.font: xft:Hack Nerd Font:style=Regular:size=12, \
-           xft:UbuntuMono Nerd Font Mono:style=Regular:size=12, \
-            xft:Iosevka Nerd Font Mono:style=Regular:size=12
+URxvt.font: xft:Hack Nerd Font:style=Regular:size=15, \
+           xft:UbuntuMono Nerd Font Mono:style=Regular:size=15, \
+            xft:Iosevka Nerd Font Mono:style=Regular:size=15
 URxvt.letterSpace: 0
 URxvt.lineSpace: 0
 URxvt.geometry: 92x24
@@ -59,3 +59,5 @@ URxvt.scrollBar_right: false
 URxvt.urgentOnBell: true
 URxvt.depth: 24
 URxvt.iso14755: false
+
+URxvt.perl-ext-common: font-size

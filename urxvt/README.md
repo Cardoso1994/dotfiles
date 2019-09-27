@@ -1,5 +1,7 @@
-#URXVT
+# URxvt
+---> va en ~/.Xdefaults o ~/.Xresources [yo usé Xdefaults]
 
-El archivo va en ~/.Xdefaults o ~/.Xresources
+---> [NERDFonts](https://www.nerdfonts.com/). Hack, Iosevka y Ubuntu Mono
 
-Yo por ahora lo utilizo en ~/.Xdefaults
+---> utiliza [urxvt-font-size](https://github.com/majutsushi/urxvt-font-size)
+para control del tamaño de letra ON THE FLY
