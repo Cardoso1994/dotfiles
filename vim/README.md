@@ -8,7 +8,7 @@ I'm only adding the files in which I've edited / added some lines of configurati
 
 This modifications are basically some c / c++ flags for the [ale plugin](https://github.com/w0rp/ale) in order to check for syntax errors.
 
-I also added the [monokai theme](https://github.com/sickill/vim-monokai) and the [Archery theme](https://github.com/Badacadabra/vim-archery)
+I also added the [monokai theme](https://github.com/sickill/vim-monokai), the [Archery theme](https://github.com/Badacadabra/vim-archery) and the [Abstract theme](https://github.com/jdsimcoe/abstract.vim)
 
 The files that i modified (after _amix/vimrc_ installation, obviously) are:
 - .vim_runtime/vimrcs/plugins_config.vim
