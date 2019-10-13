@@ -1,52 +1,76 @@
-!! Colorscheme
+!!  !! Arc Dark Colorscheme
+!!
+!!  ! special
+!!  *.foreground:   #f8f8f8
+!!  *.background:   #171717
+!!  *.cursorColor:  #f8f8f8
+!!
+!!  ! black
+!!  *.color0:       #171717
+!!  *.color8:       #38252c
+!!
+!!  ! red
+!!  *.color1:       #d81765
+!!  *.color9:       #ff0000
+!!
+!!  ! green
+!!  *.color2:       #97d01a
+!!  *.color10:      #76b639
+!!
+!!  ! yellow
+!!  *.color3:       #ffa800
+!!  *.color11:      #e1a126
+!!
+!!  ! blue
+!!  *.color4:       #16b1fb
+!!  *.color12:      #289cd5
+!!
+!!  ! magenta
+!!  *.color5:       #ff2491
+!!  *.color13:      #ff2491
+!!
+!!  ! cyan
+!!  *.color6:       #0fdcb6
+!!  *.color14:      #0a9b81
+!!
+!!  ! white
+!!  *.color7:       #ebebeb
+!!  *.color15:      #f8f8f8
 
-! special
-*.foreground: #e2276f
-*.background: #141c21
-*.cursorColor: #afbfbf
 
-! black
-*.color0: #263640
-*.color8: #4a697d
+! Dracula Xresources palette
+*.foreground: #F8F8F2
+*.background: #282A36
+*.color0:     #000000
+*.color8:     #4D4D4D
+*.color1:     #FF5555
+*.color9:     #FF6E67
+*.color2:     #50FA7B
+*.color10:    #5AF78E
+*.color3:     #F1FA8C
+*.color11:    #F4F99D
+*.color4:     #BD93F9
+*.color12:    #CAA9FA
+*.color5:     #FF79C6
+*.color13:    #FF92D0
+*.color6:     #8BE9FD
+*.color14:    #9AEDFE
+*.color7:     #BFBFBF
+*.color15:    #E6E6E6
 
-! red
-*.color1: #d12f2c
-*.color9: #fa3935
-
-! green
-*.color2: #819400
-*.color10: #a4bd00
-
-! yellow
-*.color3: #b08500
-*.color11: #d9a400
-
-! blue
-*.color4: #2587cc
-*.color12: #2ca2f5
-
-! magenta
-*.color5: #696ebf
-*.color13: #8086e8
-
-! cyan
-*.color6: #289c93
-*.color14: #33c5ba
-
-! white
-*.color7: #bfbaac
-*.color15: #fdf6e3
 
 !! URxvt Appearance
 URxvt.intensityStyles:  false
 !Transparecy
 urxvt*transparent:      true
-urxvt*shading:          35
-urxvt*fading:           30
-urxvt*fadeColor:        #000000
-URxvt.font: xft:Hack Nerd Font:style=Regular:size=15, \
-           xft:UbuntuMono Nerd Font Mono:style=Regular:size=15, \
-            xft:Iosevka Nerd Font Mono:style=Regular:size=15
+urxvt*shading:          25
+
+# when not focused
+urxvt*fading:           15
+urxvt*fadeColor:        #171717
+URxvt.font: xft:Hack Nerd Font:style=Regular:size=13, \
+           xft:UbuntuMono Nerd Font Mono:style=Regular:size=13, \
+            xft:Iosevka Nerd Font Mono:style=Regular:size=13
 URxvt.letterSpace: 0
 URxvt.lineSpace: 0
 URxvt.geometry: 92x24
