@@ -10,6 +10,11 @@ This modifications are basically some c / c++ flags for the [ale plugin](https:/
 
 I also added the [monokai theme](https://github.com/sickill/vim-monokai), the [Archery theme](https://github.com/Badacadabra/vim-archery) and the [Abstract theme](https://github.com/jdsimcoe/abstract.vim)
 
+By now my FAV colorscheme is [Dracula](https://draculatheme.com/vim/)
+
+It also uses [vim-polyglot](https://github.com/sheerun/vim-polyglot) for better syntax highlighting.
+- After amix installation, clone vim-polyglot to .vim_runtime/my_plugins
+
 The files that i modified (after _amix/vimrc_ installation, obviously) are:
 - .vim_runtime/vimrcs/plugins_config.vim
 - .vim_runtime/vimrcs/extended.vim
