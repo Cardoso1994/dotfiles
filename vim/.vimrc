@@ -13,6 +13,7 @@ endtry
 set encoding=utf-8
 set t_Co=256
 
+
 set cursorline
 
 set tabstop=4 softtabstop=0 shiftwidth=4 smarttab
@@ -22,7 +23,7 @@ set backspace=indent,eol,start
 " isrelative number.
 set number
 set relativenumber
-autocmd InsertEnter * :set norelativenumber 
+autocmd InsertEnter * :set norelativenumber
 autocmd InsertLeave * :set relativenumber
 
 " sets vim's working directory to be the same as the file's directory
@@ -50,8 +51,11 @@ set cc=80
 highlight ColorColumn ctermbg=8
 
 set cursorline
-hi CursorLine term=bold cterm=bold guibg=Grey40
+hi CursorLine term=bold cterm=bold guibg=IndianRed
 
 " allowing transparecy
 hi NonText ctermbg=none
 hi Normal guibg=NONE ctermbg=NONE
+
+
+let python_highlight_all = 1

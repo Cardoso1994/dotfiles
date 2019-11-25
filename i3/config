@@ -169,8 +169,8 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # exit with options (lock, , logout, suspend, hibernate, reboot, shutdown)
-bindsym $mod+X mode "$mode_system"
-set $mode_system System (k) lock, (l) logout, (u) suspend, (h) hibernate), (r) reboot, (s) shutdown
+bindsym $mod+Shift+X mode "$mode_system"
+set $mode_system System (k) lock, (l) logout, (u) suspend, (h) hibernate), (r) reboot, (Shift + s) shutdown
 
 mode "$mode_system"{
         # must give exec permission to i3exit.sh
@@ -179,7 +179,7 @@ mode "$mode_system"{
         bindsym u exec --no-startup-id ~/.config/i3/scripts/i3exit.sh suspend, mode "default"
         bindsym h exec --no-startup-id ~/.config/i3/scripts/i3exit.sh hibernate, mode "default"
         bindsym r exec --no-startup-id ~/.config/i3/scripts/i3exit.sh reboot, mode "default"
-        bindsym s exec --no-startup-id ~/.config/i3/scripts/i3exit.sh shutdown, mode "default"
+        bindsym Shift+s exec --no-startup-id ~/.config/i3/scripts/i3exit.sh shutdown, mode "default"
 
         # back to normal: Enter or Escape
         bindsym Return mode "default"
@@ -215,7 +215,7 @@ bindsym $mod+r mode "resize"
 
 
 # eliminating borders
-for_window [class="\w*"] border pixel 2
+for_window [class="^.*"] border pixel 2
 
 # #         Arc Dark Theme
 # #                       border              background          text                    indicator
@@ -280,6 +280,7 @@ exec_always compton -f
 exec --no-startup-id megasync
 exec --no-startup-id dropbox start
 exec --no-startup-id redshift-gtk
+exec_always udiskie
 
 #assigning specific workspace for specific programs
 assign [class="URxvt"] $ws1
@@ -288,6 +289,7 @@ assign [class="Spyder"] $ws2
 assign [class="RStudio"] $ws2
 assign [class="TeXstudio"] $ws2
 assign [class="octave-gui"] $ws2
+assign [class="Sublime_text"] $ws2
 
 assign [class="Firefox"] $ws3
 
@@ -302,6 +304,7 @@ assign [class="feh"] $ws6
 assign [class="Nitrogen"] $ws6
 assign [class="Pix"] $ws6
 assign [class="Matplotlib"] $ws6
+assign [class="Paraview"] $ws6
 
 # enabling controlvolume and brightness
 # Pulse Audio controls
