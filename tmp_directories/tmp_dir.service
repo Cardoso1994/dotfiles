@@ -1,0 +1,6 @@
+[Unit]
+Description=handles own tmp directories
+
+[Service]
+Type=oneshot
+ExecStart=/home/cardoso/.tmp_dir
