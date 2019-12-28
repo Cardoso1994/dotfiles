@@ -956,11 +956,11 @@ bar {
     }
 
 #       Cyberpunk Theme
-client.focused          #f57800 #f57800 #f57800 #f57800   #f57800
-client.focused_inactive #000b1e #000b1e #000b1e #000b1e   #000b1e
-client.unfocused        #000b1e #000b1e #000b1e #000b1e   #000b1e
-client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
-client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
+client.focused          #f57800 #f57800 #000b1e #f57800   #f57800
+client.focused_inactive #000b1e #000b1e #0abd6c #000b1e   #000b1e
+client.unfocused        #000b1e #000b1e #0abd6c #000b1e   #000b1e
+client.urgent           #44475A #FF5555 #0abd6c #FF5555   #FF5555
+client.placeholder      #282A36 #282A36 #0abd6c #282A36   #282A36
 client.background       #000b1e
 
 #         Dracula Dark Theme
