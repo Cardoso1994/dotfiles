@@ -64,7 +64,6 @@ set norunexec
 
 " Selected color scheme
 
-" colorscheme Default
 colorscheme dracula
 
 " Format for displaying time in file list. For example:
@@ -172,20 +171,26 @@ command! reload :write | restart
 " program.
 
 " Pdf
-filextype *.pdf zathura %c %i &, apvlv %c, xpdf %c
+" filextype *.pdf zathura %c %i &, apvlv %c, xpdf %c
+filextype *.pdf zathura %c %i, apvlv %c, xpdf %c
 fileviewer *.pdf pdftotext -nopgbrk %c -
 
 " PostScript
 filextype *.ps,*.eps,*.ps.gz
         \ {View in zathura}
-        \ zathura %f &,
+        \ zathura %f,
         \ {View in gv}
         \ gv %c %i &,
 
 " Djvu
+" filextype *.djvu
+"         \ {View in zathura}
+"         \ zathura %f,
+"         \ {View in apvlv}
+"         \ apvlv %f,
 filextype *.djvu
         \ {View in zathura}
-        \ zathura %f &,
+        \ zathura %c %i,
         \ {View in apvlv}
         \ apvlv %f,
 
@@ -233,6 +238,7 @@ fileviewer *.[1-8] man ./%c | col -b
 " Images
 filextype *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm
         \ {View in sxiv}
+        " \ sxiv %f &,
         \ sxiv %f &,
         \ {View in gpicview}
         \ gpicview %c,
@@ -240,10 +246,10 @@ filextype *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm
         \ shotwell,
 " fileviewer *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm
 "          \ identify %f
-fileviewer *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm
-         \ vifmimg draw %px %py %pw %ph %c
-         \ %pc
-         \ vifmimg clear
+fileviewer *.bmp,*.jpg,*.jpeg,*.png,*.xpm
+        \ vifmimg draw %px %py %pw %ph %c
+        \ %pc
+        \ vifmimg clear
 
 " OpenRaster
 filextype *.ora
@@ -381,7 +387,9 @@ filextype */
 
 " What should be saved automatically between vifm sessions.  Drop "savedirs"
 " value if you don't want vifm to remember last visited directories for you.
-set vifminfo=dhistory,savedirs,chistory,state,tui,shistory,
+" set vifminfo=dhistory,savedirs,chistory,state,tui,shistory,
+"     \phistory,fhistory,dirstack,registers,bookmarks,bmarks
+set vifminfo=dhistory,chistory,state,tui,shistory,
     \phistory,fhistory,dirstack,registers,bookmarks,bmarks
 
 " ------------------------------------------------------------------------------
@@ -486,3 +494,8 @@ nnoremap <f8> :delete<cr>
 "     vifm --server-name "$VIFM_SERVER_NAME" --remote +"cd '$PWD'"
 "
 " let $VIFM_SERVER_NAME = v:servername
+
+" added by Cardoso
+" don't show hidden files
+windo normal zm
+
