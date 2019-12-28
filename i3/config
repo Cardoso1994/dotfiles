@@ -782,7 +782,7 @@ popup_during_fullscreen smart
 # want it
 
 
-for_window [class="^.*"] border pixel 3
+for_window [class="^.*"] border pixel 2
 gaps inner 9
 gaps outer 0
 smart_gaps on
@@ -926,28 +926,50 @@ bar {
 #	        inactive_workspace    #a9a9a9 #222222 #a9a9a9
 #	        urgent_workspace      #a9a9a9 #d42121 #FFFFFF
 #	        }
-#       Dracula Theme
-        colors {
-            background #282A36
-            statusline #F8F8F2
-            separator  #44475A
 
-            focused_workspace  #44475A #44475A #F8F8F2
-            active_workspace   #282A36 #44475A #F8F8F2
-            inactive_workspace #282A36 #282A36 #BFBFBF
+#       Dracula Theme
+#         colors {
+#             background #282A36
+#             statusline #F8F8F2
+#             separator  #44475A
+#
+#             focused_workspace  #44475A #44475A #F8F8F2
+#             active_workspace   #282A36 #44475A #F8F8F2
+#             inactive_workspace #282A36 #282A36 #BFBFBF
+#             urgent_workspace   #FF5555 #FF5555 #F8F8F2
+#             binding_mode       #FF5555 #FF5555 #F8F8F2
+#           }
+
+#       Cyberpunk Theme
+        colors {
+            background #000b1e
+            statusline #0abdc6
+            separator  #123e7c
+
+            focused_workspace  #123e7c #123e7c #d300c4
+            active_workspace   #123e7c #123e7c #d300c4
+            inactive_workspace #123e7c #123e7c #f57800
             urgent_workspace   #FF5555 #FF5555 #F8F8F2
             binding_mode       #FF5555 #FF5555 #F8F8F2
           }
 
     }
 
-#         Dracula Dark Theme
-client.focused          #6272A4 #6272A4 #F8F8F2 #6272A4   #6272A4
-client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
-client.unfocused        #282A36 #282A36 #BFBFBF #282A36   #282A36
+#       Cyberpunk Theme
+client.focused          #f57800 #f57800 #f57800 #f57800   #f57800
+client.focused_inactive #711c91 #711c91 #711c91 #711c91   #711c91
+client.unfocused        #000b1e #000b1e #000b1e #000b1e   #000b1e
 client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
 client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
-client.background       #F8F8F2
+client.background       #000b1e
+
+#         Dracula Dark Theme
+# client.focused          #6272A4 #6272A4 #F8F8F2 #6272A4   #6272A4
+# client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
+# client.unfocused        #282A36 #282A36 #BFBFBF #282A36   #282A36
+# client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
+# client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
+# client.background       #F8F8F2
 
 # DarkGrey background with white text - not focus grey background - black text
 # Windows decoration colors
