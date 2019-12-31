@@ -8,7 +8,7 @@ I'm only adding the files in which I've edited / added some lines of configurati
 
 This modifications are basically some c / c++ flags for the [ale plugin](https://github.com/w0rp/ale) in order to check for syntax errors.
 
-I also added the [dracula theme](https://github.com/dracula/vim), [monokai theme](https://github.com/sickill/vim-monokai), the [Archery theme](https://github.com/Badacadabra/vim-archery)
+I also added the [cyberpunk](https://github.com/Roboron3042/Cyberpunk-Neon) with little modifications found in this repo, [dracula theme](https://github.com/dracula/vim), [monokai theme](https://github.com/sickill/vim-monokai), the [Archery theme](https://github.com/Badacadabra/vim-archery)
 
 It also uses [vim-polyglot](https://github.com/sheerun/vim-polyglot) for better syntax highlighting.
 - After amix installation, clone vim-polyglot to .vim_runtime/my_plugins
