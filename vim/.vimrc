@@ -10,6 +10,18 @@ source ~/.vim_runtime/my_configs.vim
 catch
 endtry
 
+set runtimepath+=~/.vim_runtime
+
+source ~/.vim_runtime/vimrcs/basic.vim
+source ~/.vim_runtime/vimrcs/filetypes.vim
+source ~/.vim_runtime/vimrcs/plugins_config.vim
+source ~/.vim_runtime/vimrcs/extended.vim
+
+try
+source ~/.vim_runtime/my_configs.vim
+catch
+endtry
+
 set encoding=utf-8
 set t_Co=256
 
@@ -56,6 +68,3 @@ hi CursorLine term=bold cterm=bold guibg=IndianRed
 " allowing transparecy
 hi NonText ctermbg=none
 hi Normal guibg=NONE ctermbg=NONE
-
-
-let python_highlight_all = 1
