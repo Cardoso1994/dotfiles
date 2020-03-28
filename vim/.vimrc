@@ -76,3 +76,4 @@ let NERDTreeQuitOnOpen=1
 " Buffergator config
 nmap <Space>, :BuffergatorToggle<CR>
 let g:buffergator_viewport_split_policy="B"
+let g:buffergator_hsplit_size=5
