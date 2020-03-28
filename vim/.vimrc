@@ -72,3 +72,7 @@ hi Normal guibg=NONE ctermbg=NONE
 " NERDTree config
 nmap <Space> :NERDTreeToggle<CR>
 let NERDTreeQuitOnOpen=1
+
+" Buffergator config
+nmap <Space>, :BuffergatorToggle<CR>
+let g:buffergator_viewport_split_policy="B"
