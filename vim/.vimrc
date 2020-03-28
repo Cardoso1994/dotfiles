@@ -68,3 +68,7 @@ hi CursorLine term=bold cterm=bold guibg=IndianRed
 " allowing transparecy
 hi NonText ctermbg=none
 hi Normal guibg=NONE ctermbg=NONE
+
+" NERDTree config
+nmap <Space> :NERDTreeToggle<CR>
+let NERDTreeQuitOnOpen=1
