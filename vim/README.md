@@ -13,6 +13,8 @@ I also added the [cyberpunk](https://github.com/Roboron3042/Cyberpunk-Neon) with
 It also uses [vim-polyglot](https://github.com/sheerun/vim-polyglot) for better syntax highlighting.
 - After amix installation, clone vim-polyglot to .vim_runtime/my_plugins
 
+Now it uses also[Buffergator](https://github.com/jeetsukumaran/vim-buffergator/) to check for opened buffers
+
 The files that i modified (after _amix/vimrc_ installation, obviously) are:
 - .vim_runtime/vimrcs/plugins_config.vim
 - .vim_runtime/vimrcs/extended.vim
