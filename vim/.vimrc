@@ -70,7 +70,7 @@ hi NonText ctermbg=none
 hi Normal guibg=NONE ctermbg=NONE
 
 " NERDTree config
-nmap <Space> :NERDTreeToggle<CR>
+nmap <Space>. :NERDTreeToggle<CR>
 let NERDTreeQuitOnOpen=1
 
 " Buffergator config
