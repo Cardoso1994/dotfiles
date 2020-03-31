@@ -21,7 +21,8 @@
 
 ! CyberpunkNeon Theme
 *.cursorColor: #d300c4
-*background:  #000b1e
+! *background:  #000b1e
+*background:  #000000
 *foreground:  #0abdc6
 *color0:  #123e7c
 *color1:  #ff0000
@@ -33,10 +34,11 @@
 *color7:  #d7d7d5
 *color8:  #123e7c
 *color9:  #ff0000
-*color10:  #d300c4
+*color10:  #d3005f
 *color11:  #f57800
 *color12:  #00ff00
-*color13:  #711c91
+! *color13:  #711c91
+*color13:  #a370b5
 *color14:  #0abdc6
 *color15:  #d7d7d5
 
