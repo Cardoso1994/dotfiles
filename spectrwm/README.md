@@ -13,3 +13,4 @@ Uses:
 - dmenu
 - xfce4-notifyd (and all its dependencies in order to use notify-send)
 - st, urxvt or alacritty
+- trayer (by default the bar does not suppor applets)
