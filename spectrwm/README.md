@@ -2,7 +2,7 @@
 
 My own config for spectrwm tiling window manager.
 
-I find it better to place all files in '''.config/spectrwm/''' folder
+I find it better to place all files in ```.config/spectrwm/``` folder
 But it needs a soft link of ```~/.config/spectrwm/.spectrwm.conf``` to ```~/.spectrwm.conf```,
 since that is the locationthat spectrwm searches for.
 
