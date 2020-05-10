@@ -80,3 +80,8 @@ let g:buffergator_hsplit_size=5
 
 " GitGutter config
 set updatetime=300
+
+" vertical split of the same file with sync scrollbind
+" spreads the file in two windows, extending visualization
+set splitright
+nmap <Space>v :set noscrollbind<CR> :vs<CR> <C-l> L zt 6<C-e> :set scb!<CR> <C-h> :set scb!<CR>
