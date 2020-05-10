@@ -10,11 +10,13 @@ export ZSH="/home/cardoso/.oh-my-zsh"
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 # ZSH_THEME="robbyrussell"
 # ZSH_THEME="dracula"
+ZSH_THEME="jonathan"
+
 
 # agnoster theme
-DEFAULT_USER=$USER
-prompt_context() {}
-ZSH_THEME="agnoster"
+#DEFAULT_USER=$USER
+#prompt_context() {}
+# ZSH_THEME="agnoster"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -112,6 +114,26 @@ export EDITOR="$VISUAL"
 # alias to open vifm with image support
 alias vifm_="/home/cardoso/.config/vifm/scripts/vifmrun"
 
+# alias for python
+alias python2="python"
+alias python="python3"
+
 # surfraw aliases
 alias srg="sr google"
 alias sra="sr archwiki"
+
+# PYWAL
+# Import colorscheme from 'wal' asynchronously
+# &   # Run the process in the background.
+# ( ) # Hide shell job control messages.
+(cat ~/.cache/wal/sequences &)
+export PATH="${PATH}:${HOME}/.local/bin/"
+
+# git aliases
+alias gts="git status"
+alias gta="git add"
+alias gtc="git commit"
+alias gtd="git diff"
+alias gtp="git push"
+alias gtpll="git pull"
+alias gtchk="git checkout"
