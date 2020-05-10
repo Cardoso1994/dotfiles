@@ -34,16 +34,34 @@ cpu() {
 
 ## VOLUME
 vol() {
+
+    # ARCOLINUX
     # vol=`amixer get Master | awk -F'[][]' 'END{ print $4":"$2 }'`
-    vol=`amixer -c 1 -M -D pulse get Master | awk -F'[][]' 'END{ print $2 }'`
+    vol=`amixer get Master | awk -F'[][]' 'END{ print $2 }'`
+
+    # UBUNTU
+    # vol=`amixer -c 1 -M -D pulse get Master | awk -F'[][]' 'END{ print $2 }'`
     # echo -e "VOL: $vol"
     echo "VOL: $vol"
 }
 
-SLEEP_SEC=5
+bat () {
+    bat=`acpi | awk -F',' 'END{ print $2 }'`
+
+    echo "BAT: $bat"
+
+    bat=`acpi | awk -F',' 'END{ print $2 }' | sed 's/%//'`
+
+    if [ $bat -le 10 ]; then
+        notify-send "LOW BATTERY"
+    fi
+}
+
+SLEEP_SEC=6
 #loops forever outputting a line every SLEEP_SEC secs
 while :; do
     # echo "+@fg=1; +@fn=1;💻+@fn=0; $(cpu) +@fg=0; | +@fg=2;  +@fn=1;💾+@fn=0; $(mem) +@fg=0; | +@fg=3; +@fn=1;💿+@fn=0; $(hdd) +@fg=0; | +@fg=4; +@fn=1;🔈+@fn=0; $(vol) +@fg=0; |"
-    echo "$(cpu) | RAM: $(mem) | $(hdd) | $(vol) |"
-	sleep $SLEEP_SEC
+    echo "$(cpu) | RAM: $(mem) | $(hdd) | $(vol) | $(bat)"
+    sleep $SLEEP_SEC
 done
+
