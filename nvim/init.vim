@@ -18,7 +18,7 @@ let mapleader = ","
 " Fast saving
 nmap <leader>w :w!<cr>
 
-" :W sudo saves the file 
+" :W sudo saves the file
 " (useful for handling the permission-denied error)
 command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
 
@@ -85,7 +85,7 @@ set whichwrap+=<,>,h,l
 " Ignore case when searching
 set ignorecase
 
-" When searching try to be smart about cases 
+" When searching try to be smart about cases
 set smartcase
 
 " Highlight search results
@@ -136,7 +136,7 @@ set guioptions-=R
 set guioptions-=l
 set guioptions-=L
 
-" Turn persistent undo on 
+" Turn persistent undo on
 "    means that you can undo even when you close a buffer/VIM
 try
     set undodir=~/.config/nvim/temp_dirs/undodir
@@ -145,9 +145,9 @@ catch
 endtry
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " COLORS AND FONTS
-" """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Enable syntax highlighting
 syntax enable
@@ -165,6 +165,9 @@ set background=dark
 colorscheme onedark
 " colorscheme wal
 
+" allowing transparecy
+" hi NonText ctermbg=none
+" hi Normal guibg=NONE ctermbg=NONE
 
 " Set extra options when running in GUI mode
 if has("gui_running")
@@ -256,6 +259,15 @@ map <leader>h :bprevious<cr>
 
 " Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
+
+" vertical split of the same file with sync scrollbind
+" spreads the file in two windows, extending visualization
+set splitright splitbelow
+nmap <Space>v :set noscrollbind<CR> :vs<CR> <C-l> L zt 3<C-e> :set scb!<CR> <C-h> :set scb!<CR>
+
+" resizing vsplits
+nnoremap <silent> <Leader>+ :exe "vertical resize +3"<CR>
+nnoremap <silent> <Leader>- :exe "vertical resize -3"<CR>
 
 " Specify the behavior when switching between buffers
 try
@@ -380,15 +392,6 @@ if has("autocmd")
     autocmd BufWritePre *.txt,*.js,*.py,*.wiki,*.sh,*.coffee :call CleanExtraSpaces()
 endif
 
-" vertical split of the same file with sync scrollbind
-" spreads the file in two windows, extending visualization
-set splitright splitbelow
-nmap <Space>v :set noscrollbind<CR> :vs<CR> <C-l> L zt 3<C-e> :set scb!<CR> <C-h> :set scb!<CR>
-
-" resizing vsplits
-nnoremap <silent> <Leader>+ :exe "vertical resize " . (winwidth(0) * 1/9)<CR>
-nnoremap <silent> <Leader>- :exe "vertical resize " . (winwidth(0) * -1/9)<CR>
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Python section
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -400,24 +403,24 @@ au BufNewFile,BufRead *.mako set ft=mako
 
 au FileType python map <buffer> F :set foldmethod=indent<cr>
 
-au FileType python inoremap <buffer> $r return 
-au FileType python inoremap <buffer> $i import 
-au FileType python inoremap <buffer> $p print 
+au FileType python inoremap <buffer> $r return
+au FileType python inoremap <buffer> $i import
+au FileType python inoremap <buffer> $p print
 au FileType python inoremap <buffer> $f # --- <esc>a
-au FileType python map <buffer> <leader>1 /class 
-au FileType python map <buffer> <leader>2 /def 
-au FileType python map <buffer> <leader>C ?class 
-au FileType python map <buffer> <leader>D ?def 
+au FileType python map <buffer> <leader>1 /class
+au FileType python map <buffer> <leader>2 /def
+au FileType python map <buffer> <leader>C ?class
+au FileType python map <buffer> <leader>D ?def
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Shell section
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-if exists('$TMUX') 
+if exists('$TMUX')
     if has('nvim')
         set termguicolors
     else
-        set term=screen-256color 
+        set term=screen-256color
     endif
 endif
 
