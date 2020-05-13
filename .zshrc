@@ -133,6 +133,7 @@ alias sra="sr archwiki"
 export PATH="${PATH}:${HOME}/.local/bin/"
 
 # git aliases
+alias gtcln="git clone"
 alias gts="git status"
 alias gta="git add"
 alias gtc="git commit"
