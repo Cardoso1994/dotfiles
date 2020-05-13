@@ -18,7 +18,7 @@ let mapleader = ","
 " Fast saving
 nmap <leader>w :w!<cr>
 
-" :W sudo saves the file
+" :W sudo saves the file 
 " (useful for handling the permission-denied error)
 command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
 
@@ -26,17 +26,16 @@ command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
 set autochdir
 
 " Plugins will be downloaded under the specified directory.
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.config/nvim/plugged')
 
 " Declare the list of plugins.
-Plug 'tpope/vim-sensible'
-Plug 'junegunn/seoul256.vim'
 Plug 'joshdick/onedark.vim'
 Plug 'preservim/nerdtree'
 Plug 'jeetsukumaran/vim-buffergator'
 Plug 'itchyny/lightline.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'frazrepo/vim-rainbow'
+Plug 'tomasiser/vim-code-dark'
 
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
@@ -85,7 +84,7 @@ set whichwrap+=<,>,h,l
 " Ignore case when searching
 set ignorecase
 
-" When searching try to be smart about cases
+" When searching try to be smart about cases 
 set smartcase
 
 " Highlight search results
@@ -136,7 +135,7 @@ set guioptions-=R
 set guioptions-=l
 set guioptions-=L
 
-" Turn persistent undo on
+" Turn persistent undo on 
 "    means that you can undo even when you close a buffer/VIM
 try
     set undodir=~/.config/nvim/temp_dirs/undodir
@@ -163,6 +162,7 @@ set background=dark
 " colorscheme cyberpunkneon
 " colorscheme bloodmoon
 colorscheme onedark
+" colorscheme codedark
 " colorscheme wal
 
 " allowing transparecy
@@ -266,8 +266,12 @@ set splitright splitbelow
 nmap <Space>v :set noscrollbind<CR> :vs<CR> <C-l> L zt 3<C-e> :set scb!<CR> <C-h> :set scb!<CR>
 
 " resizing vsplits
-nnoremap <silent> <Leader>+ :exe "vertical resize +3"<CR>
-nnoremap <silent> <Leader>- :exe "vertical resize -3"<CR>
+nnoremap <silent> <M-h> :exe "vertical resize +2"<CR>
+nnoremap <silent> <M-l> :exe "vertical resize -2"<CR>
+
+" resizing splits
+nnoremap <silent> <M-k> :exe "res +2"<CR>
+nnoremap <silent> <M-j> :exe "res -2"<CR>
 
 " Specify the behavior when switching between buffers
 try
@@ -336,7 +340,7 @@ let NERDTreeQuitOnOpen=1
 let g:NERDTreeWinPos = "left"
 let NERDTreeShowHidden=0
 let NERDTreeIgnore = ['\.pyc$', '__pycache__']
-let g:NERDTreeWinSize=20
+let g:NERDTreeWinSize=25
 map <leader>nn :NERDTreeToggle<cr>
 map <leader>nb :NERDTreeFromBookmark<Space>
 map <leader>nf :NERDTreeFind<cr>
@@ -367,10 +371,10 @@ let g:rainbow_active = 1
 map 0 ^
 
 " Move a line of text using ALT+[jk] or Command+[jk] on mac
-nmap <M-j> mz:m+<cr>`z
-map <M-k> mz:m-2<cr>`z
-vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
-vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
+" nmap <M-j> mz:m+<cr>`z
+" map <M-k> mz:m-2<cr>`z
+" vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
+" vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
 
 if has("mac") || has("macunix")
   nmap <D-j> <M-j>
@@ -392,6 +396,15 @@ if has("autocmd")
     autocmd BufWritePre *.txt,*.js,*.py,*.wiki,*.sh,*.coffee :call CleanExtraSpaces()
 endif
 
+" vanilla vim mode of auto closing brackets and alike
+inoremap " ""<left>
+inoremap ' ''<left>
+inoremap ( ()<left>
+inoremap [ []<left>
+inoremap { {}<left>
+inoremap {<CR> {<CR>}<ESC>O
+inoremap {;<CR> {<CR>};<ESC>O
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Python section
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -403,24 +416,24 @@ au BufNewFile,BufRead *.mako set ft=mako
 
 au FileType python map <buffer> F :set foldmethod=indent<cr>
 
-au FileType python inoremap <buffer> $r return
-au FileType python inoremap <buffer> $i import
-au FileType python inoremap <buffer> $p print
+au FileType python inoremap <buffer> $r return 
+au FileType python inoremap <buffer> $i import 
+au FileType python inoremap <buffer> $p print 
 au FileType python inoremap <buffer> $f # --- <esc>a
-au FileType python map <buffer> <leader>1 /class
-au FileType python map <buffer> <leader>2 /def
-au FileType python map <buffer> <leader>C ?class
-au FileType python map <buffer> <leader>D ?def
+au FileType python map <buffer> <leader>1 /class 
+au FileType python map <buffer> <leader>2 /def 
+au FileType python map <buffer> <leader>C ?class 
+au FileType python map <buffer> <leader>D ?def 
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Shell section
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-if exists('$TMUX')
+if exists('$TMUX') 
     if has('nvim')
         set termguicolors
     else
-        set term=screen-256color
+        set term=screen-256color 
     endif
 endif
 
