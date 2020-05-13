@@ -118,6 +118,9 @@ alias vifm_="/home/cardoso/.config/vifm/scripts/vifmrun"
 alias python2="python"
 alias python="python3"
 
+# alias for ipython
+alias ipy="ipython"
+
 # surfraw aliases
 alias srg="sr google"
 alias sra="sr archwiki"
@@ -137,3 +140,4 @@ alias gtd="git diff"
 alias gtp="git push"
 alias gtpll="git pull"
 alias gtchk="git checkout"
+alias gtl="git log"
