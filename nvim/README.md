@@ -11,6 +11,8 @@ Install [vim plug](https://github.com/junegunn/vim-plug)
 - [lightline](https://github.com/itchyny/lightline.vim)
 - [Gitgutter](https://github.com/airblade/vim-gitgutter)
 - [Rainbow](https://github.com/frazrepo/vim-rainbow)
+- [Coc](https://github.com/neoclide/coc.nvim)
+  - [coc-python](https://github.com/neoclide/coc-python)
 
 ## Notes
 Place `init.vim` in `~/.config/nvim/`
