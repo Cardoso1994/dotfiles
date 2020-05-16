@@ -14,6 +14,7 @@ Install [vim plug](https://github.com/junegunn/vim-plug)
 - [Coc](https://github.com/neoclide/coc.nvim)
   - [coc-python](https://github.com/neoclide/coc-python)
   - [coc-texlab](https://github.com/fannheyward/coc-texlab)
+- [vim-fugitive](https://github.com/tpope/vim-fugitive)
 
 ## Notes
 Place `init.vim` in `~/.config/nvim/`
