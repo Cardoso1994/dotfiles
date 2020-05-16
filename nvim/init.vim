@@ -18,7 +18,7 @@ let mapleader = ","
 " Fast saving
 nmap <leader>w :w!<cr>
 
-" :W sudo saves the file 
+" :W sudo saves the file
 " (useful for handling the permission-denied error)
 command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
 
@@ -28,14 +28,19 @@ set autochdir
 " Plugins will be downloaded under the specified directory.
 call plug#begin('~/.config/nvim/plugged')
 
-" Declare the list of plugins.
+" Declare the list of colorschemes.
 Plug 'joshdick/onedark.vim'
+Plug 'ayu-theme/ayu-vim'
+Plug 'tomasiser/vim-code-dark'
+
+" Declare the list of plugins.
 Plug 'preservim/nerdtree'
 Plug 'jeetsukumaran/vim-buffergator'
 Plug 'itchyny/lightline.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'frazrepo/vim-rainbow'
-Plug 'tomasiser/vim-code-dark'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'tpope/vim-fugitive'
 
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
@@ -84,7 +89,7 @@ set whichwrap+=<,>,h,l
 " Ignore case when searching
 set ignorecase
 
-" When searching try to be smart about cases 
+" When searching try to be smart about cases
 set smartcase
 
 " Highlight search results
@@ -135,7 +140,7 @@ set guioptions-=R
 set guioptions-=l
 set guioptions-=L
 
-" Turn persistent undo on 
+" Turn persistent undo on
 "    means that you can undo even when you close a buffer/VIM
 try
     set undodir=~/.config/nvim/temp_dirs/undodir
@@ -158,13 +163,15 @@ endif
 
 " Colorscheme
 set background=dark
-" colorscheme dracula
-" colorscheme cyberpunkneon
-" colorscheme bloodmoon
 colorscheme onedark
+" colorscheme archery
 " colorscheme codedark
-" colorscheme wal
 
+" set termguicolors     " enable true colors support
+" let ayucolor="light"  " for light version of theme
+" let ayucolor="mirage" " for mirage version of theme
+" let ayucolor="dark"   " for dark version of theme
+" colorscheme ayu
 " allowing transparecy
 " hi NonText ctermbg=none
 " hi Normal guibg=NONE ctermbg=NONE
@@ -266,12 +273,12 @@ set splitright splitbelow
 nmap <Space>v :set noscrollbind<CR> :vs<CR> <C-l> L zt 3<C-e> :set scb!<CR> <C-h> :set scb!<CR>
 
 " resizing vsplits
-nnoremap <silent> <M-h> :exe "vertical resize +2"<CR>
-nnoremap <silent> <M-l> :exe "vertical resize -2"<CR>
+nnoremap <silent> <M-H> :exe "vertical resize +2"<CR>
+nnoremap <silent> <M-L> :exe "vertical resize -2"<CR>
 
 " resizing splits
-nnoremap <silent> <M-k> :exe "res +2"<CR>
-nnoremap <silent> <M-j> :exe "res -2"<CR>
+nnoremap <silent> <M-K> :exe "res +2"<CR>
+nnoremap <silent> <M-J> :exe "res -2"<CR>
 
 " Specify the behavior when switching between buffers
 try
@@ -325,6 +332,9 @@ let g:lightline = {
       \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
       \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
       \ },
+      \ 'component_function': {
+      \   'gitbranch': 'FugitiveHead'
+      \ },
       \ 'separator': { 'left': ' ', 'right': ' ' },
       \ 'subseparator': { 'left': ' ', 'right': ' ' }
       \ }
@@ -363,6 +373,11 @@ set updatetime=700
 " => Rainbow
 """"""""""""""""
 let g:rainbow_active = 1
+
+""""""""""""""""
+" => Coc
+""""""""""""""""
+source ~/.vim/coc_config.vim
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " OWN MAPPINGS
@@ -416,24 +431,24 @@ au BufNewFile,BufRead *.mako set ft=mako
 
 au FileType python map <buffer> F :set foldmethod=indent<cr>
 
-au FileType python inoremap <buffer> $r return 
-au FileType python inoremap <buffer> $i import 
-au FileType python inoremap <buffer> $p print 
+au FileType python inoremap <buffer> $r return
+au FileType python inoremap <buffer> $i import
+au FileType python inoremap <buffer> $p print
 au FileType python inoremap <buffer> $f # --- <esc>a
-au FileType python map <buffer> <leader>1 /class 
-au FileType python map <buffer> <leader>2 /def 
-au FileType python map <buffer> <leader>C ?class 
-au FileType python map <buffer> <leader>D ?def 
+au FileType python map <buffer> <leader>1 /class
+au FileType python map <buffer> <leader>2 /def
+au FileType python map <buffer> <leader>C ?class
+au FileType python map <buffer> <leader>D ?def
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Shell section
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-if exists('$TMUX') 
+if exists('$TMUX')
     if has('nvim')
         set termguicolors
     else
-        set term=screen-256color 
+        set term=screen-256color
     endif
 endif
 
