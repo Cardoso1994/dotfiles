@@ -13,7 +13,7 @@ Install [vim plug](https://github.com/junegunn/vim-plug)
 - [Gitgutter](https://github.com/airblade/vim-gitgutter)
 - [Rainbow](https://github.com/frazrepo/vim-rainbow)
 - [Coc](https://github.com/neoclide/coc.nvim)
-  - [coc-python](https://github.com/neoclide/coc-python)
+  - [coc-python](https://github.com/neoclide/coc-python) **might need to install jedi via pip. ArcolinuxD**
   - [coc-texlab](https://github.com/fannheyward/coc-texlab)
 - [vim-fugitive](https://github.com/tpope/vim-fugitive)
 
