@@ -13,6 +13,7 @@ Install [vim plug](https://github.com/junegunn/vim-plug)
 - [Rainbow](https://github.com/frazrepo/vim-rainbow)
 - [Coc](https://github.com/neoclide/coc.nvim)
   - [coc-python](https://github.com/neoclide/coc-python)
+  - [coc-texlab](https://github.com/fannheyward/coc-texlab)
 
 ## Notes
 Place `init.vim` in `~/.config/nvim/`
