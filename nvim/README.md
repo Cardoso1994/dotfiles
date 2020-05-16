@@ -2,6 +2,7 @@
 
 ## Colorschemes
 - [One Dark](https://github.com/joshdick/onedark.vim)
+- [ayu](https://github.com/ayu-theme/ayu-vim)
 
 ## Plugins
 Install [vim plug](https://github.com/junegunn/vim-plug)
