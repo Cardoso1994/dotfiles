@@ -1,0 +1,15 @@
+{
+    // python config
+    // "python.linting.enabled" : true,
+    // "python.linting.pylintEnabled" : true,
+
+    // coc-explorer
+    "explorer.quitOnOpen": true,
+    "explorer.width": 30,
+    "explorer.icon.enableNerdfont": true,
+    "explorer.previewAction.onHover": false,
+    "explorer.keyMappings": {
+        "<cr>": ["expandable?", "expand", "open"],
+        "v": "open:vsplit"
+    }
+}

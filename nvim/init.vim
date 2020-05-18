@@ -34,8 +34,8 @@ Plug 'ayu-theme/ayu-vim'
 Plug 'tomasiser/vim-code-dark'
 
 " Declare the list of plugins.
-Plug 'preservim/nerdtree'
-Plug 'jeetsukumaran/vim-buffergator'
+" Plug 'preservim/nerdtree'
+" Plug 'jeetsukumaran/vim-buffergator'
 Plug 'itchyny/lightline.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'frazrepo/vim-rainbow'
@@ -44,7 +44,6 @@ Plug 'tpope/vim-fugitive'
 
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " User Interface
@@ -172,6 +171,7 @@ colorscheme onedark
 " let ayucolor="mirage" " for mirage version of theme
 " let ayucolor="dark"   " for dark version of theme
 " colorscheme ayu
+
 " allowing transparecy
 " hi NonText ctermbg=none
 " hi Normal guibg=NONE ctermbg=NONE
@@ -211,7 +211,7 @@ set smarttab
 " 1 tab == 4 spaces
 set shiftwidth=4
 set tabstop=4
-set softtabstop=0
+set softtabstop=4
 set shiftwidth=4
 
 " Linebreak on 80 characters
@@ -270,7 +270,7 @@ map <leader>cd :cd %:p:h<cr>:pwd<cr>
 " vertical split of the same file with sync scrollbind
 " spreads the file in two windows, extending visualization
 set splitright splitbelow
-nmap <Space>v :set noscrollbind<CR> :vs<CR> <C-l> L zt 3<C-e> :set scb!<CR> <C-h> :set scb!<CR>
+nmap <Space>v :set noscrollbind<CR> :vs<CR> <C-l> L zt 3<C-e> :set scb<CR> <C-h> :set scb!<CR>
 
 " resizing vsplits
 nnoremap <silent> <M-H> :exe "vertical resize +2"<CR>
@@ -314,51 +314,34 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 """"""""""""""""
 " => lightline
 """"""""""""""""
-set laststatus=2
 let g:lightline = {
       \ 'colorscheme': 'one',
       \ 'active': {
-      \   'left': [ ['mode', 'paste'],
-      \             ['fugitive', 'readonly', 'filename', 'modified'] ],
-      \   'right': [ [ 'lineinfo' ], ['percent'] ]
-      \ },
-      \ 'component': {
-      \   'readonly': '%{&filetype=="help"?"":&readonly?"🔒":""}',
-      \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
-      \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
-      \ },
-      \ 'component_visible_condition': {
-      \   'readonly': '(&filetype!="help"&& &readonly)',
-      \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
-      \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
       \ },
       \ 'component_function': {
       \   'gitbranch': 'FugitiveHead'
       \ },
-      \ 'separator': { 'left': ' ', 'right': ' ' },
-      \ 'subseparator': { 'left': ' ', 'right': ' ' }
       \ }
-
-" Format the status line
-" set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
 
 """"""""""""""""
 " => Nerd Tree
 """"""""""""""""
-nmap <Space>. :NERDTreeToggle<CR>
+" nmap <Space>. :NERDTreeToggle<CR>
 let NERDTreeQuitOnOpen=1
 let g:NERDTreeWinPos = "left"
 let NERDTreeShowHidden=0
 let NERDTreeIgnore = ['\.pyc$', '__pycache__']
 let g:NERDTreeWinSize=25
-map <leader>nn :NERDTreeToggle<cr>
-map <leader>nb :NERDTreeFromBookmark<Space>
-map <leader>nf :NERDTreeFind<cr>
+" map <leader>nn :NERDTreeToggle<cr>
+" map <leader>nb :NERDTreeFromBookmark<Space>
+" map <leader>nf :NERDTreeFind<cr>
 
 """"""""""""""""
 " => Buffergator
 """"""""""""""""
-nmap <Space>, :BuffergatorToggle<CR>
+" nmap <Space>, :BuffergatorToggle<CR>
 let g:buffergator_viewport_split_policy="B"
 let g:buffergator_hsplit_size=5
 
@@ -377,7 +360,7 @@ let g:rainbow_active = 1
 """"""""""""""""
 " => Coc
 """"""""""""""""
-source ~/.config/nvim/coc_config.vim
+source ~/.vim/coc_config.vim
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " OWN MAPPINGS
@@ -456,3 +439,7 @@ endif
 " => Markdown
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let vim_markdown_folding_disabled = 1
+
+
+" nmap <space>e :CocCommand explorer ~/<CR>
+nmap <space>, :CocCommand explorer <CR>
