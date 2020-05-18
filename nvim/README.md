@@ -15,6 +15,7 @@ Install [vim plug](https://github.com/junegunn/vim-plug)
 - [Coc](https://github.com/neoclide/coc.nvim)
   - [coc-python](https://github.com/neoclide/coc-python) **might need to install jedi via pip. ArcolinuxD**
   - [coc-texlab](https://github.com/fannheyward/coc-texlab)
+  - [coc-explorer](https://github.com/weirongxu/coc-explorer) **as a replacement of NERDTree and Buffergator**
 - [vim-fugitive](https://github.com/tpope/vim-fugitive)
 
 ## Notes
