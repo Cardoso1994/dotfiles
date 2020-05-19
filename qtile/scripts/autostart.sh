@@ -27,17 +27,18 @@ function run {
 nitrogen --restore &
 # compton -b
 # feh --bg-fill /usr/share/backgrounds/arcolinux/arco-wallpaper.jpg &
+
 #start the conky to learn the shortcuts
 (conky -c $HOME/.config/qtile/scripts/system-overview) &
 
 #starting utility applications at boot time
-run variety &
 run nm-applet &
 run pamac-tray &
 run xfce4-power-manager &
 numlockx on &
 blueberry-tray &
-compton --config $HOME/.config/qtile/scripts/picom.conf &
+# compton --config $HOME/.config/qtile/scripts/picom.conf &
+compton -i 0.9
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 /usr/lib/xfce4/notifyd/xfce4-notifyd &
 
@@ -55,5 +56,5 @@ run volumeicon &
 #run atom &
 #run telegram-desktop &
 
-# montar en automatico medios externos
+# mounting external drives automatically
 udiskie &
