@@ -32,6 +32,7 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'joshdick/onedark.vim'
 Plug 'ayu-theme/ayu-vim'
 Plug 'tomasiser/vim-code-dark'
+Plug 'drewtempelmeyer/palenight.vim'
 
 " Declare the list of plugins.
 " Plug 'preservim/nerdtree'
@@ -127,10 +128,6 @@ highlight ColorColumn ctermbg=8
 set cursorline
 hi CursorLine term=bold cterm=bold guibg=IndianRed
 
-" allowing transparecy
-hi NonText ctermbg=none
-hi Normal guibg=NONE ctermbg=NONE
-
 " Add a bit extra margin to the left
 " set foldcolumn=1
 
@@ -161,13 +158,19 @@ if $COLORTERM == 'gnome-terminal'
     set t_Co=256
 endif
 
+" Enable true color
+if (has("termguicolors"))
+  set termguicolors
+endif
+
 " Colorscheme
 set background=dark
-colorscheme onedark
+" colorscheme onedark
+" colorscheme dracula
+colorscheme palenight
 " colorscheme archery
 " colorscheme codedark
 
-" set termguicolors     " enable true colors support
 " let ayucolor="light"  " for light version of theme
 " let ayucolor="mirage" " for mirage version of theme
 " let ayucolor="dark"   " for dark version of theme
