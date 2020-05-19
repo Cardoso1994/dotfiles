@@ -17,6 +17,7 @@ Install [vim plug](https://github.com/junegunn/vim-plug)
   - [coc-texlab](https://github.com/fannheyward/coc-texlab)
   - [coc-explorer](https://github.com/weirongxu/coc-explorer) **as a replacement of NERDTree and Buffergator**
 - [vim-fugitive](https://github.com/tpope/vim-fugitive)
+- [csv](https://github.com/chrisbra/csv.vim)
 
 ## Notes
 Place `init.vim` in `~/.config/nvim/`
