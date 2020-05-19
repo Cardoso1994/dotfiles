@@ -3,6 +3,7 @@
 ## Colorschemes
 - [One Dark](https://github.com/joshdick/onedark.vim)
 - [ayu](https://github.com/ayu-theme/ayu-vim)
+- [palenight](https://github.com/drewtempelmeyer/palenight.vim)
 
 ## Plugins
 Install [vim plug](https://github.com/junegunn/vim-plug)
