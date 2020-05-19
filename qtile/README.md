@@ -1,4 +1,4 @@
-#QTILE
+# QTILE
 
 Own adaptation of arcolinuxd qtile release.
 
@@ -13,6 +13,7 @@ Uses:
 - xfce4-screenshooter
 - amixer pulse
 - pícom / compton
+- **xterm is a must have**
 
 Fonts:
 - Inconsolata (Go) Nerd Font
