@@ -37,7 +37,7 @@ from libqtile.widget import Spacer
 # import arcomemory
 
 #mod4 or mod = super key
-mod = "mod4"
+mod = "mod1"
 mod1 = "alt"
 mod2 = "control"
 home = os.path.expanduser('~')
@@ -51,6 +51,7 @@ def window_to_prev_group(qtile):
 
 @lazy.function
 def window_to_next_group(qtile):
+    print(type(qtile))
     if qtile.currentWindow is not None:
         i = qtile.groups.index(qtile.currentGroup)
         qtile.currentWindow.togroup(qtile.groups[i + 1].name)
@@ -59,98 +60,35 @@ keys = [
 
 # FUNCTION KEYS
 
-    Key([], "F12", lazy.spawn('xfce4-terminal --drop-down')),
-
 # SUPER + FUNCTION KEYS
 
-    # Key([mod], "e", lazy.spawn('atom')),
-    # Key([mod], "c", lazy.spawn('conky-toggle')),
-    # Key([mod], "f", lazy.window.toggle_fullscreen()),
-    # Key([mod], "m", lazy.spawn('pragha')),
-    # Key([mod], "q", lazy.window.kill()),
-    Key([mod], "r", lazy.spawn('rofi-theme-selector')),
     # Key([mod], "Return", lazy.spawn('urxvt')),
-    Key([mod], "Return", lazy.spawn('st')),
+    # Key([mod], "Return", lazy.spawn('st')),
+    Key([mod], "Return", lazy.spawn('alacritty')),
     Key([mod], "d", lazy.spawn('xfce4-appfinder')),
     Key([mod], "v", lazy.spawn('pavucontrol')),
-    # Key([mod], "w", lazy.spawn('vivaldi-stable')),
     Key([mod], "x", lazy.spawn('oblogout')),
     Key([mod], "Escape", lazy.spawn('xkill')),
-    # Key([mod], "F1", lazy.spawn('vivaldi-stable')),
-    # Key([mod], "F2", lazy.spawn('atom')),
-    # Key([mod], "F3", lazy.spawn('inkscape')),
-    # Key([mod], "F4", lazy.spawn('gimp')),
-    # Key([mod], "F5", lazy.spawn('meld')),
-    # Key([mod], "F6", lazy.spawn('vlc --video-on-top')),
-    # Key([mod], "F7", lazy.spawn('virtualbox')),
-    # Key([mod], "F8", lazy.spawn('thunar')),
-    # Key([mod], "F9", lazy.spawn('evolution')),
-    # Key([mod], "F10", lazy.spawn("spotify")),
-    # Key([mod], "F11", lazy.spawn('rofi -show run -fullscreen')),
-    # Key([mod], "F12", lazy.spawn('rofi -show run')),
+
 
 # SUPER + SHIFT KEYS
-
     Key([mod, "shift"], "Return",
-        # lazy.spawn("urxvt -e /home/desarrollo/.config/vifm/scripts/vifmrun")),
-        lazy.spawn("st /home/desarrollo/.config/vifm/scripts/vifmrun")),
+        lazy.spawn(
+            "alacritty -e /home/desarrollo/.config/vifm/scripts/vifmrun")),
+        # lazy.spawn("st /home/desarrollo/.config/vifm/scripts/vifmrun")),
     Key([mod, "shift"], "q", lazy.window.kill()),
     Key([mod, "shift"], "r", lazy.restart()),
-    # Key([mod, "control"], "r", lazy.restart()),
     Key([mod, "shift"], "x", lazy.shutdown()),
 
 # CONTROL + ALT KEYS
 
-    # Key(["mod1", "control"], "Next", lazy.spawn('conky-rotate -n')),
-    # Key(["mod1", "control"], "Prior", lazy.spawn('conky-rotate -p')),
-    # Key(["mod1", "control"], "a", lazy.spawn('xfce4-appfinder')),
-    # Key(["mod1", "control"], "b", lazy.spawn('thunar')),
-    # Key(["mod1", "control"], "c", lazy.spawn('catfish')),
-    # Key(["mod1", "control"], "e", lazy.spawn('arcolinux-tweak-tool')),
-    # Key(["mod1", "control"], "f", lazy.spawn('firefox')),
-    # Key(["mod1", "control"], "g", lazy.spawn('chromium -no-default-browser-check')),
-    # Key(["mod1", "control"], "i", lazy.spawn('nitrogen')),
-    # Key(["mod1", "control"], "k", lazy.spawn('slimlock')),
-    # Key(["mod1", "control"], "m", lazy.spawn('xfce4-settings-manager')),
-    # Key(["mod1", "control"], "o", lazy.spawn(home + '/.config/qtile/scripts/compton-toggle.sh')),
-    # Key(["mod1", "control"], "p", lazy.spawn('pamac-manager')),
-    # Key(["mod1", "control"], "r", lazy.spawn('rofi-theme-selector')),
-    # Key(["mod1", "control"], "s", lazy.spawn('spotify')),
-    # Key(["mod1", "control"], "t", lazy.spawn('termite')),
-    # Key(["mod1", "control"], "u", lazy.spawn('pavucontrol')),
-    # Key(["mod1", "control"], "v", lazy.spawn('vivaldi-stable')),
-    # Key(["mod1", "control"], "w", lazy.spawn('arcolinux-welcome-app')),
-    # Key(["mod1", "control"], "Return", lazy.spawn('termite')),
-
 # ALT + ... KEYS
-
-    # Key(["mod1"], "k", lazy.spawn('slimlock')),
-    # Key(["mod1"], "f", lazy.spawn('variety -f')),
-    # Key(["mod1"], "h", lazy.spawn('urxvt -e htop')),
-    # Key(["mod1"], "n", lazy.spawn('variety -n')),
-    # Key(["mod1"], "p", lazy.spawn('variety -p')),
-    # Key(["mod1"], "t", lazy.spawn('variety -t')),
-    # Key(["mod1"], "Up", lazy.spawn('variety --pause')),
-    # Key(["mod1"], "Down", lazy.spawn('variety --resume')),
-    # Key(["mod1"], "Left", lazy.spawn('variety -p')),
-    # Key(["mod1"], "Right", lazy.spawn('variety -n')),
-    # Key(["mod1"], "F2", lazy.spawn('gmrun')),
-    # Key(["mod1"], "F3", lazy.spawn('xfce4-appfinder')),
-
-# VARIETY KEYS WITH PYWAL
-
-    # Key(["mod1", "shift"], "f", lazy.spawn(home + '/.config/qtile/scripts/set-pywal.sh -f')),
-    # Key(["mod1", "shift"], "p", lazy.spawn(home + '/.config/qtile/scripts/set-pywal.sh -p')),
-    # Key(["mod1", "shift"], "n", lazy.spawn(home + '/.config/qtile/scripts/set-pywal.sh -n')),
-    # Key(["mod1", "shift"], "u", lazy.spawn(home + '/.config/qtile/scripts/set-pywal.sh -u')),
 
 # CONTROL + SHIFT KEYS
 
     Key([mod2, "shift"], "Escape", lazy.spawn('xfce4-taskmanager')),
 
 # SCREENSHOTS
-
-    # Key([], "Print", lazy.spawn("scrot 'ArcoLinux-%Y-%m-%d-%s_screenshot_$wx$h.jpg' -e 'mv $f $$(xdg-user-dir PICTURES)'")),
     Key([mod2], "Print", lazy.spawn('xfce4-screenshooter')),
     Key([mod2, "shift"], "Print", lazy.spawn('gnome-screenshot -i')),
 
@@ -258,6 +196,10 @@ keys = [
     Key([mod, "shift"], "Left", lazy.layout.swap_left()),
     Key([mod, "shift"], "Right", lazy.layout.swap_right()),
 
+# MOVE TO OTHER MONITOR
+    Key([mod, "shift"], "m", lazy.next_screen()),
+    Key([mod, "shift"], "n", lazy.prev_screen()),
+
 # TOGGLE FLOATING LAYOUT
     Key([mod, "shift"], "space", lazy.window.toggle_floating()),]
 
@@ -344,8 +286,6 @@ def init_colors():
 
 
 colors = init_colors()
-
-
 
 
 # WIDGETS FOR THE BAR
