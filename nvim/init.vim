@@ -41,6 +41,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'frazrepo/vim-rainbow'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-fugitive'
+Plug 'chrisbra/csv.vim'
 
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
