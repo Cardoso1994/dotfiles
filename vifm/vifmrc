@@ -11,7 +11,9 @@
 " If you would like to use another vi clone such as Elvis or Vile
 " you will need to change this setting.
 
-set vicmd=vim
+" set vicmd=vim
+set vicmd="~/nvim.appimage"
+" set vicmd="emacs -nw"
 " set vicmd=elvis\ -G\ termcap
 " set vicmd=vile
 
@@ -64,7 +66,10 @@ set norunexec
 
 " Selected color scheme
 
-colorscheme dracula
+" colorscheme dracula
+" colorscheme onedark
+" colorscheme ph
+colorscheme default
 
 " Format for displaying time in file list. For example:
 " TIME_STAMP_FORMAT=%m/%d-%H:%M
@@ -100,7 +105,7 @@ set incsearch
 
 " Try to leave some space from cursor to upper/lower border in lists
 
-set scrolloff=4
+set scrolloff=3
 
 " Don't do too many requests to slow file systems
 
@@ -171,8 +176,8 @@ command! reload :write | restart
 " program.
 
 " Pdf
-" filextype *.pdf zathura %c %i &, apvlv %c, xpdf %c
-filextype *.pdf zathura %c %i, apvlv %c, xpdf %c
+filextype *.pdf zathura %c %i &, apvlv %c, xpdf %c
+" "filextype *.pdf zathura %c %i, apvlv %c, xpdf %c
 fileviewer *.pdf pdftotext -nopgbrk %c -
 
 " PostScript
@@ -213,6 +218,8 @@ filextype *.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.mpeg,*.vob,
         \ dragon %f:p,
         \ {View using mplayer}
         \ mplayer %f,
+        \ {View using mplayer}
+        \ parole %F,
 fileviewer *.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.mpeg,*.vob,
           \*.fl[icv],*.m2v,*.mov,*.webm,*.ts,*.mts,*.m4v,*.r[am],*.qt,*.divx,
           \*.as[fx]
@@ -499,3 +506,5 @@ nnoremap <f8> :delete<cr>
 " don't show hidden files
 windo normal zm
 
+" open all folder with sxiv
+command!   SXIV    :!sxiv  -r  -t  -s d  %d  &
