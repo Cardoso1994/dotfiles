@@ -30,19 +30,21 @@ call plug#begin('~/.config/nvim/plugged')
 
 " Declare the list of colorschemes.
 Plug 'joshdick/onedark.vim'
-Plug 'ayu-theme/ayu-vim'
-Plug 'tomasiser/vim-code-dark'
-Plug 'drewtempelmeyer/palenight.vim'
+Plug 'morhetz/gruvbox'
+Plug 'sainnhe/forest-night'
+Plug 'sainnhe/sonokai'
+Plug 'sainnhe/edge'
 
 " Declare the list of plugins.
-" Plug 'preservim/nerdtree'
-" Plug 'jeetsukumaran/vim-buffergator'
+Plug 'preservim/nerdtree'
+Plug 'jeetsukumaran/vim-buffergator'
 Plug 'itchyny/lightline.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'frazrepo/vim-rainbow'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-fugitive'
 Plug 'chrisbra/csv.vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'sheerun/vim-polyglot'
 
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
@@ -163,18 +165,47 @@ if (has("termguicolors"))
   set termguicolors
 endif
 
+"""""""""""""""""""""""""""""""""""""""
 " Colorscheme
-set background=dark
-" colorscheme onedark
-" colorscheme dracula
-colorscheme palenight
-" colorscheme archery
-" colorscheme codedark
+"""""""""""""""""""""""""""""""""""""""
+syntax enable
 
-" let ayucolor="light"  " for light version of theme
-" let ayucolor="mirage" " for mirage version of theme
-" let ayucolor="dark"   " for dark version of theme
-" colorscheme ayu
+"""""""""""""""""""""""""""""""""""
+" colorscheme depending time of day
+"""""""""""""""""""""""""""""""""""
+let hr= (strftime('%H'))
+if hr > 8 && hr < 18
+    set background=light
+    let g:gruvbox_contrast_light="hard"
+    colorscheme gruvbox
+else
+    set background=dark
+    let g:sonokai_style="shusia"
+    colorscheme sonokai
+endif
+
+" onedark
+" colorscheme onedark
+
+" gruvbox
+" let g:gruvbox_italic=1
+" let g:gruvbox_bold=1
+" let g:gruvbox_contrast_dark="medium"
+" let g:gruvbox_contrast_light="soft"
+" colorscheme gruvbox
+
+
+" sonokai
+" let g:sonokai_style="andromeda"
+" let g:sonokai_style="shusia"
+" let g:sonokai_style="maia"
+" colorscheme sonokai
+
+" forest-night
+" colorscheme forest-night
+
+" edge
+" let g:edge_style="aura"
 
 " allowing transparecy
 " hi NonText ctermbg=none
@@ -216,7 +247,6 @@ set smarttab
 set shiftwidth=4
 set tabstop=4
 set softtabstop=4
-set shiftwidth=4
 
 " Linebreak on 80 characters
 set lbr
@@ -242,13 +272,15 @@ execute "set list listchars=tab:". _tab_placeholder .",trail:". _space_placehold
 " Super useful! From an idea by Michael Naumann
 vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
 vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
+vnoremap <Tab> >
+vnoremap <S-Tab> <
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " BUFFERS, WINDOWS AND TABS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
 " map <space> /
-" map <C-space> ?
+map <C-space> /
 
 " Disable highlight when <leader><cr> is pressed
 map <silent> <leader><cr> :noh<cr>
@@ -272,7 +304,7 @@ map <leader>h :bprevious<cr>
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
 " vertical split of the same file with sync scrollbind
-" spreads the file in two windows, extending visualization
+" i.e. spreads the file in two windows, extending visualization
 set splitright splitbelow
 nmap <Space>v :set noscrollbind<CR> :vs<CR> <C-l> L zt 3<C-e> :set scb<CR> <C-h> :set scb!<CR>
 
@@ -319,7 +351,7 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 " => lightline
 """"""""""""""""
 let g:lightline = {
-      \ 'colorscheme': 'one',
+      \ 'colorscheme': 'sonokai',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
@@ -332,7 +364,7 @@ let g:lightline = {
 """"""""""""""""
 " => Nerd Tree
 """"""""""""""""
-" nmap <Space>. :NERDTreeToggle<CR>
+nmap <silent><Space>. :NERDTreeToggle<CR>
 let NERDTreeQuitOnOpen=1
 let g:NERDTreeWinPos = "left"
 let NERDTreeShowHidden=0
@@ -345,7 +377,7 @@ let g:NERDTreeWinSize=25
 """"""""""""""""
 " => Buffergator
 """"""""""""""""
-" nmap <Space>, :BuffergatorToggle<CR>
+nmap <silent><Space>, :BuffergatorToggle<CR>
 let g:buffergator_viewport_split_policy="B"
 let g:buffergator_hsplit_size=5
 
@@ -407,6 +439,11 @@ inoremap { {}<left>
 inoremap {<CR> {<CR>}<ESC>O
 inoremap {;<CR> {<CR>};<ESC>O
 
+" Coc-mappings overwrited by other plugins and mappings
+" nmap <space>, :CocCommand explorer <CR>
+
+" quick search
+nmap <space><space> /
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Python section
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -443,7 +480,3 @@ endif
 " => Markdown
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let vim_markdown_folding_disabled = 1
-
-
-" nmap <space>e :CocCommand explorer ~/<CR>
-nmap <space>, :CocCommand explorer <CR>
