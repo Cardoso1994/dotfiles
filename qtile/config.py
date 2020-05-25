@@ -36,8 +36,15 @@ from libqtile.widget import Spacer
 # import arcobattery
 # import arcomemory
 
+
+# for multimonitor on the fly support
+from Xlib import display as xdisplay
+
+###############################################################################
+# => MOD KEYS
+###############################################################################
 #mod4 or mod = super key
-mod = "mod1"
+mod = "mod4"
 mod1 = "alt"
 mod2 = "control"
 home = os.path.expanduser('~')
@@ -56,49 +63,82 @@ def window_to_next_group(qtile):
         i = qtile.groups.index(qtile.currentGroup)
         qtile.currentWindow.togroup(qtile.groups[i + 1].name)
 
+
+###############################################################################
+# => MONITORS ON THE FLY
+###############################################################################
+# function to get the num_monitors on the fly
+# added by Cardoso via https://github.com/qtile/qtile/wiki/screens
+def get_num_monitors():
+    num_monitors = 0
+    try:
+        display = xdisplay.Display()
+        screen = display.screen()
+        resources = screen.root.xrandr_get_screen_resources()
+
+        for output in resources.outputs:
+            monitor = display.xrandr_get_output_info(output,
+                                            resources.config_timestamp)
+            preferred = False
+            if hasattr(monitor, "preferred"):
+                preferred = monitor.preferred
+            elif hasattr(monitor, "num_preferred"):
+                preferred = monitor.num_preferred
+            if preferred:
+                num_monitors += 1
+    except Exception as e:
+        return 1
+    else:
+        return num_monitors
+
+num_monitors = get_num_monitors()
+
+###############################################################################
+# => KEY COMBINATIONS
+###############################################################################
 keys = [
 
-# FUNCTION KEYS
-
-# SUPER + FUNCTION KEYS
+    # SUPER + FUNCTION KEYS
 
     # Key([mod], "Return", lazy.spawn('urxvt')),
     # Key([mod], "Return", lazy.spawn('st')),
-    Key([mod], "Return", lazy.spawn('alacritty')),
-    Key([mod], "d", lazy.spawn('xfce4-appfinder')),
+    Key([mod], "Return", lazy.spawn('/home/desarrollo/.cargo/bin/alacritty')),
+    Key([mod], "d", lazy.spawn('dmenu_run -i -fn' + ' "InconsolataGo"')),
     Key([mod], "v", lazy.spawn('pavucontrol')),
     Key([mod], "x", lazy.spawn('oblogout')),
     Key([mod], "Escape", lazy.spawn('xkill')),
 
 
-# SUPER + SHIFT KEYS
+    # SUPER + SHIFT KEYS
     Key([mod, "shift"], "Return",
         lazy.spawn(
-            "alacritty -e /home/desarrollo/.config/vifm/scripts/vifmrun")),
+            "/home/desarrollo/.cargo/bin/alacritty"
+            + " -e /home/desarrollo/.config/vifm/scripts/vifmrun")),
         # lazy.spawn("st /home/desarrollo/.config/vifm/scripts/vifmrun")),
     Key([mod, "shift"], "q", lazy.window.kill()),
     Key([mod, "shift"], "r", lazy.restart()),
     Key([mod, "shift"], "x", lazy.shutdown()),
+    Key([mod, "shift"], "d", lazy.spawn('xfce4-appfinder')),
 
-# CONTROL + ALT KEYS
+    # CONTROL + ALT KEYS
 
-# ALT + ... KEYS
+    # ALT + ... KEYS
 
-# CONTROL + SHIFT KEYS
+    # CONTROL + SHIFT KEYS
 
     Key([mod2, "shift"], "Escape", lazy.spawn('xfce4-taskmanager')),
 
-# SCREENSHOTS
+    # SCREENSHOTS
     Key([mod2], "Print", lazy.spawn('xfce4-screenshooter')),
     Key([mod2, "shift"], "Print", lazy.spawn('gnome-screenshot -i')),
 
-# MULTIMEDIA KEYS
+    # MULTIMEDIA KEYS
 
-# INCREASE/DECREASE BRIGHTNESS
+    # INCREASE/DECREASE BRIGHTNESS
     Key([], "XF86MonBrightnessUp", lazy.spawn("xbacklight -inc 5")),
     Key([], "XF86MonBrightnessDown", lazy.spawn("xbacklight -dec 5")),
 
-# INCREASE/DECREASE/MUTE VOLUME
+    # INCREASE/DECREASE/MUTE VOLUME
     Key([], "XF86AudioMute", lazy.spawn("amixer -D pulse set Master toggle")),
     Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -D pulse sset Master '5%-'")),
     Key([], "XF86AudioRaiseVolume", lazy.spawn(" amixer -D pulse sset Master '5%+'")),
@@ -108,16 +148,16 @@ keys = [
     Key([], "XF86AudioPrev", lazy.spawn("playerctl previous")),
     Key([], "XF86AudioStop", lazy.spawn("playerctl stop")),
 
-#    Key([], "XF86AudioPlay", lazy.spawn("mpc toggle")),
-#    Key([], "XF86AudioNext", lazy.spawn("mpc next")),
-#    Key([], "XF86AudioPrev", lazy.spawn("mpc prev")),
-#    Key([], "XF86AudioStop", lazy.spawn("mpc stop")),
+    # Key([], "XF86AudioPlay", lazy.spawn("mpc toggle")),
+    # Key([], "XF86AudioNext", lazy.spawn("mpc next")),
+    # Key([], "XF86AudioPrev", lazy.spawn("mpc prev")),
+    # Key([], "XF86AudioStop", lazy.spawn("mpc stop")),
 
-# QTILE LAYOUT KEYS
+    # QTILE LAYOUT KEYS
     Key([mod], "n", lazy.layout.normalize()),
     Key([mod], "space", lazy.next_layout()),
 
-# CHANGE FOCUS
+    # CHANGE FOCUS OF WINDOWS
     Key([mod], "Up", lazy.layout.up()),
     Key([mod], "Down", lazy.layout.down()),
     Key([mod], "Left", lazy.layout.left()),
@@ -128,7 +168,7 @@ keys = [
     Key([mod], "l", lazy.layout.right()),
 
 
-# RESIZE UP, DOWN, LEFT, RIGHT
+    # RESIZE UP, DOWN, LEFT, RIGHT
     Key([mod, "control"], "l",
         lazy.layout.grow_right(),
         lazy.layout.grow(),
@@ -175,51 +215,55 @@ keys = [
         ),
 
 
-# FLIP LAYOUT FOR MONADTALL/MONADWIDE
+    # FLIP LAYOUT FOR MONADTALL/MONADWIDE
     Key([mod, "shift"], "f", lazy.layout.flip()),
 
-# FLIP LAYOUT FOR BSP
+    # FLIP LAYOUT FOR BSP
     # Key([mod, "mod1"], "k", lazy.layout.flip_up()),
     # Key([mod, "mod1"], "j", lazy.layout.flip_down()),
     # Key([mod, "mod1"], "l", lazy.layout.flip_right()),
     # Key([mod, "mod1"], "h", lazy.layout.flip_left()),
 
-# MOVE WINDOWS UP OR DOWN
+    # MOVE WINDOWS UP OR DOWN
     Key([mod, "shift"], "k", lazy.layout.shuffle_up()),
     Key([mod, "shift"], "j", lazy.layout.shuffle_down()),
     Key([mod, "shift"], "h", lazy.layout.shuffle_left()),
     Key([mod, "shift"], "l", lazy.layout.shuffle_right()),
 
-# MOVE WINDOWS UP OR DOWN MONADTALL/MONADWIDE LAYOUT
+    # MOVE WINDOWS UP OR DOWN MONADTALL/MONADWIDE LAYOUT
     Key([mod, "shift"], "Up", lazy.layout.shuffle_up()),
     Key([mod, "shift"], "Down", lazy.layout.shuffle_down()),
     Key([mod, "shift"], "Left", lazy.layout.swap_left()),
     Key([mod, "shift"], "Right", lazy.layout.swap_right()),
 
-# MOVE TO OTHER MONITOR
+    # MOVE TO OTHER MONITOR
     Key([mod, "shift"], "m", lazy.next_screen()),
     Key([mod, "shift"], "n", lazy.prev_screen()),
 
-# TOGGLE FLOATING LAYOUT
-    Key([mod, "shift"], "space", lazy.window.toggle_floating()),]
+    # TOGGLE FLOATING LAYOUT
+    Key([mod, "shift"], "space", lazy.window.toggle_floating()),
+    ]
 
+
+###############################################################################
+# => GROUPS
+###############################################################################
 groups = []
 
 # FOR QWERTY KEYBOARDS
 group_names = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0",]
 
-# FOR AZERTY KEYBOARDS
-#group_names = ["ampersand", "eacute", "quotedbl", "apostrophe", "parenleft", "section", "egrave", "exclam", "ccedilla", "agrave",]
-
-# group_labels = ["1 ", "2 ", "3 ", "4 ", "5 ", "6 ", "7 ", "8 ", "9 ", "0",]
 # group_labels = ["", "", "", "", "", "", "", "", "", "",]
 group_labels = ["", "", "", "", "", "", "", "", "",  "",]
 # group_labels = ["", "", "", "", "", "", "", "", "", "",]
 
-#group_labels = ["Web", "Edit/chat", "Image", "Gimp", "Meld", "Video", "Vb", "Files", "Mail", "Music",]
 
-group_layouts = ["monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall", "monadtall",]
-#group_layouts = ["monadtall", "matrix", "monadtall", "bsp", "monadtall", "matrix", "monadtall", "bsp", "monadtall", "monadtall",]
+group_layouts = ["monadtall", "monadtall", "monadtall", "monadtall",
+                 "monadtall", "monadtall", "monadtall", "monadtall",
+                 "monadtall", "monadtall",]
+
+groups_screen_0 = ["2"]
+groups_screen_1 = ["3", "6", "0"]
 
 for i in range(len(group_names)):
     groups.append(
@@ -229,27 +273,59 @@ for i in range(len(group_names)):
             label=group_labels[i],
         ))
 
-for i in groups:
-    keys.extend([
+#####################################
+# => GROUP KEYS
+#####################################
+if num_monitors == 1:
+    for i in groups:
+        keys.extend([
+            #CHANGE WORKSPACES
+            Key([mod], i.name, lazy.group[i.name].toscreen()),
+            # Key([mod], "Tab", lazy.screen.next_group()),
+            # Key(["mod1"], "Tab", lazy.screen.next_group()),
+            # Key(["mod1", "shift"], "Tab", lazy.screen.prev_group()),
 
-#CHANGE WORKSPACES
-        Key([mod], i.name, lazy.group[i.name].toscreen()),
-        Key([mod], "Tab", lazy.screen.next_group()),
-        # Key(["mod1"], "Tab", lazy.screen.next_group()),
-        Key(["mod1", "shift"], "Tab", lazy.screen.prev_group()),
+            # MOVE WINDOW TO SELECTED WORKSPACE 1-10 AND STAY ON WORKSPACE
+            Key([mod, "control"], i.name, lazy.window.togroup(i.name)),
+            # MOVE WINDOW TO SELECTED WORKSPACE 1-10 AND GO TO WORKSPACE
+            Key([mod, "shift"], i.name, lazy.window.togroup(i.name) ,
+                lazy.group[i.name].toscreen()),
+        ])
+else:
+    for i in groups:
+        # ASSIGN WORKSPACE TO SPECIFIC MONITOR
+        if i.name in groups_screen_0:
+            keys.extend([
+                Key([mod], i.name, lazy.group[i.name].toscreen(0))
+            ])
+        elif i.name in groups_screen_1:
+            keys.extend([
+                Key([mod], i.name, lazy.group[i.name].toscreen(1))
+            ])
+        else:
+            keys.extend([
+                Key([mod], i.name, lazy.group[i.name].toscreen())
+            ])
 
-# MOVE WINDOW TO SELECTED WORKSPACE 1-10 AND STAY ON WORKSPACE
-        Key([mod, "control"], i.name, lazy.window.togroup(i.name)),
-# MOVE WINDOW TO SELECTED WORKSPACE 1-10 AND FOLLOW MOVED WINDOW TO WORKSPACE
-        Key([mod, "shift"], i.name, lazy.window.togroup(i.name) , lazy.group[i.name].toscreen()),
-    ])
+        keys.extend([
+            # MOVE WINDOW TO SELECTED WORKSPACE 1-10 AND STAY ON WORKSPACE
+            Key([mod, "control"], i.name, lazy.window.togroup(i.name)),
+            # MOVE WINDOW TO SELECTED WORKSPACE 1-10 AND GO TO WORKSPACE
+            Key([mod, "shift"], i.name, lazy.window.togroup(i.name) ,
+                lazy.group[i.name].toscreen()),
+        ])
 
-
+###############################################################################
+# => LAYOUTS
+###############################################################################
+border_width_ = 1
+border_focus_ = "#f57800"
+border_normal_ = "#123e7c"
 def init_layout_theme():
     return {"margin":6,
-            "border_width":3,
-            "border_focus": "#f57800",
-            "border_normal": "#123e7c"
+            "border_width":border_width_,
+            "border_focus": border_focus_,
+            "border_normal": border_normal_
             }
 
 layout_theme = init_layout_theme()
@@ -257,12 +333,16 @@ layout_theme = init_layout_theme()
 
 layouts = [
     layout.Columns(num_columns=2, insert_position=1, margin=5,
-                   border_focus="#f57800", border_normal="#123e7c",
+                   border_focus=border_focus_, border_normal=border_normal_,
                    grow_amount=2),
-    layout.MonadTall(margin=5, border_width=3, border_focus="#f57800",
-                     border_normal="#123e7c", ratio=0.60),
-    layout.MonadWide(align=1, margin=5, border_width=3, border_focus="#f57800",
-                     border_normal="#123e7c", ratio=0.65),
+    layout.MonadTall(margin=5, border_width=border_width_,
+                     border_focus=border_focus_,
+                     border_normal=border_normal_, ratio=0.65, max_ratio=0.75,
+                     min_ratio=0.25),
+    layout.MonadWide(align=0, margin=5, border_width=border_width_,
+                     border_focus=border_focus_,
+                     border_normal=border_normal_, ratio=0.65, max_ratio=0.85,
+                     min_ratio=0.15),
     # layout.Matrix(**layout_theme),
     # layout.Bsp(**layout_theme),
     layout.Floating(**layout_theme),
@@ -270,6 +350,9 @@ layouts = [
     layout.Max(**layout_theme)
 ]
 
+###############################################################################
+# => BAR
+###############################################################################
 # COLORS FOR THE BAR
 
 def init_colors():
@@ -498,14 +581,35 @@ def init_widgets_screen2():
 widgets_screen1 = init_widgets_screen1()
 widgets_screen2 = init_widgets_screen2()
 
-
+###############################################################################
+# SCREENS
+###############################################################################
 def init_screens():
     return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), size=26)),
-            Screen(top=bar.Bar(widgets=init_widgets_screen2(), size=26))]
+            Screen(top=bar.Bar(widgets=init_widgets_screen1(), size=26))]
+
+def init_screens_on_the_fly():
+    screens = [Screen(top=bar.Bar(widgets=init_widgets_screen1(), size=26))]
+
+    for _ in range(num_monitors - 1):
+        screens.append(
+            Screen(top=bar.Bar(widgets=init_widgets_screen2(), size=26))
+        )
+
+    return screens
+
+
+if num_monitors == 1:
+    screens = init_screens()
+else:
+    screens = init_screens_on_the_fly()
+
+
 screens = init_screens()
 
-
-# MOUSE CONFIGURATION
+###############################################################################
+# => MOUSE CONFIGURATION
+###############################################################################
 mouse = [
     Drag([mod], "Button1", lazy.window.set_position_floating(),
          start=lazy.window.get_position()),
@@ -516,14 +620,15 @@ mouse = [
 dgroups_key_binder = None
 dgroups_app_rules = []
 
-# ASSIGN APPLICATIONS TO A SPECIFIC GROUPNAME
-# BEGIN
+###############################################################################
+# => ASSIGN APPLICATIONS TO A SPECIFIC GROUPNAME
+###############################################################################
 
 @hook.subscribe.client_new
 def assign_app_group(client):
     d = {}
     #########################################################
-    ################ assgin apps to groups ##################
+    ################ assign apps to groups ##################
     #########################################################
     # d["1"] = ["Navigator", "Firefox", "Vivaldi-stable", "Vivaldi-snapshot", "Chromium", "Google-chrome", "Brave", "Brave-browser",
     #           "navigator", "firefox", "vivaldi-stable", "vivaldi-snapshot", "chromium", "google-chrome", "brave", "brave-browser", ]
@@ -563,6 +668,9 @@ def assign_app_group(client):
 # ASSIGN APPLICATIONS TO A SPECIFIC GROUPNAME
 
 
+###############################################################################
+# => FORCING FLOATING IN APPLICATIONS
+###############################################################################
 
 main = None
 
@@ -613,7 +721,7 @@ floating_layout = layout.Floating(float_rules=[
     {'wname': 'pinentry'},
     {'wmclass': 'ssh-askpass'},
 
-],  fullscreen_border_width = 0, border_width = 0)
+],  fullscreen_border_width = border_width_, border_width = border_width_)
 auto_fullscreen = True
 
 focus_on_window_activation = "focus" # or smart
