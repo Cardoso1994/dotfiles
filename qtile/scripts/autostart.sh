@@ -24,12 +24,12 @@ function run {
 # run dex $HOME/.config/autostart/arcolinux-welcome-app.desktop &
 
 #Some ways to set your wallpaper besides variety or nitrogen
-nitrogen --restore &
-# compton -b
 # feh --bg-fill /usr/share/backgrounds/arcolinux/arco-wallpaper.jpg &
+# nitrogen --restore &
+wal -R
 
 #start the conky to learn the shortcuts
-(conky -c $HOME/.config/qtile/scripts/system-overview) &
+#(conky -c $HOME/.config/qtile/scripts/system-overview) &
 
 #starting utility applications at boot time
 run nm-applet &
@@ -38,7 +38,7 @@ run xfce4-power-manager &
 numlockx on &
 blueberry-tray &
 # compton --config $HOME/.config/qtile/scripts/picom.conf &
-compton -i 0.9
+picom -i 0.9 &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 /usr/lib/xfce4/notifyd/xfce4-notifyd &
 
