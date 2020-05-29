@@ -15,4 +15,6 @@ redshift-gtk &
 # montar automaticamente medios externos
 udiskie &
 
+# speed up keyboard
+xset r rate 300 50
 # conky -c ~/.config/qtile/scripts/system-overview &
