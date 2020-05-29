@@ -445,6 +445,8 @@ exec --no-startup-id volumeicon
 #variety
 exec --no-startup-id variety
 
+# speed up keyboard
+xset r rate 300 50
 
 #Conky
 exec --no-startup-id conky -c ~/.config/i3/system-overview
