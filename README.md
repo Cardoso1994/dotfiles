@@ -23,3 +23,7 @@ List of software that I frequently used in all window managers
 - xterm
 - nm-applet
 
+## Fonts
+- Cascadia
+- FiraCode
+- Inconsolotaga NERD Font
