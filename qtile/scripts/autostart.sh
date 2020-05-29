@@ -58,3 +58,12 @@ run volumeicon &
 
 # mounting external drives automatically
 udiskie &
+
+# changing the keyboard speed
+xset r rate 300 50
+
+
+
+
+
+
