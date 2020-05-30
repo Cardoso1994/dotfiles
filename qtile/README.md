@@ -23,4 +23,9 @@ Uses many software of the xfce4 deskptop environment.
 - **xterm is a must have**
 
 Fonts:
+- Cascadia
+- Caskaydia Cove Nerd Font (Basically Cascadia Nerd Font)
 - Inconsolata (Go) Nerd Font
+
+## Troubleshooting
+- Config Error will occur if the font specified for the bar is not installed
