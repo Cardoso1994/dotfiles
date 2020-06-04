@@ -296,11 +296,13 @@ else:
         # ASSIGN WORKSPACE TO SPECIFIC MONITOR
         if i.name in groups_screen_0:
             keys.extend([
-                Key([mod], i.name, lazy.group[i.name].toscreen(0))
+                Key([mod], i.name, lazy.group[i.name].toscreen(0),
+                   lazy.to_screen(0))
             ])
         elif i.name in groups_screen_1:
             keys.extend([
-                Key([mod], i.name, lazy.group[i.name].toscreen(1))
+                Key([mod], i.name, lazy.group[i.name].toscreen(1),
+                   lazy.to_screen(1))
             ])
         else:
             keys.extend([
@@ -356,17 +358,28 @@ layouts = [
 # COLORS FOR THE BAR
 
 def init_colors():
-    return [["#2F343F", "#2F343F"], # color 0
-            ["#2F343F", "#2F343F"], # color 1
+    #return [["#2F343F", "#2F343F"], # color 0
+    #        ["#2F343F", "#2F343F"], # color 1
+    #        ["#c0c5ce", "#c0c5ce"], # color 2
+    #        ["#fba922", "#fba922"], # color 3
+    #        ["#3384d0", "#3384d0"], # color 4
+    #        ["#f3f4f5", "#f3f4f5"], # color 5
+    #        ["#cd1f3f", "#cd1f3f"], # color 6
+    #        ["#62FF00", "#62FF00"], # color 7
+    #        ["#6790eb", "#6790eb"], # color 8
+    #        ["#a9a9a9", "#a9a9a9"]] # color 9
+
+# sonokai colorscheme
+    return [["#2d2a2e", "#2d2a2e"], # color 0
+            ["#1a181a", "#1a181a"], # color 1
             ["#c0c5ce", "#c0c5ce"], # color 2
             ["#fba922", "#fba922"], # color 3
             ["#3384d0", "#3384d0"], # color 4
-            ["#f3f4f5", "#f3f4f5"], # color 5
+            ["#f85e84", "#f85e84"], # color 5
             ["#cd1f3f", "#cd1f3f"], # color 6
             ["#62FF00", "#62FF00"], # color 7
             ["#6790eb", "#6790eb"], # color 8
-            ["#a9a9a9", "#a9a9a9"]] # color 9
-
+            ["#ab9df2", "#ab9df2"]] # color 9
 
 colors = init_colors()
 
