@@ -1,0 +1,5 @@
+[Unit]
+Description=changes alacritty colorscheme (light / dark) depending on the time
+
+[Service]
+ExecStart=/home/desarrollo/.config/alacritty/color_change
