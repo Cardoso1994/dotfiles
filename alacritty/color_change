@@ -1,0 +1,14 @@
+#!/bin/bash
+
+LIGHT="/home/desarrollo/.config/alacritty/alacritty_light.yml"
+DARK="/home/desarrollo/.config/alacritty/alacritty_dark.yml"
+CONFIG_NO_COLOR="/home/desarrollo/.config/alacritty/alacritty.yml"
+_TIME_=$(date +%H)
+
+if [ $_TIME_ -ge 8 -a $_TIME_ -lt 18 ]; then
+        cp $CONFIG_NO_COLOR alacritty.yml
+        cat $LIGHT >> alacritty.yml
+else
+        cp $CONFIG_NO_COLOR alacritty.yml
+        cat $DARK >> alacritty.yml
+fi
