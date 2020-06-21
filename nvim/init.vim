@@ -34,6 +34,11 @@ Plug 'morhetz/gruvbox'
 Plug 'sainnhe/forest-night'
 Plug 'sainnhe/sonokai'
 Plug 'sainnhe/edge'
+Plug 'franbach/miramare'
+Plug 'drewtempelmeyer/palenight.vim'
+Plug 'sainnhe/gruvbox-material'
+Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'iCyMind/NeoSolarized'
 
 " Declare the list of plugins.
 Plug 'preservim/nerdtree'
@@ -45,6 +50,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'chrisbra/csv.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'sheerun/vim-polyglot'
+Plug 'mboughaba/i3config.vim'
+Plug 'jlanzarotta/bufexplorer'
 
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
@@ -170,46 +177,53 @@ endif
 """""""""""""""""""""""""""""""""""""""
 syntax enable
 
-"""""""""""""""""""""""""""""""""""
-" colorscheme depending time of day
-"""""""""""""""""""""""""""""""""""
-let hr= (strftime('%H'))
-if hr > 8 && hr < 18
-    set background=light
-    let g:gruvbox_contrast_light="hard"
-    colorscheme gruvbox
-else
-    set background=dark
-    let g:sonokai_style="shusia"
-    colorscheme sonokai
-endif
-
 " onedark
 " colorscheme onedark
 
 " gruvbox
-" let g:gruvbox_italic=1
-" let g:gruvbox_bold=1
-" let g:gruvbox_contrast_dark="medium"
-" let g:gruvbox_contrast_light="soft"
+let g:gruvbox_italic=1
+let g:gruvbox_bold=1
+let g:gruvbox_contrast_dark="hard"
+let g:gruvbox_contrast_light="medium"
 " colorscheme gruvbox
 
+" gruvbox material
+let g:gruvbox_material_palette = 'material'
+let g:gruvbox_material_background = 'hard'
+let g:gruvbox_material_visual = 'reverse'
 
 " sonokai
 " let g:sonokai_style="andromeda"
-" let g:sonokai_style="shusia"
+let g:sonokai_style="shusia"
 " let g:sonokai_style="maia"
+let g:sonokai_enable_italic=1
 " colorscheme sonokai
 
 " forest-night
 " colorscheme forest-night
 
 " edge
-" let g:edge_style="aura"
+let g:edge_style="aura"
 
 " allowing transparecy
 " hi NonText ctermbg=none
 " hi Normal guibg=NONE ctermbg=NONE
+
+"""""""""""""""""""""""""""""""""""
+" colorscheme depending time of day
+"""""""""""""""""""""""""""""""""""
+let hr= (strftime('%H'))
+if hr > 8 && hr < 18
+    set background=light
+    let g:gruvbox_material_palette = 'original'
+    let g:gruvbox_material_background = 'medium'
+    colorscheme gruvbox-material
+else
+    set background=dark
+    let g:gruvbox_material_palette = 'material'
+    let g:gruvbox_material_background = 'hard'
+    colorscheme gruvbox-material
+endif
 
 " Set extra options when running in GUI mode
 if has("gui_running")
@@ -250,7 +264,7 @@ set softtabstop=4
 
 " Linebreak on 80 characters
 set lbr
-set tw=80
+set tw=79
 
 set ai "Auto indent
 set si "Smart indent
@@ -292,7 +306,7 @@ map <C-h> <C-W>h
 map <C-l> <C-W>l
 
 " Close the current buffer
-map <leader>bd :Bclose<cr>:tabclose<cr>gT
+map <leader>bd :b#<bar>bd#<cr>gT
 
 " Close all the buffers
 map <leader>ba :bufdo bd<cr>
@@ -328,7 +342,7 @@ map <leader>tn :tabnew<cr>
 map <leader>to :tabonly<cr>
 map <leader>tc :tabclose<cr>
 map <leader>tm :tabmove
-map <leader>t<leader> :tabnext
+map <leader>t<leader> :tabnext<cr>
 
 " Let 'tl' toggle between this and the last accessed tab
 let g:lasttab = 1
@@ -361,6 +375,11 @@ let g:lightline = {
       \ },
       \ }
 
+function LightlineReload()
+    call lightline#init()
+    call lightline#colorscheme()
+    call lightline#update()
+endfunction
 """"""""""""""""
 " => Nerd Tree
 """"""""""""""""
@@ -444,6 +463,12 @@ inoremap {;<CR> {<CR>};<ESC>O
 
 " quick search
 nmap <space><space> /
+
+" redo mapping
+nmap <space>u <C-r>
+
+" out of insert mode
+imap jk <ESC>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Python section
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
