@@ -415,7 +415,7 @@ let g:rainbow_active = 1
 """"""""""""""""
 " => Coc
 """"""""""""""""
-source ~/.vim/coc_config.vim
+source ~/.config/nvim/coc_config.vim
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " OWN MAPPINGS
