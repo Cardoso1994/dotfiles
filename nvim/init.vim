@@ -1,4 +1,4 @@
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+                                                                                                                                 ──(sáb,jul11)─┘"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " GENERAL
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -31,14 +31,12 @@ call plug#begin('~/.config/nvim/plugged')
 " Declare the list of colorschemes.
 Plug 'joshdick/onedark.vim'
 Plug 'morhetz/gruvbox'
-Plug 'sainnhe/forest-night'
 Plug 'sainnhe/sonokai'
 Plug 'sainnhe/edge'
 Plug 'franbach/miramare'
 Plug 'drewtempelmeyer/palenight.vim'
 Plug 'sainnhe/gruvbox-material'
-Plug 'dracula/vim', { 'as': 'dracula' }
-Plug 'iCyMind/NeoSolarized'
+Plug 'arcticicestudio/nord-vim'
 
 " Declare the list of plugins.
 Plug 'preservim/nerdtree'
@@ -184,8 +182,7 @@ syntax enable
 let g:gruvbox_italic=1
 let g:gruvbox_bold=1
 let g:gruvbox_contrast_dark="hard"
-let g:gruvbox_contrast_light="medium"
-" colorscheme gruvbox
+let g:gruvbox_contrast_light="soft"
 
 " gruvbox material
 let g:gruvbox_material_palette = 'material'
@@ -215,14 +212,15 @@ let g:edge_style="aura"
 let hr= (strftime('%H'))
 if hr > 8 && hr < 18
     set background=light
-    let g:gruvbox_material_palette = 'original'
-    let g:gruvbox_material_background = 'medium'
+    let g:gruvbox_material_palette = 'material'
+    let g:gruvbox_material_background = 'soft'
     colorscheme gruvbox-material
 else
     set background=dark
     let g:gruvbox_material_palette = 'material'
     let g:gruvbox_material_background = 'hard'
     colorscheme gruvbox-material
+    " colorscheme gruvbox
 endif
 
 " Set extra options when running in GUI mode
@@ -365,7 +363,7 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 " => lightline
 """"""""""""""""
 let g:lightline = {
-      \ 'colorscheme': 'sonokai',
+      \ 'colorscheme': 'gruvbox_material',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
@@ -415,7 +413,7 @@ let g:rainbow_active = 1
 """"""""""""""""
 " => Coc
 """"""""""""""""
-source ~/.config/nvim/coc_config.vim
+source ~/.vim/coc_config.vim
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " OWN MAPPINGS
