@@ -29,7 +29,7 @@ import os
 import re
 import socket
 import subprocess
-from libqtile.config import Drag, Key, Screen, Group, Drag, Click, Rule
+from libqtile.config import Drag, Key, Screen, Group, Drag, Click, Rule, Match
 from libqtile.command import lazy, Client
 from libqtile import layout, bar, widget, hook
 from libqtile.widget import Spacer
@@ -103,9 +103,9 @@ keys = [
     # Key([mod], "Return", lazy.spawn('urxvt')),
     # Key([mod], "Return", lazy.spawn('st')),
     Key([mod], "Return", lazy.spawn('/home/desarrollo/.cargo/bin/alacritty')),
-    Key([mod], "d", lazy.spawn('dmenu_run -i -fn' + ' "InconsolataGo"')),
+    Key([mod], "d", lazy.spawn('dmenu_run -i -fn' + ' "Cascadia PL"')),
     Key([mod], "v", lazy.spawn('pavucontrol')),
-    Key([mod], "x", lazy.spawn('oblogout')),
+    # Key([mod], "x", lazy.spawn('oblogout')),
     Key([mod], "Escape", lazy.spawn('xkill')),
 
 
@@ -113,7 +113,7 @@ keys = [
     Key([mod, "shift"], "Return",
         lazy.spawn(
             "/home/desarrollo/.cargo/bin/alacritty"
-            + " -e /home/desarrollo/.config/vifm/scripts/vifmrun")),
+            + " -e vifm")),
         # lazy.spawn("st /home/desarrollo/.config/vifm/scripts/vifmrun")),
     Key([mod, "shift"], "q", lazy.window.kill()),
     Key([mod, "shift"], "r", lazy.restart()),
@@ -216,13 +216,13 @@ keys = [
 
 
     # FLIP LAYOUT FOR MONADTALL/MONADWIDE
-    Key([mod, "shift"], "f", lazy.layout.flip()),
+    Key([mod, "shift"], "space", lazy.layout.flip()),
 
     # FLIP LAYOUT FOR BSP
-    # Key([mod, "mod1"], "k", lazy.layout.flip_up()),
-    # Key([mod, "mod1"], "j", lazy.layout.flip_down()),
-    # Key([mod, "mod1"], "l", lazy.layout.flip_right()),
-    # Key([mod, "mod1"], "h", lazy.layout.flip_left()),
+    Key([mod, "mod1"], "k", lazy.layout.flip_up()),
+    Key([mod, "mod1"], "j", lazy.layout.flip_down()),
+    Key([mod, "mod1"], "l", lazy.layout.flip_right()),
+    Key([mod, "mod1"], "h", lazy.layout.flip_left()),
 
     # MOVE WINDOWS UP OR DOWN
     Key([mod, "shift"], "k", lazy.layout.shuffle_up()),
@@ -239,9 +239,10 @@ keys = [
     # MOVE TO OTHER MONITOR
     Key([mod, "shift"], "m", lazy.next_screen()),
     Key([mod, "shift"], "n", lazy.prev_screen()),
+    Key([mod], "m", lazy.next_screen()),
 
     # TOGGLE FLOATING LAYOUT
-    Key([mod, "shift"], "space", lazy.window.toggle_floating()),
+    Key([mod, "shift"], "t", lazy.window.toggle_floating()),
     ]
 
 
@@ -262,10 +263,19 @@ group_layouts = ["monadtall", "monadtall", "monadtall", "monadtall",
                  "monadtall", "monadtall", "monadtall", "monadtall",
                  "monadtall", "monadtall",]
 
-groups_screen_0 = ["2"]
-groups_screen_1 = ["3", "6", "0"]
+groups_screen_0 = {"2"}
+groups_screen_1 = {"3", "4", "6", "0"}
+groups_any_screen = set(group_names) - (groups_screen_0 | groups_screen_1)
 
 for i in range(len(group_names)):
+    if group_names[i] == '6':
+        groups.append(
+            Group(
+                name=group_names[i],
+                layout=group_layouts[i].lower(),
+                label=group_labels[i],
+                matches=[Match(wm_class=['freecad', 'FreeCAD'])]
+            ))
     groups.append(
         Group(
             name=group_names[i],
@@ -294,37 +304,69 @@ if num_monitors == 1:
 else:
     for i in groups:
         # ASSIGN WORKSPACE TO SPECIFIC MONITOR
+        # MOVE WINDOW TO SELECTED WORKSPACE 1-10 AND GO TO WORKSPACE IN
+        # SPECIFIC MONITOR
+
+        # Cardoso Approach
         if i.name in groups_screen_0:
             keys.extend([
-                Key([mod], i.name, lazy.group[i.name].toscreen(0),
-                   lazy.to_screen(0))
+                # Key([mod], i.name, lazy.group[i.name].toscreen(0),
+                #     lazy.to_screen(0)),
+                Key([mod], i.name, lazy.to_screen(0),
+                    lazy.group[i.name].toscreen(0)),
+                # Key([mod, "shift"], i.name, lazy.window.togroup(i.name) ,
+                #     lazy.group[i.name].toscreen(0), lazy.to_screen(0))
+                Key([mod, "shift"], i.name, lazy.window.togroup(i.name),
+                    lazy.to_screen(0), lazy.group[i.name].toscreen(0))
             ])
         elif i.name in groups_screen_1:
             keys.extend([
-                Key([mod], i.name, lazy.group[i.name].toscreen(1),
-                   lazy.to_screen(1))
+                # Key([mod], i.name, lazy.group[i.name].toscreen(1),
+                #     lazy.to_screen(1)),
+                Key([mod], i.name, lazy.to_screen(1),
+                    lazy.group[i.name].toscreen(1)),
+                # Key([mod, "shift"], i.name, lazy.window.togroup(i.name) ,
+                #     lazy.group[i.name].toscreen(1), lazy.to_screen(1)),
+                Key([mod, "shift"], i.name, lazy.window.togroup(i.name),
+                    lazy.to_screen(1), lazy.group[i.name].toscreen(1))
             ])
         else:
             keys.extend([
-                Key([mod], i.name, lazy.group[i.name].toscreen())
+                Key([mod], i.name, lazy.group[i.name].toscreen()),
+                Key([mod, "shift"], i.name, lazy.window.togroup(i.name) ,
+                    lazy.group[i.name].toscreen()),
             ])
 
         keys.extend([
             # MOVE WINDOW TO SELECTED WORKSPACE 1-10 AND STAY ON WORKSPACE
             Key([mod, "control"], i.name, lazy.window.togroup(i.name)),
             # MOVE WINDOW TO SELECTED WORKSPACE 1-10 AND GO TO WORKSPACE
-            Key([mod, "shift"], i.name, lazy.window.togroup(i.name) ,
-                lazy.group[i.name].toscreen()),
+            # Key([mod, "shift"], i.name, lazy.window.togroup(i.name) ,
+            #     lazy.group[i.name].toscreen()),
         ])
+
+# gruvbox colors
+bg = "#282828"
+red = "#cc241d"
+red_1 = "#9d0006"
+green = "#98971a"
+yellow = "#d79921"
+blue = "#458588"
+purple = "#b16286"
+aqua = "#689d68"
+gray = "#a89984"
+darkgray = "#1d2021"
 
 ###############################################################################
 # => LAYOUTS
 ###############################################################################
-border_width_ = 1
-border_focus_ = "#f57800"
-border_normal_ = "#123e7c"
+border_width_   = 4
+border_focus_   = red_1
+border_normal_  = darkgray
+margin_         = 6
+
 def init_layout_theme():
-    return {"margin":6,
+    return {"margin":margin_,
             "border_width":border_width_,
             "border_focus": border_focus_,
             "border_normal": border_normal_
@@ -334,19 +376,19 @@ layout_theme = init_layout_theme()
 
 
 layouts = [
-    layout.Columns(num_columns=2, insert_position=1, margin=5,
+    layout.Columns(num_columns=3, insert_position=1, margin=margin_,
                    border_focus=border_focus_, border_normal=border_normal_,
                    grow_amount=2),
-    layout.MonadTall(margin=5, border_width=border_width_,
+    layout.MonadTall(margin=margin_, border_width=border_width_,
                      border_focus=border_focus_,
                      border_normal=border_normal_, ratio=0.65, max_ratio=0.75,
                      min_ratio=0.25),
-    layout.MonadWide(align=0, margin=5, border_width=border_width_,
+    layout.MonadWide(align=0, margin=margin_, border_width=border_width_,
                      border_focus=border_focus_,
                      border_normal=border_normal_, ratio=0.65, max_ratio=0.85,
                      min_ratio=0.15),
     # layout.Matrix(**layout_theme),
-    # layout.Bsp(**layout_theme),
+    layout.Bsp(**layout_theme),
     layout.Floating(**layout_theme),
     # layout.RatioTile(**layout_theme),
     layout.Max(**layout_theme)
@@ -358,38 +400,27 @@ layouts = [
 # COLORS FOR THE BAR
 
 def init_colors():
-    #return [["#2F343F", "#2F343F"], # color 0
-    #        ["#2F343F", "#2F343F"], # color 1
-    #        ["#c0c5ce", "#c0c5ce"], # color 2
-    #        ["#fba922", "#fba922"], # color 3
-    #        ["#3384d0", "#3384d0"], # color 4
-    #        ["#f3f4f5", "#f3f4f5"], # color 5
-    #        ["#cd1f3f", "#cd1f3f"], # color 6
-    #        ["#62FF00", "#62FF00"], # color 7
-    #        ["#6790eb", "#6790eb"], # color 8
-    #        ["#a9a9a9", "#a9a9a9"]] # color 9
-
-# sonokai colorscheme
-    return [["#2d2a2e", "#2d2a2e"], # color 0
-            ["#1a181a", "#1a181a"], # color 1
+    return [["#2F343F", "#2F343F"], # color 0
+            ["#2F343F", "#2F343F"], # color 1
             ["#c0c5ce", "#c0c5ce"], # color 2
             ["#fba922", "#fba922"], # color 3
             ["#3384d0", "#3384d0"], # color 4
-            ["#f85e84", "#f85e84"], # color 5
+            ["#f3f4f5", "#f3f4f5"], # color 5
             ["#cd1f3f", "#cd1f3f"], # color 6
             ["#62FF00", "#62FF00"], # color 7
             ["#6790eb", "#6790eb"], # color 8
-            ["#ab9df2", "#ab9df2"]] # color 9
+            ["#a9a9a9", "#a9a9a9"]] # color 9
+
 
 colors = init_colors()
 
-
 # WIDGETS FOR THE BAR
 
+fontsize_ = 14
 def init_widgets_defaults():
     # return dict(font="Noto Sans",
     return dict(font="Inconsolata Nerd Font",
-                fontsize = 12,
+                fontsize = fontsize_,
                 padding = 2,
                 background=colors[1])
 
@@ -398,8 +429,8 @@ widget_defaults = init_widgets_defaults()
 def init_widgets_list():
     prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
     widgets_list = [
-               widget.GroupBox(font="Inconsolata Nerd Font",
-                        fontsize = 16,
+               widget.GroupBox(font="InconsolataGo Nerd Font Mono",
+                        fontsize = fontsize_,
                         margin_y = -1,
                         margin_x = 0,
                         padding_y = 6,
@@ -421,8 +452,8 @@ def init_widgets_list():
                         background = colors[1]
                         ),
                widget.CurrentLayout(
-                        font = "InconsolataGo Nerd Font Mono Bold",
-                        fontsize = 16,
+                        font = "CaskaydiaCove Nerd Font Mono",
+                        fontsize = fontsize_,
                         foreground = colors[5],
                         background = colors[1]
                         ),
@@ -432,14 +463,14 @@ def init_widgets_list():
                         foreground = colors[2],
                         background = colors[1]
                         ),
-               widget.WindowName(font="InconsolataGo Nerd Font Mono",
-                        fontsize = 16,
+               widget.WindowName(font="CaskaydiaCove Nerd Font Mono",
+                        fontsize = fontsize_,
                         foreground = colors[5],
                         background = colors[1],
                         ),
-        widget.Pomodoro(
-                        fontsize = 16,
-                        font = "InconsolataGo Nerd Font Mono",
+               widget.Pomodoro(
+                        fontsize = fontsize_,
+                        font = "CaskaydiaCove Nerd Font Mono",
                         background = colors[1],
                         foreground = colors[5],
                         length_pomodori = 22,
@@ -448,6 +479,30 @@ def init_widgets_list():
                         num_pomodori = 4,
                         update_interval = 5
                        ),
+               widget.Sep(
+                        linewidth = 1,
+                        padding = 10,
+                        foreground = colors[2],
+                        background = colors[1]
+                        ),
+               widget.TextBox(
+                        font="FontAwesome",
+                        text=" RAM: ",
+                        foreground=colors[6],
+                        background=colors[1],
+                        padding = 0,
+                        fontsize=fontsize_
+                        ),
+               widget.MemoryGraph(
+                        border_color = colors[2],
+                        fill_color = colors[8],
+                        graph_color = colors[8],
+                        background=colors[1],
+                        border_width = 1,
+                        line_width = 1,
+                        core = "all",
+                        type = "box"
+                        ),
                # widget.Net(
                #          font="Noto Sans",
                #          fontsize=12,
@@ -484,11 +539,11 @@ def init_widgets_list():
                #          ),
                widget.TextBox(
                         font="FontAwesome",
-                        text="  ",
+                   text=" CPU:",
                         foreground=colors[6],
                         background=colors[1],
                         padding = 0,
-                        fontsize=16
+                        fontsize=fontsize_
                         ),
                widget.CPUGraph(
                         border_color = colors[2],
@@ -521,7 +576,7 @@ def init_widgets_list():
                         foreground=colors[4],
                         background=colors[1],
                         padding = 0,
-                        fontsize=16
+                        fontsize=fontsize_
                         ),
                # arcomemory.Memory(
                #          font="Noto Sans",
@@ -558,12 +613,12 @@ def init_widgets_list():
                         foreground=colors[3],
                         background=colors[1],
                         padding = 0,
-                        fontsize=16
+                        fontsize=fontsize_
                         ),
                widget.Clock(
                         foreground = colors[5],
                         background = colors[1],
-                        fontsize = 12,
+                        fontsize = fontsize_,
                         format="%Y-%m-%d %H:%M"
                         ),
                widget.Sep(
@@ -643,8 +698,6 @@ def assign_app_group(client):
     #########################################################
     ################ assign apps to groups ##################
     #########################################################
-    # d["1"] = ["Navigator", "Firefox", "Vivaldi-stable", "Vivaldi-snapshot", "Chromium", "Google-chrome", "Brave", "Brave-browser",
-    #           "navigator", "firefox", "vivaldi-stable", "vivaldi-snapshot", "chromium", "google-chrome", "brave", "brave-browser", ]
     d["1"] = ["st","St", "urxvt", "URxvt", ]
 
     d["2"] = [ "Atom", "Subl3", "Spyder", "RStudio", "TeXstudio", "texstudio",
@@ -675,16 +728,17 @@ def assign_app_group(client):
         if wm_class in list(d.values())[i]:
             group = list(d.keys())[i]
             client.togroup(group)
-            client.group.cmd_toscreen()
-
-# END
-# ASSIGN APPLICATIONS TO A SPECIFIC GROUPNAME
+            if group in groups_screen_0:
+                client.group.cmd_toscreen(0)
+            elif group in groups_screen_1:
+                client.group.cmd_toscreen(1)
+            else:
+                client.group.cmd_toscreen(0)
 
 
 ###############################################################################
 # => FORCING FLOATING IN APPLICATIONS
 ###############################################################################
-
 main = None
 
 @hook.subscribe.startup_once
