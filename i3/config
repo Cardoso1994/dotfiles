@@ -190,10 +190,10 @@ bindsym $mod+$up focus          up
 bindsym $mod+$right focus       right
 
 # alternatively, you can use the cursor keys:
-bindsym $mod+Left focus         left
-bindsym $mod+Down focus         down
-bindsym $mod+Up focus           up
-bindsym $mod+Right focus        right
+# bindsym $mod+Left focus         left
+# bindsym $mod+Down focus         down
+# bindsym $mod+Up focus           up
+# bindsym $mod+Right focus        right
 
 # move focused window
 bindsym $mod+Shift+$left move   left
@@ -202,11 +202,12 @@ bindsym $mod+Shift+$up move     up
 bindsym $mod+Shift+$right move  right
 
 # alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left move    left
-bindsym $mod+Shift+Down move    down
-bindsym $mod+Shift+Up move      up
-bindsym $mod+Shift+Right move   right
+# bindsym $mod+Shift+Left move    left
+# bindsym $mod+Shift+Down move    down
+# bindsym $mod+Shift+Up move      up
+# bindsym $mod+Shift+Right move   right
 
+# lets you cycle over a container without going to any container
 focus_wrapping force
 
 ################################################################
@@ -231,12 +232,6 @@ for_window [urgent=latest] focus
 # orientation for new workspaces
 default_orientation horizontal
 
-# split in horizontal orientation
-bindsym $mod+n split h
-
-# split in vertical orientation
-bindsym $mod+v split v
-
 # enter fullscreen mode for the focused container
 # Super + F in arcolinux is execute thunar
 bindsym $mod+f fullscreen toggle
@@ -246,6 +241,8 @@ bindsym $mod+f fullscreen toggle
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
+bindsym $mod+n split horizontal
+bindsym $mod+v split vertical
 
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
@@ -259,6 +256,41 @@ bindsym $mod+z focus child
 # move to and from scratchpad
 bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
+
+##############################################
+#################   mouse    #################
+##############################################
+set $mouseMover Mouse movement : quit (c)     move far (hjkl)     move close (hjkl+shift/v)        click (i) click&exit(spacebar/enter)   right click (shift+spacebar / I)       scrollUp/Down (o/p)
+    bindsym $mod+c mode "$mouseMover"
+    mode "$mouseMover" {
+        bindsym c mode "default"
+        bindsym Escape mode "default"
+
+        bindsym space exec xdotool click 1 ; mode "default"
+        bindsym enter exec xdotool click 1 ; mode "default"
+        bindsym i exec xdotool click 1
+
+        bindsym shift+space exec xdotool click 2
+        bindsym shift+i exec xdotool click 3
+
+        bindsym Up exec xdotool click 4
+        bindsym Down exec xdotool click 5
+
+        bindsym h exec xdotool mousemove_relative -- -200 0
+        bindsym j exec xdotool mousemove_relative 0 200
+        bindsym k exec xdotool mousemove_relative 0 -200
+        bindsym l exec xdotool mousemove_relative 200 0
+
+        bindsym shift+h exec xdotool mousemove_relative -- -10 0
+        bindsym shift+j exec xdotool mousemove_relative 0 10
+        bindsym shift+k exec xdotool mousemove_relative 0 -10
+        bindsym shift+l exec xdotool mousemove_relative 10 0
+        # bindsym shift+h exec xdotool mousemove_relative -- -25 0
+        # bindsym shift+j exec xdotool mousemove_relative 0 25
+        # bindsym shift+k exec xdotool mousemove_relative 0 -25
+        # bindsym shift+l exec xdotool mousemove_relative 25 0
+
+ }
 
 ##############################################
 #################   resize   #################
@@ -338,6 +370,8 @@ assign [class="Matplotlib"] $ws6
 assign [class="matplotlib"] $ws6
 assign [class="Paraview"] $ws6
 assign [class="Inkscape"] $ws6
+assign [class="gl"] $ws6
+assign [class="mpv"] $ws6
 
 
 #########################################################################
@@ -423,11 +457,6 @@ exec --no-startup-id /usr/lib/xfce4/notifyd/xfce4-notifyd &
 #############################################################################
 
 #not workspace related
-
-#conky
-bindsym $mod+c exec --no-startup-id conky-toggle
-bindsym control+mod1+Next exec --no-startup-id conky-rotate -n
-bindsym control+mod1+Prior exec --no-startup-id conky-rotate -p
 
 # terminal
 bindsym $mod+Return exec --no-startup-id ~/.cargo/bin/alacritty;focus
@@ -559,10 +588,10 @@ popup_during_fullscreen smart
 # https://github.com/Airblader/i3/tree/gaps-next
 # delete or uncomment the following lines if you do not have it or do not
 # want it
-for_window [class="^.*"] border pixel 3
-set $inner_gaps 10
+for_window [class="^.*"] border pixel 5
+set $inner_gaps 6
 gaps inner $inner_gaps
-gaps outer -1
+gaps outer 0
 smart_gaps on
 # smart_borders on
 
@@ -612,102 +641,67 @@ mode "$mode_gaps_outer" {
 #################   compton of i3wm   #################
 #######################################################
 #if you want transparency on non-focused windows, ...
-# exec_always --no-startup-id compton -i 0.9 --config ~/.config/i3/picom.config &
+# exec_always --no-startup-id compton --config ~/.config/i3/picom.config &
 
 
 ######################################################
 #################   bar appearance   #################
 ######################################################
 # set primary gruvbox colorscheme colors
-set $bg #282828
-set $red #cc241d
-set $green #98971a
-set $yellow #d79921
-set $blue #458588
-set $purple #b16286
-set $aqua #689d68
-set $gray #a89984
-set $darkgray #1d2021
+set $bg         #282828
+set $red        #cc241d
+set $red_1      #9d0006
+set $green      #98971a
+set $yellow     #d79921
+set $blue       #458588
+set $purple     #b16286
+set $aqua       #689d68
+set $gray       #a89984
+set $darkgray   #1d2021
 
 bar {
 
     i3bar_command i3bar
-    #height 20
     workspace_buttons yes
-    font pango:Caskaydia Cove Nerd Font Mono 13
+    font pango:Caskaydia Cove Nerd Font Mono 16
+    mode hide
+    hidden_state hide
+    modifier Mod1
 
     position top
     # position bottom
 
     # system icons
-    # tray_output primary
     tray_output $firstMonitor
-    # tray_output $secondMonitor
-    #
+
     # type status_command i3status without the config file and
     # you will get the standard i3status bar
     # Second one is the standard statusbar with my personal settings
-
     #status_command i3status
     status_command i3status -c ~/.config/i3/i3status.conf
 
 # gruvbox
         colors {
                 # bar background color
-                background $darkgraycc
+                background $darkgray
                 # text color used for blocks that do not have a color specified.
-                statusline $blue
+                statusline $green
                 # workspaces section
                 #                    border  backgr. text
-                focused_workspace    $purple $purple $darkgray
-                inactive_workspace   $darkgray $darkgray $yellow
+                # focused_workspace    $purple $purple $darkgray
+                focused_workspace    $red_1 $red_1 $darkgray
+                inactive_workspace   $darkgray $darkgray $green
                 active_workspace     $aqua $aqua $darkgray
                 urgent_workspace     $red $red $bg
             }
-#	Arco Linux Theme
-      # colors {
-      #         background #2F2F2F
-      #         statusline #eeeeee
-      #         separator  #666666
-      #         #                     border  backgr. text
-      #         focused_workspace     #a9a9a9 #5f676a #eeeeee
-      #         active_workspace      #a9a9a9 #5f676a #a9a9a9
-      #         inactive_workspace    #a9a9a9 #222222 #a9a9a9
-      #         urgent_workspace      #a9a9a9 #d42121 #FFFFFF
-      #         }
 
-#       Dracula Theme
-#          colors {
-#              background #282A36
-#              statusline #F8F8F2
-#              separator  #44475A
-#
-#              focused_workspace  #44475A #44475A #F8F8F2
-#              active_workspace   #282A36 #44475A #F8F8F2
-#              inactive_workspace #282A36 #282A36 #BFBFBF
-#              urgent_workspace   #FF5555 #FF5555 #F8F8F2
-#              binding_mode       #FF5555 #FF5555 #F8F8F2
-#            }
-
-#       Cyberpunk Theme
-#         colors {
-#             background #000b1e
-#             statusline #0abdc6
-#             separator  #123e7c
-#
-#             focused_workspace  #123e7c #123e7c #f57800
-#             active_workspace   #123e7c #123e7c #f57800
-#             inactive_workspace #123e7c #123e7c #d300c4
-#             urgent_workspace   #FF5555 #FF5555 #F8F8F2
-#             binding_mode       #FF5555 #FF5555 #F8F8F2
-#           }
-#
 }
 
 
 
 #       Gruvbox Theme   brdr       bg         text       indictr    cld_brdr
-client.focused          $purple    $purple    $darkgray  $purple    $purple
+# client.focused          $purple    $purple    $darkgray  $purple    $purple
+client.focused          $red_1    $red_1    $darkgray  $red_1    $red_1
 client.focused_inactive $aqua      $aqua      $darkgray  $aqua      $aqua
 client.unfocused        $darkgray  $darkgray  $darkgray  $darkgray  $darkgray
 client.urgent           $red       $red       $gray      $red
