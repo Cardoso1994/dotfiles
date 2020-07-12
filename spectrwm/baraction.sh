@@ -11,13 +11,13 @@ dte() {
 hdd() {
   hdd="$(df -h | awk 'NR==4{print $3, $5}')"
   # echo -e "HDD: $hdd"
-  echo "/: $hdd"
+  echo " $hdd"
 }
 
 ## RAM
 mem() {
-  mem=`free | awk '/Mem/ {printf "%d MiB/%d MiB\n", $3 / 1024.0, $2 / 1024.0 }'`
-  echo -e "$mem"
+  mem=`free | awk '/Mem/ {printf "%d/%d MiB\n", $3 / 1024.0, $2 / 1024.0 }'`
+  echo -e " $mem"
 }
 
 ## CPU
@@ -29,7 +29,7 @@ cpu() {
   total=$((a+b+c+idle))
   cpu=$((100*( (total-prevtotal) - (idle-previdle) ) / (total-prevtotal) ))
   # echo -e "CPU: $cpu%"
-  echo "CPU: $cpu%"
+  echo "$cpu%"
 }
 
 ## VOLUME
@@ -42,13 +42,13 @@ vol() {
     # UBUNTU
     # vol=`amixer -c 1 -M -D pulse get Master | awk -F'[][]' 'END{ print $2 }'`
     # echo -e "VOL: $vol"
-    echo "VOL: $vol"
+    echo "墳 $vol"
 }
 
 bat () {
     bat=`acpi | awk -F',' 'END{ print $2 }'`
 
-    echo "BAT: $bat"
+    echo " $bat"
 
     bat=`acpi | awk -F',' 'END{ print $2 }' | sed 's/%//'`
 
@@ -57,11 +57,9 @@ bat () {
     fi
 }
 
-SLEEP_SEC=6
+SLEEP_SEC=1
 #loops forever outputting a line every SLEEP_SEC secs
 while :; do
-    # echo "+@fg=1; +@fn=1;💻+@fn=0; $(cpu) +@fg=0; | +@fg=2;  +@fn=1;💾+@fn=0; $(mem) +@fg=0; | +@fg=3; +@fn=1;💿+@fn=0; $(hdd) +@fg=0; | +@fg=4; +@fn=1;🔈+@fn=0; $(vol) +@fg=0; |"
-    echo "$(cpu) | RAM: $(mem) | $(hdd) | $(vol) | $(bat)"
+    echo "+@bg=1;+@fg=0; 力 $(cpu)  +@bg=0;  +@bg=2; $(mem)  +@bg=0;  +@bg=3; $(hdd)  +@bg=0;  +@bg=4; $(vol)  +@bg=0;  +@bg=5; $(bat)  "
     sleep $SLEEP_SEC
 done
-
