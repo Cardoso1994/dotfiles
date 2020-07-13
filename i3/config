@@ -112,15 +112,16 @@ bindsym $mod+m focus output right
 
 
 ############################################################
-#################   3 menu's in arcolinux   ################
+#################          menu             ################
 ############################################################
 # start dmenu
-bindsym $mod+d exec --no-startup-id \
-    dmenu_run -i -nb '$darkgray' -nf '$blue' \
-            -sb '$blue' -sf '$darkgray' -fn 'Cascadia Code PL:bold:pixelsize=18'
+# bindsym $mod+d exec --no-startup-id \
+#     dmenu_run -i -nb '$darkgray' -nf '$blue' \
+#             -sb '$blue' -sf '$darkgray' -fn 'Cascadia Code PL:bold:pixelsize=18'
+bindsym $mod+d exec --no-startup-id rofi -show run
 
 # start xfce-appfinder
-bindsym $mod+Shift+d exec --no-startup-id xfce4-appfinder
+bindsym $mod+Shift+d exec --no-startup-id rofi -show drun
 
 
 #########################################################################
@@ -402,12 +403,6 @@ exec --no-startup-id nm-applet &
 # num lock activated
 exec_always --no-startup-id numlockx on
 
-# dropbox
-exec --no-startup-id dropbox start
-
-# MEGA
-exec --no-startup-id megasync
-
 #redshift
 exec_always redshift -p -O 4800 &
 
@@ -415,22 +410,13 @@ exec_always redshift -p -O 4800 &
 #exec --no-startup-id insync start
 
 # volume
-#exec --no-startup-id pasystray
 exec --no-startup-id volumeicon
 
-#variety
-exec --no-startup-id variety
-
-
-#Conky
-exec --no-startup-id conky -c ~/.config/i3/system-overview
-
 # sets wallpaper
-# exec_always wal -R
 exec_always --no-startup-id nitrogen --restore
 
 # udiskie for automounting external drives
-exec_always udiskie
+exec udiskie
 
 # exec --no-startup-id thunderbird
 
@@ -459,7 +445,7 @@ exec --no-startup-id /usr/lib/xfce4/notifyd/xfce4-notifyd &
 #not workspace related
 
 # terminal
-bindsym $mod+Return exec --no-startup-id ~/.cargo/bin/alacritty;focus
+bindsym $mod+Return exec --no-startup-id alacritty;focus
 # bindsym $mod+Return exec --no-startup-id st;focus
 # bindsym $mod+Return exec --no-startup-id urxvt;focus
 
@@ -469,14 +455,8 @@ bindsym --release $mod+Escape exec xkill
 
 #workspace 8 related
 for_window [class="Thunar"] focus
-# bindsym $mod+Shift+Return exec --no-startup-id thunar;focus
-# bindsym $mod+Shift+Return exec --no-startup-id ~/.cargo/bin/alacritty vifm;\
-#   focus
-bindsym $mod+Shift+Return exec --no-startup-id ~/.cargo/bin/alacritty -e vifm;\
+bindsym $mod+Shift+Return exec --no-startup-id alacritty -e vifm;\
         focus
-# bindsym $mod+Shift+Return exec --no-startup-id st \
-#   ~/.config/vifm/scripts/vifmrun;focus
-
 
 
 #########################################################
