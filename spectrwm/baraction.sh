@@ -11,13 +11,13 @@ dte() {
 hdd() {
   hdd="$(df -h | awk 'NR==4{print $3, $5}')"
   # echo -e "HDD: $hdd"
-  echo " $hdd"
+  echo "$hdd"
 }
 
 ## RAM
 mem() {
   mem=`free | awk '/Mem/ {printf "%d/%d MiB\n", $3 / 1024.0, $2 / 1024.0 }'`
-  echo -e " $mem"
+  echo -e "$mem"
 }
 
 ## CPU
@@ -42,17 +42,18 @@ vol() {
     # UBUNTU
     # vol=`amixer -c 1 -M -D pulse get Master | awk -F'[][]' 'END{ print $2 }'`
     # echo -e "VOL: $vol"
-    echo "墳 $vol"
+    echo "$vol"
 }
 
 bat () {
     bat=`acpi | awk -F',' 'END{ print $2 }'`
+    chr=`acpi | awk -F',' '{print $1}' | awk -F' ' '{print $3}'`
 
-    echo " $bat"
+    echo "$bat"
 
     bat=`acpi | awk -F',' 'END{ print $2 }' | sed 's/%//'`
 
-    if [ $bat -le 10 ]; then
+    if [ $bat -le 10 ] && [ chr != "Discharging"  ]; then
         notify-send "LOW BATTERY"
     fi
 }
@@ -60,6 +61,6 @@ bat () {
 SLEEP_SEC=1
 #loops forever outputting a line every SLEEP_SEC secs
 while :; do
-    echo "+@bg=1;+@fg=0; 力 $(cpu)  +@bg=0;  +@bg=2; $(mem)  +@bg=0;  +@bg=3; $(hdd)  +@bg=0;  +@bg=4; $(vol)  +@bg=0;  +@bg=5; $(bat)  "
+    echo "+@bg=1;+@fg=0; +@fn=1;力+@fn=0; $(cpu)  +@bg=0;  +@bg=2;  +@fn=0;+@fn=1; $(mem)  +@bg=0;  +@bg=3; +@fn=1;+@fn=0; $(hdd)  +@bg=0;  +@bg=4; +@fn=1;墳+@fn=0; $(vol)  +@bg=0;  +@bg=5; +@fn=1;+@fn=0;$(bat)  "
     sleep $SLEEP_SEC
 done
