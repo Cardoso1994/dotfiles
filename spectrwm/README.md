@@ -10,7 +10,7 @@ Uses:
 - nm-applet (i think tihs requires some gnome packages)
 - compton
 - xfce4-appfinder
-- dmenu
+- dmenu, rofi
 - xfce4-notifyd (and all its dependencies in order to use notify-send)
 - st, urxvt or alacritty
 - trayer (by default the bar does not suppor applets)
