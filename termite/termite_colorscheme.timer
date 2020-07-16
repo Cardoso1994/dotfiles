@@ -1,0 +1,10 @@
+[Unit]
+Description=changes termite colorscheme (light / dark) depending on the time
+
+[Timer]
+OnCalendar=*-*-* 8:00:00
+OnCalendar=*-*-* 18:00:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target
