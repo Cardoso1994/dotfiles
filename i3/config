@@ -43,7 +43,7 @@ set $right  l
 ##############################################################
 # setting variables for later use
 # use xrandr and/or arandr to know the names of your monitors
-set $firstMonitor   HDMI-0
+set $firstMonitor   eDP1
 set $secondMonitor  HDMI-1-1
 
 # setting variable names for workspaces
@@ -70,6 +70,8 @@ workspace $ws6 output   $secondMonitor
 # workspace $ws9 output # $secondMonitor
 workspace $ws10 output  $secondMonitor
 
+# defining default layouts for workspace
+workspace_layout        tabbed
 # switch to workspace
 bindsym $mod+1 workspace $ws1
 bindsym $mod+2 workspace $ws2
@@ -352,6 +354,9 @@ assign [class="Atom"] $ws2
 
 assign [class="Firefox"] $ws3
 assign [class="firefox"] $ws3
+assign [class="Navigator"] $ws3
+assign [class="brave-browser"] $ws3
+assign [class="Brave-browser"] $ws3
 assign [class="Chromium-browser"] $ws3
 
 assign [class="Xreader"] $ws4
@@ -370,6 +375,7 @@ assign [class="Pix"] $ws6
 assign [class="Matplotlib"] $ws6
 assign [class="matplotlib"] $ws6
 assign [class="Paraview"] $ws6
+assign [class="paraview"] $ws6
 assign [class="Inkscape"] $ws6
 assign [class="gl"] $ws6
 assign [class="mpv"] $ws6
@@ -392,7 +398,7 @@ assign [class="mpv"] $ws6
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
 # Updater
-exec --no-startup-id pamac-tray
+# exec --no-startup-id pamac-tray
 
 # bluetooth
 exec --no-startup-id blueberry-tray
@@ -404,13 +410,13 @@ exec --no-startup-id nm-applet &
 exec_always --no-startup-id numlockx on
 
 #redshift
-exec_always redshift -p -O 4800 &
+exec redshift -p -O 4800 &
 
 # insync
 #exec --no-startup-id insync start
 
 # volume
-exec --no-startup-id volumeicon
+# exec --no-startup-id volumeicon
 
 # sets wallpaper
 exec_always --no-startup-id nitrogen --restore
@@ -425,6 +431,9 @@ exec udiskie
 
 # keyboard speed up
 exec xset r rate 300 50
+
+# pomodoro
+exec pomotroid
 
 ##################################################################
 #########        system applications             #################
@@ -445,7 +454,7 @@ exec --no-startup-id /usr/lib/xfce4/notifyd/xfce4-notifyd &
 #not workspace related
 
 # terminal
-bindsym $mod+Return exec --no-startup-id alacritty;focus
+bindsym $mod+Return exec --no-startup-id termite;focus
 # bindsym $mod+Return exec --no-startup-id st;focus
 # bindsym $mod+Return exec --no-startup-id urxvt;focus
 
@@ -455,7 +464,7 @@ bindsym --release $mod+Escape exec xkill
 
 #workspace 8 related
 for_window [class="Thunar"] focus
-bindsym $mod+Shift+Return exec --no-startup-id alacritty -e vifm;\
+bindsym $mod+Shift+Return exec --no-startup-id termite -e vifm;\
         focus
 
 
@@ -571,8 +580,8 @@ popup_during_fullscreen smart
 for_window [class="^.*"] border pixel 5
 set $inner_gaps 6
 gaps inner $inner_gaps
-gaps outer 0
-smart_gaps on
+gaps outer -2
+# smart_gaps on
 # smart_borders on
 
 
@@ -643,7 +652,7 @@ bar {
 
     i3bar_command i3bar
     workspace_buttons yes
-    font pango:Caskaydia Cove Nerd Font Mono 16
+    font pango:Caskaydia Cove Nerd Font Mono 15
     mode hide
     hidden_state hide
     modifier Mod1
