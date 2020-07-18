@@ -1,8 +1,0 @@
-#!/usr/bin/bash
-GARBAGE="/home/cardoso/garbage/"
-touch $GARBAGE
-find $GARBAGE -type f -mtime +9 -exec /bin/rm -rf {} +
-find $GARBAGE -type f -iname ".*" -mtime +0 -exec /bin/rm -rf {} +
-find $GARBAGE -type l -mtime +9 -exec /bin/rm -rf {} +
-find $GARBAGE -type d -mtime +0 -exec /bin/rmdir {} +
-find $GARBAGE -type d -iname ".*" -mtime +0 -exec /bin/rmdir {} +
