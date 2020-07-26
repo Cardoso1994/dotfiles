@@ -28,7 +28,8 @@ cpu() {
   read cpu a b c idle rest < /proc/stat
   total=$((a+b+c+idle))
   cpu=$((100*( (total-prevtotal) - (idle-previdle) ) / (total-prevtotal) ))
-  temp=`sensors | grep temp1: | head -1 | awk -F' ' '{ print $2 }'`
+  # temp=`sensors | grep temp1: | head -1 | awk -F' ' '{ print $2 }'`
+  temp=`sensors | grep "Core 0:" | head -1 | awk -F' ' '{ print $3 }'`
   temp="${temp:1}"
 
   echo "$cpu% $temp"
