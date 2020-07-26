@@ -1,0 +1,4 @@
+#!/usr/bin/bash
+
+# requires xclip utility
+mpv $(xclip -o) & disown
