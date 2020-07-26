@@ -1,4 +1,4 @@
 #!/usr/bin/bash
 
 # requires xclip utility
-mpv $(xclip -o) & disown
+mpv $(xclip -o -selection "clipboard") & disown
