@@ -188,6 +188,9 @@ let g:gruvbox_contrast_light="soft"
 let g:gruvbox_material_palette = 'material'
 let g:gruvbox_material_background = 'hard'
 let g:gruvbox_material_visual = 'reverse'
+let g:gruvbox_material_enable_bold = 1
+let g:gruvbox_material_cursor = 'red'
+let g:gruvbox_material_better_performance = 1
 
 " sonokai
 " let g:sonokai_style="andromeda"
@@ -212,15 +215,12 @@ let g:edge_style="aura"
 let hr= (strftime('%H'))
 if hr > 8 && hr < 18
     set background=light
-    let g:gruvbox_material_palette = 'material'
-    let g:gruvbox_material_background = 'soft'
+    let g:gruvbox_material_background = 'medium'
     colorscheme gruvbox-material
 else
     set background=dark
-    let g:gruvbox_material_palette = 'material'
     let g:gruvbox_material_background = 'hard'
     colorscheme gruvbox-material
-    " colorscheme gruvbox
 endif
 
 " Set extra options when running in GUI mode
@@ -413,7 +413,7 @@ let g:rainbow_active = 1
 """"""""""""""""
 " => Coc
 """"""""""""""""
-source ~/.vim/coc_config.vim
+source ~/.config/nvim/coc_config.vim
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " OWN MAPPINGS
