@@ -3,7 +3,7 @@
 #Authentication dialog
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
-#power manager
+# power manager
 xfce4-power-manager &
 
 # notifications
@@ -11,12 +11,9 @@ xfce4-power-manager &
 
 # Wallpaper selection
 nitrogen --restore &
-# wal -R
-
-xrdb -merge .Xresources &
 
 # compton to make every non focused windows transparent
-# picom -i 0.9
+picom &
 
 # redshift. Elimina luz azul en la noche
 # redshift-gtk &
@@ -30,3 +27,6 @@ xset r rate 300 50 &
 
 # pomodoro technique
 pomotroid &
+
+# click on tap touchpad
+/home/cardoso/.config/spectrwm/scripts/pad_on_off.sh click
