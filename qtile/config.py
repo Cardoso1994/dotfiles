@@ -102,22 +102,18 @@ keys = [
 
     # Key([mod], "Return", lazy.spawn('urxvt')),
     # Key([mod], "Return", lazy.spawn('st')),
-    Key([mod], "Return", lazy.spawn('/home/desarrollo/.cargo/bin/alacritty')),
+    Key([mod], "Return", lazy.spawn('termite')),
     Key([mod], "d", lazy.spawn('dmenu_run -i -fn' + ' "Cascadia PL"')),
-    Key([mod], "v", lazy.spawn('pavucontrol')),
-    # Key([mod], "x", lazy.spawn('oblogout')),
+    # Key([mod], "v", lazy.spawn('pavucontrol')),
+    # Key([mod], "x", lazy.spawn('~/.config/spectrwm/scripts/system_admin')),
     Key([mod], "Escape", lazy.spawn('xkill')),
 
 
     # SUPER + SHIFT KEYS
-    Key([mod, "shift"], "Return",
-        lazy.spawn(
-            "/home/desarrollo/.cargo/bin/alacritty"
-            + " -e vifm")),
-        # lazy.spawn("st /home/desarrollo/.config/vifm/scripts/vifmrun")),
+    Key([mod, "shift"], "Return", lazy.spawn("termite" + " -e vifm")),
     Key([mod, "shift"], "q", lazy.window.kill()),
     Key([mod, "shift"], "r", lazy.restart()),
-    Key([mod, "shift"], "x", lazy.shutdown()),
+    Key([mod, "shift"], "x", lazy.spawn('~/.config/spectrwm/scripts/system_admin')),
     Key([mod, "shift"], "d", lazy.spawn('xfce4-appfinder')),
 
     # CONTROL + ALT KEYS
@@ -135,7 +131,8 @@ keys = [
     # MULTIMEDIA KEYS
 
     # INCREASE/DECREASE BRIGHTNESS
-    Key([], "XF86MonBrightnessUp", lazy.spawn("xbacklight -inc 5")),
+    Key([], "XF86MonBrightnessUp", lazy.spawn("xbacklight -inc 5" + " && "
+                                              + 'notify-send "brighten down"')),
     Key([], "XF86MonBrightnessDown", lazy.spawn("xbacklight -dec 5")),
 
     # INCREASE/DECREASE/MUTE VOLUME
