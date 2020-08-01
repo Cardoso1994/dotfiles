@@ -31,8 +31,9 @@ cpu() {
   # temp=`sensors | grep temp1: | head -1 | awk -F' ' '{ print $2 }'`
   temp=`sensors | grep "Core 0:" | head -1 | awk -F' ' '{ print $3 }'`
   temp="${temp:1}"
+  load_=`cat /proc/loadavg | awk -F' ' '{ print $1}'`
 
-  echo "$cpu% $temp"
+  echo "$cpu% $temp $load_"
 }
 
 ## VOLUME
