@@ -3,6 +3,12 @@
 #Authentication dialog
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
+# bluetooth
+blueverry-tray &
+
+# network
+nm-applet &
+
 # power manager
 xfce4-power-manager &
 
@@ -24,9 +30,6 @@ udiskie &
 
 # speed up keyboard
 xset r rate 300 50 &
-
-# pomodoro technique
-pomotroid &
 
 # click on tap touchpad
 /home/cardoso/.config/spectrwm/scripts/pad_on_off.sh click
