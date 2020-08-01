@@ -12,8 +12,7 @@
 " you will need to change this setting.
 
 " set vicmd=vim
-set vicmd="~/nvim.appimage"
-" set vicmd="emacs -nw"
+set vicmd="nvim"
 " set vicmd=elvis\ -G\ termcap
 " set vicmd=vile
 
@@ -246,9 +245,7 @@ fileviewer *.[1-8] man ./%c | col -b
 " Images
 filextype *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm
         \ {View in sxiv}
-        " \ sxiv %f &,
-        "\ sxiv %f &,
-        \ sxiv  -r  -t  -s d  %d  &,
+        \ sxiv  -r -s d  %d  &,
         \ {View in gpicview}
         \ gpicview %c,
         \ {View in shotwell}
