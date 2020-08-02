@@ -30,11 +30,9 @@ import re
 import socket
 import subprocess
 from libqtile.config import Drag, Key, Screen, Group, Drag, Click, Rule, Match
-from libqtile.command import lazy, Client
+from libqtile.command import lazy#, Client
 from libqtile import layout, bar, widget, hook
 from libqtile.widget import Spacer
-# import arcobattery
-# import arcomemory
 
 
 # for multimonitor on the fly support
@@ -58,7 +56,6 @@ def window_to_prev_group(qtile):
 
 @lazy.function
 def window_to_next_group(qtile):
-    print(type(qtile))
     if qtile.currentWindow is not None:
         i = qtile.groups.index(qtile.currentGroup)
         qtile.currentWindow.togroup(qtile.groups[i + 1].name)
@@ -100,39 +97,22 @@ keys = [
 
     # SUPER + FUNCTION KEYS
 
-    # Key([mod], "Return", lazy.spawn('urxvt')),
-    # Key([mod], "Return", lazy.spawn('st')),
     Key([mod], "Return", lazy.spawn('termite')),
-    Key([mod], "d", lazy.spawn('dmenu_run -i -fn' + ' "Cascadia PL"')),
-    # Key([mod], "v", lazy.spawn('pavucontrol')),
-    # Key([mod], "x", lazy.spawn('~/.config/spectrwm/scripts/system_admin')),
+    Key([mod], "d", lazy.spawn("rofi -show run -theme dmenu")),
     Key([mod], "Escape", lazy.spawn('xkill')),
 
 
     # SUPER + SHIFT KEYS
-    Key([mod, "shift"], "Return", lazy.spawn("termite" + " -e vifm")),
+    Key([mod, "shift"], "Return", lazy.spawn("termite"
+                        + " -e /home/cardoso/.config/vifm/scripts/vifmrun")),
     Key([mod, "shift"], "q", lazy.window.kill()),
     Key([mod, "shift"], "r", lazy.restart()),
-    Key([mod, "shift"], "x", lazy.spawn('~/.config/spectrwm/scripts/system_admin')),
-    Key([mod, "shift"], "d", lazy.spawn('xfce4-appfinder')),
-
-    # CONTROL + ALT KEYS
-
-    # ALT + ... KEYS
-
-    # CONTROL + SHIFT KEYS
-
-    Key([mod2, "shift"], "Escape", lazy.spawn('xfce4-taskmanager')),
-
-    # SCREENSHOTS
-    Key([mod2], "Print", lazy.spawn('xfce4-screenshooter')),
-    Key([mod2, "shift"], "Print", lazy.spawn('gnome-screenshot -i')),
+    Key([mod, "shift"], "x", lazy.spawn('/home/cardoso/.config/spectrwm/scripts/system_admin')),
+    Key([mod, "shift"], "d", lazy.spawn('rofi -show drun -theme dmenu')),
 
     # MULTIMEDIA KEYS
-
     # INCREASE/DECREASE BRIGHTNESS
-    Key([], "XF86MonBrightnessUp", lazy.spawn("xbacklight -inc 5" + " && "
-                                              + 'notify-send "brighten down"')),
+    Key([], "XF86MonBrightnessUp", lazy.spawn('xbacklight -inc 5')),
     Key([], "XF86MonBrightnessDown", lazy.spawn("xbacklight -dec 5")),
 
     # INCREASE/DECREASE/MUTE VOLUME
@@ -385,8 +365,8 @@ layouts = [
                      border_normal=border_normal_, ratio=0.65, max_ratio=0.85,
                      min_ratio=0.15),
     # layout.Matrix(**layout_theme),
-    layout.Bsp(**layout_theme),
-    layout.Floating(**layout_theme),
+    # layout.Bsp(**layout_theme),
+    # layout.Floating(**layout_theme),
     # layout.RatioTile(**layout_theme),
     layout.Max(**layout_theme)
 ]
@@ -412,223 +392,155 @@ def init_colors():
 colors = init_colors()
 
 # WIDGETS FOR THE BAR
-
-fontsize_ = 14
 def init_widgets_defaults():
-    # return dict(font="Noto Sans",
-    return dict(font="Inconsolata Nerd Font",
-                fontsize = fontsize_,
-                padding = 2,
-                background=colors[1])
+    return dict(font="CaskaydiaCove Nerd Font",
+                fontsize=12,
+                padding=2,
+                background=darkgray,
+                foreground=purple
+                )
 
 widget_defaults = init_widgets_defaults()
 
 def init_widgets_list():
     prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
     widgets_list = [
-               widget.GroupBox(font="InconsolataGo Nerd Font Mono",
-                        fontsize = fontsize_,
-                        margin_y = -1,
-                        margin_x = 0,
-                        padding_y = 6,
-                        padding_x = 5,
-                        borderwidth = 0,
-                        disable_drag = True,
-                        active = colors[9],
-                        inactive = colors[5],
-                        rounded = False,
-                        highlight_method = "text",
-                        this_current_screen_border = colors[8],
-                        foreground = colors[2],
-                        background = colors[1]
-                        ),
+               widget.GroupBox(
+                    font=widget_defaults['font'],
+                    fontsize = widget_defaults['fontsize'] + 3,
+                    margin_y = -1,
+                    margin_x = 0,
+                    padding_y = 6,
+                    padding_x = 5,
+                    borderwidth = 0,
+                    disable_drag = True,
+                    active = purple,
+                    rounded = False,
+                    highlight_method = "text",
+                    this_current_screen_border = red_1, # current group
+                    foreground = widget_defaults['foreground'],
+                    background = widget_defaults['background'],
+                    hide_unused=True,
+                    ),
                widget.Sep(
-                        linewidth = 1,
-                        padding = 10,
-                        foreground = colors[2],
-                        background = colors[1]
-                        ),
+                    linewidth = 1,
+                    padding = 10,
+                    foreground = widget_defaults['foreground'],
+                    background = widget_defaults['background']
+                    ),
                widget.CurrentLayout(
-                        font = "CaskaydiaCove Nerd Font Mono",
-                        fontsize = fontsize_,
-                        foreground = colors[5],
-                        background = colors[1]
-                        ),
+                    font = widget_defaults['font'],
+                    fontsize = widget_defaults['fontsize'] + 5,
+                    foreground = blue,
+                    background = widget_defaults['background']
+                    ),
                widget.Sep(
-                        linewidth = 1,
-                        padding = 10,
-                        foreground = colors[2],
-                        background = colors[1]
-                        ),
-               widget.WindowName(font="CaskaydiaCove Nerd Font Mono",
-                        fontsize = fontsize_,
-                        foreground = colors[5],
-                        background = colors[1],
-                        ),
-               widget.Pomodoro(
-                        fontsize = fontsize_,
-                        font = "CaskaydiaCove Nerd Font Mono",
-                        background = colors[1],
-                        foreground = colors[5],
-                        length_pomodori = 22,
-                        length_long_break = 15,
-                        length_short_break = 5,
-                        num_pomodori = 4,
-                        update_interval = 5
-                       ),
+                    linewidth = 1,
+                    padding = 10,
+                    foreground = widget_defaults['foreground'],
+                    background = widget_defaults['background']
+                    ),
+               widget.WindowName(
+                    font=widget_defaults['font'],
+                    fontsize = widget_defaults['fontsize'],
+                    foreground = blue,
+                    background = widget_defaults['background']
+                    ),
                widget.Sep(
-                        linewidth = 1,
-                        padding = 10,
-                        foreground = colors[2],
-                        background = colors[1]
-                        ),
+                    linewidth = 1,
+                    padding = 10,
+                    foreground = widget_defaults['foreground'],
+                    background = widget_defaults['background']
+                    ),
                widget.TextBox(
-                        font="FontAwesome",
-                        text=" RAM: ",
-                        foreground=colors[6],
-                        background=colors[1],
-                        padding = 0,
-                        fontsize=fontsize_
-                        ),
+                    font=widget_defaults['font'],
+                    text="  ",
+                    foreground=colors[6],
+                    background=widget_defaults['background'],
+                    padding = 0,
+                    fontsize=widget_defaults['fontsize'] + 6
+                    ),
                widget.MemoryGraph(
-                        border_color = colors[2],
-                        fill_color = colors[8],
-                        graph_color = colors[8],
-                        background=colors[1],
-                        border_width = 1,
-                        line_width = 1,
-                        core = "all",
-                        type = "box"
-                        ),
-               # widget.Net(
-               #          font="Noto Sans",
-               #          fontsize=12,
-               #          interface="enp0s31f6",
-               #          foreground=colors[2],
-               #          background=colors[1],
-               #          padding = 0,
-               #          ),
-               # widget.Sep(
-               #          linewidth = 1,
-               #          padding = 10,
-               #          foreground = colors[2],
-               #          background = colors[1]
-               #          ),
-               # widget.NetGraph(
-               #          font="Noto Sans",
-               #          fontsize=12,
-               #          bandwidth="down",
-               #          interface="auto",
-               #          fill_color = colors[8],
-               #          foreground=colors[2],
-               #          background=colors[1],
-               #          graph_color = colors[8],
-               #          border_color = colors[2],
-               #          padding = 0,
-               #          border_width = 1,
-               #          line_width = 1,
-               #          ),
-               # widget.Sep(
-               #          linewidth = 1,
-               #          padding = 10,
-               #          foreground = colors[2],
-               #          background = colors[1]
-               #          ),
+                    border_color = purple,
+                    fill_color = aqua,
+                    graph_color = aqua,
+                    background=widget_defaults['background'],
+                    border_width = 1,
+                    line_width = 1,
+                    core = "all",
+                    type = "box"
+                    ),
                widget.TextBox(
-                        font="FontAwesome",
-                   text=" CPU:",
-                        foreground=colors[6],
-                        background=colors[1],
-                        padding = 0,
-                        fontsize=fontsize_
-                        ),
+                    font=widget_defaults['font'],
+                    text=" 力 ",
+                    foreground=red,
+                    background=widget_defaults['background'],
+                    padding = 0,
+                    fontsize=widget_defaults['fontsize'] + 5
+                    ),
                widget.CPUGraph(
-                        border_color = colors[2],
-                        fill_color = colors[8],
-                        graph_color = colors[8],
-                        background=colors[1],
-                        border_width = 1,
-                        line_width = 1,
-                        core = "all",
-                        type = "box"
-                        ),
-                        # do not activate in Virtualbox - will break qtile
-#              widget.ThermalSensor(
-#                        foreground = colors[5],
-#                        foreground_alert = colors[6],
-#                        background = colors[1],
-#                        metric = True,
-#                        padding = 3,
-#                        threshold = 80
-#                        ),
-               widget.Sep(
-                        linewidth = 1,
-                        padding = 10,
-                        foreground = colors[2],
-                        background = colors[1]
-                        ),
+                    border_color = purple,
+                    fill_color = colors[8],
+                    graph_color = aqua,
+                    background=widget_defaults['background'],
+                    border_width = 1,
+                    line_width = 1,
+                    core = "all",
+                    type = "box"
+                    ),
+               widget.CPU(
+                    font=widget_defaults['font'],
+                    fontsize=widget_defaults['fontsize'],
+                    format='L: {load_percent}%',
+                    foreground=aqua
+                    ),
                widget.TextBox(
-                        font="FontAwesome",
-                        text="  ",
-                        foreground=colors[4],
-                        background=colors[1],
-                        padding = 0,
-                        fontsize=fontsize_
-                        ),
-               # arcomemory.Memory(
-               #          font="Noto Sans",
-               #          fmt = '{MemUsed}/{MemTotal}M',
-               #          update_interval = 1,
-               #          fontsize = 12,
-               #          foreground = colors[5],
-               #          background = colors[1],
-               #          ),
-               # # battery option 1  or ArcoLinux Horizontal icons by default
-               # widget.Sep(
-               #          linewidth = 1,
-               #          padding = 10,
-               #          foreground = colors[2],
-               #          background = colors[1]
-               #          ),
-               # arcobattery.BatteryIcon(
-               #          padding=0,
-               #          scale=0.7,
-               #          y_poss=2,
-               #          theme_path=home + "/.config/qtile/icons/battery_icons_horiz",
-               #          update_interval = 5,
-               #          background = colors[1]
-               #          ),
+                    font=widget_defaults['font'],
+                    text="  ",
+                    foreground=red,
+                    background=widget_defaults['background'],
+                    padding = 0,
+                    fontsize=widget_defaults['fontsize'] + 4
+                    ),
+              widget.ThermalSensor(
+                    foreground = aqua,
+                    foreground_alert = red,
+                    background = widget_defaults['background'],
+                    metric = True,
+                    padding = 3,
+                    threshold = 80
+                    ),
                widget.Sep(
-                        linewidth = 1,
-                        padding = 10,
-                        foreground = colors[2],
-                        background = colors[1]
-                        ),
+                    linewidth = 1,
+                    padding = 10,
+                    foreground = widget_defaults['foreground'],
+                    background = widget_defaults['background']
+                    ),
                widget.TextBox(
-                        font="FontAwesome",
-                        text="  ",
-                        foreground=colors[3],
-                        background=colors[1],
-                        padding = 0,
-                        fontsize=fontsize_
-                        ),
+                    font=widget_defaults['font'],
+                    text="  ",
+                    foreground=green,
+                    background=widget_defaults['background'],
+                    padding = 0,
+                    fontsize=widget_defaults['fontsize']
+                    ),
                widget.Clock(
-                        foreground = colors[5],
-                        background = colors[1],
-                        fontsize = fontsize_,
-                        format="%Y-%m-%d %H:%M"
-                        ),
+                    foreground = widget_defaults['foreground'],
+                    background = widget_defaults['background'],
+                    fontsize = widget_defaults['fontsize'],
+                    format="%Y-%m-%d %H:%M"
+                    ),
                widget.Sep(
-                        linewidth = 1,
-                        padding = 10,
-                        foreground = colors[2],
-                        background = colors[1]
-                        ),
+                    linewidth = 1,
+                    padding = 10,
+                    foreground = colors[2],
+                    background = widget_defaults['background']
+                    ),
                widget.Systray(
-                        background=colors[1],
-                        icon_size=20,
-                        padding = 4
-                        ),
+                    background=widget_defaults['background'],
+                    icon_size=22,
+                    padding = 4
+                    ),
               ]
     return widgets_list
 
@@ -650,8 +562,8 @@ widgets_screen2 = init_widgets_screen2()
 # SCREENS
 ###############################################################################
 def init_screens():
-    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), size=26)),
-            Screen(top=bar.Bar(widgets=init_widgets_screen1(), size=26))]
+    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), size=26))]
+            # Screen(top=bar.Bar(widgets=init_widgets_screen1(), size=26))]
 
 def init_screens_on_the_fly():
     screens = [Screen(top=bar.Bar(widgets=init_widgets_screen1(), size=26))]
@@ -761,8 +673,6 @@ follow_mouse_focus = True
 bring_front_click = False
 cursor_warp = False
 floating_layout = layout.Floating(float_rules=[
-    # {'wmclass': 'Arcolinux-welcome-app.py'},
-    # {'wmclass': 'Arcolinux-tweak-tool.py'},
     {'wmclass': 'confirm'},
     {'wmclass': 'xfce4-appfinder'},
     {'wmclass': 'dialog'},
@@ -785,7 +695,9 @@ floating_layout = layout.Floating(float_rules=[
     {'wname': 'pinentry'},
     {'wmclass': 'ssh-askpass'},
 
-],  fullscreen_border_width = border_width_, border_width = border_width_)
+],  fullscreen_border_width = border_width_, border_width = border_width_,
+                                  border_focus=border_focus_,
+                                  border_normal=border_normal_)
 auto_fullscreen = True
 
 focus_on_window_activation = "focus" # or smart
