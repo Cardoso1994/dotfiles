@@ -107,8 +107,14 @@ keys = [
                         + " -e /home/cardoso/.config/vifm/scripts/vifmrun")),
     Key([mod, "shift"], "q", lazy.window.kill()),
     Key([mod, "shift"], "r", lazy.restart()),
-    Key([mod, "shift"], "x", lazy.spawn('/home/cardoso/.config/spectrwm/scripts/system_admin')),
+    Key([mod, "shift"], "x", lazy.spawn('/home/cardoso/.config/scripts/exit')),
     Key([mod, "shift"], "d", lazy.spawn('rofi -show drun -theme dmenu')),
+
+    # TOUCHPAD ON - OFF
+    Key([mod], "p", lazy.spawn(
+            '/home/cardoso/.config/scripts/pad_on_off.sh off')),
+    Key([mod], "o", lazy.spawn(
+            '/home/cardoso/.config/scripts/pad_on_off.sh on')),
 
     # MULTIMEDIA KEYS
     # INCREASE/DECREASE BRIGHTNESS
@@ -214,8 +220,6 @@ keys = [
     Key([mod, "shift"], "Right", lazy.layout.swap_right()),
 
     # MOVE TO OTHER MONITOR
-    Key([mod, "shift"], "m", lazy.next_screen()),
-    Key([mod, "shift"], "n", lazy.prev_screen()),
     Key([mod], "m", lazy.next_screen()),
 
     # TOGGLE FLOATING LAYOUT

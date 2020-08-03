@@ -1,0 +1,34 @@
+#!/bin/bash
+
+options="shutdown\nsuspend\nreboot\nhibernate\nlogout\nlock"
+operation=`echo -e "$options" | rofi -dmenu -i -p "Action: " -theme dmenu`
+
+[ -z $operation ] && exit -1
+
+conf="No\nYes"
+confirmation=`echo -e "$conf" \
+    | rofi -dmenu -i -p "Are you sure to $operation?: " -theme dmenu`
+
+[ -z $confirmation ] || [ $confirmation = "No" ] && exit -2
+
+case $operation in
+    shutdown )
+        systemctl poweroff
+        ;;
+    suspend )
+        systemctl suspend
+        ;;
+    reboot )
+        systemctl reboot
+        ;;
+    hibernate )
+        systemctl hibernate
+        ;;
+    logout )
+        id=`loginctl | grep $(whoami) | awk -F' ' '{ print $1 }'`
+        loginctl kill-session $id
+        ;;
+    lock )
+        i3lock -c "#9d0006"
+        ;;
+esac
