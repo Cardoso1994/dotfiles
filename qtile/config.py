@@ -202,10 +202,10 @@ keys = [
     Key([mod, "shift"], "space", lazy.layout.flip()),
 
     # FLIP LAYOUT FOR BSP
-    Key([mod, "mod1"], "k", lazy.layout.flip_up()),
-    Key([mod, "mod1"], "j", lazy.layout.flip_down()),
-    Key([mod, "mod1"], "l", lazy.layout.flip_right()),
-    Key([mod, "mod1"], "h", lazy.layout.flip_left()),
+    # Key([mod, "mod1"], "k", lazy.layout.flip_up()),
+    # Key([mod, "mod1"], "j", lazy.layout.flip_down()),
+    # Key([mod, "mod1"], "l", lazy.layout.flip_right()),
+    # Key([mod, "mod1"], "h", lazy.layout.flip_left()),
 
     # MOVE WINDOWS UP OR DOWN
     Key([mod, "shift"], "k", lazy.layout.shuffle_up()),
@@ -221,6 +221,9 @@ keys = [
 
     # MOVE TO OTHER MONITOR
     Key([mod], "m", lazy.next_screen()),
+
+    # COLUMNS LAYOUT STACK OR SPLIT
+    Key([mod, "control"], "Return", lazy.layout.toggle_split()),
 
     # TOGGLE FLOATING LAYOUT
     Key([mod, "shift"], "t", lazy.window.toggle_floating()),
