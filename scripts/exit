@@ -1,13 +1,17 @@
 #!/bin/bash
 
 options="shutdown\nsuspend\nreboot\nhibernate\nlogout\nlock"
-operation=`echo -e "$options" | rofi -dmenu -i -p "Action: " -theme dmenu`
+operation=`echo -e "$options" |
+    dmenu -i -p "Action: " -nb "#282828" -nf "#d79921" -sb "#cc241d" \
+    -sf "#282828" -fn "Cascadia Code PL:bold:pixelsize=18"`
 
+echo $operation
 [ -z $operation ] && exit -1
 
 conf="No\nYes"
-confirmation=`echo -e "$conf" \
-    | rofi -dmenu -i -p "Are you sure to $operation?: " -theme dmenu`
+confirmation=`echo -e "$conf" |
+    dmenu -i -p "Are you sure to $operation?: " -nb "#282828" -nf "#d79921" \
+    -sb "#cc241d" -sf "#282828" -fn "Cascadia Code PL:bold:pixelsize=18"`
 
 [ -z $confirmation ] || [ $confirmation = "No" ] && exit -2
 
