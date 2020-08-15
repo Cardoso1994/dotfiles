@@ -20,50 +20,47 @@ function run {
 #change your keyboard if you need it
 #setxkbmap -layout be
 
-#autostart ArcoLinux Welcome App
-# run dex $HOME/.config/autostart/arcolinux-welcome-app.desktop &
-
-#Some ways to set your wallpaper besides variety or nitrogen
-# feh --bg-fill /usr/share/backgrounds/arcolinux/arco-wallpaper.jpg &
-# nitrogen --restore &
-wal -R
-
-#start the conky to learn the shortcuts
-#(conky -c $HOME/.config/qtile/scripts/system-overview) &
-
-#starting utility applications at boot time
-run nm-applet &
-run pamac-tray &
-run xfce4-power-manager &
-numlockx on &
-blueberry-tray &
-# compton --config $HOME/.config/qtile/scripts/picom.conf &
-picom -i 0.9 &
+# Authentication dialog
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-/usr/lib/xfce4/notifyd/xfce4-notifyd &
 
-#starting user applications at boot time
-run volumeicon &
-#run discord &
-#nitrogen --restore &
-#run caffeine -a &
-#run vivaldi-stable &
-#run firefox &
-#run thunar &
-#run dropbox &
-#run insync start &
-#run spotify &
-#run atom &
-#run telegram-desktop &
+# bluetooth
+# exec_always --no-startup-id blueberry-tray &
 
-# mounting external drives automatically
+# network
+nm-applet &
+
+# num lock activated
+numlockx on &
+
+# redshift
+redshift -P -O 4500 &
+
+# tap to click
+/home/cardoso/.config/scripts/pad_on_off.sh click &
+
+# volume
+# exec --no-startup-id volumeicon
+
+# sets wallpaper
+nitrogen --restore &
+
+# udiskie for automounting external drives
 udiskie &
 
-# changing the keyboard speed
-xset r rate 300 50
+# keyboard speed up
+xset r rate 300 50 &
 
+# compositor
+# compton -i 0.98 --config ~/.config/i3/picom.config &
+# picom &
 
-
-
-
-
+###################################################
+#########   system applications   #################
+###################################################
+exec_always --no-startup-id xfce4-power-manager &
+# ommitted next line to get super key to bring up the menu in xfce and avoid
+#   error then in i3
+# IF xfsettingsd is activated you can not change themes
+#exec --no-startup-id xfsettingsd &
+/usr/lib/xfce4/notifyd/xfce4-notifyd &
+# exec_always --no-startup-id dunst

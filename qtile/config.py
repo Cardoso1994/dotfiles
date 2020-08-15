@@ -30,6 +30,7 @@ import re
 import socket
 import subprocess
 from libqtile.config import Drag, Key, Screen, Group, Drag, Click, Rule, Match
+from libqtile.config import ScratchPad, DropDown
 from libqtile.command import lazy#, Client
 from libqtile import layout, bar, widget, hook
 from libqtile.widget import Spacer
@@ -89,33 +90,58 @@ def get_num_monitors():
         return num_monitors
 
 num_monitors = get_num_monitors()
+num_monitors = 1
+###############################################################################
+# => General Configuration Variables
+###############################################################################
+
+###################
+# gruvbox colors
+###################
+bg = "#282828"
+red = "#cc241d"
+red_1 = "#9d0006"
+green = "#98971a"
+yellow = "#d79921"
+blue = "#458588"
+purple = "#b16286"
+aqua = "#689d68"
+gray = "#a89984"
+darkgray = "#1d2021"
+
 
 ###############################################################################
 # => KEY COMBINATIONS
 ###############################################################################
 keys = [
-
     # SUPER + FUNCTION KEYS
-
     Key([mod], "Return", lazy.spawn('termite')),
-    Key([mod], "d", lazy.spawn("rofi -show run -theme dmenu")),
     Key([mod], "Escape", lazy.spawn('xkill')),
-
-
+    Key([mod], "d", lazy.spawn('dmenu_run -i -nb ' + darkgray
+                                    + ' -nf ' + aqua + ' -sb ' + green
+                                    + ' -sf ' + darkgray + ' -fn '
+                                    + "'Cascadia Code PL:bold:pixelsize=18'")),
+    Key([mod], "b", lazy.hide_show_bar()),
+    # TOUCHPAD ON - OFF
+    Key([mod], "p", lazy.spawn(
+            '/home/cardoso/.config/scripts/pad_on_off.sh off')),
+    Key([mod], "o", lazy.spawn(
+            '/home/cardoso/.config/scripts/pad_on_off.sh on')),
     # SUPER + SHIFT KEYS
     Key([mod, "shift"], "Return", lazy.spawn("termite"
                         + " -e /home/cardoso/.config/vifm/scripts/vifmrun")),
     Key([mod, "shift"], "q", lazy.window.kill()),
     Key([mod, "shift"], "r", lazy.restart()),
     Key([mod, "shift"], "x", lazy.spawn('/home/cardoso/.config/scripts/exit')),
-    Key([mod, "shift"], "d", lazy.spawn('rofi -show drun -theme dmenu')),
-
-    # TOUCHPAD ON - OFF
-    Key([mod], "p", lazy.spawn(
-            '/home/cardoso/.config/scripts/pad_on_off.sh off')),
-    Key([mod], "o", lazy.spawn(
-            '/home/cardoso/.config/scripts/pad_on_off.sh on')),
-
+    Key([mod, "shift"], "d", lazy.spawn(f'j4-dmenu-desktop --dmenu="dmenu -i'
+                               + f" -nb '{darkgray}'" + f" -nf '{aqua}' "
+                               + f" -sb '{green}' -sf '{darkgray}' "
+                               + f" -fn 'Cascadia Code Pl:bold:pixelsize=18'"
+                               + '"')),
+    Key([mod, "shift"], "s", lazy.spawn("/home/cardoso/.config/"
+                                        + "scripts/screen_layout")),
+    Key([mod, "shift"], "v", lazy.spawn("/home/cardoso/.config/"
+                                        + "scripts/mpv_web")),
     # MULTIMEDIA KEYS
     # INCREASE/DECREASE BRIGHTNESS
     Key([], "XF86MonBrightnessUp", lazy.spawn('xbacklight -inc 5')),
@@ -123,8 +149,10 @@ keys = [
 
     # INCREASE/DECREASE/MUTE VOLUME
     Key([], "XF86AudioMute", lazy.spawn("amixer -D pulse set Master toggle")),
-    Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -D pulse sset Master '5%-'")),
-    Key([], "XF86AudioRaiseVolume", lazy.spawn(" amixer -D pulse sset Master '5%+'")),
+    Key([], "XF86AudioLowerVolume", lazy.spawn(
+                                    "amixer -D pulse sset Master '5%-'")),
+    Key([], "XF86AudioRaiseVolume", lazy.spawn(
+                                    "amixer -D pulse sset Master '5%+'")),
 
     Key([], "XF86AudioPlay", lazy.spawn("playerctl play-pause")),
     Key([], "XF86AudioNext", lazy.spawn("playerctl next")),
@@ -223,7 +251,7 @@ keys = [
     Key([mod], "m", lazy.next_screen()),
 
     # COLUMNS LAYOUT STACK OR SPLIT
-    Key([mod, "control"], "Return", lazy.layout.toggle_split()),
+    Key([mod], "w", lazy.layout.toggle_split()),
 
     # TOGGLE FLOATING LAYOUT
     Key([mod, "shift"], "t", lazy.window.toggle_floating()),
@@ -238,14 +266,12 @@ groups = []
 # FOR QWERTY KEYBOARDS
 group_names = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0",]
 
-# group_labels = ["", "", "", "", "", "", "", "", "", "",]
 group_labels = ["", "", "", "", "", "", "", "", "",  "",]
-# group_labels = ["", "", "", "", "", "", "", "", "", "",]
 
 
-group_layouts = ["monadtall", "monadtall", "monadtall", "monadtall",
-                 "monadtall", "monadtall", "monadtall", "monadtall",
-                 "monadtall", "monadtall",]
+group_layouts = ["columns", "columns", "columns", "columns",
+                 "columns", "columns", "columns", "columns",
+                 "columns", "columns",]
 
 groups_screen_0 = {"2"}
 groups_screen_1 = {"3", "4", "6", "0"}
@@ -258,7 +284,7 @@ for i in range(len(group_names)):
                 name=group_names[i],
                 layout=group_layouts[i].lower(),
                 label=group_labels[i],
-                matches=[Match(wm_class=['freecad', 'FreeCAD'])]
+                # matches=[Match(wm_class=['firefox', 'Navigator'])]
             ))
     groups.append(
         Group(
@@ -329,7 +355,33 @@ else:
             #     lazy.group[i.name].toscreen()),
         ])
 
+###############
+# SCRATCHPAD
+###############
+# groups.append(
+#     ScratchPad("scratchpad", [
+#         # define a drop down terminal.
+#         # it is placed in the upper third of screen by default.
+#         DropDown("pomotroid", "pomotroid", opacity=0.88, height=0.65,
+#                  width=0.40, x = 0.5),
+#
+#         # define another terminal exclusively for qshell at different position
+#         DropDown("qshell", "/usr/bin/termite -e qshell",
+#                  x=0.05, y=0.4, width=0.9, height=0.6, opacity=0.9,
+#                  on_focus_lost_hide=True)
+#     ]), )
+#
+# keys.extend([
+#     # Scratchpad
+#     # toggle visibiliy of above defined DropDown named "term"
+#     Key([], 'F12', lazy.group['scratchpad'].dropdown_toggle('pomotroid')),
+#     Key([], 'F11', lazy.group['scratchpad'].dropdown_toggle('qshell')),
+# ])
+
+
+###################
 # gruvbox colors
+###################
 bg = "#282828"
 red = "#cc241d"
 red_1 = "#9d0006"
@@ -344,10 +396,10 @@ darkgray = "#1d2021"
 ###############################################################################
 # => LAYOUTS
 ###############################################################################
-border_width_   = 4
+border_width_   = 3
 border_focus_   = red_1
 border_normal_  = darkgray
-margin_         = 6
+margin_         = 5
 
 def init_layout_theme():
     return {"margin":margin_,
@@ -360,9 +412,9 @@ layout_theme = init_layout_theme()
 
 
 layouts = [
-    layout.Columns(num_columns=3, insert_position=1, margin=margin_,
+    layout.Columns(num_columns=2, insert_position=1, margin=margin_,
                    border_focus=border_focus_, border_normal=border_normal_,
-                   grow_amount=2),
+                   grow_amount=2, border_width=border_width_),
     layout.MonadTall(margin=margin_, border_width=border_width_,
                      border_focus=border_focus_,
                      border_normal=border_normal_, ratio=0.65, max_ratio=0.75,
@@ -413,21 +465,25 @@ def init_widgets_list():
     prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
     widgets_list = [
                widget.GroupBox(
-                    font=widget_defaults['font'],
-                    fontsize = widget_defaults['fontsize'] + 3,
-                    margin_y = -1,
-                    margin_x = 0,
-                    padding_y = 6,
-                    padding_x = 5,
-                    borderwidth = 0,
-                    disable_drag = True,
-                    active = purple,
-                    rounded = False,
-                    highlight_method = "text",
-                    this_current_screen_border = red_1, # current group
-                    foreground = widget_defaults['foreground'],
-                    background = widget_defaults['background'],
-                    hide_unused=True,
+                   font=widget_defaults['font'],
+                   fontsize = widget_defaults['fontsize'] + 3,
+                   margin_y = -1,
+                   margin_x = 0,
+                   padding_y = 6,
+                   padding_x = 5,
+                   borderwidth = 0,
+                   disable_drag = True,
+                   active = purple,
+                   rounded = False,
+                   highlight_method = "text",
+                   this_current_screen_border = aqua, # current group
+                   block_highlight_text_color = aqua,
+                   foreground = blue,
+                   background = widget_defaults['background'],
+                   hide_unused=True,
+                   urgent_border=red_1,
+                   urgent_text=red_1,
+                   urgent_alert_method = 'text'
                     ),
                widget.Sep(
                     linewidth = 1,
@@ -447,12 +503,13 @@ def init_widgets_list():
                     foreground = widget_defaults['foreground'],
                     background = widget_defaults['background']
                     ),
-               widget.WindowName(
-                    font=widget_defaults['font'],
-                    fontsize = widget_defaults['fontsize'],
-                    foreground = blue,
-                    background = widget_defaults['background']
-                    ),
+                widget.Spacer(),
+               # widget.WindowName(
+               #      font=widget_defaults['font'],
+               #      fontsize = widget_defaults['fontsize'],
+               #      foreground = blue,
+               #      background = widget_defaults['background']
+               #      ),
                widget.Sep(
                     linewidth = 1,
                     padding = 10,
@@ -469,13 +526,25 @@ def init_widgets_list():
                     ),
                widget.MemoryGraph(
                     border_color = purple,
-                    fill_color = aqua,
-                    graph_color = aqua,
+                    fill_color = yellow,
+                    graph_color = yellow,
                     background=widget_defaults['background'],
                     border_width = 1,
                     line_width = 1,
                     core = "all",
                     type = "box"
+                    ),
+                widget.Memory(
+                    background = widget_defaults['background'],
+                    font = widget_defaults['font'],
+                    fontsize = widget_defaults['fontsize'] + 3,
+                    foreground = yellow,
+                ),
+               widget.Sep(
+                    linewidth = 1,
+                    padding = 10,
+                    foreground = widget_defaults['foreground'],
+                    background = widget_defaults['background']
                     ),
                widget.TextBox(
                     font=widget_defaults['font'],
@@ -497,8 +566,8 @@ def init_widgets_list():
                     ),
                widget.CPU(
                     font=widget_defaults['font'],
-                    fontsize=widget_defaults['fontsize'],
-                    format='L: {load_percent}%',
+                    fontsize=widget_defaults['fontsize'] + 3,
+                   format='L: {load_percent}% GHz: {freq_current}',
                     foreground=aqua
                     ),
                widget.TextBox(
@@ -507,7 +576,7 @@ def init_widgets_list():
                     foreground=red,
                     background=widget_defaults['background'],
                     padding = 0,
-                    fontsize=widget_defaults['fontsize'] + 4
+                    fontsize=widget_defaults['fontsize'] + 3
                     ),
               widget.ThermalSensor(
                     foreground = aqua,
@@ -515,7 +584,9 @@ def init_widgets_list():
                     background = widget_defaults['background'],
                     metric = True,
                     padding = 3,
-                    threshold = 80
+                    threshold = 80,
+                    fontsize=widget_defaults['fontsize'] + 3,
+                    tag = "temp1"
                     ),
                widget.Sep(
                     linewidth = 1,
@@ -532,15 +603,15 @@ def init_widgets_list():
                     fontsize=widget_defaults['fontsize']
                     ),
                widget.Clock(
-                    foreground = widget_defaults['foreground'],
+                    foreground = blue,
                     background = widget_defaults['background'],
-                    fontsize = widget_defaults['fontsize'],
+                    fontsize = widget_defaults['fontsize'] + 3,
                     format="%Y-%m-%d %H:%M"
                     ),
                widget.Sep(
                     linewidth = 1,
                     padding = 10,
-                    foreground = colors[2],
+                    foreground = purple,
                     background = widget_defaults['background']
                     ),
                widget.Systray(
@@ -569,19 +640,18 @@ widgets_screen2 = init_widgets_screen2()
 # SCREENS
 ###############################################################################
 def init_screens():
-    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), size=26))]
+    return [Screen(bottom=bar.Bar(widgets=init_widgets_screen1(), size=26))]
             # Screen(top=bar.Bar(widgets=init_widgets_screen1(), size=26))]
 
 def init_screens_on_the_fly():
-    screens = [Screen(top=bar.Bar(widgets=init_widgets_screen1(), size=26))]
+    screens = [Screen(bottom=bar.Bar(widgets=init_widgets_screen1(), size=26))]
 
     for _ in range(num_monitors - 1):
         screens.append(
-            Screen(top=bar.Bar(widgets=init_widgets_screen2(), size=26))
+            Screen(bottom=bar.Bar(widgets=init_widgets_screen2(), size=26))
         )
 
     return screens
-
 
 if num_monitors == 1:
     screens = init_screens()
@@ -620,7 +690,7 @@ def assign_app_group(client):
                "atom", "subl3", "octave-gui", "brackets", "code-oss", "code", "telegramDesktop", "discord", ]
 
     d["3"] = ["chromium-browser", "Chromium-browser", "Firefox", "firefox",
-              "Navigator"]
+              "Navigator", "brave-browser", "Brave-browser"]
 
     d["4"] = ["Xreader", "Zathura", "zathura", ]
 
@@ -644,12 +714,12 @@ def assign_app_group(client):
         if wm_class in list(d.values())[i]:
             group = list(d.keys())[i]
             client.togroup(group)
-            if group in groups_screen_0:
-                client.group.cmd_toscreen(0)
-            elif group in groups_screen_1:
-                client.group.cmd_toscreen(1)
-            else:
-                client.group.cmd_toscreen(0)
+           # if group in groups_screen_0:
+           #     client.group.cmd_toscreen(0)
+           # elif group in groups_screen_1:
+           #     client.group.cmd_toscreen(1)
+           # else:
+           #     client.group.cmd_toscreen(0)
 
 
 ###############################################################################
@@ -707,6 +777,6 @@ floating_layout = layout.Floating(float_rules=[
                                   border_normal=border_normal_)
 auto_fullscreen = True
 
-focus_on_window_activation = "focus" # or smart
+focus_on_window_activation = "smart" # or smart
 
 wmname = "LG3D"
