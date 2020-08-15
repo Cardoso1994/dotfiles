@@ -34,6 +34,7 @@ alias vifm="/home/cardoso/.config/vifm/scripts/vifmrun"
 # change directory with vifm
 change_dir(){
     dir=`vifm --choose-dir -`
+    echo $dir
     [ -n $dir ] && [ "$dir" != "$(pwd)" ] && cd $dir
 }
 
