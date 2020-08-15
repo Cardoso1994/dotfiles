@@ -8,21 +8,22 @@ operation=`echo -e "$options" | dmenu -i -p "Action: " -nb "#282828" -nf "#d7992
 [ -z $operation ] && exit -1
 
 case $operation in
+    Manual )
+        arandr & disown
+        ;;
     # asus
-    HDMI_only )
-        /home/cardoso/.config/scripts/screen_layouts/HDMI_only.sh
-        ;;
-    Lap_only )
-        /home/cardoso/.config/scripts/screen_layouts/Lap_only.sh
-        ;;
+    # HDMI_only )
+    #     /home/cardoso/.config/scripts/screen_layouts/HDMI_only.sh
+    #     ;;
+    # Lap_only )
+    #     /home/cardoso/.config/scripts/screen_layouts/Lap_only.sh
+    #     ;;
+
     # mac
     HDMI_only )
         /home/cardoso/.config/scripts/screen_layouts/HDMI_only_mac.sh
         ;;
     Lap_only )
         /home/cardoso/.config/scripts/screen_layouts/Lap_only_mac.sh
-        ;;
-    Manual )
-        arandr & disown
         ;;
 esac
