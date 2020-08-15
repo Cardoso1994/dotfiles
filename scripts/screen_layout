@@ -1,0 +1,28 @@
+#!/bin/bash
+
+options="HDMI_only\nLap_only\nManual"
+
+operation=`echo -e "$options" | dmenu -i -p "Action: " -nb "#282828" -nf "#d79921" -sb "#cc241d" \
+    -sf "#282828" -fn "Cascadia Code PL:bold:pixelsize=18"`
+
+[ -z $operation ] && exit -1
+
+case $operation in
+    # asus
+    HDMI_only )
+        /home/cardoso/.config/scripts/screen_layouts/HDMI_only.sh
+        ;;
+    Lap_only )
+        /home/cardoso/.config/scripts/screen_layouts/Lap_only.sh
+        ;;
+    # mac
+    HDMI_only )
+        /home/cardoso/.config/scripts/screen_layouts/HDMI_only_mac.sh
+        ;;
+    Lap_only )
+        /home/cardoso/.config/scripts/screen_layouts/Lap_only_mac.sh
+        ;;
+    Manual )
+        arandr & disown
+        ;;
+esac
