@@ -22,8 +22,11 @@ case $operation in
     # mac
     HDMI_only )
         /home/cardoso/.config/scripts/screen_layouts/HDMI_only_mac.sh
+        setxkbmap latam
         ;;
     Lap_only )
         /home/cardoso/.config/scripts/screen_layouts/Lap_only_mac.sh
         ;;
 esac
+
+nitrogen --restore &
