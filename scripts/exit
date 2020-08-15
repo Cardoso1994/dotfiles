@@ -31,6 +31,7 @@ case $operation in
     logout )
         id=`loginctl | grep $(whoami) | awk -F' ' '{ print $1 }'`
         loginctl kill-session $id
+        # i3-msg exit
         ;;
     lock )
         i3lock -c "#9d0006"
