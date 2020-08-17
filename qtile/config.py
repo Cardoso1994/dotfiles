@@ -133,11 +133,21 @@ keys = [
     Key([mod, "shift"], "q", lazy.window.kill()),
     Key([mod, "shift"], "r", lazy.restart()),
     Key([mod, "shift"], "x", lazy.spawn('/home/cardoso/.config/scripts/exit')),
-    Key([mod, "shift"], "d", lazy.spawn(f'j4-dmenu-desktop --dmenu="dmenu -i'
+
+    # asus
+    # Key([mod, "shift"], "d", lazy.spawn(f'j4-dmenu-desktop --dmenu="dmenu -i'
+    #                            + f" -nb '{darkgray}'" + f" -nf '{aqua}' "
+    #                            + f" -sb '{green}' -sf '{darkgray}' "
+    #                            + f" -fn 'Cascadia Code Pl:bold:pixelsize=18'"
+    #                            + '"')),
+
+    #mac
+    Key([mod, "shift"], "d", lazy.spawn(f'i3-dmenu-desktop --dmenu="dmenu -i'
                                + f" -nb '{darkgray}'" + f" -nf '{aqua}' "
                                + f" -sb '{green}' -sf '{darkgray}' "
                                + f" -fn 'Cascadia Code Pl:bold:pixelsize=18'"
                                + '"')),
+
     Key([mod, "shift"], "s", lazy.spawn("/home/cardoso/.config/"
                                         + "scripts/screen_layout")),
     Key([mod, "shift"], "v", lazy.spawn("/home/cardoso/.config/"
@@ -263,35 +273,65 @@ keys = [
 ###############################################################################
 groups = []
 
+group_matches = [
+    # workspace 1
+    [Match(wm_class=["st", "St", "urxvt", "URxvt"])],
+    # workspace 2
+    [Match(wm_class=[ "Atom", "Subl3", "Spyder", "RStudio", "TeXstudio",
+                     "texstudio", "atom", "subl3", "octave-gui", "brackets",
+                     "code-oss", "code", "telegramDesktop", "discord", ])],
+    # workspace 3
+    [Match(wm_class=["chromium-browser", "Chromium-browser", "Firefox",
+                     "firefox", "Navigator", "brave-browser",
+                     "Brave-browser"])],
+    # workspace 4
+    [Match(wm_class=["Xreader", "Zathura", "zathura", "org.pwmt.zathura"])],
+    # workspace 5
+    [Match(wm_class=["Thunderbird", "libreoffice-startcenter",
+                     "libreoffice-writer", "libreoffice-impress",
+                     "libreoffice-calc", "libreoffice", ])],
+    # workspace 6
+    [Match(wm_class=["Vlc","vlc", "FreeCAD", "freecad", "Nitrogen", "nitrogen",
+              "matplotlib", "Paraview", "paraview", "mpv", "Mpv", "gl"])],
+    # workspace 7
+    [Match(wm_class=["VirtualBox Manager", "VirtualBox Machine", "Vmplayer",
+              "virtualbox manager", "virtualbox machine", "vmplayer", ])],
+    # workspace 8
+    [Match(wm_class=["Thunar", "thunar", "Pcmanfm", "Pcmanfm-qt", "pcmanfm",
+                     "pcmanfm-qt"])],
+    # workspace 9
+    [Match(wm_class=[None])],
+    # workspace 0 (10)
+    [Match(wm_class=[None])],
+]
 # FOR QWERTY KEYBOARDS
 group_names = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0",]
 
 group_labels = ["", "", "", "", "", "", "", "", "",  "",]
 
 
-group_layouts = ["columns", "columns", "columns", "columns",
-                 "columns", "columns", "columns", "columns",
-                 "columns", "columns",]
+group_layouts = ["monadtall", "monadtall", "monadtall", "monadtall",
+                 "monadtall", "monadtall", "monadtall", "monadtall",
+                 "monadtall", "monadtall",]
 
 groups_screen_0 = {"2"}
 groups_screen_1 = {"3", "4", "6", "0"}
 groups_any_screen = set(group_names) - (groups_screen_0 | groups_screen_1)
 
 for i in range(len(group_names)):
-    if group_names[i] == '6':
-        groups.append(
+    groups.append(
             Group(
                 name=group_names[i],
                 layout=group_layouts[i].lower(),
                 label=group_labels[i],
-                # matches=[Match(wm_class=['firefox', 'Navigator'])]
+                matches=group_matches[i]
             ))
-    groups.append(
-        Group(
-            name=group_names[i],
-            layout=group_layouts[i].lower(),
-            label=group_labels[i],
-        ))
+    # groups.append(
+    #     Group(
+    #         name=group_names[i],
+    #         layout=group_layouts[i].lower(),
+    #         label=group_labels[i],
+    #     ))
 
 #####################################
 # => GROUP KEYS
@@ -453,7 +493,7 @@ colors = init_colors()
 # WIDGETS FOR THE BAR
 def init_widgets_defaults():
     return dict(font="CaskaydiaCove Nerd Font",
-                fontsize=12,
+                fontsize=14,
                 padding=2,
                 background=darkgray,
                 foreground=purple
@@ -667,7 +707,7 @@ screens = init_screens()
 mouse = [
     Drag([mod], "Button1", lazy.window.set_position_floating(),
          start=lazy.window.get_position()),
-    Drag([mod], "Button3", lazy.window.set_size_floating(),
+    Drag([mod], "Button2", lazy.window.set_size_floating(),
          start=lazy.window.get_size())
 ]
 
@@ -678,48 +718,48 @@ dgroups_app_rules = []
 # => ASSIGN APPLICATIONS TO A SPECIFIC GROUPNAME
 ###############################################################################
 
-@hook.subscribe.client_new
-def assign_app_group(client):
-    d = {}
-    #########################################################
-    ################ assign apps to groups ##################
-    #########################################################
-    d["1"] = ["st","St", "urxvt", "URxvt", ]
-
-    d["2"] = [ "Atom", "Subl3", "Spyder", "RStudio", "TeXstudio", "texstudio",
-               "atom", "subl3", "octave-gui", "brackets", "code-oss", "code", "telegramDesktop", "discord", ]
-
-    d["3"] = ["chromium-browser", "Chromium-browser", "Firefox", "firefox",
-              "Navigator", "brave-browser", "Brave-browser"]
-
-    d["4"] = ["Xreader", "Zathura", "zathura", ]
-
-    d["5"] = ["Thunderbird", "libreoffice-startcenter", "libreoffice-writer",
-              "libreoffice-impress", "libreoffice-calc", "libreoffice", ]
-
-    d["6"] = ["Vlc","vlc", "FreeCAD", "freecad", "Nitrogen", "nitrogen",
-              "matplotlib", "Paraview", "paraview", ]
-    d["7"] = ["VirtualBox Manager", "VirtualBox Machine", "Vmplayer",
-              "virtualbox manager", "virtualbox machine", "vmplayer", ]
-    d["8"] = ["Thunar", "Nemo", "Caja", "Nautilus", "org.gnome.Nautilus", "Pcmanfm", "Pcmanfm-qt",
-              "thunar", "nemo", "caja", "nautilus", "org.gnome.nautilus", "pcmanfm", "pcmanfm-qt", ]
-    d["9"] = ["Evolution", "Geary", "Mail", "Thunderbird",
-              "evolution", "geary", "mail", "thunderbird" ]
-    d["0"] = ["Spotify", "Pragha", "Clementine", "Deadbeef", "Audacious",
-              "spotify", "pragha", "clementine", "deadbeef", "audacious" ]
-    ##########################################################
-    wm_class = client.window.get_wm_class()[0]
-
-    for i in range(len(d)):
-        if wm_class in list(d.values())[i]:
-            group = list(d.keys())[i]
-            client.togroup(group)
-           # if group in groups_screen_0:
-           #     client.group.cmd_toscreen(0)
-           # elif group in groups_screen_1:
-           #     client.group.cmd_toscreen(1)
-           # else:
-           #     client.group.cmd_toscreen(0)
+# @hook.subscribe.client_new
+# def assign_app_group(client):
+#     d = {}
+#     #########################################################
+#     ################ assign apps to groups ##################
+#     #########################################################
+#     d["1"] = ["st","St", "urxvt", "URxvt", ]
+#
+#     d["2"] = [ "Atom", "Subl3", "Spyder", "RStudio", "TeXstudio", "texstudio",
+#                "atom", "subl3", "octave-gui", "brackets", "code-oss", "code", "telegramDesktop", "discord", ]
+#
+#     d["3"] = ["chromium-browser", "Chromium-browser", "Firefox", "firefox",
+#               "Navigator", "brave-browser", "Brave-browser"]
+#
+#     d["4"] = ["Xreader", "Zathura", "zathura", "org.pwmt.zathura"]
+#
+#     d["5"] = ["Thunderbird", "libreoffice-startcenter", "libreoffice-writer",
+#               "libreoffice-impress", "libreoffice-calc", "libreoffice", ]
+#
+#     d["6"] = ["Vlc","vlc", "FreeCAD", "freecad", "Nitrogen", "nitrogen",
+#               "matplotlib", "Paraview", "paraview", "mpv", "Mpv", "gl"]
+#     d["7"] = ["VirtualBox Manager", "VirtualBox Machine", "Vmplayer",
+#               "virtualbox manager", "virtualbox machine", "vmplayer", ]
+#     d["8"] = ["Thunar", "Nemo", "Caja", "Nautilus", "org.gnome.Nautilus", "Pcmanfm", "Pcmanfm-qt",
+#               "thunar", "nemo", "caja", "nautilus", "org.gnome.nautilus", "pcmanfm", "pcmanfm-qt", ]
+#     d["9"] = ["Evolution", "Geary", "Mail", "Thunderbird",
+#               "evolution", "geary", "mail", "thunderbird" ]
+#     d["0"] = ["Spotify", "Pragha", "Clementine", "Deadbeef", "Audacious",
+#               "spotify", "pragha", "clementine", "deadbeef", "audacious" ]
+#     ##########################################################
+#     wm_class = client.window.get_wm_class()[0]
+#
+#     for i in range(len(d)):
+#         if wm_class in list(d.values())[i]:
+#             group = list(d.keys())[i]
+#             client.togroup(group)
+#            # if group in groups_screen_0:
+#            #     client.group.cmd_toscreen(0)
+#            # elif group in groups_screen_1:
+#            #     client.group.cmd_toscreen(1)
+#            # else:
+#            #     client.group.cmd_toscreen(0)
 
 
 ###############################################################################
