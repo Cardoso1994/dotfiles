@@ -1,0 +1,28 @@
+#!/bin/bash
+
+chr=`acpi -b | awk '{ print $3 }'`
+
+case $BLOCK_BUTTON in
+    3)
+        [ $chr == 'Discharging,' ] \
+            && notify-send "Discharging: $(acpi -b | awk '{ print $5 }') remaining"
+        [ $chr == 'Charging,' ] \
+            && notify-send "Charging: $(acpi -b | awk '{ print $5 }') remaining"
+        ;;
+esac
+
+bat=$(acpi -b | grep -E -o '[0-9][0-9]?%')
+echo "$bat "
+
+echo $chr
+
+# Set urgent flag below 5% and notify
+[ ${bat%?} -le 10 ] && [ $chr == "Discharging," ] \
+    && notify-send -u critical "  CHARGE BATTERY!" \
+    && exit 33
+
+[ ${bat%?} -le 10 ] && exit 33
+
+[ ${bat%?} -ge 98 ] && notify-send -u critical "Battery fully charged!"
+
+exit 0

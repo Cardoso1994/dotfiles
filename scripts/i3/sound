@@ -1,0 +1,12 @@
+#!/bin/bash
+
+vol_level="$(amixer get Master | awk -F'[][]' 'END{ print $2 }') "
+is_mute=$(amixer get Master | awk ' /%/{print ($NF=="[off]" ? 1 : 0); exit;}')
+
+echo $vol_level $is_mute
+if [ $is_mute = 1 ]
+then
+    echo "it is muted"
+fi
+
+
