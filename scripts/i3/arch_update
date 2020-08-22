@@ -1,0 +1,8 @@
+#!/bin/bash
+
+case $BLOCK_BUTTON in
+    3)
+        pkill -RTMIN+11 i3blocks
+        ;;
+esac
+echo "  $(pacman -Qu | wc -l)   $(yay --aur -Qu | wc -l) "

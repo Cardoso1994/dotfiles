@@ -27,6 +27,7 @@ case $operation in
     Lap_only )
         /home/cardoso/.config/scripts/screen_layouts/Lap_only_mac.sh
         setxkbmap latam
+        # setxkbmap -model pc105 -layout es -variant mac
         ;;
 esac
 
