@@ -5,7 +5,6 @@ operation=`echo -e "$options" |
     dmenu -i -p "Action: " -nb "#282828" -nf "#d79921" -sb "#cc241d" \
     -sf "#282828" -fn "Cascadia Code PL:bold:pixelsize=18"`
 
-echo $operation
 [ -z $operation ] && exit -1
 
 conf="No\nYes"
@@ -29,11 +28,11 @@ case $operation in
         systemctl hibernate
         ;;
     logout )
-        id=`loginctl | grep $(whoami) | awk -F' ' '{ print $1 }'`
-        loginctl kill-session $id
-        # i3-msg exit
+        # id=`loginctl | grep $(whoami) | awk -F' ' '{ print $1 }'`
+        # loginctl kill-session $id
+        i3-msg exit
         ;;
     lock )
-        i3lock -c "#9d0006"
+        i3lock -c "#9d0006" -k --pass-volume-keys
         ;;
 esac
