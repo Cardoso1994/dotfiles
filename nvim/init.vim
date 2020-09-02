@@ -33,10 +33,7 @@ Plug 'joshdick/onedark.vim'
 Plug 'morhetz/gruvbox'
 Plug 'sainnhe/sonokai'
 Plug 'sainnhe/edge'
-Plug 'franbach/miramare'
-Plug 'drewtempelmeyer/palenight.vim'
 Plug 'sainnhe/gruvbox-material'
-Plug 'arcticicestudio/nord-vim'
 
 " Declare the list of plugins.
 Plug 'preservim/nerdtree'
@@ -50,6 +47,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'sheerun/vim-polyglot'
 Plug 'mboughaba/i3config.vim'
 Plug 'jlanzarotta/bufexplorer'
+Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
@@ -182,7 +180,7 @@ syntax enable
 let g:gruvbox_italic=1
 let g:gruvbox_bold=1
 let g:gruvbox_contrast_dark="hard"
-let g:gruvbox_contrast_light="soft"
+let g:gruvbox_contrast_light="medium"
 
 " gruvbox material
 let g:gruvbox_material_palette = 'material'
@@ -191,6 +189,7 @@ let g:gruvbox_material_visual = 'reverse'
 let g:gruvbox_material_enable_bold = 1
 let g:gruvbox_material_cursor = 'red'
 let g:gruvbox_material_better_performance = 1
+let g:gruvbox_material_statusline_style = 'original'
 
 " sonokai
 " let g:sonokai_style="andromeda"
@@ -215,7 +214,7 @@ let g:edge_style="aura"
 let hr= (strftime('%H'))
 if hr > 8 && hr < 18
     set background=light
-    let g:gruvbox_material_background = 'medium'
+    let g:gruvbox_material_background = 'soft'
     colorscheme gruvbox-material
 else
     set background=dark
@@ -467,6 +466,11 @@ nmap <space>u <C-r>
 
 " out of insert mode
 imap jk <ESC>
+
+" copy/paste with system clipboard clipboard
+vnoremap <C-c> "+y
+map <C-p> "+p
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Python section
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -476,7 +480,7 @@ au FileType python syn keyword pythonDecorator True None False self
 au BufNewFile,BufRead *.jinja set syntax=htmljinja
 au BufNewFile,BufRead *.mako set ft=mako
 
-au FileType python map <buffer> F :set foldmethod=indent<cr>
+" au FileType python map <buffer> F :set foldmethod=indent<cr>
 
 au FileType python inoremap <buffer> $r return
 au FileType python inoremap <buffer> $i import
