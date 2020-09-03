@@ -1,0 +1,24 @@
+#!/bin/bash
+
+_TIME_=$(date +%H)
+
+LIGHT="/home/cardoso/.config/termite/themes/base16-gruvbox-light-soft.config"
+DARK="/home/cardoso/.config/termite/themes/base16-gruvbox-dark-hard.config"
+CONFIG_NO_COLOR="/home/cardoso/.config/termite/config_no_color"
+CONFIG="/home/cardoso/.config/termite/config"
+
+DARK_XRES="/home/cardoso/.config/xresources/gruvbox_dark"
+LIGHT_XRES="/home/cardoso/.config/xresources/gruvbox_light"
+XRES="/home/cardoso/.Xresources"
+
+if [ $_TIME_ -ge 8 -a $_TIME_ -lt 18 ]; then
+        redshift -P -O 4800 &
+        cp $CONFIG_NO_COLOR $CONFIG
+        cat $LIGHT >> $CONFIG
+        cat $LIGHT_XRES > $XRES
+else
+        redshift -P -O 3600 &
+        cp $CONFIG_NO_COLOR $CONFIG
+        cat $DARK >> $CONFIG
+        cat $DARK_XRES > $XRES
+fi
