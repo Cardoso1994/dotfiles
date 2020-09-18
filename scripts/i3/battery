@@ -1,18 +1,20 @@
 #!/bin/bash
 
-chr=`acpi -b | awk '{ print $3 }'`
+data=`acpi -b`
+chr=`echo $data | awk '{ print $3 }'`
 
 case $BLOCK_BUTTON in
     3)
+        remain=$(echo $data | awk '{ print $5 }')
         [ $chr == 'Discharging,' ] \
-            && notify-send "Discharging: $(acpi -b | awk '{ print $5 }') remaining"
+            && notify-send "Discharging: $remain remaining"
         [ $chr == 'Charging,' ] \
-            && notify-send "Charging: $(acpi -b | awk '{ print $5 }') remaining"
+            && notify-send "Charging: $remain remaining"
         ;;
 esac
 
-# echo "chr is $chr"
-bat=$(acpi -b | grep -E -o '[0-9][0-9]?%')
+bat=`echo $data | grep -E -o '[0-9][0-9]?%'`
+
 
 [ $chr == "Discharging," ] && echo "  $bat " || echo "  $bat "
 

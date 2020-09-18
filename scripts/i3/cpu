@@ -18,7 +18,7 @@ temp=`echo ${temp:1} | awk -F '.' '{ print $1}'`
 load_=`cat /proc/loadavg | awk -F' ' '{ print $1}'`
 load_bool=`echo $load_'>'4.5 | bc -l`
 
-echo "$cpu%  $temp°C  $load_ "
+echo "  $cpu%   $temp°C   $load_ "
 
 [ $cpu -ge 75 ]  || [ $load_bool -gt 0 ]  || [ $temp -ge 75 ] && exit 33
 
