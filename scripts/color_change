@@ -22,3 +22,5 @@ else
         cat $DARK >> $CONFIG
         cat $DARK_XRES > $XRES
 fi
+
+xrdb -merge /home/cardoso/.Xresources
