@@ -7,19 +7,18 @@ lock(){
 }
 
 # dmenu
+dmenu_flags=( -i -nb "#282828" -nf "#d79921" -sb "#cc241d" -sf "#282828" \
+    -fn "Cascadia Code PL:bold:pixelsize=18" )
+
 options="shutdown\nsuspend\nreboot\nhibernate\nlogout\nlock"
-operation=`echo -e "$options" |
-    dmenu -i -p "Action: " -nb "#282828" -nf "#d79921" -sb "#cc241d" \
-    -sf "#282828" -fn "Cascadia Code PL:bold:pixelsize=18"`
+operation=$(echo -e "$options" | dmenu "${dmenu_flags[@]}" -p "Action:")
 
 # exit if escape in dmenu
 [ -z $operation ] && exit -1
 
 conf="No\nYes"
-confirmation=`echo -e "$conf" |
-    dmenu -i -p "Are you sure you want to $operation?: " \
-    -nb "#282828" -nf "#d79921" \
-    -sb "#cc241d" -sf "#282828" -fn "Cascadia Code PL:bold:pixelsize=18"`
+confirmation=`echo -e "$conf" \
+    | dmenu "${dmenu_flags[@]}" -p "Are you sure you want to $operation?:" `
 
 # exit if aborted confirmation
 [ -z $confirmation ] || [ $confirmation = "No" ] && exit -2
