@@ -34,6 +34,7 @@ Plug 'morhetz/gruvbox'
 Plug 'sainnhe/sonokai'
 Plug 'sainnhe/edge'
 Plug 'sainnhe/gruvbox-material'
+Plug 'franbach/miramare'
 
 " Declare the list of plugins.
 Plug 'preservim/nerdtree'
@@ -47,7 +48,6 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'sheerun/vim-polyglot'
 Plug 'mboughaba/i3config.vim'
 Plug 'jlanzarotta/bufexplorer'
-Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
@@ -220,6 +220,7 @@ else
     set background=dark
     let g:gruvbox_material_background = 'hard'
     colorscheme gruvbox-material
+    " colorscheme miramare
 endif
 
 " Set extra options when running in GUI mode
