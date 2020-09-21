@@ -1,17 +1,27 @@
 #!/bin/bash
 
+# lock configuration for i3lock
+lock(){
+    i3lock -c "#9d0006" -k --pass-volume-keys --timestr="%H:%M" \
+        --timecolor="#a89984" --datecolor="#a89984"
+}
+
+# dmenu
 options="shutdown\nsuspend\nreboot\nhibernate\nlogout\nlock"
 operation=`echo -e "$options" |
     dmenu -i -p "Action: " -nb "#282828" -nf "#d79921" -sb "#cc241d" \
     -sf "#282828" -fn "Cascadia Code PL:bold:pixelsize=18"`
 
+# exit if escape in dmenu
 [ -z $operation ] && exit -1
 
 conf="No\nYes"
 confirmation=`echo -e "$conf" |
-    dmenu -i -p "Are you sure to $operation?: " -nb "#282828" -nf "#d79921" \
+    dmenu -i -p "Are you sure you want to $operation?: " \
+    -nb "#282828" -nf "#d79921" \
     -sb "#cc241d" -sf "#282828" -fn "Cascadia Code PL:bold:pixelsize=18"`
 
+# exit if aborted confirmation
 [ -z $confirmation ] || [ $confirmation = "No" ] && exit -2
 
 case $operation in
@@ -19,13 +29,13 @@ case $operation in
         systemctl poweroff
         ;;
     suspend )
-        systemctl suspend
+        lock && systemctl suspend
         ;;
     reboot )
         systemctl reboot
         ;;
     hibernate )
-        systemctl hibernate
+        lock && systemctl hibernate
         ;;
     logout )
         # id=`loginctl | grep $(whoami) | awk -F' ' '{ print $1 }'`
@@ -33,6 +43,7 @@ case $operation in
         i3-msg exit
         ;;
     lock )
-        i3lock -c "#9d0006" -k --pass-volume-keys
+        # i3lock -c "#9d0006" -k --pass-volume-keys
+        lock
         ;;
 esac
