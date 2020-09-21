@@ -1,7 +1,9 @@
 #!/bin/bash
 
+# if muted
 mute=`amixer -D pulse get Master | grep -o -m 1 off`
 [ $mute ] && echo " 婢 " && exit 0
 
+# if not muted print level
 level=`amixer -D pulse get Master |  grep -o -m 1 '[0-9]\+\%' `
-echo "  $level  " && exit 0
+echo "  $level " && exit 0
