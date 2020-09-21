@@ -15,16 +15,17 @@ esac
 
 bat=`echo $data | grep -E -o '[0-9][0-9]?%'`
 
-
+# printing current status
 [ $chr == "Discharging," ] && echo "  $bat " || echo "  $bat "
 
-# Set urgent flag below 5% and notify
+# Set urgent flag below 10% and notify
 [ ${bat%?} -le 10 ] && [ $chr == "Discharging," ] \
     && notify-send -u critical "  CHARGE BATTERY!" \
     && exit 33
 
 [ ${bat%?} -le 10 ] && exit 33
 
-[ ${bat%?} -ge 97 ] && notify-send -u critical "Battery fully charged!"
+[ ${bat%?} -ge 97 ] && [ $chr == "Charging," ] \
+    && notify-send -u critical "Battery fully charged!" && exit 33
 
 exit 0
