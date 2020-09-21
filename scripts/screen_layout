@@ -12,23 +12,23 @@ case $operation in
         arandr & disown
         ;;
     # asus
-    HDMI_only )
-        /home/cardoso/.config/scripts/screen_layouts/HDMI_only.sh
-        ;;
-    Lap_only )
-        /home/cardoso/.config/scripts/screen_layouts/Lap_only.sh
-        ;;
-
-    # mac
     # HDMI_only )
-    #     /home/cardoso/.config/scripts/screen_layouts/HDMI_only_mac.sh
-    #     setxkbmap latam
+    #     /home/cardoso/.config/scripts/screen_layouts/HDMI_only.sh
     #     ;;
     # Lap_only )
-    #     /home/cardoso/.config/scripts/screen_layouts/Lap_only_mac.sh
-    #     setxkbmap latam
-    #     # setxkbmap -model pc105 -layout es -variant mac
+    #     /home/cardoso/.config/scripts/screen_layouts/Lap_only.sh
     #     ;;
+
+    # mac
+    HDMI_only )
+        /home/cardoso/.config/scripts/screen_layouts/HDMI_only_mac.sh
+        setxkbmap latam
+        ;;
+    Lap_only )
+        /home/cardoso/.config/scripts/screen_layouts/Lap_only_mac.sh
+        setxkbmap latam
+        # setxkbmap -model pc105 -layout es -variant mac
+        ;;
 esac
 
 nitrogen --restore &
