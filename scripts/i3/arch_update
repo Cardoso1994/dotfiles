@@ -6,4 +6,4 @@ case $BLOCK_BUTTON in
         ;;
 esac
 
-echo "  $(pacman -Qu | wc -l)   $(yay --aur -Qu | wc -l) "
+echo "  $(checkupdates | wc -l)   $(yay --aur -Qu | wc -l) "
