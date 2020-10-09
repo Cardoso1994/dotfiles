@@ -42,3 +42,6 @@ alias cdcd="change_dir"
 
 # remove files safely
 alias rm="rm -i"
+
+# open st in current dir
+alias std="st -d . & disown ; exit"
