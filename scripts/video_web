@@ -1,0 +1,4 @@
+#!/usr/bin/bash
+
+# requires xclip utility
+vlc $(xclip -o -selection "clipboard") & disown
