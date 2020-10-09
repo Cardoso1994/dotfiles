@@ -3,7 +3,8 @@
 host=$(hostname)
 
 options="HDMI_only\nLap_only\nManual"
-operation=`echo -e "$options" | dmenu -i -p "Action: " -nb "#282828" -nf "#d79921" -sb "#cc241d" \
+operation=`echo -e "$options" | dmenu -i -p "Action: " -nb "#282828" \
+    -nf "#d79921" -sb "#cc241d" \
     -sf "#282828" -fn "Cascadia Code PL:bold:pixelsize=18"`
 
 
@@ -13,11 +14,10 @@ case $operation in
     Manual )
         arandr & disown
         ;;
-    # asus
     HDMI_only )
         [ $host == 'cardosoarco' ] \
             && /home/cardoso/.config/scripts/screen_layouts/HDMI_only.sh \
-            ; nitrogen --restore exit 0
+            ; nitrogen --restore ; exit 0
         [ $host == 'kimura'] \
             && /home/cardoso/.config/scripts/screen_layouts/HDMI_only_mac.sh \
             ; setxkbmap latam ; nitrogen --restore ; exit 0
@@ -30,17 +30,4 @@ case $operation in
             && /home/cardoso/.config/scripts/screen_layouts/HDMI_only_mac.sh \
             ; setxkbmap latam ; nitrogen --restore ; exit 0
         ;;
-
-    # mac
-    # HDMI_only )
-    #     /home/cardoso/.config/scripts/screen_layouts/HDMI_only_mac.sh
-    #     setxkbmap latam
-    #     ;;
-    # Lap_only )
-    #     /home/cardoso/.config/scripts/screen_layouts/Lap_only_mac.sh
-    #     setxkbmap latam
-    #     # setxkbmap -model pc105 -layout es -variant mac
-    #     ;;
 esac
-
-nitrogen --restore &
