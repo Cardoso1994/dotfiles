@@ -1,6 +1,12 @@
 #!/bin/bash
 
 case $BLOCK_BUTTON in
+    1)
+        notify-send "Arch:
+$(checkupdates | cut -f1 -d ' ')
+AUR:
+$(yay --aur -Qu)"
+        ;;
     3)
         pkill -SIGRTMIN+2 i3blocks
         ;;

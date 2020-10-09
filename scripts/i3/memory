@@ -1,8 +1,8 @@
 #!/bin/bash
 
 case $BLOCK_BUTTON in
-    3) notify-send "Most intensive memory processes:
-        $(ps axch -o cmd:18,%mem --sort=-%mem | head)"
+    3) notify-send "Most memory intensive processes:
+        $(ps axch -o cmd:18,%mem --sort=-%mem | head -n 5)"
         ;;
 esac
 

@@ -1,13 +1,14 @@
 #!/bin/bash
+
 case $BLOCK_BUTTON in
-    3) notify-send "Most intensive CPU processes:
-        $(ps axch -o cmd:18,%cpu --sort=-%cpu | head)"
+    3) notify-send "Most CPU intensive processes:
+        $(ps axch -o cmd:18,%cpu --sort=-%cpu | head -n 5)"
         ;;
 esac
 
 read cpu a b c previdle rest < /proc/stat
 prevtotal=$((a+b+c+previdle))
-sleep 0.5
+sleep 0.4
 read cpu a b c idle rest < /proc/stat
 total=$((a+b+c+idle))
 cpu=$((100*( (total-prevtotal) - (idle-previdle) ) / (total-prevtotal) ))
