@@ -35,6 +35,9 @@ Plug 'sainnhe/sonokai'
 Plug 'sainnhe/edge'
 Plug 'sainnhe/gruvbox-material'
 Plug 'franbach/miramare'
+Plug 'sainnhe/forest-night'
+Plug 'arcticicestudio/nord-vim'
+Plug 'frankier/neovim-colors-solarized-truecolor-only'
 
 " Declare the list of plugins.
 Plug 'preservim/nerdtree'
@@ -47,7 +50,6 @@ Plug 'chrisbra/csv.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'sheerun/vim-polyglot'
 Plug 'mboughaba/i3config.vim'
-Plug 'jlanzarotta/bufexplorer'
 
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
@@ -55,8 +57,6 @@ call plug#end()
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " User Interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-set cursorline
 
 " set number lines.
 " When in NORMAL mode is absolute number. When in INSERT isrelative number.
@@ -66,7 +66,7 @@ autocmd InsertEnter * :set norelativenumber
 autocmd InsertLeave * :set relativenumber
 
 " Set lines to the cursor - when moving vertically using j/k
-set so=3
+set so=2
 
 " Turn on the Wild menu
 set wildmenu
@@ -131,7 +131,6 @@ set cc=80
 highlight ColorColumn ctermbg=8
 
 set cursorline
-hi CursorLine term=bold cterm=bold guibg=IndianRed
 
 " Add a bit extra margin to the left
 " set foldcolumn=1
@@ -155,26 +154,16 @@ endtry
 " COLORS AND FONTS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Enable syntax highlighting
-syntax enable
-
 " Enable 256 colors palette in Gnome Terminal
 if $COLORTERM == 'gnome-terminal'
     set t_Co=256
 endif
 
-" Enable true color
-if (has("termguicolors"))
-  set termguicolors
-endif
 
 """""""""""""""""""""""""""""""""""""""
 " Colorscheme
 """""""""""""""""""""""""""""""""""""""
 syntax enable
-
-" onedark
-" colorscheme onedark
 
 " gruvbox
 let g:gruvbox_italic=1
@@ -184,11 +173,8 @@ let g:gruvbox_contrast_light="medium"
 
 " gruvbox material
 let g:gruvbox_material_palette = 'material'
-let g:gruvbox_material_background = 'hard'
 let g:gruvbox_material_visual = 'reverse'
 let g:gruvbox_material_enable_bold = 1
-let g:gruvbox_material_cursor = 'red'
-let g:gruvbox_material_better_performance = 1
 let g:gruvbox_material_statusline_style = 'original'
 
 " sonokai
@@ -196,10 +182,6 @@ let g:gruvbox_material_statusline_style = 'original'
 let g:sonokai_style="shusia"
 " let g:sonokai_style="maia"
 let g:sonokai_enable_italic=1
-" colorscheme sonokai
-
-" forest-night
-" colorscheme forest-night
 
 " edge
 let g:edge_style="aura"
@@ -211,14 +193,19 @@ let g:edge_style="aura"
 """""""""""""""""""""""""""""""""""
 " colorscheme depending time of day
 """""""""""""""""""""""""""""""""""
-let hr= (strftime('%H'))
-if hr > 8 && hr < 18
+" Enable true color
+if (has("termguicolors"))
+    set termguicolors
+endif
+
+let hr = (strftime('%H'))
+if hr >= 8 && hr < 17
     set background=light
     let g:gruvbox_material_background = 'soft'
     colorscheme gruvbox-material
 else
     set background=dark
-    let g:gruvbox_material_background = 'hard'
+    let g:gruvbox_material_background = 'medium'
     colorscheme gruvbox-material
 endif
 
@@ -291,7 +278,6 @@ vnoremap <S-Tab> <
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
 " map <space> /
-map <C-space> /
 
 " Disable highlight when <leader><cr> is pressed
 map <silent> <leader><cr> :noh<cr>
@@ -362,7 +348,7 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 " => lightline
 """"""""""""""""
 let g:lightline = {
-      \ 'colorscheme': 'gruvbox_material',
+      \ 'colorscheme': 'lighthaus',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
@@ -459,7 +445,7 @@ inoremap {;<CR> {<CR>};<ESC>O
 " nmap <space>, :CocCommand explorer <CR>
 
 " quick search
-nmap <space><space> /
+nmap ff /
 
 " redo mapping
 nmap <space>u <C-r>
@@ -469,6 +455,7 @@ imap jk <ESC>
 
 " copy/paste with system clipboard clipboard
 vnoremap <C-c> "+y
+vnoremap <C-x> "+d
 map <C-p> "+p
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
