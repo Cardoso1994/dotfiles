@@ -5,6 +5,9 @@ alias python="python3"
 # alias for ipython
 alias ipy="ipython --TerminalInteractiveShell.editing_mode=vi"
 
+# alias for jupyter notebook
+alias jup="jupyter notebook"
+
 # surfraw aliases
 alias srg="sr google"
 alias sra="sr archwiki"
@@ -33,8 +36,7 @@ alias vifm="/home/cardoso/.config/vifm/scripts/vifmrun"
 
 # change directory with vifm
 change_dir(){
-    dir=`vifm --choose-dir -`
-    echo $dir
+    dir=$(vifm --choose-dir -)
     [ -n $dir ] && [ "$dir" != "$(pwd)" ] && cd $dir
 }
 
