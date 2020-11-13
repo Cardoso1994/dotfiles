@@ -1,0 +1,35 @@
+!!!!!!!!!!!!!!!!!!!!!!!!!!
+! Forest Night
+!!!!!!!!!!!!!!!!!!!!!!!!!!
+*background: #323d43
+! medium
+! *background: #282828
+! soft
+! *background: #32302f
+
+*foreground: #d8caac
+
+! Black + DarkGrey
+*color0:  #3c474d
+*color8:  #32302f
+! DarkRed + Red
+*color1:  #e68183
+*color9:  #e68183
+! DarkGreen + Green
+*color2:  #a7c080
+*color10: #a7c080
+! DarkYellow + Yellow
+*color3:  #e39b7b
+*color11: #e39b7b
+! DarkBlue + Blue
+*color4:  #83b6af
+*color12: #83b6af
+! DarkMagenta + Magenta
+*color5:  #d39bb6
+*color13: #d39bb6
+! DarkCyan + Cyan
+*color6:  #87c095
+*color14: #87c095
+! LightGrey + White
+*color7:  #d4be98
+*color15: #d4be98

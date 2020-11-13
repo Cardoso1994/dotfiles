@@ -1,0 +1,12 @@
+#!/bin/bash
+
+case $BLOCK_BUTTON in
+    3)
+        notify-send -u low "  `date +'%A %d %B %G'` `date +'%R'` "
+        ;;
+esac
+
+# support for color_change script
+_TIME_=$(date +%H:%M)
+
+echo "  $_TIME_ "

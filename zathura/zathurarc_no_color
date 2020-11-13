@@ -1,0 +1,5 @@
+# Zathura config without color configuration
+set selection-clipboard clipboard
+
+# Color configuration
+
