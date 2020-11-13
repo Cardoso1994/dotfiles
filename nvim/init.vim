@@ -220,7 +220,6 @@ else
     set background=dark
     let g:gruvbox_material_background = 'hard'
     colorscheme gruvbox-material
-    " colorscheme miramare
 endif
 
 " Set extra options when running in GUI mode

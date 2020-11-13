@@ -2,27 +2,55 @@
 
 _TIME_=$(date +%H)
 
+# Termite
 LIGHT="/home/cardoso/.config/termite/themes/base16-gruvbox-light-soft.config"
 DARK="/home/cardoso/.config/termite/themes/base16-gruvbox-dark-hard.config"
 CONFIG_NO_COLOR="/home/cardoso/.config/termite/config_no_color"
 CONFIG="/home/cardoso/.config/termite/config"
 
+# Xresources
 DARK_XRES="/home/cardoso/.config/xresources/gruvbox_material_dark"
 LIGHT_XRES="/home/cardoso/.config/xresources/gruvbox_material_light"
 XRES="/home/cardoso/.Xresources"
 
-if [ $_TIME_ -ge 8 -a $_TIME_ -lt 18 ]; then
-        cp $CONFIG_NO_COLOR $CONFIG
-        cat $LIGHT >> $CONFIG
+# Zathura
+ZAT_RC_NO_COLOR="/home/cardoso/.config/zathura/zathurarc_no_color"
+ZAT_RC="/home/cardoso/.config/zathura/zathurarc"
+ZAT_DARK="/home/cardoso/.config/zathura/colors/gruvbox_dark"
+ZAT_LIGHT="/home/cardoso/.config/zathura/colors/gruvbox_light"
+
+if [ $_TIME_ -ge 8 -a $_TIME_ -lt 17 ]; then
+        notify-send "Changing to Light Mode"
+        # Termite
+        # cp $CONFIG_NO_COLOR $CONFIG
+        # cat $LIGHT >> $CONFIG
+
+        # Xresources
         cat $LIGHT_XRES > $XRES
+
+        # Zathura
+        cp $ZAT_RC_NO_COLOR $ZAT_RC
+        cat $ZAT_LIGHT >> $ZAT_RC
 else
-        cp $CONFIG_NO_COLOR $CONFIG
-        cat $DARK >> $CONFIG
+        notify-send "Changing to Dark Mode"
+
+        # Termite
+        # cp $CONFIG_NO_COLOR $CONFIG
+        # cat $DARK >> $CONFIG
+
+        # Xresources
         cat $DARK_XRES > $XRES
+
+        # Zathura
+        cp $ZAT_RC_NO_COLOR $ZAT_RC
+        cat $ZAT_DARK >> $ZAT_RC
 fi
 
-sleep 5
-xrdb /home/cardoso/.Xresources
+xrdb -merge $XRES
+xrdb $XRES
 
 desktop=$(echo $DESKTOP_SESSION)
-[ $desktop = "i3" ] && i3-msg reload && exit 0
+[ "$desktop" == "i3" ] && i3-msg reload &>/dev/null
+[ "$(pgrep -i polybar)" ] && polybar-msg cmd restart &>/dev/null
+
+exit 0

@@ -20,7 +20,7 @@ bat=`echo $data | grep -E -o '[0-9][0-9]?%'`
 
 # Set urgent flag below 10% and notify
 [ ${bat%?} -le 10 ] && [ $chr == "Discharging," ] \
-    && notify-send -u critical "  CHARGE BATTERY!" \
+    && notify-send -u critical "CHARGE BATTERY!" \
     && exit 33
 
 [ ${bat%?} -le 10 ] && exit 33

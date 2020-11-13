@@ -1,9 +1,20 @@
 #!/bin/bash
 
+case $BLOCK_BUTTON in
+    1)
+        i3-msg $(pavucontrol && pkill -RTMIN+10 dwmblocks) &> /dev/null
+        ;;
+    3)
+        /home/cardoso/.config/scripts/color_change
+        ;;
+esac
+
+brightness=$(echo " $(printf "%.0f" $(xbacklight -get))")
+
 # if muted
 mute=`amixer -D pulse get Master | grep -o -m 1 off`
-[ $mute ] && echo " 婢 " && exit 0
+[ $mute ] && echo " 婢 $brightness " && exit 0
 
 # if not muted print level
 level=`amixer -D pulse get Master |  grep -o -m 1 '[0-9]\+\%' `
-echo "  $level " && exit 0
+echo "  $level $brightness " && exit 0

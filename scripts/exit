@@ -2,13 +2,26 @@
 
 # lock configuration for i3lock
 lock(){
-    i3lock -c "#9d0006" -k --pass-volume-keys --timestr="%H:%M" \
-        --timecolor="#a89984" --datecolor="#a89984"
+    i3lock -c $I3LCK_BG -k --pass-volume-keys --timestr="%H:%M" \
+        --timecolor=$I3LCK_TIME --datecolor=$I3LCK_DATE
 }
 
-# dmenu
-dmenu_flags=( -i -nb "#282828" -nf "#d79921" -sb "#cc241d" -sf "#282828" \
-    -fn "Cascadia Code PL:bold:pixelsize=18" )
+[ "$NB" ] || NB="#282828"
+[ "$NF" ] || NF="#d79921"
+[ "$SB" ] || SB="#cc241d"
+[ "$SF" ] || SF="#282828"
+[ "$FN" ] || FN="Fira Code:pixelsize=18"
+[ "$I3LCK_BG" ] || I3LCK_BG="#9d0006"
+[ "$I3LCK_TIME" ] || I3LCK_TIME="#a89984"
+[ "$I3LCK_DATE" ] || I3LCK_DATE="#a89984"
+
+# uses i3lock with xautolock when xauto is defined
+[ $xauto ] && lock && exit 0
+
+
+# dmenu selection of exit options
+dmenu_flags=( -i -nb $NB -nf $NF -sb $SB -sf $SF \
+    -fn "$FN" )
 
 options="shutdown\nsuspend\nreboot\nhibernate\nlogout\nlock"
 operation=$(echo -e "$options" | dmenu "${dmenu_flags[@]}" -p "Action:")
@@ -37,9 +50,9 @@ case $operation in
         lock && systemctl hibernate
         ;;
     logout )
-        # id=`loginctl | grep $(whoami) | awk -F' ' '{ print $1 }'`
-        # loginctl kill-session $id
-        i3-msg exit
+        [ "$DESKTOP_SESSION" ='i3' ] && i3-msg exit
+        id=`loginctl | grep $(whoami) | awk -F' ' '{ print $1 }'`
+        loginctl kill-session $id
         ;;
     lock )
         # i3lock -c "#9d0006" -k --pass-volume-keys

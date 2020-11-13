@@ -3,28 +3,28 @@ Various configuration files
 
 ## SOFTWARE
 List of software that I frequently used in all window managers
-- termite, st, urxvt, xterm
+- st, termite, xterm
 - vifm / ranger
 - nvim / vim
 - dmenu / j4-dmenu-desktop / i3-dmenu-desktop
-- redshift-gtk
+- redshift
 - arandr
 - nitrogen
 - picom / compton
 - pcmanfm / thunar
 - brave / firefox / chromium
-- xfce4-notifyd / dunst
-- xfce4-appfinder
+- dunst / xfce4-notifyd
 - xfce4-screenshooter
 - pavucontrol
 - zathura
 - sxiv
-- xterm
 - nm-applet
+- xfce4-appfinder
 
 ## Fonts
 - Cascadia
-- FiraCode
+- Fira Code
+- JuliaMono
 - Inconsolotaga NERD Font
 
 ## ETC/FSTAB

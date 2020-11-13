@@ -2,7 +2,7 @@
 
 case $BLOCK_BUTTON in
     3)
-        pkill -SIGRTMIN+3
+        pkill -SIGRTMIN+3 i3blocks
         ;;
 esac
 

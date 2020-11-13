@@ -2,10 +2,16 @@
 
 host=$(hostname)
 
+echo $FN
+[ "$NB" ] || NB="#282828"
+[ "$NF" ] || NF="#d79921"
+[ "$SB" ] || SB="#cc241d"
+[ "$SF" ] || SF="#282828"
+[ "$FN" ] || FN="Fira Code:pixelsize=18"
+
 options="HDMI_only\nLap_only\nManual"
-operation=`echo -e "$options" | dmenu -i -p "Action: " -nb "#282828" \
-    -nf "#d79921" -sb "#cc241d" \
-    -sf "#282828" -fn "Cascadia Code PL:bold:pixelsize=18"`
+operation=$(echo -e "$options" | dmenu -i -p "Action: " -nb $NB -nf $NF \
+    -sb $SB -sf $SF -fn "$FN")
 
 
 [ -z $operation ] && exit -1

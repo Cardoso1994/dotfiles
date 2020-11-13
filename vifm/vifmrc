@@ -64,12 +64,10 @@ set vimhelp
 set norunexec
 
 " Selected color scheme
-
 " colorscheme dracula
 " colorscheme onedark
 " colorscheme ph
-" colorscheme
-colorscheme gruvbox
+" colorscheme iceberg
 
 " Format for displaying time in file list. For example:
 " TIME_STAMP_FORMAT=%m/%d-%H:%M
@@ -431,6 +429,8 @@ nnoremap O :!gvim %f<cr>
 
 " Open file in the background using its default program
 nnoremap gb :file &<cr>l
+
+nnoremap ff /
 
 " Interaction with system clipboard
 if has('win')

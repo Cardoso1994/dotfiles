@@ -1,10 +1,12 @@
 !!!!!!!!!!!!!!!!!!!!!!!!!!
 ! Gruvbox Material Light
 !!!!!!!!!!!!!!!!!!!!!!!!!!
-! hard *background: #f9f5d7
+! hard
+! *background: #f9f5d7
 ! medium
-*background: #fbf1c7
-! soft *background: #f2e5bc
+! *background: #fbf1c7
+! soft
+*background: #f2e5bc
 
 *foreground: #654735
 

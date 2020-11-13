@@ -7,11 +7,9 @@ CONFIG="/home/cardoso/.config/alacritty/alacritty.yml"
 _TIME_=$(date +%H)
 
 if [ $_TIME_ -ge 8 -a $_TIME_ -lt 18 ]; then
-        redshift -P -O 4800 &
         cp $CONFIG_NO_COLOR $CONFIG
         cat $LIGHT >> $CONFIG
 else
-        redshift -P -O 3600 &
         cp $CONFIG_NO_COLOR $CONFIG
         cat $DARK >> $CONFIG
 fi

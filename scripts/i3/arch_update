@@ -1,15 +1,37 @@
-#!/bin/bash
+#!/bin/zsh
+
+# update whatever bar it is running
+bar_update(){
+        [ $(pgrep -i i3blocks) ] && pkill -SIGRTMIN+2 i3blocks &> /dev/null
+        [ $(pgrep -i polybar) ] && polybar-msg hook arch_update 1 &> /dev/null
+}
+
+# storing output of update cheking
+updts=$(checkupdates)
+updts_aur=$(yay --aur -Qu)
+
+# counting number of updates
+arch=$(echo $updts | wc -l)
+aur=$(echo $updts_aur | wc -l)
+
+# zsh returns empty string if no updates are available then, count is 0
+[ $updts ] || arch=0
+[ $updts_aur ] || aur=0
+
+total=$(($arch + $aur))
 
 case $BLOCK_BUTTON in
     1)
-        notify-send "Arch:
-$(checkupdates | cut -f1 -d ' ')
-AUR:
-$(yay --aur -Qu)"
+        bar_update
         ;;
     3)
-        pkill -SIGRTMIN+2 i3blocks
+        [[ $total -gt 0 ]] && notify-send "Arch:
+$(echo $updts | cut -f1 -d ' ')
+Aur:
+$(echo $updts_aur)"
+        bar_update
         ;;
 esac
 
-echo "  $(checkupdates | wc -l)   $(yay --aur -Qu | wc -l) "
+[ $total -ge 20 ] && echo "  $total " && exit 33
+[ $total != 0 ] && echo "  $total " || echo "  " && exit 0
