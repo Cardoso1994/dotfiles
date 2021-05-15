@@ -30,14 +30,13 @@ call plug#begin('~/.config/nvim/plugged')
 
 " Declare the list of colorschemes.
 Plug 'joshdick/onedark.vim'
-Plug 'morhetz/gruvbox'
 Plug 'sainnhe/sonokai'
 Plug 'sainnhe/edge'
 Plug 'sainnhe/gruvbox-material'
 Plug 'franbach/miramare'
+Plug 'morhetz/gruvbox'
+Plug 'lighthaus-theme/vim-lighthaus'
 Plug 'sainnhe/forest-night'
-Plug 'arcticicestudio/nord-vim'
-Plug 'frankier/neovim-colors-solarized-truecolor-only'
 
 " Declare the list of plugins.
 Plug 'preservim/nerdtree'
@@ -50,7 +49,6 @@ Plug 'chrisbra/csv.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'sheerun/vim-polyglot'
 Plug 'mboughaba/i3config.vim'
-
 " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
 
@@ -171,12 +169,6 @@ let g:gruvbox_bold=1
 let g:gruvbox_contrast_dark="hard"
 let g:gruvbox_contrast_light="medium"
 
-" gruvbox material
-let g:gruvbox_material_palette = 'material'
-let g:gruvbox_material_visual = 'reverse'
-let g:gruvbox_material_enable_bold = 1
-let g:gruvbox_material_statusline_style = 'original'
-
 " sonokai
 " let g:sonokai_style="andromeda"
 let g:sonokai_style="shusia"
@@ -190,6 +182,16 @@ let g:edge_style="aura"
 " hi NonText ctermbg=none
 " hi Normal guibg=NONE ctermbg=NONE
 
+" gruvbox material
+let g:gruvbox_material_palette = 'material'
+let g:gruvbox_material_visual = 'reverse'
+let g:gruvbox_material_enable_bold = 1
+let g:gruvbox_material_statusline_style = 'original'
+let g:gruvbox_material_better_performance = 1
+
+" everforest
+let g:everforest_background = 'soft'
+
 """""""""""""""""""""""""""""""""""
 " colorscheme depending time of day
 """""""""""""""""""""""""""""""""""
@@ -199,13 +201,13 @@ if (has("termguicolors"))
 endif
 
 let hr = (strftime('%H'))
-if hr >= 8 && hr < 17
+if hr >= 7 && hr < 19
     set background=light
     let g:gruvbox_material_background = 'soft'
     colorscheme gruvbox-material
 else
     set background=dark
-    let g:gruvbox_material_background = 'medium'
+    let g:gruvbox_material_background = 'soft'
     colorscheme gruvbox-material
 endif
 
@@ -306,8 +308,8 @@ set splitright splitbelow
 nmap <Space>v :set noscrollbind<CR> :vs<CR> <C-l> L zt 3<C-e> :set scb<CR> <C-h> :set scb!<CR>
 
 " resizing vsplits
-nnoremap <silent> <M-H> :exe "vertical resize +2"<CR>
-nnoremap <silent> <M-L> :exe "vertical resize -2"<CR>
+nnoremap <silent> <M-L> :exe "vertical resize +2"<CR>
+nnoremap <silent> <M-H> :exe "vertical resize -2"<CR>
 
 " resizing splits
 nnoremap <silent> <M-K> :exe "res +2"<CR>
@@ -348,7 +350,7 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 " => lightline
 """"""""""""""""
 let g:lightline = {
-      \ 'colorscheme': 'lighthaus',
+      \ 'colorscheme': 'gruvbox_material',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]

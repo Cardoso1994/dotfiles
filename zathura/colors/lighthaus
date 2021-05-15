@@ -53,3 +53,4 @@ set recolor-darkcolor           "#FFEE79"
 # added by Cardoso
 # opens zathura with the colorscheme loaded
 set recolor "true"
+set recolor-keephue             "true"

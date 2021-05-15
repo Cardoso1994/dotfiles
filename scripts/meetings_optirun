@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# launch various online meeting apps with optirun and dmenu
+
+[ "$NB" ] || NB="#282828"
+[ "$NF" ] || NF="#d79921"
+[ "$SB" ] || SB="#cc241d"
+[ "$SF" ] || SF="#282828"
+[ "$FN" ] || FN="Cascadia Code PL:regular:pixelsize=28"
+
+
+dmenu_flags=( -i -nb $NB -nf $NF -sb $SB -sf $SF \
+    -fn "$FN" )
+options="Skype\nZoom\nMeet\nTeams"
+operation=$(echo -e "$options" | dmenu "${dmenu_flags[@]}" -p "Action:")
+
+# exit if escape in dmenu
+[ -z $operation ] && exit -1
+
+case $operation in
+    Skype )
+        optirun skypeforlinux & disown
+        ;;
+    Zoom )
+        optirun zoom & disown
+        ;;
+    Meet )
+        optirun chromium meet.google.com & disown
+        ;;
+    Teams )
+        optirun teams & disown
+esac

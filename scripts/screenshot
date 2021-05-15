@@ -1,2 +1,13 @@
 #!/bin/bash
-scrot 'scrot_%s_$wx$h.png' -e 'mv $f ~/garbage/'
+
+
+case $mode in
+    window )
+        scrot -u 'scrot_%d-%m-%H:%M:%S.png' -e 'mv $f ~/garbage/'
+        ;;
+    sel )
+        sleep 0.2 ;
+        scrot -s 'scrot_%d-%m-%H:%M:%S.png' -e 'mv $f ~/garbage/'
+        ;;
+esac
+

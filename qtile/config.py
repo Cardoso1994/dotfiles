@@ -67,6 +67,7 @@ def window_to_next_group(qtile):
 ###############################################################################
 # function to get the num_monitors on the fly
 # added by Cardoso via https://github.com/qtile/qtile/wiki/screens
+@hook.subscribe.restart
 def get_num_monitors():
     num_monitors = 0
     try:
@@ -90,7 +91,7 @@ def get_num_monitors():
         return num_monitors
 
 num_monitors = get_num_monitors()
-num_monitors = 1
+# num_monitors = 1
 ###############################################################################
 # => General Configuration Variables
 ###############################################################################
@@ -115,12 +116,12 @@ darkgray = "#1d2021"
 ###############################################################################
 keys = [
     # SUPER + FUNCTION KEYS
-    Key([mod], "Return", lazy.spawn('termite')),
+    Key([mod], "Return", lazy.spawn('st')),
     Key([mod], "Escape", lazy.spawn('xkill')),
     Key([mod], "d", lazy.spawn('dmenu_run -i -nb ' + darkgray
                                     + ' -nf ' + aqua + ' -sb ' + green
                                     + ' -sf ' + darkgray + ' -fn '
-                                    + "'Cascadia Code PL:bold:pixelsize=18'")),
+                                    + "'Cascadia Code PL:semilight:pixelsize=28'")),
     Key([mod], "b", lazy.hide_show_bar()),
     # TOUCHPAD ON - OFF
     Key([mod], "p", lazy.spawn(
@@ -128,24 +129,16 @@ keys = [
     Key([mod], "o", lazy.spawn(
             '/home/cardoso/.config/scripts/pad_on_off.sh on')),
     # SUPER + SHIFT KEYS
-    Key([mod, "shift"], "Return", lazy.spawn("termite"
+    Key([mod, "shift"], "Return", lazy.spawn("st"
                         + " -e /home/cardoso/.config/vifm/scripts/vifmrun")),
     Key([mod, "shift"], "q", lazy.window.kill()),
     Key([mod, "shift"], "r", lazy.restart()),
     Key([mod, "shift"], "x", lazy.spawn('/home/cardoso/.config/scripts/exit')),
 
-    # asus
-    # Key([mod, "shift"], "d", lazy.spawn(f'j4-dmenu-desktop --dmenu="dmenu -i'
-    #                            + f" -nb '{darkgray}'" + f" -nf '{aqua}' "
-    #                            + f" -sb '{green}' -sf '{darkgray}' "
-    #                            + f" -fn 'Cascadia Code Pl:bold:pixelsize=18'"
-    #                            + '"')),
-
-    #mac
-    Key([mod, "shift"], "d", lazy.spawn(f'i3-dmenu-desktop --dmenu="dmenu -i'
+    Key([mod, "shift"], "d", lazy.spawn(f'j4-dmenu-desktop --dmenu="dmenu -i'
                                + f" -nb '{darkgray}'" + f" -nf '{aqua}' "
                                + f" -sb '{green}' -sf '{darkgray}' "
-                               + f" -fn 'Cascadia Code Pl:bold:pixelsize=18'"
+                               + f" -fn 'Cascadia Code Pl:semilight:pixelsize=28'"
                                + '"')),
 
     Key([mod, "shift"], "s", lazy.spawn("/home/cardoso/.config/"
@@ -275,7 +268,7 @@ groups = []
 
 group_matches = [
     # workspace 1
-    [Match(wm_class=["st", "St", "urxvt", "URxvt"])],
+    [Match(wm_class=[])],
     # workspace 2
     [Match(wm_class=[ "Atom", "Subl3", "Spyder", "RStudio", "TeXstudio",
                      "texstudio", "atom", "subl3", "octave-gui", "brackets",
@@ -307,7 +300,8 @@ group_matches = [
 # FOR QWERTY KEYBOARDS
 group_names = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0",]
 
-group_labels = ["", "", "", "", "", "", "", "", "",  "",]
+group_labels = ["  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ", "  ",
+                "  ",]
 
 
 group_layouts = ["monadtall", "monadtall", "monadtall", "monadtall",
@@ -336,7 +330,8 @@ for i in range(len(group_names)):
 #####################################
 # => GROUP KEYS
 #####################################
-if num_monitors == 1:
+# if num_monitors == 1:
+if True:
     for i in groups:
         keys.extend([
             #CHANGE WORKSPACES
@@ -436,7 +431,7 @@ darkgray = "#1d2021"
 ###############################################################################
 # => LAYOUTS
 ###############################################################################
-border_width_   = 3
+border_width_   = 7
 border_focus_   = red_1
 border_normal_  = darkgray
 margin_         = 5
@@ -494,8 +489,8 @@ colors = init_colors()
 
 # WIDGETS FOR THE BAR
 def init_widgets_defaults():
-    return dict(font="CaskaydiaCove Nerd Font",
-                fontsize=14,
+    return dict(font="FuraCode Nerd Font",
+                fontsize=18,
                 padding=2,
                 background=darkgray,
                 foreground=purple
@@ -508,18 +503,18 @@ def init_widgets_list():
     widgets_list = [
                widget.GroupBox(
                    font=widget_defaults['font'],
-                   fontsize = widget_defaults['fontsize'] + 3,
-                   margin_y = -1,
+                   fontsize = widget_defaults['fontsize'] + 10,
+                   margin_y = 0,
                    margin_x = 0,
                    padding_y = 6,
                    padding_x = 5,
                    borderwidth = 0,
                    disable_drag = True,
-                   active = purple,
+                   active = aqua,
                    rounded = False,
                    highlight_method = "text",
-                   this_current_screen_border = aqua, # current group
-                   block_highlight_text_color = aqua,
+                   this_current_screen_border = yellow, # current group
+                   block_highlight_text_color = yellow,
                    foreground = blue,
                    background = widget_defaults['background'],
                    hide_unused=True,
@@ -695,13 +690,12 @@ def init_screens_on_the_fly():
 
     return screens
 
+print (f"num_monitors is: {num_monitors}")
 if num_monitors == 1:
     screens = init_screens()
 else:
     screens = init_screens_on_the_fly()
 
-
-screens = init_screens()
 
 ###############################################################################
 # => MOUSE CONFIGURATION
@@ -709,7 +703,7 @@ screens = init_screens()
 mouse = [
     Drag([mod], "Button1", lazy.window.set_position_floating(),
          start=lazy.window.get_position()),
-    Drag([mod], "Button2", lazy.window.set_size_floating(),
+    Drag([mod], "Button3", lazy.window.set_size_floating(),
          start=lazy.window.get_size())
 ]
 
@@ -789,8 +783,8 @@ floating_types = ["notification", "toolbar", "splash", "dialog"]
 
 
 follow_mouse_focus = True
-bring_front_click = False
-cursor_warp = False
+bring_front_click = "floating_only"
+cursor_warp = True
 floating_layout = layout.Floating(float_rules=[
     {'wmclass': 'confirm'},
     {'wmclass': 'xfce4-appfinder'},

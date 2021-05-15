@@ -1,6 +1,8 @@
 # Zathura config without color configuration
 set selection-clipboard clipboard
 
+map ff search
+
 # Color configuration
 
 set notification-error-bg       "#282828" # bg
@@ -42,4 +44,4 @@ set render-loading-fg           "#ebdbb2" # fg
 set recolor-lightcolor          "#282828" # bg
 set recolor-darkcolor           "#ebdbb2" # fg
 set recolor                     "true"
-# set recolor-keephue             true      # keep original color
+set recolor-keephue             true      # keep original color

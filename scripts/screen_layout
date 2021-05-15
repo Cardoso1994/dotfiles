@@ -1,15 +1,16 @@
 #!/bin/bash
 
+# select between different displays layouts with dmenu
+
 host=$(hostname)
 
-echo $FN
 [ "$NB" ] || NB="#282828"
 [ "$NF" ] || NF="#d79921"
 [ "$SB" ] || SB="#cc241d"
 [ "$SF" ] || SF="#282828"
-[ "$FN" ] || FN="Fira Code:pixelsize=18"
+[ "$FN" ] || FN="JetBrains Mono:regular:pixelsize=28"
 
-options="HDMI_only\nLap_only\nManual"
+options="Home_both\nHDMI_only\nLap_only\nManual"
 operation=$(echo -e "$options" | dmenu -i -p "Action: " -nb $NB -nf $NF \
     -sb $SB -sf $SF -fn "$FN")
 
@@ -18,22 +19,24 @@ operation=$(echo -e "$options" | dmenu -i -p "Action: " -nb $NB -nf $NF \
 
 case $operation in
     Manual )
-        arandr & disown
+        arandr & disown \
+            nitrogen --restore
         ;;
     HDMI_only )
-        [ $host == 'cardosoarco' ] \
-            && /home/cardoso/.config/scripts/screen_layouts/HDMI_only.sh \
-            ; nitrogen --restore ; exit 0
-        [ $host == 'kimura'] \
-            && /home/cardoso/.config/scripts/screen_layouts/HDMI_only_mac.sh \
-            ; setxkbmap latam ; nitrogen --restore ; exit 0
+        /home/cardoso/.config/scripts/screen_layouts/HDMI_only.sh \
+            nitrogen --restore
         ;;
     Lap_only )
-        [ $host == 'cardosoarco' ] \
-            && /home/cardoso/.config/scripts/screen_layouts/Lap_only.sh \
-            ; nitrogen --restore ; exit 0
-        [ $host == 'kimura'] \
-            && /home/cardoso/.config/scripts/screen_layouts/HDMI_only_mac.sh \
-            ; setxkbmap latam ; nitrogen --restore ; exit 0
+        /home/cardoso/.config/scripts/screen_layouts/Lap_only.sh \
+            nitrogen --restore
+        ;;
+    Home_both )
+        /home/cardoso/.config/scripts/screen_layouts/home_both.sh \
+            nitrogen --restore
         ;;
 esac
+
+desktop=$(echo $DESKTOP_SESSION)
+[ "$desktop" == "i3" ] && i3-msg reload &>/dev/null
+[ "$desktop" == "herbstluftwm" ] && herbstclient detect_monitors
+nitrogen --restore

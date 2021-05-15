@@ -4,7 +4,7 @@
 [ "$NF" ] || NF="#d79921"
 [ "$SB" ] || SB="#cc241d"
 [ "$SF" ] || SF="#282828"
-[ "$FN" ] || FN="Fira Code:pixelsize=18"
+[ "$FN" ] || FN="Cascadia Code PL:regular:pixelsize=28"
 
 [ $1 == "dmenu" ]  && dmenu_run -nb "$NB" -nf "$NF" -sb "$SB" -sf "$SF" \
         -fn "$FN"

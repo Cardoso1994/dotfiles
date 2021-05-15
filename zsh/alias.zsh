@@ -1,3 +1,4 @@
+#! /bin/zsh
 # alias for python
 alias python2="python"
 alias python="python3"
@@ -32,7 +33,7 @@ alias gtchk="git checkout"
 alias gtl="git log" 
 
 # vifm with pictures
-alias vifm="/home/cardoso/.config/vifm/scripts/vifmrun"
+# alias vifm="/home/cardoso/.config/vifm/scripts/vifmrun"
 
 # change directory with vifm
 change_dir(){
@@ -40,10 +41,23 @@ change_dir(){
     [ -n $dir ] && [ "$dir" != "$(pwd)" ] && cd $dir
 }
 
-alias cdcd="change_dir"
+alias cdc="change_dir"
 
 # remove files safely
 alias rm="rm -i"
 
 # open st in current dir
 alias std="st -d . & disown ; exit"
+
+# update arch system and send signal to i3blocks
+update_sys(){
+
+    START_TIME=$SECONDS
+    echo "Calling pacman" ; sudo pacman -Syu
+    ELAPSED_TIME=$(($SECONDS - $START_TIME))
+    [ $ELAPSED_TIME -ge 300 ] && notify-send -u critical "Attend your update terminal"
+    echo "\n\n\n\nCalling yay" ; yay -Syu
+    [ $(pgrep i3blocks) ] && pkill -RTMIN+2 i3blocks
+}
+
+alias update="update_sys"

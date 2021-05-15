@@ -7,28 +7,28 @@
 ! soft
 ! *background: #32302f
 
-*foreground: #d8caac
+*foreground: #d3c6aa
 
 ! Black + DarkGrey
-*color0:  #3c474d
-*color8:  #32302f
+*color0:  #323c41
+*color8:  #323c41
 ! DarkRed + Red
-*color1:  #e68183
-*color9:  #e68183
+*color1:  #e67e80
+*color9:  #e67e80
 ! DarkGreen + Green
 *color2:  #a7c080
 *color10: #a7c080
 ! DarkYellow + Yellow
-*color3:  #e39b7b
-*color11: #e39b7b
+*color3:  #e69875
+*color11: #e69875
 ! DarkBlue + Blue
-*color4:  #83b6af
-*color12: #83b6af
+*color4:  #7fbbb3
+*color12: #7fbbb3
 ! DarkMagenta + Magenta
-*color5:  #d39bb6
+*color5:  #d699b6
 *color13: #d39bb6
 ! DarkCyan + Cyan
-*color6:  #87c095
+*color6:  #83c092
 *color14: #87c095
 ! LightGrey + White
 *color7:  #d4be98

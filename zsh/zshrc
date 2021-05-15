@@ -106,3 +106,6 @@ export EDITOR="$VISUAL"
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 source /home/cardoso/.config/zsh/alias.zsh
+
+# pyenv init
+eval "$(pyenv init -)"

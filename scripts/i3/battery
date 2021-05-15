@@ -19,13 +19,13 @@ bat=`echo $data | grep -E -o '[0-9][0-9]?%'`
 [ $chr == "Discharging," ] && echo "  $bat " || echo "  $bat "
 
 # Set urgent flag below 10% and notify
-[ ${bat%?} -le 10 ] && [ $chr == "Discharging," ] \
+[ ${bat%?} -le 8 ] && [ $chr == "Discharging," ] \
     && notify-send -u critical "CHARGE BATTERY!" \
     && exit 33
 
 [ ${bat%?} -le 10 ] && exit 33
 
-[ ${bat%?} -ge 97 ] && [ $chr == "Charging," ] \
+[ ${bat%?} -ge 95 ] && [ $chr == "Charging," ] \
     && notify-send -u critical "Battery fully charged!" && exit 33
 
 exit 0

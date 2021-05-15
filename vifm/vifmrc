@@ -199,10 +199,12 @@ filextype *.djvu
 
 " Audio
 filetype *.wav,*.mp3,*.flac,*.m4a,*.wma,*.ape,*.ac3,*.og[agx],*.spx,*.opus
-       \ {Play using ffplay}
-       \ ffplay -nodisp -autoexit %c,
-       \ {Play using MPlayer}
-       \ mplayer %f,
+        \ {Play with vlc}
+        \ vlc %f,
+        \ {Play using ffplay}
+        \ ffplay -nodisp -autoexit %c,
+        \ {Play using MPlayer}
+        \ mplayer %f,
 fileviewer *.mp3 mp3info
 fileviewer *.flac soxi
 
@@ -243,7 +245,7 @@ fileviewer *.[1-8] man ./%c | col -b
 " Images
 filextype *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm
         \ {View in sxiv}
-        \ sxiv  -r -s d  %d  &,
+        \ sxiv  -t -s d  %d  &,
         \ {View in gpicview}
         \ gpicview %c,
         \ {View in shotwell}
