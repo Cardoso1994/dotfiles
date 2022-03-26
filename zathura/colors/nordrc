@@ -1,8 +1,8 @@
 # Base16 Nord
 # Author: arcticicestudio
 
-set default-bg                  "#2E3440"
-set default-fg                  "#3B4252"
+set default-bg                  "#3b4252"
+set default-fg                  "#d8dee9"
 
 set statusbar-fg                "#D8DEE9"
 set statusbar-bg                "#434C5E"
@@ -32,4 +32,4 @@ set recolor-lightcolor          "#2E3440"
 set recolor-darkcolor           "#ECEFF4"
 
 set recolor                     "true"
-set recolor-keephue             "false"
+set recolor-keephue             "true"

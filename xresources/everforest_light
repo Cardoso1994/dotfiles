@@ -2,10 +2,12 @@
 ! Forest Night
 !!!!!!!!!!!!!!!!!!!!!!!!!!
 *background: #f8f0dc
+! hard
+! *background: #fff9e8
 ! medium
-! *background: #282828
+! *background: #fdf6e3
 ! soft
-! *background: #32302f
+! *background: #f8f0dc
 
 *foreground: #5c6a72
 

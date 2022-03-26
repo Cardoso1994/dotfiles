@@ -1,12 +1,3 @@
-# Zathura config without color configuration
-set selection-clipboard clipboard
-
-map ff fsearch
-set page-padding 16
-map zm recolor
-
-# Color configuration
-
 # zathurarc-light
 set notification-error-bg       "#eee8d5" # base2  # seem not work
 set notification-error-fg       "#dc322f" # red

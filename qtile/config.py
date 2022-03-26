@@ -431,10 +431,10 @@ darkgray = "#1d2021"
 ###############################################################################
 # => LAYOUTS
 ###############################################################################
-border_width_   = 7
+border_width_   = 4
 border_focus_   = red_1
 border_normal_  = darkgray
-margin_         = 5
+margin_         = 4
 
 def init_layout_theme():
     return {"margin":margin_,

@@ -1,79 +1,96 @@
 #!/bin/bash
 
-# time of the day and changes of day and night
-_TIME_=$(date +%H)
-DAY=7
-NIGHT=19
-
 HOME="/home/cardoso"
 
-# Termite
-TERMITE_LIGHT="${HOME}/.config/termite/themes/base16-gruvbox-light-soft.config"
-TERMITE_DARK="${HOME}/.config/termite/themes/one_dark.config"
-TERMITE_CONFIG_NO_COLOR="${HOME}/.config/termite/config_no_color"
-TERMITE_CONFIG="${HOME}/.config/termite/config"
+# time of the day and changes of day and night
+TIME=$(date +%H)
+DAY=7
+NIGHT=18
+
+# redshift screen temperatures
+DAY_TEMP=4300
+NIGHT_TEMP=2900
+
+# brightness percent
+BRIGHT_DAY=17
+BRIGHT_NIGHT=12
+
+# Alacritty
+ALACRITTY_CONFIG="${HOME}/.config/alacritty/alacritty.yml"
+ALACRITTY_CONFIG_NO_COLOR="${HOME}/.config/alacritty/alacritty_no_color.yml"
+ALACRITTY_DARK="colors: *gruvbox_material_medium_dark"
+ALACRITTY_LIGHT="colors: *gruvbox_material_medium_light"
 
 # Xresources
-DARK_XRES="${HOME}/.config/xresources/gruvbox_material_dark"
-LIGHT_XRES="${HOME}/.config/xresources/gruvbox_material_light"
-# LIGHT_XRES="${HOME}/.config/xresources/everforest_light"
+# DARK_XRES="${HOME}/.config/xresources/gruvbox_material_dark"
+# LIGHT_XRES="${HOME}/.config/xresources/gruvbox_material_light"
+DARK_XRES="${HOME}/.config/xresources/solarized_dark"
+LIGHT_XRES="${HOME}/.config/xresources/solarized_light"
 XRES="${HOME}/.Xresources"
 
 # Zathura
-ZAT_RC_NO_COLOR="${HOME}/.config/zathura/zathurarc_no_color"
+ZAT_RC_NO_COLOR="${HOME}/.config/zathura/zathura_no_colorrc"
 ZAT_RC="${HOME}/.config/zathura/zathurarc"
-# ZAT_DARK="${HOME}/.config/zathura/colors/onedark"
-ZAT_DARK="${HOME}/.config/zathura/colors/gruvbox_dark"
-ZAT_LIGHT="${HOME}/.config/zathura/colors/gruvbox_light"
+ZAT_DARK="${HOME}/.config/zathura/colors/solarized_darkrc"
+ZAT_LIGHT="${HOME}/.config/zathura/colors/solarized_lightrc"
+# ZAT_DARK="${HOME}/.config/zathura/colors/gruvbox_material_darkrc"
+# ZAT_LIGHT="${HOME}/.config/zathura/colors/gruvbox_material_lightrc"
 
 update_zathura(){
         cp $ZAT_RC_NO_COLOR $ZAT_RC
         cat $ZAT_COLOR >> $ZAT_RC
 }
 
-update_termite(){
-cp $TERMITE_CONFIG_NO_COLOR $TERMITE_CONFIG
-cat $TERMITE_COLOR >> $TERMITE_CONFIG
+update_alacritty(){
+        cp $ALACRITTY_CONFIG_NO_COLOR $ALACRITTY_CONFIG
+        # cat $ALACRITTY_COLOR >> $ALACRITTY_CONFIG
+        echo $ALACRITTY_COLOR >> $ALACRITTY_CONFIG
 }
 
-if [ $_TIME_ -ge $DAY -a $_TIME_ -lt $NIGHT ]; then
+if [ $TIME -ge $DAY ] && [ $TIME -lt $NIGHT ]; then
         notify-send "Changing to Light Mode"
-        # Termite
-        # cp $CONFIG_NO_COLOR $CONFIG
-        # cat $LIGHT >> $CONFIG
-        TERMITE_COLOR=${TERMITE_LIGHT}
+
+        # Alacritty
+        ALACRITTY_COLOR=${ALACRITTY_LIGHT}
 
         # Xresources
         cat $LIGHT_XRES > $XRES
-        update_termite
 
         # Zathura
         ZAT_COLOR=${ZAT_LIGHT}
-        update_zathura
 
-        [ "$(pgrep -i redshift)" ] || redshift -P -O 4800 &>/dev/null
+        # xbacklight
+        BRIGHT=${BRIGHT_DAY}
+
+        # redshift
+        TEMP=${DAY_TEMP}
+        [ "$(pgrep -i redshift)" ] || redshift -P -O $DAY_TEMP &>/dev/null
 else
         notify-send "Changing to Dark Mode"
 
-        # Termite
-        TERMITE_COLOR=${TERMITE_DARK}
-        update_termite
+        # Alacritty
+        ALACRITTY_COLOR=${ALACRITTY_DARK}
 
         # Xresources
         cat $DARK_XRES > $XRES
 
         # Zathura
         ZAT_COLOR=${ZAT_DARK}
-        update_zathura
 
-        [ "$(pgrep -i redshift)" ] || redshift -P -O 3300 &>/dev/null
+        # xbacklight
+        BRIGHT=${BRIGHT_NIGHT}
+
+        # redshift
+        TEMP=${NIGHT_TEMP}
 fi
 
+# update colors
+update_zathura
 xrdb -merge $XRES
 xrdb $XRES
+xbacklight -set $BRIGHT
+[ "$(pgrep -i redshift)" ] || redshift -P -O $TEMP &>/dev/null
 
 desktop=$(echo $DESKTOP_SESSION)
 [ "$desktop" == "i3" ] && i3-msg reload &>/dev/null
-[ "$(pgrep -i polybar)" ] && polybar-msg cmd restart &>/dev/null
-
 exit 0

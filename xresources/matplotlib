@@ -1,0 +1,31 @@
+!!!!!!!!!!!!!!!!!!!!!!!!!!
+! Matplotlib
+!!!!!!!!!!!!!!!!!!!!!!!!!!
+*background: #10092d
+
+*foreground: #fdcf92
+
+! Black + DarkGrey
+*color0:  #050417
+*color8:  #050417
+! DarkRed + Red
+*color1:  #bc3754
+*color9:  #bc3754
+! DarkGreen + Green
+*color2:  #5ec962
+*color10: #5ec962
+! DarkYellow + Yellow
+*color3:  #dfe318
+*color11: #dfe318
+! DarkBlue + Blue
+*color4:  #277f8e
+*color12: #277f8e
+! DarkMagenta + Magenta
+*color5:  #3d4b89
+*color13: #3d4b89
+! DarkCyan + Cyan
+*color6:  #25848e
+*color14: #25848e
+! LightGrey + White
+*color7:  #fed89a
+*color15: #fed89a

@@ -65,7 +65,7 @@ set norunexec
 
 " Selected color scheme
 " colorscheme dracula
-" colorscheme onedark
+colorscheme onedark
 " colorscheme ph
 " colorscheme iceberg
 
@@ -173,15 +173,24 @@ command! reload :write | restart
 " You can also add %CLEAR if you want to clear screen before running FUSE
 " program.
 
+" Code
+filextype *.py,*.org,*.c,*.cpp,*.h,*.R,*.hs,*.js,*.lisp,*.el,*.yml
+          \*rc,*.conf,*.config,*.md,*.sh,*.service,*.timer,*.zsh,
+          \.gitignore,
+          \ {open in emacs}
+          \ emacsclient -c -a emacs %f & disown
 " Pdf
 filextype *.pdf zathura %c %i &, apvlv %c, xpdf %c
 " "filextype *.pdf zathura %c %i, apvlv %c, xpdf %c
 fileviewer *.pdf pdftotext -nopgbrk %c -
 
+" Epub
+filextype *.epub zathura %c %i &
+
 " PostScript
 filextype *.ps,*.eps,*.ps.gz
         \ {View in zathura}
-        \ zathura %f,
+        \ optirun zathura %f,
         \ {View in gv}
         \ gv %c %i &,
 
@@ -212,6 +221,8 @@ fileviewer *.flac soxi
 filextype *.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.mpeg,*.vob,
          \*.fl[icv],*.m2v,*.mov,*.webm,*.ts,*.mts,*.m4v,*.r[am],*.qt,*.divx,
          \*.as[fx]
+        \ {Play with vlc}
+        \ vlc %f & disown,
         \ {View using ffplay}
         \ ffplay -fs -autoexit %f,
         \ {View using Dragon}

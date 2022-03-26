@@ -2,15 +2,17 @@
 
 # lock configuration for i3lock
 lock(){
-    i3lock -c $I3LCK_BG -k --pass-volume-keys --timestr="%H:%M" \
-        --timecolor=$I3LCK_TIME --datecolor=$I3LCK_DATE
+    # i3lock -c $I3LCK_BG -k --pass-volume-keys --timestr="%H:%M" \
+    #     --timecolor=$I3LCK_TIME --datecolor=$I3LCK_DATE
+
+    i3lock -c $I3LCK_BG -k --pass-volume-keys
 }
 
 [ "$NB" ] || NB="#282828"
 [ "$NF" ] || NF="#d79921"
 [ "$SB" ] || SB="#cc241d"
 [ "$SF" ] || SF="#282828"
-[ "$FN" ] || FN="Cascadia Code PL:regular:pixelsize=28"
+[ "$FN" ] || FN="JetBrains Mono:bold:pixelsize=28"
 [ "$I3LCK_BG" ] || I3LCK_BG="#9d0006"
 [ "$I3LCK_TIME" ] || I3LCK_TIME="#a89984"
 [ "$I3LCK_DATE" ] || I3LCK_DATE="#a89984"

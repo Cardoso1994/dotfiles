@@ -1,4 +1,13 @@
 #! /bin/zsh
+
+################################################################################
+#
+# General info
+#   Make a backup of mirrorlist in /etc/pacman.d/mirrorlist. It is used in
+#   update function
+#
+################################################################################
+
 # alias for python
 alias python2="python"
 alias python="python3"
@@ -32,8 +41,6 @@ alias gtpll="git pull"
 alias gtchk="git checkout"
 alias gtl="git log" 
 
-# vifm with pictures
-# alias vifm="/home/cardoso/.config/vifm/scripts/vifmrun"
 
 # change directory with vifm
 change_dir(){
@@ -52,12 +59,18 @@ alias std="st -d . & disown ; exit"
 # update arch system and send signal to i3blocks
 update_sys(){
 
+    # echo "calling reflector"
+    # sudo reflector --sort rate -l 5 --save /etc/pacman.d/mirrorlist
+
     START_TIME=$SECONDS
     echo "Calling pacman" ; sudo pacman -Syu
     ELAPSED_TIME=$(($SECONDS - $START_TIME))
-    [ $ELAPSED_TIME -ge 300 ] && notify-send -u critical "Attend your update terminal"
-    echo "\n\n\n\nCalling yay" ; yay -Syu
+    [ $ELAPSED_TIME -ge 420 ] && notify-send -u critical "Attend your update terminal"
+    echo "\n\nCalling yay" ; yay -Syu
     [ $(pgrep i3blocks) ] && pkill -RTMIN+2 i3blocks
 }
 
 alias update="update_sys"
+
+# vifm with pictures
+alias vifm="/home/cardoso/.config/vifm/scripts/vifmrun"

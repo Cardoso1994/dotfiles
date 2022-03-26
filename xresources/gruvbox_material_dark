@@ -4,9 +4,9 @@
 ! hard
 ! *background: #1d2021
 ! medium
-*background: #282828
+! *background: #282828
 ! soft
-! *background: #32302f
+*background: #32302f
 
 *foreground: #d4be98
 

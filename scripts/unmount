@@ -1,0 +1,16 @@
+#!/bin/bash
+
+[ "$NB" ] || NB="#282828"
+[ "$NF" ] || NF="#d79921"
+[ "$SB" ] || SB="#cc241d"
+[ "$SF" ] || SF="#282828"
+[ "$FN" ] || FN="JetBrains Mono:regular:pixelsize=28"
+
+devices=$(ls /run/media/cardoso/)
+
+
+device=$(echo -e "$devices" | dmenu -i -p "Devices: " -nb $NB -nf $NF -sb $SB -sf $SF -fn "$FN")
+
+[ -z $device ] && exit -1
+
+udiskie-umount "$device"

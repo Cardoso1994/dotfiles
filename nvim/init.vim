@@ -29,14 +29,12 @@ set autochdir
 call plug#begin('~/.config/nvim/plugged')
 
 " Declare the list of colorschemes.
-Plug 'joshdick/onedark.vim'
-Plug 'sainnhe/sonokai'
 Plug 'sainnhe/edge'
 Plug 'sainnhe/gruvbox-material'
-Plug 'franbach/miramare'
-Plug 'morhetz/gruvbox'
 Plug 'lighthaus-theme/vim-lighthaus'
 Plug 'sainnhe/forest-night'
+Plug 'arcticicestudio/nord-vim'
+Plug 'overcache/NeoSolarized'
 
 " Declare the list of plugins.
 Plug 'preservim/nerdtree'
@@ -46,7 +44,6 @@ Plug 'airblade/vim-gitgutter'
 Plug 'frazrepo/vim-rainbow'
 Plug 'tpope/vim-fugitive'
 Plug 'chrisbra/csv.vim'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'sheerun/vim-polyglot'
 Plug 'mboughaba/i3config.vim'
 " List ends here. Plugins become visible to Vim after this call.
@@ -166,8 +163,8 @@ syntax enable
 " gruvbox
 let g:gruvbox_italic=1
 let g:gruvbox_bold=1
-let g:gruvbox_contrast_dark="hard"
-let g:gruvbox_contrast_light="medium"
+let g:gruvbox_contrast_dark="soft"
+let g:gruvbox_contrast_light="soft"
 
 " sonokai
 " let g:sonokai_style="andromeda"
@@ -176,21 +173,26 @@ let g:sonokai_style="shusia"
 let g:sonokai_enable_italic=1
 
 " edge
-let g:edge_style="aura"
+" let g:edge_style="aura"
+let g:edge_enable_italic = 1
+let g:edge_disable_italic_comment = 0
 
-" allowing transparecy
+" allowing transparec
 " hi NonText ctermbg=none
 " hi Normal guibg=NONE ctermbg=NONE
 
 " gruvbox material
-let g:gruvbox_material_palette = 'material'
+let g:gruvbox_material_palette = 'mix'
 let g:gruvbox_material_visual = 'reverse'
 let g:gruvbox_material_enable_bold = 1
-let g:gruvbox_material_statusline_style = 'original'
+let g:gruvbox_material_statusline_style = 'material'
 let g:gruvbox_material_better_performance = 1
 
 " everforest
-let g:everforest_background = 'soft'
+let g:everforest_background = 'medium'
+let g:everforest_enable_italic = 1
+let g:everforest_disable_italic_comment = 0
+
 
 """""""""""""""""""""""""""""""""""
 " colorscheme depending time of day
@@ -200,15 +202,17 @@ if (has("termguicolors"))
     set termguicolors
 endif
 
+syntax enable
 let hr = (strftime('%H'))
-if hr >= 7 && hr < 19
+if hr >= 7 && hr < 18
     set background=light
-    let g:gruvbox_material_background = 'soft'
-    colorscheme gruvbox-material
+    let g:gruvbox_material_background = 'medium'
+    " colorscheme gruvbox-material
+    colorscheme NeoSolarized
 else
     set background=dark
-    let g:gruvbox_material_background = 'soft'
-    colorscheme gruvbox-material
+    let g:gruvbox_material_background = 'medium'
+    colorscheme NeoSolarized
 endif
 
 " Set extra options when running in GUI mode
@@ -349,6 +353,7 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 """"""""""""""""
 " => lightline
 """"""""""""""""
+" \ 'colorscheme': 'gruvbox_material',
 let g:lightline = {
       \ 'colorscheme': 'gruvbox_material',
       \ 'active': {
@@ -397,11 +402,6 @@ set updatetime=700
 """"""""""""""""
 let g:rainbow_active = 1
 
-""""""""""""""""
-" => Coc
-""""""""""""""""
-source ~/.config/nvim/coc_config.vim
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " OWN MAPPINGS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -442,9 +442,6 @@ inoremap [ []<left>
 inoremap { {}<left>
 inoremap {<CR> {<CR>}<ESC>O
 inoremap {;<CR> {<CR>};<ESC>O
-
-" Coc-mappings overwrited by other plugins and mappings
-" nmap <space>, :CocCommand explorer <CR>
 
 " quick search
 nmap ff /

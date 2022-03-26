@@ -1,7 +1,9 @@
 # Zathura config without color configuration
 set selection-clipboard clipboard
 
-map ff search
+map ff fsearch
+set page-padding 16
+map zm recolor
 
 # Color configuration
 

@@ -6,25 +6,31 @@
 [ "$NF" ] || NF="#d79921"
 [ "$SB" ] || SB="#cc241d"
 [ "$SF" ] || SF="#282828"
-[ "$FN" ] || FN="Cascadia Code PL:regular:pixelsize=28"
+[ "$FN" ] || FN="JetBrains Mono:regular:pixelsize=28"
 
 
 dmenu_flags=( -i -nb $NB -nf $NF -sb $SB -sf $SF \
     -fn "$FN" )
-options="Skype\nZoom\nMeet\nTeams"
+options="Brave\nFirefox\nChromium\nSkype\nZoom\nTeams"
 operation=$(echo -e "$options" | dmenu "${dmenu_flags[@]}" -p "Action:")
 
 # exit if escape in dmenu
 [ -z $operation ] && exit -1
 
 case $operation in
+    Brave )
+        optirun brave & disown
+        ;;
+    Firefox )
+        optirun firefox & disown
+        ;;
     Skype )
         optirun skypeforlinux & disown
         ;;
     Zoom )
         optirun zoom & disown
         ;;
-    Meet )
+    Chromium )
         optirun chromium meet.google.com & disown
         ;;
     Teams )
