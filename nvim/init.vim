@@ -32,7 +32,7 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'sainnhe/edge'
 Plug 'sainnhe/gruvbox-material'
 Plug 'lighthaus-theme/vim-lighthaus'
-Plug 'sainnhe/forest-night'
+Plug 'sainnhe/everforest'
 Plug 'arcticicestudio/nord-vim'
 Plug 'overcache/NeoSolarized'
 

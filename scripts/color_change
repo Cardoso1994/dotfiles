@@ -52,34 +52,25 @@ if [ $TIME -ge $DAY ] && [ $TIME -lt $NIGHT ]; then
 
         # Alacritty
         ALACRITTY_COLOR=${ALACRITTY_LIGHT}
-
         # Xresources
         cat $LIGHT_XRES > $XRES
-
         # Zathura
         ZAT_COLOR=${ZAT_LIGHT}
-
         # xbacklight
         BRIGHT=${BRIGHT_DAY}
-
         # redshift
         TEMP=${DAY_TEMP}
         [ "$(pgrep -i redshift)" ] || redshift -P -O $DAY_TEMP &>/dev/null
 else
         notify-send "Changing to Dark Mode"
-
         # Alacritty
         ALACRITTY_COLOR=${ALACRITTY_DARK}
-
         # Xresources
         cat $DARK_XRES > $XRES
-
         # Zathura
         ZAT_COLOR=${ZAT_DARK}
-
         # xbacklight
         BRIGHT=${BRIGHT_NIGHT}
-
         # redshift
         TEMP=${NIGHT_TEMP}
 fi

@@ -1,4 +1,6 @@
 #!/usr/bin/bash
 
 # requires xclip utility
-optirun vlc $(xclip -o -selection "clipboard") & disown
+# optirun vlc $(xclip -o -selection "clipboard") & disown
+mpv $(xclip -o -selection "clipboard") & disown
+# mpv --ytdl-format=bestvideo+bestaudio/best --fs --speed=2.5 --af=rubberband=pitch-scale=0.981818181818181 "$(xclip -o)"

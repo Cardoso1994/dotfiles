@@ -5,6 +5,7 @@ lock(){
     # i3lock -c $I3LCK_BG -k --pass-volume-keys --timestr="%H:%M" \
     #     --timecolor=$I3LCK_TIME --datecolor=$I3LCK_DATE
 
+    # needs i3lock-color instead of i3lock
     i3lock -c $I3LCK_BG -k --pass-volume-keys
 }
 
