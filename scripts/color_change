@@ -5,7 +5,7 @@ HOME="/home/cardoso"
 # time of the day and changes of day and night
 TIME=$(date +%H)
 DAY=7
-NIGHT=18
+NIGHT=19
 
 # redshift screen temperatures
 DAY_TEMP=4300
@@ -18,8 +18,8 @@ BRIGHT_NIGHT=12
 # Alacritty
 ALACRITTY_CONFIG="${HOME}/.config/alacritty/alacritty.yml"
 ALACRITTY_CONFIG_NO_COLOR="${HOME}/.config/alacritty/alacritty_no_color.yml"
-ALACRITTY_DARK="colors: *gruvbox_material_medium_dark"
-ALACRITTY_LIGHT="colors: *gruvbox_material_medium_light"
+ALACRITTY_DARK="${HOME}/.config/alacritty/colors/solarized_dark.yaml"
+ALACRITTY_LIGHT="${HOME}/.config/alacritty/colors/solarized_light.yaml"
 
 # Xresources
 # DARK_XRES="${HOME}/.config/xresources/gruvbox_material_dark"
@@ -43,8 +43,8 @@ update_zathura(){
 
 update_alacritty(){
         cp $ALACRITTY_CONFIG_NO_COLOR $ALACRITTY_CONFIG
-        # cat $ALACRITTY_COLOR >> $ALACRITTY_CONFIG
-        echo $ALACRITTY_COLOR >> $ALACRITTY_CONFIG
+        cat $ALACRITTY_COLOR >> $ALACRITTY_CONFIG
+        # echo $ALACRITTY_COLOR >> $ALACRITTY_CONFIG
 }
 
 if [ $TIME -ge $DAY ] && [ $TIME -lt $NIGHT ]; then
@@ -85,6 +85,7 @@ else
 fi
 
 # update colors
+update_alacritty
 update_zathura
 xrdb -merge $XRES
 xrdb $XRES
