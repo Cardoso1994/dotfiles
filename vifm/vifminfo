@@ -1,0 +1,442 @@
+# You can edit this file by hand, but it's recommended not to do that.
+
+# Marks:
+'b
+	/home/cardoso/bin/
+	..
+1649114979
+'c
+	/home/cardoso/.config
+	..
+1649114995
+'g
+	/home/cardoso/garbage
+	..
+1649115008
+'h
+	/home/cardoso/
+	..
+1649114979
+'l
+	/home/cardoso/libros
+	..
+1649269924
+'m
+	/home/cardoso/mcic/3rd
+	..
+1649115002
+
+# Bookmarks:
+
+# TUI:
+al
+q1
+v2
+ov
+m-1
+l2
+r2
+
+# Left window history (oldest to newest):
+d/home/cardoso/libros/libros
+	MCIC
+3
+d/home/cardoso/libros/libros/MCIC
+	computation_theory
+4
+d/home/cardoso/libros/libros
+	MCIC
+3
+d/home/cardoso/libros
+	libros
+4
+d/home/cardoso
+	libros
+15
+d/home/cardoso/libros
+	libros
+4
+d/home/cardoso/libros/libros
+	MCIC
+3
+d/home/cardoso/libros
+	libros
+4
+d/home/cardoso
+	libros__
+15
+d/home/cardoso/libros__
+	MCIC
+3
+d/home/cardoso
+	libros
+15
+d/home/cardoso/libros
+	MCIC
+3
+d/home/cardoso/libros/MCIC
+	computation_theory
+4
+d/home/cardoso/libros/MCIC/computation_theory
+	brookshear.pdf
+2
+d/home/cardoso
+	libros
+15
+d/home/cardoso/mcic/3rd
+	metaheuristicas
+2
+d/home/cardoso/mcic/3rd/metaheuristicas
+	recursos_didacticos
+3
+d/home/cardoso/mcic/3rd/metaheuristicas/recursos_didacticos
+	12 Conferencia 3 (MSP-SA).pdf
+3
+d/home/cardoso/mcic/3rd/metaheuristicas
+	recursos_didacticos
+3
+d/home/cardoso/mcic/3rd
+	metaheuristicas
+2
+d/home/cardoso/mcic
+	3rd
+3
+d/home/cardoso/mcic/3rd
+	metaheuristicas_equipo
+3
+d/home/cardoso/mcic/3rd/metaheuristicas_equipo
+	laboratorio_05_sa_knapsack
+7
+d/home/cardoso/mcic/3rd/metaheuristicas_equipo/laboratorio_05_sa_knapsack
+	laboratorio_05.pdf
+4
+d/home/cardoso/mcic/3rd/metaheuristicas_equipo
+	laboratorio_06_sa_traveling_salesman
+8
+d/home/cardoso/mcic/3rd/metaheuristicas_equipo/laboratorio_06_sa_traveling_salesman
+	laboratorio_06_sa_traveling_salesman.tex
+6
+d/home/cardoso/mcic/3rd/metaheuristicas_equipo
+	laboratorio_07_sa_minimos_funcion
+9
+d/home/cardoso/mcic/3rd/metaheuristicas_equipo/laboratorio_07_sa_minimos_funcion
+	laboratorio_07_sa_minimos_funcion.pdf
+5
+d/home/cardoso
+	Downloads
+3
+d/home/cardoso/Downloads
+	10.1515_jci-2021-0006.pdf
+1
+d/home/cardoso
+	Downloads
+3
+d/home/cardoso/garbage
+	closure_CFL.pdf
+5
+d/home/cardoso
+	garbage
+14
+d/home/cardoso/mcic/3rd
+	metaheuristicas_equipo
+3
+d/home/cardoso/mcic/3rd/metaheuristicas_equipo
+	laboratorio_07_sa_minimos_funcion
+10
+d/home/cardoso/garbage
+	cardoso_ic_06.pdf
+3
+d/home/cardoso
+	usb
+21
+d/home/cardoso/usb
+	..
+0
+d/home/cardoso
+	usb
+21
+d/home/cardoso/mcic/3rd
+	seminario_cog
+4
+d/home/cardoso/mcic/3rd/seminario_cog
+	papers
+2
+d/home/cardoso
+	usb
+21
+d/home/cardoso/mcic/3rd
+	memorias_asociativas
+1
+d/home/cardoso/mcic/3rd/memorias_asociativas
+	materiales_complementarios
+2
+d/home/cardoso/mcic/3rd/memorias_asociativas/materiales_complementarios
+	..
+0
+d/home/cardoso/mcic/3rd/memorias_asociativas
+	hw
+1
+d/home/cardoso/mcic/3rd/memorias_asociativas/hw
+	03
+3
+d/home/cardoso/mcic/3rd/memorias_asociativas/hw/03
+	..
+0
+d/home/cardoso/mcic/3rd/memorias_asociativas/hw
+	03
+3
+d/home/cardoso/mcic/3rd/memorias_asociativas
+	materiales_complementarios
+2
+d/home/cardoso/mcic/3rd
+	memorias_asociativas
+1
+d/home/cardoso/mcic/3rd/memorias_asociativas
+	minimalist_machine_learning
+3
+d/home/cardoso/mcic/3rd/memorias_asociativas/minimalist_machine_learning
+	2dpc_article_2022
+1
+d/home/cardoso/mcic/3rd/memorias_asociativas/minimalist_machine_learning/2dpc_article_2022
+	src
+2
+d/home/cardoso/mcic/3rd/memorias_asociativas/minimalist_machine_learning/2dpc_article_2022/src
+	..
+0
+d/home/cardoso/mcic/3rd/memorias_asociativas/minimalist_machine_learning/2dpc_article_2022
+	data
+1
+d/home/cardoso/mcic/3rd/memorias_asociativas/minimalist_machine_learning/2dpc_article_2022/data
+	gastroenterology_dataset
+1
+d/home/cardoso/mcic/3rd/memorias_asociativas/minimalist_machine_learning/2dpc_article_2022/data/gastroenterology_dataset
+	data_only_NBI_transpose.arff
+8
+d/home/cardoso
+	usb
+21
+d/home/cardoso/mcic/3rd
+	memorias_asociativas
+1
+d/home/cardoso/mcic/3rd/memorias_asociativas
+	minimalist_machine_learning
+3
+d/home/cardoso/mcic/3rd/memorias_asociativas/minimalist_machine_learning
+	2dpc_article_2022
+1
+d/home/cardoso/mcic/3rd/memorias_asociativas/minimalist_machine_learning/2dpc_article_2022
+	data
+1
+d/home/cardoso/mcic/3rd/memorias_asociativas/minimalist_machine_learning/2dpc_article_2022/data
+	gastroenterology_dataset
+1
+d/home/cardoso/mcic/3rd/memorias_asociativas/minimalist_machine_learning/2dpc_article_2022/data/gastroenterology_dataset
+	only_NBI
+1
+d/home/cardoso/mcic/3rd/memorias_asociativas/minimalist_machine_learning/2dpc_article_2022/data/gastroenterology_dataset/only_NBI
+	2dpc_results
+1
+d/home/cardoso/mcic/3rd/memorias_asociativas/minimalist_machine_learning/2dpc_article_2022/data/gastroenterology_dataset/only_NBI/2dpc_results
+	scrot_23-04-19:16:51.png
+1
+d/home/cardoso
+	usb
+21
+d/home/cardoso/mcic/3rd
+	memorias_asociativas
+1
+d/home/cardoso/garbage
+	cardoso_ic_06.pdf
+3
+d/home/cardoso
+	Downloads
+3
+d/home/cardoso/Downloads
+	Frontiers_LaTeX_Templates.zip
+5
+d/home/cardoso
+	Downloads
+3
+d/home/cardoso/libros
+	MCIC
+3
+d/home/cardoso/libros/MCIC
+	computation_theory
+4
+d/home/cardoso/libros/MCIC/computation_theory
+	brookshear.pdf
+2
+d/home/cardoso
+	Downloads
+3
+d/home/cardoso/mcic/3rd
+	memorias_asociativas
+1
+d/home/cardoso/mcic/3rd/memorias_asociativas
+	minimalist_machine_learning
+3
+d/home/cardoso/mcic/3rd/memorias_asociativas/minimalist_machine_learning
+	2dpc_article_2022
+1
+d/home/cardoso/mcic/3rd/memorias_asociativas/minimalist_machine_learning/2dpc_article_2022
+	data
+1
+d/home/cardoso/mcic/3rd/memorias_asociativas/minimalist_machine_learning/2dpc_article_2022/data
+	gastroenterology_dataset
+1
+d/home/cardoso/mcic/3rd/memorias_asociativas/minimalist_machine_learning/2dpc_article_2022/data/gastroenterology_dataset
+	only_NBI
+1
+d/home/cardoso/mcic/3rd/memorias_asociativas/minimalist_machine_learning/2dpc_article_2022/data/gastroenterology_dataset/only_NBI
+	results.pdf
+3
+d/home/cardoso
+	Downloads
+3
+d/home/cardoso/libros
+	MCIC
+3
+d/home/cardoso/libros/MCIC
+	computation_theory
+4
+d/home/cardoso/libros/MCIC/computation_theory
+	brookshear.pdf
+2
+d/home/cardoso/libros/MCIC
+	neural_netowrks
+8
+d/home/cardoso/libros/MCIC/neural_netowrks
+	Deep_Learning_With_PyTorch.pdf
+1
+d/home/cardoso/libros/MCIC
+	neural_netowrks
+8
+d/home/cardoso/mcic/3rd
+	metaheuristicas
+2
+d/home/cardoso/mcic/3rd/metaheuristicas
+	recursos_didacticos
+3
+d/home/cardoso/mcic/3rd/metaheuristicas/recursos_didacticos
+	20 Conferencia 4 (GA).pdf
+4
+d/home/cardoso
+	Downloads
+3
+d/home/cardoso/mcic/3rd
+	metaheuristicas
+2
+d/home/cardoso/mcic/3rd/metaheuristicas
+	recursos_didacticos
+3
+d/home/cardoso/mcic/3rd
+	metaheuristicas_equipo
+3
+d/home/cardoso/mcic/3rd/metaheuristicas_equipo
+	laboratorio_10_GA_1_theory
+13
+d/home/cardoso/mcic/3rd/metaheuristicas_equipo/laboratorio_10_GA_1_theory
+	laboratorio_10_ga_seleccion.pdf
+5
+
+# Right window history (oldest to newest):
+D/home/cardoso
+	.config
+3
+D/home/cardoso/.config
+	..
+0
+D/home/cardoso
+	mcic
+31
+D/home/cardoso/mcic
+	3rd
+3
+D/home/cardoso/mcic/3rd
+	..
+0
+D/home/cardoso/mcic
+	3rd
+3
+D/home/cardoso
+	garbage
+30
+D/home/cardoso/garbage
+	scrot_31-03-17:22:34.png
+4
+D/home/cardoso
+	.config
+3
+D/home/cardoso/.config
+	vifm
+26
+D/home/cardoso/.config/vifm
+	colors
+1
+D/home/cardoso/.config/vifm/colors
+	Default.vifm
+1
+D/home/cardoso/.config/vifm
+	scripts
+2
+D/home/cardoso/.config
+	vifm
+26
+D/home/cardoso
+	Downloads
+3
+D/home/cardoso/Downloads
+	diccionario_estados.py
+9
+D/home/cardoso
+	Downloads
+3
+D/home/cardoso/garbage
+	..
+0
+D/home/cardoso/libros
+	MCIC
+3
+D/home/cardoso/libros/MCIC
+	neural_netowrks
+8
+D/home/cardoso/libros/MCIC/neural_netowrks
+	Deep_Learning_With_PyTorch.pdf
+1
+D/home/cardoso
+	Downloads
+3
+D/home/cardoso/Downloads
+	10.1515_jci-2021-0006.pdf
+1
+D/home/cardoso
+	
+0
+
+# Command line history (oldest to newest):
+
+# Search history (oldest to newest):
+/neu
+
+# Prompt history (oldest to newest):
+plibros__
+p__scrot_03-04-12:40:39.png
+
+# Local filter history (oldest to newest):
+
+# Registers:
+
+# Directory stack (oldest to newest):
+
+# Trash content:
+
+# State:
+f
+i1
+[.1
+[F
+F
+I1
+].1
+]F
+s0
