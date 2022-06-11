@@ -1,0 +1,33 @@
+#!/bin/zsh
+
+# update whatever bar it is running
+bar_update(){
+        [ $(pgrep -i i3blocks) ] && pkill -SIGRTMIN+2 i3blocks &> /dev/null
+}
+
+# storing output of update cheking
+updts=$(apt list --upgradeable)
+
+# counting number of updates
+ubuntu=$(echo $updts | wc -l)
+
+# zsh returns empty string if no updates are available then, count is 0
+[ $updts ] || ubuntu=0
+
+total=$(($ubuntu - 1))
+
+case $BLOCK_BUTTON in
+    1)
+        bar_update
+        ;;
+    3)
+        [[ $total -gt 0 ]] && notify-send "Arch:
+$(echo $updts | cut -f1 -d ' ')
+Aur:
+$(echo $updts_aur)"
+        bar_update
+        ;;
+esac
+
+[ $total -ge 20 ] && echo " $total " && exit 33
+[ $total != 0 ] && echo "  $total " || echo "  " && exit 0
