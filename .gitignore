@@ -1,6 +1,16 @@
 __pycache__
 qtile/icons/
 
+############
+# vifm
+############
+*/vifm/vifm-help*
+*/vifm/vifm/vifminfo*
+
+############
+# nvim
+############
+./nvim/plugged/*
 
 ############
 # C Files
