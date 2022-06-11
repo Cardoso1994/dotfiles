@@ -22,19 +22,19 @@ ALACRITTY_DARK="colors: *gruvbox_material_medium_dark"
 ALACRITTY_LIGHT="colors: *gruvbox_material_medium_light"
 
 # Xresources
-# DARK_XRES="${HOME}/.config/xresources/gruvbox_material_dark"
-# LIGHT_XRES="${HOME}/.config/xresources/gruvbox_material_light"
-DARK_XRES="${HOME}/.config/xresources/solarized_dark"
-LIGHT_XRES="${HOME}/.config/xresources/solarized_light"
+DARK_XRES="${HOME}/.config/xresources/gruvbox_material_dark"
+LIGHT_XRES="${HOME}/.config/xresources/gruvbox_material_light"
+# DARK_XRES="${HOME}/.config/xresources/solarized_dark"
+# LIGHT_XRES="${HOME}/.config/xresources/solarized_light"
 XRES="${HOME}/.Xresources"
 
 # Zathura
 ZAT_RC_NO_COLOR="${HOME}/.config/zathura/zathura_no_colorrc"
 ZAT_RC="${HOME}/.config/zathura/zathurarc"
-ZAT_DARK="${HOME}/.config/zathura/colors/solarized_darkrc"
-ZAT_LIGHT="${HOME}/.config/zathura/colors/solarized_lightrc"
-# ZAT_DARK="${HOME}/.config/zathura/colors/gruvbox_material_darkrc"
-# ZAT_LIGHT="${HOME}/.config/zathura/colors/gruvbox_material_lightrc"
+# ZAT_DARK="${HOME}/.config/zathura/colors/solarized_darkrc"
+# ZAT_LIGHT="${HOME}/.config/zathura/colors/solarized_lightrc"
+ZAT_DARK="${HOME}/.config/zathura/colors/gruvbox_material_darkrc"
+ZAT_LIGHT="${HOME}/.config/zathura/colors/gruvbox_material_lightrc"
 
 update_zathura(){
         cp $ZAT_RC_NO_COLOR $ZAT_RC
@@ -76,6 +76,7 @@ else
 fi
 
 # update colors
+update_alacritty
 update_zathura
 xrdb -merge $XRES
 xrdb $XRES
