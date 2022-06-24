@@ -67,3 +67,8 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+
+# NeoVim
+temp_dirs/
+plugged
