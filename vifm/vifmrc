@@ -64,8 +64,8 @@ set vimhelp
 set norunexec
 
 " Selected color scheme
-" colorscheme dracula
-colorscheme onedark
+colorscheme dracula
+" colorscheme onedark
 " colorscheme ph
 " colorscheme iceberg
 

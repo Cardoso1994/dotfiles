@@ -73,4 +73,4 @@ update_sys(){
 alias update="update_sys"
 
 # vifm with pictures
-# alias vifm="/home/cardoso/.config/vifm/scripts/vifmrun"
+alias vifm="/home/cardoso/.config/vifm/scripts/vifmrun"
