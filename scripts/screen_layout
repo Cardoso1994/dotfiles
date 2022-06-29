@@ -33,6 +33,7 @@ case $operation in
     Home_both )
         /home/cardoso/.config/scripts/screen_layouts/home_both.sh \
         ;;
+
     CIC )
         /home/cardoso/.config/scripts/screen_layouts/cic.sh \
         ;;
@@ -40,6 +41,7 @@ esac
 
 sleep 2
 nitrogen --restore
+xset r rate 300 50
 desktop=$(echo $DESKTOP_SESSION)
 [ "$desktop" == "i3" ] && i3-msg reload &>/dev/null
 [ "$desktop" == "herbstluftwm" ] && herbstclient detect_monitors
