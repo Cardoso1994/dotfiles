@@ -72,3 +72,9 @@ dkms.conf
 # NeoVim
 temp_dirs/
 plugged
+
+# alacritty
+alacritty.yml
+
+# zathura
+zathurarc
