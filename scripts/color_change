@@ -8,11 +8,11 @@ DAY=7
 NIGHT=19
 
 # redshift screen temperatures
-DAY_TEMP=4300
-NIGHT_TEMP=2900
+DAY_TEMP=4900
+NIGHT_TEMP=3500
 
 # brightness percent
-BRIGHT_DAY=17
+BRIGHT_DAY=18
 BRIGHT_NIGHT=12
 
 # Alacritty
@@ -26,7 +26,6 @@ ALACRITTY_DARK="colors: *gruvbox_material_medium_dark"
 # Xresources
 DARK_XRES="${HOME}/.config/xresources/gruvbox_material_dark"
 LIGHT_XRES="${HOME}/.config/xresources/gruvbox_material_light"
-LIGHT_XRES="${HOME}/.config/xresources/nord_light"
 # DARK_XRES="${HOME}/.config/xresources/solarized_dark"
 # LIGHT_XRES="${HOME}/.config/xresources/solarized_light"
 XRES="${HOME}/.Xresources"
