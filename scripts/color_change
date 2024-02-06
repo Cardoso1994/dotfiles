@@ -8,11 +8,11 @@ DAY=7
 NIGHT=18
 
 # redshift screen temperatures
-DAY_TEMP=4300
-NIGHT_TEMP=2900
+DAY_TEMP=4900
+NIGHT_TEMP=3500
 
 # brightness percent
-BRIGHT_DAY=17
+BRIGHT_DAY=18
 BRIGHT_NIGHT=12
 
 # Alacritty
@@ -45,8 +45,8 @@ update_zathura(){
 
 update_alacritty(){
         cp $ALACRITTY_CONFIG_NO_COLOR $ALACRITTY_CONFIG
-        cat $ALACRITTY_COLOR >> $ALACRITTY_CONFIG
-        # echo $ALACRITTY_COLOR >> $ALACRITTY_CONFIG
+        # cat $ALACRITTY_COLOR >> $ALACRITTY_CONFIG
+        echo $ALACRITTY_COLOR >> $ALACRITTY_CONFIG
 }
 
 if [ $TIME -ge $DAY ] && [ $TIME -lt $NIGHT ]; then

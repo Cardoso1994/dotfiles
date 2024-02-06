@@ -6,4 +6,4 @@ case $BLOCK_BUTTON in
         ;;
 esac
 
-echo "  $(df -h | awk 'NR==4{print $3, $5}') "
+echo "  $(df -h | awk 'NR==3{print $3, $5}') "

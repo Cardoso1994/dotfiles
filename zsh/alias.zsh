@@ -57,7 +57,7 @@ alias rm="rm -i"
 alias std="st -d . & disown ; exit"
 
 # update arch system and send signal to i3blocks
-update_sys(){
+update_sys_arch(){
 
     # echo "calling reflector"
     # sudo reflector --sort rate -l 5 --save /etc/pacman.d/mirrorlist
@@ -70,7 +70,15 @@ update_sys(){
     [ $(pgrep i3blocks) ] && pkill -RTMIN+2 i3blocks
 }
 
-alias update="update_sys"
+# update ubuntu based systems and send signal to i3blocks
+update_sys_ubuntu(){
+    START_TIME=$SECONDS
+    echo "Initializing update and upgrade" ; sudo apt update && sudo apt upgrade
+    ELAPSED_TIME=$(($SECONDS - $START_TIME))
+    [ $ELAPSED_TIME -ge 420 ] && notify-send -u critical "Attend your update terminal"
+    [ $(pgrep i3blocks) ] && pkill -RTMIN+2 i3blocks
+}
+alias update="update_sys_ubuntu"
 
 # vifm with pictures
-# alias vifm="/home/cardoso/.config/vifm/scripts/vifmrun"
+alias vifm="/home/cardoso/.config/vifm/scripts/vifmrun"

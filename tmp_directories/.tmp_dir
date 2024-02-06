@@ -1,6 +1,8 @@
 #!/usr/bin/sh
 
 GARBAGE_DIR="${HOME}/garbage"
+echo $HOME
+echo $GARBAGE_DIR
 OLDER_THAN=20
 
 find $GARBAGE_DIR -type f -mtime +$OLDER_THAN -exec rm -rf {} \;

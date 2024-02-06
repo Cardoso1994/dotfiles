@@ -1,6 +1,16 @@
 __pycache__
 qtile/icons/
 
+############
+# vifm
+############
+*/vifm/vifm-help*
+*/vifm/vifm/vifminfo*
+
+############
+# nvim
+############
+./nvim/plugged/*
 
 ############
 # C Files
@@ -57,3 +67,14 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+
+# NeoVim
+temp_dirs/
+plugged
+
+# alacritty
+alacritty.yml
+
+# zathura
+zathurarc

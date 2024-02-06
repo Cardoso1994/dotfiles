@@ -21,10 +21,8 @@ case $BLOCK_BUTTON in
         bar_update
         ;;
     3)
-        [[ $total -gt 0 ]] && notify-send "Arch:
-$(echo $updts | cut -f1 -d ' ')
-Aur:
-$(echo $updts_aur)"
+        [[ $total -gt 0 ]] && notify-send "Ubuntu:
+$(echo $updts | cut -f1 -d ' ')"
         bar_update
         ;;
 esac
