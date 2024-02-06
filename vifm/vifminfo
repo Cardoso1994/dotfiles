@@ -6,9 +6,13 @@
 	..
 1649114979
 'c
-	/home/cardoso/.config
-	..
-1649114995
+	/home/cardoso
+	Downloads
+1668447610
+'d
+	/home/cardoso/phd_admin
+	propuesta_doctoral
+1670438392
 'g
 	/home/cardoso/garbage
 	..
@@ -17,14 +21,22 @@
 	/home/cardoso/
 	..
 1649114979
+'j
+	/home/cardoso/mcic/4th/seminario_cog/MICAI_2022/img
+	spectrogram_channels.png
+1668736680
 'l
 	/home/cardoso/libros
 	..
 1649269924
 'm
-	/home/cardoso/mcic/3rd
-	..
-1649115002
+	/home/cardoso/mcic
+	thesis
+1667947724
+'p
+	/home/cardoso/PhD
+	admision
+1670383083
 
 # Bookmarks:
 
@@ -38,39 +50,42 @@ l2
 r2
 
 # Left window history (oldest to newest):
-d/home/cardoso/libros/libros
-	MCIC
-3
-d/home/cardoso/libros/libros/MCIC
-	computation_theory
-4
-d/home/cardoso/libros/libros
-	MCIC
-3
-d/home/cardoso/libros
-	libros
-4
+d/home/cardoso/phd_admin
+	propuesta_doctoral
+1
+d/home/cardoso/phd_admin/propuesta_doctoral
+	propuesta_doctoral.org
+2
 d/home/cardoso
-	libros
-15
-d/home/cardoso/libros
-	libros
+	Downloads
 4
-d/home/cardoso/libros/libros
-	MCIC
-3
-d/home/cardoso/libros
-	libros
-4
+d/home/cardoso/Downloads
+	NIPS-2014-generative-adversarial-nets-Bibtex.bib
+32
+d/home/cardoso/PhD
+	admision
+1
+d/home/cardoso/PhD/admision
+	..
+0
+d/home/cardoso/PhD
+	propuesta_doctoral.org
+2
 d/home/cardoso
-	libros__
-15
-d/home/cardoso/libros__
-	MCIC
+	phd_admin
+23
+d/home/cardoso/phd_admin
+	propuesta_doctoral
+1
+d/home/cardoso/phd_admin/propuesta_doctoral
+	propuesta_doctoral.org
 3
-d/home/cardoso
-	libros
-15
+d/home/cardoso/phd_admin
+	propuesta_doctoral
+1
+d/home/cardoso/phd_admin/propuesta_doctoral
+	63515459-d647-4aec-b215-6dde3a033b8d.pdf
+1
 d/home/cardoso/libros
 	MCIC
 3
@@ -80,183 +95,117 @@ d/home/cardoso/libros/MCIC
 d/home/cardoso/libros/MCIC/computation_theory
 	brookshear.pdf
 2
+d/home/cardoso/libros/MCIC
+	computation_theory
+4
+d/home/cardoso/phd_admin
+	propuesta_doctoral
+1
+d/home/cardoso/phd_admin/propuesta_doctoral
+	63515459-d647-4aec-b215-6dde3a033b8d.pdf
+1
 d/home/cardoso
-	libros
-15
-d/home/cardoso/mcic/3rd
-	metaheuristicas
-2
-d/home/cardoso/mcic/3rd/metaheuristicas
-	recursos_didacticos
-3
-d/home/cardoso/mcic/3rd/metaheuristicas/recursos_didacticos
-	12 Conferencia 3 (MSP-SA).pdf
-3
-d/home/cardoso/mcic/3rd/metaheuristicas
-	recursos_didacticos
-3
-d/home/cardoso/mcic/3rd
-	metaheuristicas
-2
+	phd_admin
+23
+d/home/cardoso/phd_admin
+	propuesta_doctoral
+1
+d/home/cardoso/phd_admin/propuesta_doctoral
+	propuesta_doctoral.pdf
+5
 d/home/cardoso/mcic
-	3rd
-3
-d/home/cardoso/mcic/3rd
-	metaheuristicas_equipo
-3
-d/home/cardoso/mcic/3rd/metaheuristicas_equipo
-	laboratorio_05_sa_knapsack
-7
-d/home/cardoso/mcic/3rd/metaheuristicas_equipo/laboratorio_05_sa_knapsack
-	laboratorio_05.pdf
-4
-d/home/cardoso/mcic/3rd/metaheuristicas_equipo
-	laboratorio_06_sa_traveling_salesman
-8
-d/home/cardoso/mcic/3rd/metaheuristicas_equipo/laboratorio_06_sa_traveling_salesman
-	laboratorio_06_sa_traveling_salesman.tex
+	thesis
 6
-d/home/cardoso/mcic/3rd/metaheuristicas_equipo
-	laboratorio_07_sa_minimos_funcion
-9
-d/home/cardoso/mcic/3rd/metaheuristicas_equipo/laboratorio_07_sa_minimos_funcion
-	laboratorio_07_sa_minimos_funcion.pdf
+d/home/cardoso/mcic/thesis
+	Writing_org
+3
+d/home/cardoso/mcic/thesis/Writing_org
+	cardoso_tesis_mcic.bbl
 5
-d/home/cardoso
-	Downloads
+d/home/cardoso/mcic/thesis
+	Writing_org
 3
-d/home/cardoso/Downloads
-	10.1515_jci-2021-0006.pdf
-1
-d/home/cardoso
-	Downloads
-3
-d/home/cardoso/garbage
-	closure_CFL.pdf
-5
-d/home/cardoso
-	garbage
-14
-d/home/cardoso/mcic/3rd
-	metaheuristicas_equipo
-3
-d/home/cardoso/mcic/3rd/metaheuristicas_equipo
-	laboratorio_07_sa_minimos_funcion
-10
-d/home/cardoso/garbage
-	cardoso_ic_06.pdf
-3
-d/home/cardoso
-	usb
-21
-d/home/cardoso/usb
-	..
-0
-d/home/cardoso
-	usb
-21
-d/home/cardoso/mcic/3rd
+d/home/cardoso/mcic
+	4th
+4
+d/home/cardoso/mcic/4th
 	seminario_cog
-4
-d/home/cardoso/mcic/3rd/seminario_cog
+1
+d/home/cardoso/mcic/4th/seminario_cog
 	papers
-2
-d/home/cardoso
-	usb
-21
-d/home/cardoso/mcic/3rd
-	memorias_asociativas
-1
-d/home/cardoso/mcic/3rd/memorias_asociativas
-	materiales_complementarios
-2
-d/home/cardoso/mcic/3rd/memorias_asociativas/materiales_complementarios
-	..
-0
-d/home/cardoso/mcic/3rd/memorias_asociativas
-	hw
-1
-d/home/cardoso/mcic/3rd/memorias_asociativas/hw
-	03
-3
-d/home/cardoso/mcic/3rd/memorias_asociativas/hw/03
-	..
-0
-d/home/cardoso/mcic/3rd/memorias_asociativas/hw
-	03
-3
-d/home/cardoso/mcic/3rd/memorias_asociativas
-	materiales_complementarios
-2
-d/home/cardoso/mcic/3rd
-	memorias_asociativas
-1
-d/home/cardoso/mcic/3rd/memorias_asociativas
-	minimalist_machine_learning
-3
-d/home/cardoso/mcic/3rd/memorias_asociativas/minimalist_machine_learning
-	2dpc_article_2022
-1
-d/home/cardoso/mcic/3rd/memorias_asociativas/minimalist_machine_learning/2dpc_article_2022
-	src
-2
-d/home/cardoso/mcic/3rd/memorias_asociativas/minimalist_machine_learning/2dpc_article_2022/src
-	..
-0
-d/home/cardoso/mcic/3rd/memorias_asociativas/minimalist_machine_learning/2dpc_article_2022
-	data
-1
-d/home/cardoso/mcic/3rd/memorias_asociativas/minimalist_machine_learning/2dpc_article_2022/data
-	gastroenterology_dataset
-1
-d/home/cardoso/mcic/3rd/memorias_asociativas/minimalist_machine_learning/2dpc_article_2022/data/gastroenterology_dataset
-	data_only_NBI_transpose.arff
-8
-d/home/cardoso
-	usb
-21
-d/home/cardoso/mcic/3rd
-	memorias_asociativas
-1
-d/home/cardoso/mcic/3rd/memorias_asociativas
-	minimalist_machine_learning
-3
-d/home/cardoso/mcic/3rd/memorias_asociativas/minimalist_machine_learning
-	2dpc_article_2022
-1
-d/home/cardoso/mcic/3rd/memorias_asociativas/minimalist_machine_learning/2dpc_article_2022
-	data
-1
-d/home/cardoso/mcic/3rd/memorias_asociativas/minimalist_machine_learning/2dpc_article_2022/data
-	gastroenterology_dataset
-1
-d/home/cardoso/mcic/3rd/memorias_asociativas/minimalist_machine_learning/2dpc_article_2022/data/gastroenterology_dataset
-	only_NBI
-1
-d/home/cardoso/mcic/3rd/memorias_asociativas/minimalist_machine_learning/2dpc_article_2022/data/gastroenterology_dataset/only_NBI
-	2dpc_results
-1
-d/home/cardoso/mcic/3rd/memorias_asociativas/minimalist_machine_learning/2dpc_article_2022/data/gastroenterology_dataset/only_NBI/2dpc_results
-	scrot_23-04-19:16:51.png
-1
-d/home/cardoso
-	usb
-21
-d/home/cardoso/mcic/3rd
-	memorias_asociativas
-1
-d/home/cardoso/garbage
-	cardoso_ic_06.pdf
-3
+6
+d/home/cardoso/mcic/4th/seminario_cog/papers
+	turing1950.pdf
+35
 d/home/cardoso
 	Downloads
-3
+4
 d/home/cardoso/Downloads
-	Frontiers_LaTeX_Templates.zip
-5
+	NIPS-2014-generative-adversarial-nets-Bibtex.bib
+32
 d/home/cardoso
 	Downloads
+4
+d/home/cardoso/mcic
+	thesis
+6
+d/home/cardoso/mcic/thesis
+	Writing_org
 3
+d/home/cardoso/mcic
+	MML
+5
+d/home/cardoso/mcic/MML
+	..
+0
+d/home/cardoso/mcic
+	4th
+4
+d/home/cardoso/mcic/4th
+	seminario_cog
+1
+d/home/cardoso/mcic/4th/seminario_cog
+	papers
+6
+d/home/cardoso/mcic/4th/seminario_cog/papers
+	Lecun98.pdf
+6
+d/home/cardoso
+	Downloads
+4
+d/home/cardoso/Downloads
+	cardoso_tesis_mcic.pdf
+32
+d/home/cardoso
+	Downloads
+4
+d/home/cardoso/mcic
+	thesis
+6
+d/home/cardoso/mcic/thesis
+	src
+8
+d/home/cardoso/mcic/thesis/src
+	..
+0
+d/home/cardoso/mcic/thesis
+	Writing_org
+3
+d/home/cardoso/mcic/thesis/Writing_org
+	cardoso_tesis_mcic.lot
+7
+d/home/cardoso/mcic/thesis
+	Writing_org
+3
+d/home/cardoso/mcic
+	thesis
+6
+d/home/cardoso
+	Downloads
+4
+d/home/cardoso/mcic
+	thesis
+6
 d/home/cardoso/libros
 	MCIC
 3
@@ -268,132 +217,147 @@ d/home/cardoso/libros/MCIC/computation_theory
 2
 d/home/cardoso
 	Downloads
+4
+d/home/cardoso/mcic
+	thesis
+6
+d/home/cardoso/mcic/thesis
+	Writing_org
 3
-d/home/cardoso/mcic/3rd
-	memorias_asociativas
-1
-d/home/cardoso/mcic/3rd/memorias_asociativas
-	minimalist_machine_learning
-3
-d/home/cardoso/mcic/3rd/memorias_asociativas/minimalist_machine_learning
-	2dpc_article_2022
-1
-d/home/cardoso/mcic/3rd/memorias_asociativas/minimalist_machine_learning/2dpc_article_2022
-	data
-1
-d/home/cardoso/mcic/3rd/memorias_asociativas/minimalist_machine_learning/2dpc_article_2022/data
-	gastroenterology_dataset
-1
-d/home/cardoso/mcic/3rd/memorias_asociativas/minimalist_machine_learning/2dpc_article_2022/data/gastroenterology_dataset
-	only_NBI
-1
-d/home/cardoso/mcic/3rd/memorias_asociativas/minimalist_machine_learning/2dpc_article_2022/data/gastroenterology_dataset/only_NBI
-	results.pdf
-3
+d/home/cardoso/mcic/thesis/Writing_org
+	cardoso_tesis_mcic.pdf
+8
 d/home/cardoso
 	Downloads
-3
-d/home/cardoso/libros
-	MCIC
-3
-d/home/cardoso/libros/MCIC
-	computation_theory
 4
-d/home/cardoso/libros/MCIC/computation_theory
-	brookshear.pdf
-2
-d/home/cardoso/libros/MCIC
-	neural_netowrks
+d/home/cardoso/mcic
+	thesis
+6
+d/home/cardoso/mcic/thesis
+	Writing_org
+3
+d/home/cardoso/mcic/thesis/Writing_org
+	cardoso_tesis_mcic.pdf
 8
-d/home/cardoso/libros/MCIC/neural_netowrks
-	Deep_Learning_With_PyTorch.pdf
+d/home/cardoso/mcic/thesis
+	Writing_org
+3
+d/home/cardoso/mcic
+	4th
+4
+d/home/cardoso/mcic/4th
+	seminario_cog
 1
-d/home/cardoso/libros/MCIC
-	neural_netowrks
-8
-d/home/cardoso/mcic/3rd
-	metaheuristicas
-2
-d/home/cardoso/mcic/3rd/metaheuristicas
-	recursos_didacticos
-3
-d/home/cardoso/mcic/3rd/metaheuristicas/recursos_didacticos
-	20 Conferencia 4 (GA).pdf
-4
+d/home/cardoso/mcic/4th/seminario_cog
+	papers
+6
+d/home/cardoso/mcic/4th/seminario_cog/papers
+	McCulloch-Pitts1943.pdf
+7
 d/home/cardoso
 	Downloads
+4
+d/home/cardoso/mcic
+	thesis
+6
+d/home/cardoso/mcic/thesis
+	Writing_org
 3
-d/home/cardoso/mcic/3rd
-	metaheuristicas
-2
-d/home/cardoso/mcic/3rd/metaheuristicas
-	recursos_didacticos
+d/home/cardoso/mcic/thesis/Writing_org
+	cardoso_tesis_mcic.pdf
+8
+d/home/cardoso
+	Downloads
+4
+d/home/cardoso/mcic
+	thesis
+6
+d/home/cardoso/mcic/thesis
+	paper
+8
+d/home/cardoso/mcic/thesis/paper
+	template_mdpi.pdf
+10
+d/home/cardoso
+	Downloads
+4
+d/home/cardoso/mcic
+	thesis
+6
+d/home/cardoso/mcic/thesis
+	paper
+8
+d/home/cardoso/mcic
+	thesis
+6
+d/home/cardoso
+	.gnupg
+7
+d/home/cardoso/.gnupg
+	..
+0
+d/home/cardoso
+	.doom.d
+4
+d/home/cardoso/.doom.d
+	config.el
 3
-d/home/cardoso/mcic/3rd
-	metaheuristicas_equipo
-3
-d/home/cardoso/mcic/3rd/metaheuristicas_equipo
-	laboratorio_10_GA_1_theory
-13
-d/home/cardoso/mcic/3rd/metaheuristicas_equipo/laboratorio_10_GA_1_theory
-	laboratorio_10_ga_seleccion.pdf
-5
+d/home/cardoso
+	..
+0
+d/home/cardoso/mcic
+	thesis
+6
+d/home/cardoso
+	..
+0
+d/home/cardoso/mcic
+	4th
+4
+d/home/cardoso/mcic/4th
+	seminario_cog
+1
+d/home/cardoso/mcic/4th/seminario_cog
+	papers
+6
+d/home/cardoso/mcic/4th/seminario_cog/papers
+	P300_based_character_recognition_using_sparse_autoencoder_with_ensemble_of_SVMss.pdf
+21
+d/home/cardoso
+	..
+0
+d/home/cardoso/mcic
+	thesis
+6
+d/home/cardoso/mcic/thesis
+	paper
+8
+d/home/cardoso/mcic/thesis/paper
+	template_mdpi.pdf
+10
+d/home/cardoso
+	..
+0
+d/home/cardoso/mcic
+	4th
+4
+d/home/cardoso/mcic/4th
+	seminario_cog
+1
+d/home/cardoso/mcic/4th/seminario_cog
+	papers
+6
+d/home/cardoso/mcic/4th/seminario_cog/papers
+	P300_based_character_recognition_using_sparse_autoencoder_with_ensemble_of_SVMss.pdf
+21
 
 # Right window history (oldest to newest):
+D/home/cardoso/libros/MCIC/CI
+	learning-from-data-a-short-course-abu-mostafa-magdon-ismail-lin-am.pdf
+6
 D/home/cardoso
-	.config
-3
-D/home/cardoso/.config
-	..
-0
-D/home/cardoso
-	mcic
-31
-D/home/cardoso/mcic
-	3rd
-3
-D/home/cardoso/mcic/3rd
-	..
-0
-D/home/cardoso/mcic
-	3rd
-3
-D/home/cardoso
-	garbage
-30
-D/home/cardoso/garbage
-	scrot_31-03-17:22:34.png
+	Downloads
 4
-D/home/cardoso
-	.config
-3
-D/home/cardoso/.config
-	vifm
-26
-D/home/cardoso/.config/vifm
-	colors
-1
-D/home/cardoso/.config/vifm/colors
-	Default.vifm
-1
-D/home/cardoso/.config/vifm
-	scripts
-2
-D/home/cardoso/.config
-	vifm
-26
-D/home/cardoso
-	Downloads
-3
-D/home/cardoso/Downloads
-	diccionario_estados.py
-9
-D/home/cardoso
-	Downloads
-3
-D/home/cardoso/garbage
-	..
-0
 D/home/cardoso/libros
 	MCIC
 3
@@ -401,34 +365,384 @@ D/home/cardoso/libros/MCIC
 	neural_netowrks
 8
 D/home/cardoso/libros/MCIC/neural_netowrks
-	Deep_Learning_With_PyTorch.pdf
+	Hamed Habibi Aghdam, Elnaz Jahani Heravi (auth.) - Guide to Convolutional Neural Networks_ A Practical Application to Traffic-Sign Detection and Classification-Springer International Publishing (2017).pdf
+5
+D/home/cardoso/mcic
+	4th
+4
+D/home/cardoso/mcic/4th
+	seminario_cog
+1
+D/home/cardoso/mcic/4th/seminario_cog
+	papers
+6
+D/home/cardoso/mcic/4th/seminario_cog/papers
+	thesis_eduardo_lujan.pdf
+34
+D/home/cardoso/libros
+	MCIC
+3
+D/home/cardoso/libros/MCIC
+	neural_netowrks
+8
+D/home/cardoso/libros/MCIC/neural_netowrks
+	Hamed Habibi Aghdam, Elnaz Jahani Heravi (auth.) - Guide to Convolutional Neural Networks_ A Practical Application to Traffic-Sign Detection and Classification-Springer International Publishing (2017).pdf
+5
+D/home/cardoso/mcic
+	4th
+4
+D/home/cardoso/mcic/4th
+	seminario_cog
+1
+D/home/cardoso/mcic/4th/seminario_cog
+	papers
+6
+D/home/cardoso/mcic/4th/seminario_cog/papers
+	turing1950.pdf
+35
+D/home/cardoso/mcic/4th/seminario_cog
+	papers
+6
+D/home/cardoso/libros
+	MCIC
+3
+D/home/cardoso/libros/MCIC
+	symbols.pdf
+11
+D/home/cardoso
+	Downloads
+4
+D/home/cardoso/mcic
+	MML
+5
+D/home/cardoso
+	mcic
+23
+D/home/cardoso/libros
+	MCIC
+3
+D/home/cardoso/libros/MCIC
+	neural_netowrks
+8
+D/home/cardoso/libros/MCIC/neural_netowrks
+	Kevin P. Murphy - Probabilistic Machine Learning_ An Introduction-The MIT Press (2021).pdf
+6
+D/home/cardoso
+	mcic
+23
+D/home/cardoso/mcic
+	thesis
+6
+D/home/cardoso/mcic/thesis
+	Writing_org
+3
+D/home/cardoso/mcic
+	4th
+4
+D/home/cardoso/mcic/4th
+	seminario_cog
+1
+D/home/cardoso/mcic/4th/seminario_cog
+	papers
+6
+D/home/cardoso/mcic/4th/seminario_cog/papers
+	..
+0
+D/home/cardoso
+	mcic
+23
+D/home/cardoso/mcic
+	3rd
+3
+D/home/cardoso/mcic/3rd
+	redes_neuronales_avanzadas
+6
+D/home/cardoso/mcic/3rd/redes_neuronales_avanzadas
+	paper
+5
+D/home/cardoso/mcic/3rd/redes_neuronales_avanzadas/paper
+	..
+0
+D/home/cardoso/mcic/3rd/redes_neuronales_avanzadas
+	BETA_database
+1
+D/home/cardoso/mcic/3rd/redes_neuronales_avanzadas/BETA_database
+	..
+0
+D/home/cardoso/mcic/3rd/redes_neuronales_avanzadas
+	paper
+5
+D/home/cardoso/mcic/3rd/redes_neuronales_avanzadas/paper
+	..
+0
+D/home/cardoso/mcic/3rd/redes_neuronales_avanzadas
+	articulo
+2
+D/home/cardoso/mcic/3rd/redes_neuronales_avanzadas/articulo
+	a_dnn_for_ssvep_bci.pdf
+2
+D/home/cardoso/mcic
+	4th
+4
+D/home/cardoso/mcic/4th
+	seminario_cog
+1
+D/home/cardoso/mcic/4th/seminario_cog
+	papers
+6
+D/home/cardoso/mcic/4th/seminario_cog/papers
+	desc_II(2).pdf
+26
+D/home/cardoso/mcic
+	thesis
+6
+D/home/cardoso
+	mcic
+23
+D/home/cardoso/mcic
+	thesis
+6
+D/home/cardoso/mcic/thesis
+	img
+7
+D/home/cardoso/mcic/thesis/img
+	spectrogram_channels.png
+21
+D/home/cardoso/mcic/thesis
+	img
+7
+D/home/cardoso/mcic
+	thesis
+6
+D/home/cardoso/mcic/thesis
+	img
+7
+D/home/cardoso/mcic
+	thesis
+6
+D/home/cardoso/mcic/thesis
+	img
+7
+D/home/cardoso/mcic/thesis/img
+	spectrogram_channels.png
+21
+D/home/cardoso/libros
+	MCIC
+3
+D/home/cardoso/libros/MCIC
+	neural_netowrks
+8
+D/home/cardoso/libros/MCIC/neural_netowrks
+	mculloch-pitts-1943.pdf
+8
+D/home/cardoso/libros/MCIC
+	CI
+1
+D/home/cardoso/libros/MCIC/CI
+	Pattern Recognition 4th Ed. (2009).pdf
+3
+D/home/cardoso
+	facturas_micai
+16
+D/home/cardoso/facturas_micai
+	
+16
+D/home/cardoso
+	..
+0
+D/home/cardoso/mcic
+	thesis
+6
+D/home/cardoso
+	mcic
+22
+D/home/cardoso/mcic
+	4th
+4
+D/home/cardoso/mcic/4th
+	seminario_cog
+1
+D/home/cardoso/mcic
+	4th
+4
+D/home/cardoso
+	cardoso_facturas_micai
+14
+D/home/cardoso/cardoso_facturas_micai
+	desglose.pdf
+5
+D/home/cardoso
+	__.emacs.d
+13
+D/home/cardoso/PhD
+	admision
+1
+D/home/cardoso/PhD/admision
+	..
+0
+D/home/cardoso/PhD
+	admision
 1
 D/home/cardoso
 	Downloads
-3
+4
 D/home/cardoso/Downloads
-	10.1515_jci-2021-0006.pdf
+	propuesta_doctoral
+3
+D/home/cardoso/Downloads/propuesta_doctoral
+	..
+0
+D/home/cardoso/Downloads
+	IRNA
+2
+D/home/cardoso/Downloads/IRNA
+	..
+0
+D/home/cardoso/Downloads
+	IRNA
+2
+D/home/cardoso/Downloads/IRNA
+	..
+0
+D/home/cardoso/Downloads
+	26 de Septiembre 202 Lunes
+1
+D/home/cardoso/Downloads/26 de Septiembre 202 Lunes
+	..
+0
+D/home/cardoso/Downloads
+	26 de Septiembre 202 Lunes
 1
 D/home/cardoso
-	
-0
+	Downloads
+4
+D/home/cardoso/Downloads
+	Cardoso-Moreno-Marco-Antonio-Informe CIC 2022-A.pdf
+3
+D/home/cardoso
+	Downloads
+4
+D/home/cardoso/Downloads
+	conv_net.drawio (1).png
+32
+D/home/cardoso
+	Downloads
+4
+D/home/cardoso/phd_admin
+	propuesta_doctoral
+1
+D/home/cardoso/phd_admin/propuesta_doctoral
+	63515459-d647-4aec-b215-6dde3a033b8d.pdf
+1
+D/home/cardoso
+	Downloads
+4
+D/home/cardoso/mcic
+	4th
+4
+D/home/cardoso/mcic/4th
+	seminario_cog
+1
+D/home/cardoso/mcic/4th/seminario_cog
+	papers
+6
+D/home/cardoso/mcic/4th/seminario_cog/papers
+	classification_strategies_for_p300_based_bci_spellers_adopting_the_row_column_paradigm.pdf
+29
+D/home/cardoso
+	Downloads
+4
 
 # Command line history (oldest to newest):
+:mkdir admision
+:mkdir propuesta doctoral
+:mkdir propuesta_doctoral
 
 # Search history (oldest to newest):
+/ssvep
+/sigm
+/usb
+/wads
+/revie
+/histo
+/fift
+/over
+/po
+/nvim
 /neu
+/st
+/para
+/cic
+/vue
+/chann
+/wa
+/zip
+/review
+/comp
+/hop
+/desi
+/ 
+/ros
+/thesi
+/adam
+/rume
+/back
+/senso
+/ola
+/tesi
+/tur
+/fact
+/ca
+/phd
+/propu
+/recu
+/design
+/luja
+/lujan
+/pdf
+/cardoso
+/w
+/wave
+/charac
+/techni
+/singl
+/stra
+/reco
 
 # Prompt history (oldest to newest):
+psigmoid_function.png
 plibros__
 p__scrot_03-04-12:40:39.png
+pnatural langauge processing
+pWhatsApp Image 2022-06-16 at 5.37.15 PM.jpeg
+pn
+pbeifi
+pCardoso_BEIFI_01_B22
+p"Cardoso Moreno Marco Antonio Solicitud BEIFI CIC 2022 B"
+pbci_comp_interface.png
+pP300_based_character_recognition_using_sparse_autoencoder_with_ensemble_of_SVMss
+plearning-from-data-a-short-course-abu-mostafa-magdon-ismail-lin-am.pdf
+pa_dnn_for_ssvep_bci_
+pPRO22AE-Desgloce_cardoso
 
 # Local filter history (oldest to newest):
 
 # Registers:
+""/home/cardoso/.local/share/vifm/Trash/000_cardoso_propuesta_doctoral.pdf
 
 # Directory stack (oldest to newest):
 
 # Trash content:
+t/media/cardoso/FDBD-BA3D/.vifm-Trash-1000/000_Informe PIFI MACM (1).pdf
+	/home/cardoso/usb/FDBD-BA3D/Informe PIFI MACM (1).pdf
+t/home/cardoso/.local/share/vifm/Trash/000_propuesta
+	/home/cardoso/PhD/admision/propuesta
+t/home/cardoso/.local/share/vifm/Trash/000_doctoral
+	/home/cardoso/PhD/admision/doctoral
+t/home/cardoso/.local/share/vifm/Trash/000_cardoso_propuesta_doctoral.docx
+	/home/cardoso/Downloads/cardoso_propuesta_doctoral.docx
+t/home/cardoso/.local/share/vifm/Trash/000_cardoso_propuesta_doctoral.pdf
+	/home/cardoso/Downloads/cardoso_propuesta_doctoral.pdf
 
 # State:
 f

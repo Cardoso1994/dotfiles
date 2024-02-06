@@ -5,7 +5,7 @@ HOME="/home/cardoso"
 # time of the day and changes of day and night
 TIME=$(date +%H)
 DAY=7
-NIGHT=19
+NIGHT=18
 
 # redshift screen temperatures
 DAY_TEMP=4300
@@ -20,12 +20,14 @@ ALACRITTY_CONFIG="${HOME}/.config/alacritty/alacritty.yml"
 ALACRITTY_CONFIG_NO_COLOR="${HOME}/.config/alacritty/alacritty_no_color.yml"
 ALACRITTY_DARK="${HOME}/.config/alacritty/colors/solarized_dark.yaml"
 ALACRITTY_LIGHT="${HOME}/.config/alacritty/colors/solarized_light.yaml"
+ALACRITTY_DARK="${HOME}/.config/alacritty/colors/gruvbox_material_dark.yml"
+ALACRITTY_LIGHT="${HOME}/.config/alacritty/colors/gruvbox_material_light.yml"
 
 # Xresources
-# DARK_XRES="${HOME}/.config/xresources/gruvbox_material_dark"
-# LIGHT_XRES="${HOME}/.config/xresources/gruvbox_material_light"
-DARK_XRES="${HOME}/.config/xresources/solarized_dark"
-LIGHT_XRES="${HOME}/.config/xresources/solarized_light"
+DARK_XRES="${HOME}/.config/xresources/gruvbox_material_dark"
+LIGHT_XRES="${HOME}/.config/xresources/gruvbox_material_light"
+# DARK_XRES="${HOME}/.config/xresources/solarized_dark"
+# LIGHT_XRES="${HOME}/.config/xresources/solarized_light"
 XRES="${HOME}/.Xresources"
 
 # Zathura
@@ -33,8 +35,8 @@ ZAT_RC_NO_COLOR="${HOME}/.config/zathura/zathura_no_colorrc"
 ZAT_RC="${HOME}/.config/zathura/zathurarc"
 ZAT_DARK="${HOME}/.config/zathura/colors/solarized_darkrc"
 ZAT_LIGHT="${HOME}/.config/zathura/colors/solarized_lightrc"
-# ZAT_DARK="${HOME}/.config/zathura/colors/gruvbox_material_darkrc"
-# ZAT_LIGHT="${HOME}/.config/zathura/colors/gruvbox_material_lightrc"
+ZAT_DARK="${HOME}/.config/zathura/colors/gruvbox_material_darkrc"
+ZAT_LIGHT="${HOME}/.config/zathura/colors/gruvbox_material_lightrc"
 
 update_zathura(){
         cp $ZAT_RC_NO_COLOR $ZAT_RC

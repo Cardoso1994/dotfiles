@@ -208,11 +208,13 @@ if hr >= 7 && hr < 18
     set background=light
     let g:gruvbox_material_background = 'medium'
     " colorscheme gruvbox-material
-    colorscheme NeoSolarized
+    " colorscheme NeoSolarized
+    colorscheme edge
 else
     set background=dark
     let g:gruvbox_material_background = 'medium'
-    colorscheme NeoSolarized
+    " colorscheme NeoSolarized
+    colorscheme edge
 endif
 
 " Set extra options when running in GUI mode
