@@ -219,6 +219,7 @@ font:
 # Window opacity as a floating point number from `0.0` to `1.0`.
 # The value `0.0` is completely transparent and `1.0` is opaque.
 window.opacity: 0.05
+# background_opacity: 1
 # background_opacity: 0.95
 
 #selection:
@@ -767,28 +768,3 @@ schemes:
       magenta: '0x945e80'
       cyan:    '0x4c7a5d'
       white:   '0xe6d5ae'
-#########################################
-# Colors (Gruvbox material light soft)
-#########################################
-colors:
-  primary:
-    background: '0xf2e5bc'
-    foreground: '0x654735'
-  normal:
-    black:   '0xf2e5bc'
-    red:     '0xc14a4a'
-    green:   '0x6c782e'
-    yellow:  '0xb47109'
-    blue:    '0x45707a'
-    magenta: '0x945e80'
-    cyan:    '0x4c7a5d'
-    white:   '0x654735'
-  bright:
-    black:   '0x654735'
-    red:     '0xc14a4a'
-    green:   '0x6c782e'
-    yellow:  '0xb47109'
-    blue:    '0x45707a'
-    magenta: '0x945e80'
-    cyan:    '0x4c7a5d'
-    white:   '0xe6d5ae'
