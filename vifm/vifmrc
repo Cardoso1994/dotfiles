@@ -174,11 +174,16 @@ command! reload :write | restart
 " program.
 
 " Code
+" filextype *.py,*.org,*.c,*.cpp,*.h,*.R,*.hs,*.js,*.lisp,*.el,*.yml
+"           \*rc,*.conf,*.config,*.md,*.sh,*.service,*.timer,*.zsh,
+"           \.gitignore,
+"           \ {open in emacs}
+"           \ emacsclient -c -a emacs %f & disown
 filextype *.py,*.org,*.c,*.cpp,*.h,*.R,*.hs,*.js,*.lisp,*.el,*.yml
           \*rc,*.conf,*.config,*.md,*.sh,*.service,*.timer,*.zsh,
           \.gitignore,
-          \ {open in emacs}
-          \ emacsclient -c -a emacs %f & disown
+          \ {open in neovim}
+          \ nvim %f
 " Pdf
 filextype *.pdf zathura %c %i &, apvlv %c, xpdf %c
 " "filextype *.pdf zathura %c %i, apvlv %c, xpdf %c
