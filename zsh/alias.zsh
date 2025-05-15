@@ -9,8 +9,8 @@
 ################################################################################
 
 # alias for python
-alias python2="python"
-alias python="python3"
+# alias python2="python"
+# alias python="python3"
 
 # alias for ipython
 alias ipy="ipython --TerminalInteractiveShell.editing_mode=vi"
@@ -81,4 +81,4 @@ update_sys_ubuntu(){
 alias update="update_sys_ubuntu"
 
 # vifm with pictures
-alias vifm="/home/cardoso/.config/vifm/scripts/vifmrun"
+# alias vifm="/home/cardoso/.config/vifm/scripts/vifmrun"
