@@ -42,7 +42,7 @@ function cdc() {
 alias rm="rm -i"
 
 # open st in current dir
-alias std="st -d . & disown ; exit"
+# alias std="st -d . & disown ; exit"
 
 # update arch system and send signal to i3blocks
 update_sys_arch(){
