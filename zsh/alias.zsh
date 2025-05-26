@@ -18,18 +18,6 @@ alias ipy="ipython --TerminalInteractiveShell.editing_mode=vi"
 # alias for jupyter notebook
 alias jup="jupyter notebook"
 
-# surfraw aliases
-alias srg="sr google"
-alias sra="sr archwiki"
-alias srd="sr duckduckgo"
-
-# PYWAL
-# Import colorscheme from 'wal' asynchronously
-# &  # Run the process in the background.
-# ( ) # Hide shell job control messages.
-# (cat ~/.cache/wal/sequences &)
-export PATH="${PATH}:${HOME}/.local/bin/"
-
 # git aliases
 alias gtcln="git clone"
 alias gts="git status"
@@ -41,14 +29,14 @@ alias gtpll="git pull"
 alias gtchk="git checkout"
 alias gtl="git log" 
 
-
-# change directory with vifm
-change_dir(){
-    dir=$(vifm --choose-dir -)
-    [ -n $dir ] && [ "$dir" != "$(pwd)" ] && cd $dir
+function cdc() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
 }
-
-alias cdc="change_dir"
 
 # remove files safely
 alias rm="rm -i"
@@ -58,7 +46,6 @@ alias std="st -d . & disown ; exit"
 
 # update arch system and send signal to i3blocks
 update_sys_arch(){
-
     # echo "calling reflector"
     # sudo reflector --sort rate -l 5 --save /etc/pacman.d/mirrorlist
 
