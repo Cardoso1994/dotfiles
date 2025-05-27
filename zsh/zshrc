@@ -70,14 +70,12 @@ ZSH_THEME="jonathan"
 # Add wisely, as too many plugins slow down shell startup.
 # plugins=(git)
 
-# CRITICAL: Source oh-my-zsh (this was commented out!)
 if [ -f "$ZSH/oh-my-zsh.sh" ]; then
     source $ZSH/oh-my-zsh.sh
 else
     echo "Oh-my-zsh not found at $ZSH/oh-my-zsh.sh"
     echo "Please install oh-my-zsh or check the path"
 fi
-# source $ZSH/oh-my-zsh.sh
 
 # User configuration
 # Edit line in vim with ctrl-e:
@@ -113,7 +111,7 @@ export EDITOR="$VISUAL"
 # [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # source ~/.config/zsh/alias.zsh
-source ./dotfiles/zsh/alias.zsh
+source $HOME/dotfiles/zsh/alias.zsh
 
 # pyenv init
 # export PYENV_ROOT="$HOME/.pyenv"
