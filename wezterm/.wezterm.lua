@@ -83,24 +83,72 @@ local dark_scheme = {
 		"#ebdbb2", -- bright white (technically it's the foreground)
 	},
 }
--- Define light and dark color schemes
--- local light_scheme = {
--- 	background = "#f0f0f0",
--- 	foreground = "#2c2c2c",
--- 	cursor_bg = "#52ad70",
--- 	cursor_fg = "#f0f0f0",
--- 	selection_bg = "#d0d0d0",
--- 	selection_fg = "#2c2c2c",
--- }
---
--- local dark_scheme = {
--- 	background = "#1a1a1a",
--- 	foreground = "#f0f0f0",
--- 	cursor_bg = "#52ad70",
--- 	cursor_fg = "#1a1a1a",
--- 	selection_bg = "#505050",
--- 	selection_fg = "#f0f0f0",
--- }
+
+-- Kanagawa Lotus (Light) color scheme
+local lotus_scheme = {
+	-- Base colors
+	background = "#e7dba0", -- lotusWhite4
+	foreground = "#545464", -- lotusInk1
+	cursor_bg = "#cc6d00", -- lotusOrange
+	cursor_fg = "#e7dba0", -- lotusWhite4
+	selection_bg = "#c9cbd1", -- lotusViolet3
+	selection_fg = "#545464", -- lotusInk1
+
+	-- ANSI colors (0-15)
+	ansi = {
+		"#f2ecbc", -- lotusWhite3 (black)
+		"#c84053", -- lotusRed (red)
+		"#6f894e", -- lotusGreen (green)
+		"#77713f", -- lotusYellow (yellow)
+		"#4d699b", -- lotusBlue4 (blue)
+		"#b35b79", -- lotusPink (magenta)
+		"#597b75", -- lotusAqua (cyan)
+		"#716e61", -- lotusGray2 (white)
+	},
+	brights = {
+		"#8a8980", -- lotusGray3 (bright black)
+		"#d7474b", -- lotusRed2 (bright red)
+		"#6e915f", -- lotusGreen2 (bright green)
+		"#de9800", -- lotusYellow3 (bright yellow)
+		"#6693bf", -- lotusTeal2 (bright blue)
+		"#766b90", -- lotusViolet2 (bright magenta)
+		"#5e857a", -- lotusAqua2 (bright cyan)
+		"#43436c", -- lotusInk2 (bright white)
+	},
+}
+
+-- Kanagawa Dragon (Dark) color scheme
+local dragon_scheme = {
+	-- Base colors
+	background = "#181616", -- dragonBlack3
+	foreground = "#c5c9c5", -- dragonWhite
+	cursor_bg = "#b6927b", -- dragonOrange
+	cursor_fg = "#181616", -- dragonBlack3
+	selection_bg = "#393836", -- dragonBlack5
+	selection_fg = "#c5c9c5", -- dragonWhite
+
+	-- ANSI colors (0-15)
+	ansi = {
+		"#0d0c0c", -- dragonBlack0 (black)
+		"#c4746e", -- dragonRed (red)
+		"#87a987", -- dragonGreen (green)
+		"#c4b28a", -- dragonYellow (yellow)
+		"#8ba4b0", -- dragonBlue2 (blue)
+		"#a292a3", -- dragonPink (magenta)
+		"#8ea4a2", -- dragonAqua (cyan)
+		"#a6a69c", -- dragonGray (white)
+	},
+	brights = {
+		"#625e5a", -- dragonBlack6 (bright black)
+		"#c4746e", -- dragonRed (bright red)
+		"#8a9a7b", -- dragonGreen2 (bright green)
+		"#c4b28a", -- dragonYellow (bright yellow)
+		"#949fb5", -- dragonTeal (bright blue)
+		"#8992a7", -- dragonViolet (bright magenta)
+		"#737c73", -- dragonAsh (bright cyan)
+		"#c5c9c5", -- dragonWhite (bright white)
+	},
+}
 
 -- Register the color schemes
 wezterm.add_to_config_reload_watch_list(wezterm.home_dir .. "/.wezterm.lua")
@@ -114,8 +162,8 @@ config.send_composed_key_when_right_alt_is_pressed = true
 
 -- Set up color scheme
 config.color_schemes = {
-	["MyLightTheme"] = light_scheme,
-	["MyDarkTheme"] = dark_scheme,
+	["MyLightTheme"] = lotus_scheme,
+	["MyDarkTheme"] = dragon_scheme,
 }
 
 if theme_type == "Light" then
