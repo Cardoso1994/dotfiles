@@ -172,6 +172,9 @@ else
 	config.color_scheme = "MyDarkTheme"
 end
 
+-- Set font to Input Mono
+config.font = wezterm.font("Input Mono")
+
 -- Setup status bar to notify when theme should change
 wezterm.on("update-right-status", function(window, pane)
 	local theme_type = get_theme_based_on_time()
