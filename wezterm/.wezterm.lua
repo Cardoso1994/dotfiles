@@ -173,7 +173,11 @@ else
 end
 
 -- Set font to Input Mono
-config.font = wezterm.font("Input Mono")
+config.font = wezterm.font_with_fallback({
+	-- { family = "Input Mono", weight = "Regular" },
+	{ family = "Input Mono" },
+	{ family = "JetBrainsMono Nerd Font" },
+})
 
 -- Setup status bar to notify when theme should change
 wezterm.on("update-right-status", function(window, pane)
