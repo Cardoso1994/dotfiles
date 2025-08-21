@@ -174,11 +174,64 @@ end
 
 -- Set font to Input Mono
 config.font = wezterm.font_with_fallback({
-	-- { family = "Input Mono", weight = "Regular" },
-	{ family = "Input Mono" },
+	{ family = "Input Mono", weight = "Medium" },
 	{ family = "JetBrainsMono Nerd Font" },
 })
 
+-- Custom key bindings for finer font size control (both macOS and Linux)
+-- Custom key bindings for finer font size control (both macOS and Linux)
+config.keys = {
+	-- macOS bindings (Cmd key) with finer increments
+	{
+		key = "=",
+		mods = "CMD",
+		action = wezterm.action.EmitEvent("increase-font-size-fine"),
+	},
+	{
+		key = "-",
+		mods = "CMD",
+		action = wezterm.action.EmitEvent("decrease-font-size-fine"),
+	},
+	-- Linux bindings (Ctrl key) with finer increments
+	{
+		key = "=",
+		mods = "CTRL",
+		action = wezterm.action.EmitEvent("increase-font-size-fine"),
+	},
+	{
+		key = "-",
+		mods = "CTRL",
+		action = wezterm.action.EmitEvent("decrease-font-size-fine"),
+	},
+	-- Reset font size to default
+	{
+		key = "0",
+		mods = "CMD",
+		action = wezterm.action.ResetFontSize,
+	},
+	{
+		key = "0",
+		mods = "CTRL",
+		action = wezterm.action.ResetFontSize,
+	},
+}
+
+-- Event handlers for fine font size control
+wezterm.on("increase-font-size-fine", function(window, pane)
+	local overrides = window:get_config_overrides() or {}
+	local current_size = overrides.font_size or 12 -- Default to 12 if not set
+	overrides.font_size = current_size + 0.5 -- Increase by 0.5pt
+	window:set_config_overrides(overrides)
+end)
+
+wezterm.on("decrease-font-size-fine", function(window, pane)
+	local overrides = window:get_config_overrides() or {}
+	local current_size = overrides.font_size or 12 -- Default to 12 if not set
+	if current_size > 1 then -- Prevent going too small
+		overrides.font_size = current_size - 0.5 -- Decrease by 0.5pt
+		window:set_config_overrides(overrides)
+	end
+end)
 -- Setup status bar to notify when theme should change
 wezterm.on("update-right-status", function(window, pane)
 	local theme_type = get_theme_based_on_time()
