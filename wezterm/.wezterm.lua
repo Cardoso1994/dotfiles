@@ -181,6 +181,12 @@ config.font = wezterm.font_with_fallback({
 -- Custom key bindings for finer font size control (both macOS and Linux)
 -- Custom key bindings for finer font size control (both macOS and Linux)
 config.keys = {
+	-- Shift+Enter binding for Claude Code
+	{
+		key = "Enter",
+		mods = "SHIFT",
+		action = wezterm.action{SendString="\x1b\r"},
+	},
 	-- macOS bindings (Cmd key) with finer increments
 	{
 		key = "=",
