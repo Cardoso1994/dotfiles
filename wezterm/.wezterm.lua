@@ -172,20 +172,65 @@ else
 	config.color_scheme = "MyDarkTheme"
 end
 
--- Set font to Input Mono
-config.font = wezterm.font_with_fallback({
-	{ family = "Input Mono", weight = "Medium" },
-	{ family = "JetBrainsMono Nerd Font" },
+-- Font settings
+config.font_size = 13.8
+config.warn_about_missing_glyphs = true
+config.freetype_load_target = "HorizontalLcd"
+
+config.font = wezterm.font({
+	family = "Monaspace Neon NF",
+	harfbuzz_features = {
+		"calt",
+		"liga",
+		"dlig",
+		"ss01",
+		"ss02",
+		"ss03",
+		"ss04",
+		"ss05",
+		"ss06",
+		"ss07",
+		"ss08",
+	},
 })
 
--- Custom key bindings for finer font size control (both macOS and Linux)
+config.font_rules = {
+	{ -- Italic
+		intensity = "Normal",
+		italic = true,
+		font = wezterm.font({
+			family = "Monaspace Radon NF",
+			style = "Italic",
+		}),
+	},
+
+	{ -- Bold
+		intensity = "Bold",
+		italic = false,
+		font = wezterm.font({
+			family = "Monaspace Krypton NF",
+			weight = "Bold",
+		}),
+	},
+
+	{ -- Bold Italic
+		intensity = "Bold",
+		italic = true,
+		font = wezterm.font({
+			family = "Monaspace Radon NF",
+			style = "Italic",
+			weight = "Bold",
+		}),
+	},
+}
+
 -- Custom key bindings for finer font size control (both macOS and Linux)
 config.keys = {
 	-- Shift+Enter binding for Claude Code
 	{
 		key = "Enter",
 		mods = "SHIFT",
-		action = wezterm.action{SendString="\x1b\r"},
+		action = wezterm.action({ SendString = "\x1b\r" }),
 	},
 	-- macOS bindings (Cmd key) with finer increments
 	{
