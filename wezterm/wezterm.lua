@@ -150,8 +150,8 @@ local dragon_scheme = {
 	},
 }
 
--- Register the color schemes
-wezterm.add_to_config_reload_watch_list(wezterm.home_dir .. "/.wezterm.lua")
+-- Register the color schemes (watch the actual dotfiles location for changes)
+wezterm.add_to_config_reload_watch_list(wezterm.home_dir .. "/dotfiles/wezterm/wezterm.lua")
 
 -- Apply theme based on time
 local theme_type = get_theme_based_on_time()
@@ -270,14 +270,14 @@ config.keys = {
 -- Event handlers for fine font size control
 wezterm.on("increase-font-size-fine", function(window, pane)
 	local overrides = window:get_config_overrides() or {}
-	local current_size = overrides.font_size or 12 -- Default to 12 if not set
+	local current_size = overrides.font_size or config.font_size
 	overrides.font_size = current_size + 0.5 -- Increase by 0.5pt
 	window:set_config_overrides(overrides)
 end)
 
 wezterm.on("decrease-font-size-fine", function(window, pane)
 	local overrides = window:get_config_overrides() or {}
-	local current_size = overrides.font_size or 12 -- Default to 12 if not set
+	local current_size = overrides.font_size or config.font_size
 	if current_size > 1 then -- Prevent going too small
 		overrides.font_size = current_size - 0.5 -- Decrease by 0.5pt
 		window:set_config_overrides(overrides)
