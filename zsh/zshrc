@@ -70,6 +70,8 @@ ZSH_THEME="jonathan"
 # Add wisely, as too many plugins slow down shell startup.
 
 bindkey -v  # activate zsh vim mode
+bindkey -M viins 'jk' vi-cmd-mode
+bindkey -M viins 'kj' vi-cmd-mode
 plugins=(
     git
     vi-mode
@@ -81,6 +83,10 @@ else
     echo "Oh-my-zsh not found at $ZSH/oh-my-zsh.sh"
     echo "Please install oh-my-zsh or check the path"
 fi
+
+# Use j/k in vi normal mode for history search based on current input
+bindkey -M vicmd 'k' history-beginning-search-backward
+bindkey -M vicmd 'j' history-beginning-search-forward
 
 # User configuration
 # Edit line in vim with ctrl-e:
