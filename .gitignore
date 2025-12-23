@@ -78,3 +78,6 @@ alacritty.yml
 
 # zathura
 zathurarc
+
+# Local secrets
+.zshrc.local

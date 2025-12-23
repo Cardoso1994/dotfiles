@@ -68,7 +68,12 @@ ZSH_THEME="jonathan"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-# plugins=(git)
+
+bindkey -v  # activate zsh vim mode
+plugins=(
+    git
+    vi-mode
+)
 
 if [ -f "$ZSH/oh-my-zsh.sh" ]; then
     source $ZSH/oh-my-zsh.sh
@@ -120,23 +125,12 @@ source $HOME/dotfiles/zsh/alias.zsh
 #
 # eval "$(pyenv init -)"
 
-# enable conda for current user
-# [ -f /opt/miniconda3/etc/profile.d/conda.sh ] && source /opt/miniconda3/etc/profile.d/conda.sh
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/Users/marcoantoniocardosomoreno/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/Users/marcoantoniocardosomoreno/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/Users/marcoantoniocardosomoreno/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/Users/marcoantoniocardosomoreno/miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
-
 . "$HOME/.local/bin/env"
+
+export PATH="/opt/homebrew/bin:$PATH"
+export PATH="/opt/homebrew/:$PATH"
+
+# Source local secrets (not tracked by git)
+if [ -f ~/.zshrc.local ]; then
+    source ~/.zshrc.local
+fi
