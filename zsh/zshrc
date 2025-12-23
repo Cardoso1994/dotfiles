@@ -134,3 +134,71 @@ export PATH="/opt/homebrew/:$PATH"
 if [ -f ~/.zshrc.local ]; then
     source ~/.zshrc.local
 fi
+
+# ============================================
+# Devcontainer Workflow Functions
+# ============================================
+
+# Start devcontainer
+devc-up() {
+  local workspace="${1:-.}"
+  echo "Starting devcontainer for $workspace..."
+  devcontainer up --workspace-folder "$workspace"
+}
+
+# Get interactive shell (with tmux)
+devc-shell() {
+  local workspace="${1:-.}"
+  devcontainer exec --workspace-folder "$workspace" tmux new-session -A -s main
+}
+
+# Open neovim
+devc-nvim() {
+  local workspace="${1:-.}"
+  local file="${2:-}"
+  if [[ -n "$file" ]]; then
+    devcontainer exec --workspace-folder "$workspace" nvim "$file"
+  else
+    devcontainer exec --workspace-folder "$workspace" nvim
+  fi
+}
+
+# Open yazi
+devc-yazi() {
+  local workspace="${1:-.}"
+  devcontainer exec --workspace-folder "$workspace" yazi
+}
+
+# Run arbitrary command
+devc-exec() {
+  local workspace="${1:-.}"
+  shift
+  devcontainer exec --workspace-folder "$workspace" "$@"
+}
+
+# All-in-one: start and connect
+devc() {
+  local workspace="${1:-.}"
+  devc-up "$workspace"
+  devc-shell "$workspace"
+}
+
+# Stop container
+devc-down() {
+  local workspace="${1:-.}"
+  local abs_workspace=$(cd "$workspace" && pwd)
+  local container_id=$(docker ps -q --filter "label=devcontainer.local_folder=$abs_workspace")
+  if [[ -n "$container_id" ]]; then
+    docker stop "$container_id"
+    echo "Container stopped"
+  else
+    echo "No running container found for $abs_workspace"
+  fi
+}
+
+# Aliases for common commands in container
+alias daws="devc-exec . aws"
+alias dgh="devc-exec . gh"
+alias dtofu="devc-exec . tofu"
+alias dclaude="devc-exec . claude"
+alias duv="devc-exec . uv"
