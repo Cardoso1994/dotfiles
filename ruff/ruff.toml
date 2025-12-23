@@ -1,0 +1,31 @@
+# Global Ruff configuration for Google Python Style Guide
+line-length = 80  # Google prefers 80, though some teams use 100
+
+[lint]
+# Enable isort (I), pydocstyle (D), and Google-specific naming (N)
+select = ["E", "F", "I", "D", "N", "UP"]
+
+# Configuration for Google-style docstrings
+[lint.pydocstyle]
+convention = "google"
+
+[lint.isort]
+# 1. Google requires imports to be on separate lines
+force-single-line = true
+
+# 2. Sort 'from' imports alphabetically within their sections
+force-sort-within-sections = true
+
+# 3. Google prefers absolute imports over relative ones
+# This is usually handled by common sense, but 'force-to-top' can help with 
+# specific mandatory imports like 'from __future__ import annotations'
+required-imports = ["from __future__ import annotations"]
+
+# 4. Handle 'as' imports as separate lines
+combine-as-imports = true
+
+[format]
+# Google uses spaces (4), double quotes, and trailing commas
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
