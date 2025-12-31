@@ -3,7 +3,8 @@ line-length = 80  # Google prefers 80, though some teams use 100
 
 [lint]
 # Enable isort (I), pydocstyle (D), and Google-specific naming (N)
-select = ["E", "F", "I", "D", "N", "UP"]
+# ANN rules enforce type annotations (excluding *args/**kwargs)
+select = ["E", "F", "I", "D", "N", "UP", "ANN001", "ANN201", "ANN204", "ANN205", "ANN206"]
 
 # Configuration for Google-style docstrings
 [lint.pydocstyle]
