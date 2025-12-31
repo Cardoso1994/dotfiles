@@ -107,10 +107,12 @@ local lotus_scheme = {
 	},
 	brights = {
 		"#8a8980", -- lotusGray3 (bright black)
-		"#d7474b", -- lotusRed2 (bright red)
+		-- "#d7474b", -- lotusRed2 (bright red)
+		"#c84053", -- lotusRed (red)
 		"#6e915f", -- lotusGreen2 (bright green)
 		"#de9800", -- lotusYellow3 (bright yellow)
-		"#6693bf", -- lotusTeal2 (bright blue)
+		-- "#6693bf", -- lotusTeal2 (bright blue)
+		"#4d699b", -- lotusBlue4 (blue)
 		"#766b90", -- lotusViolet2 (bright magenta)
 		"#5e857a", -- lotusAqua2 (bright cyan)
 		"#43436c", -- lotusInk2 (bright white)
@@ -194,6 +196,16 @@ config.font = wezterm.font({
 	},
 })
 
+config.window_frame = {
+  font = wezterm.font({
+    family = "Monaspace Krypton NF",
+    size = 22.0,
+    weight = 700,
+  }),
+}
+
+config.use_fancy_tab_bar = true
+
 config.font_rules = {
 	{ -- Italic
 		intensity = "Normal",
@@ -209,17 +221,16 @@ config.font_rules = {
 		italic = false,
 		font = wezterm.font({
 			family = "Monaspace Krypton NF",
-			weight = "Bold",
+			weight = 700,
 		}),
 	},
 
-	{ -- Bold Italic
+	{ -- Bold Italic (Krypton for docstrings)
 		intensity = "Bold",
 		italic = true,
 		font = wezterm.font({
-			family = "Monaspace Radon NF",
-			style = "Italic",
-			weight = "Bold",
+			family = "Monaspace Krypton NF",
+			weight = 500, -- Medium weight
 		}),
 	},
 }
