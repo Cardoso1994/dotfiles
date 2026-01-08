@@ -199,9 +199,9 @@ config.font = wezterm.font({
 config.window_frame = {
   font = wezterm.font({
     family = "Monaspace Krypton NF",
-    size = 22.0,
     weight = 700,
   }),
+  font_size = 14,
 }
 
 config.use_fancy_tab_bar = true
