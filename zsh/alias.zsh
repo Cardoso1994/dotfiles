@@ -38,6 +38,11 @@ function y() {
 }
 alias cdc="y"
 
+# Try running nvim with uv if in a uv-managed project, otherwise fallback to system nvim
+nvim() {
+  uv run nvim "$@" || command nvim "$@"
+}
+
 # remove files safely
 alias rm="rm -i"
 
