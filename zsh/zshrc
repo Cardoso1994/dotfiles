@@ -69,9 +69,8 @@ ZSH_THEME="jonathan"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 
-bindkey -v  # activate zsh vim mode
-bindkey -M viins 'jk' vi-cmd-mode
-bindkey -M viins 'kj' vi-cmd-mode
+export KEYTIMEOUT=15
+
 plugins=(
     git
     vi-mode
@@ -84,7 +83,15 @@ else
     echo "Please install oh-my-zsh or check the path"
 fi
 
-# Use j/k in vi normal mode for history search based on current input
+# vi-mode config
+MODE_INDICATOR="%F{blue}[NORMAL]%f"
+RPROMPT='$(vi_mode_prompt_info)'
+bindkey -M viins 'jk' vi-cmd-mode
+bindkey -M viins 'kj' vi-cmd-mode
+
+# Start every new command line in normal mode
+function zle-line-init() { zle -K vicmd; }
+zle -N zle-line-init
 bindkey -M vicmd 'k' history-beginning-search-backward
 bindkey -M vicmd 'j' history-beginning-search-forward
 
