@@ -155,6 +155,71 @@ local dragon_scheme = {
 -- Register the color schemes (watch the actual dotfiles location for changes)
 wezterm.add_to_config_reload_watch_list(wezterm.home_dir .. "/dotfiles/wezterm/wezterm.lua")
 
+-- ============================================================
+-- Theme family: switch between "kanagawa" and "neosolarized"
+-- ============================================================
+local theme_family = "neosolarized"
+
+-- NeoSolarized Dark color scheme
+local neosolarized_dark_scheme = {
+	background = "#002b36",
+	foreground = "#839496",
+	cursor_bg  = "#cb4b16",
+	cursor_fg  = "#002b36",
+	selection_bg = "#073642",
+	selection_fg = "#93a1a1",
+	ansi = {
+		"#073642", -- black   (bg1)
+		"#dc322f", -- red
+		"#859900", -- green
+		"#b58900", -- yellow
+		"#268bd2", -- blue
+		"#d33682", -- magenta (purple)
+		"#2aa198", -- cyan    (aqua)
+		"#657b83", -- white   (fg1)
+	},
+	brights = {
+		"#586e75", -- bright black  (fg2)
+		"#dc322f", -- bright red
+		"#859900", -- bright green
+		"#b58900", -- bright yellow
+		"#268bd2", -- bright blue
+		"#6c71c4", -- bright magenta (violet)
+		"#2aa198", -- bright cyan
+		"#839496", -- bright white   (fg0)
+	},
+}
+
+-- NeoSolarized Light color scheme
+local neosolarized_light_scheme = {
+	background = "#fdf6e3",
+	foreground = "#002b36",
+	cursor_bg  = "#cb4b16",
+	cursor_fg  = "#fdf6e3",
+	selection_bg = "#eee8d5",
+	selection_fg = "#002b36",
+	ansi = {
+		"#eee8d5", -- black   (bg1)
+		"#dc322f", -- red
+		"#859900", -- green
+		"#b58900", -- yellow
+		"#268bd2", -- blue
+		"#d33682", -- magenta (purple)
+		"#2aa198", -- cyan    (aqua)
+		"#839496", -- white   (fg0)
+	},
+	brights = {
+		"#93a1a1", -- bright black  (base1)
+		"#dc322f", -- bright red
+		"#859900", -- bright green
+		"#b58900", -- bright yellow
+		"#268bd2", -- bright blue
+		"#6c71c4", -- bright magenta (violet)
+		"#2aa198", -- bright cyan
+		"#657b83", -- bright white   (fg1)
+	},
+}
+
 -- Apply theme based on time
 local theme_type = get_theme_based_on_time()
 
@@ -164,14 +229,19 @@ config.send_composed_key_when_right_alt_is_pressed = true
 
 -- Set up color scheme
 config.color_schemes = {
-	["MyLightTheme"] = lotus_scheme,
-	["MyDarkTheme"] = dragon_scheme,
+	["KanagawaLight"] = lotus_scheme,
+	["KanagawaDark"]  = dragon_scheme,
+	["SolarizedLight"] = neosolarized_light_scheme,
+	["SolarizedDark"]  = neosolarized_dark_scheme,
 }
 
+local light_theme = theme_family == "kanagawa" and "KanagawaLight" or "SolarizedLight"
+local dark_theme  = theme_family == "kanagawa" and "KanagawaDark"  or "SolarizedDark"
+
 if theme_type == "Light" then
-	config.color_scheme = "MyLightTheme"
+	config.color_scheme = light_theme
 else
-	config.color_scheme = "MyDarkTheme"
+	config.color_scheme = dark_theme
 end
 
 -- Font settings
@@ -300,8 +370,8 @@ wezterm.on("update-right-status", function(window, pane)
 	local current_theme = window:effective_config().color_scheme
 
 	if
-		(theme_type == "Light" and current_theme ~= "MyLightTheme")
-		or (theme_type == "Dark" and current_theme ~= "MyDarkTheme")
+		(theme_type == "Light" and current_theme ~= light_theme)
+		or (theme_type == "Dark" and current_theme ~= dark_theme)
 	then
 		window:set_right_status("Theme change needed - please reload configuration")
 	else
