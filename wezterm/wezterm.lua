@@ -152,20 +152,83 @@ local dragon_scheme = {
 	},
 }
 
+-- Solawarm Dark color scheme
+-- Kanagawa Dragon bg + Solarized CIELAB structure + Dragon-inspired accents
+local solawarm_dark_scheme = {
+	background = "#181616", -- base03 (Dragon bg)
+	foreground = "#808580", -- base0  (body text)
+	cursor_bg = "#8c6f5d", -- orange
+	cursor_fg = "#181616",
+	selection_bg = "#26231f", -- base02
+	selection_fg = "#968d81", -- base1  (emphasized)
+	-- Solarized canonical 16-color mapping (same slot convention as NeoSolarized)
+	ansi = {
+		"#26231f", -- 0  black   base02  (selection bg)
+		"#a7625d", -- 1  red
+		"#859577", -- 2  green
+		"#9d8e6e", -- 3  yellow
+		"#698a99", -- 4  blue
+		"#7f7280", -- 5  magenta
+		"#819593", -- 6  cyan
+		"#eae3c2", -- 7  white   base2   (light bg_hl — Solarized convention)
+	},
+	brights = {
+		"#181616", -- 8  brblack base03  (darkest bg)
+		"#8c6f5d", -- 9  brred   orange
+		"#5c5f5c", -- 10 brgreen base01  (comments/deemph)
+		"#726a62", -- 11 bryellow base00 (secondary fg)
+		"#808580", -- 12 brblue  base0   (primary fg)
+		"#71798a", -- 13 brmag   violet
+		"#968d81", -- 14 brcyan  base1   (emphasized)
+		"#f9f1d0", -- 15 brwhite base3   (light bg)
+	},
+}
+
+-- Solawarm Light color scheme
+-- Solarized/Lotus midpoint bg + same Dragon hues, CIELAB-inverted for cream
+local solawarm_light_scheme = {
+	background = "#f9f1d0", -- base3  (warm cream bg)
+	foreground = "#717571", -- base00 (body text)
+	cursor_bg = "#9c6e50", -- orange (visible on light bg)
+	cursor_fg = "#f9f1d0",
+	selection_bg = "#eae3c2", -- base2  (bg_hl)
+	selection_fg = "#716556", -- base01 (emphasized)
+	ansi = {
+		"#eae3c2", -- 0  black   base2   (bg_hl — Solarized light convention)
+		"#a66763", -- 1  red
+		"#4e663d", -- 2  green
+		"#6f6031", -- 3  yellow
+		"#0c718f", -- 4  blue
+		"#8f6a94", -- 5  magenta
+		"#026a68", -- 6  cyan
+		"#717571", -- 7  white   base00  (body text)
+	},
+	brights = {
+		"#f9f1d0", -- 8  brblack base3   (bg itself)
+		"#9c6e50", -- 9  brred   orange
+		"#979b97", -- 10 brgreen base1   (comments/deemph)
+		"#716556", -- 11 bryellow base01 (emphasized)
+		"#717571", -- 12 brblue  base00  (primary fg)
+		"#5875a3", -- 13 brmag   violet
+		"#a59888", -- 14 brcyan  base1   (emphasized)
+		"#181616", -- 15 brwhite base03  (Dragon dark bg — darkest anchor)
+	},
+}
+
 -- Register the color schemes (watch the actual dotfiles location for changes)
 wezterm.add_to_config_reload_watch_list(wezterm.home_dir .. "/dotfiles/wezterm/wezterm.lua")
 
 -- ============================================================
--- Theme family: switch between "kanagawa" and "neosolarized"
+-- Theme family: "solawarm" | "kanagawa" | "neosolarized"
 -- ============================================================
-local theme_family = "neosolarized"
+local theme_family = "solawarm"
 
 -- NeoSolarized Dark color scheme
 local neosolarized_dark_scheme = {
 	background = "#002b36",
 	foreground = "#839496",
-	cursor_bg  = "#cb4b16",
-	cursor_fg  = "#002b36",
+	cursor_bg = "#cb4b16",
+	cursor_fg = "#002b36",
 	selection_bg = "#073642",
 	selection_fg = "#93a1a1",
 	ansi = {
@@ -194,8 +257,8 @@ local neosolarized_dark_scheme = {
 local neosolarized_light_scheme = {
 	background = "#fdf6e3",
 	foreground = "#002b36",
-	cursor_bg  = "#cb4b16",
-	cursor_fg  = "#fdf6e3",
+	cursor_bg = "#cb4b16",
+	cursor_fg = "#fdf6e3",
 	selection_bg = "#eee8d5",
 	selection_fg = "#002b36",
 	ansi = {
@@ -229,14 +292,22 @@ config.send_composed_key_when_right_alt_is_pressed = true
 
 -- Set up color scheme
 config.color_schemes = {
+	["SolawarmDark"] = solawarm_dark_scheme,
+	["SolawarmLight"] = solawarm_light_scheme,
 	["KanagawaLight"] = lotus_scheme,
-	["KanagawaDark"]  = dragon_scheme,
+	["KanagawaDark"] = dragon_scheme,
 	["SolarizedLight"] = neosolarized_light_scheme,
-	["SolarizedDark"]  = neosolarized_dark_scheme,
+	["SolarizedDark"] = neosolarized_dark_scheme,
 }
 
-local light_theme = theme_family == "kanagawa" and "KanagawaLight" or "SolarizedLight"
-local dark_theme  = theme_family == "kanagawa" and "KanagawaDark"  or "SolarizedDark"
+local light_theme, dark_theme
+if theme_family == "solawarm" then
+	light_theme, dark_theme = "SolawarmLight", "SolawarmDark"
+elseif theme_family == "kanagawa" then
+	light_theme, dark_theme = "KanagawaLight", "KanagawaDark"
+else
+	light_theme, dark_theme = "SolarizedLight", "SolarizedDark"
+end
 
 if theme_type == "Light" then
 	config.color_scheme = light_theme
@@ -250,7 +321,8 @@ config.warn_about_missing_glyphs = true
 config.freetype_load_target = "HorizontalLcd"
 
 config.font = wezterm.font({
-	family = "Monaspace Neon NF",
+	-- family = "Monaspace Neon NF",
+	family = "Monaspace Krypton NF",
 	harfbuzz_features = {
 		"calt",
 		"liga",
@@ -267,11 +339,11 @@ config.font = wezterm.font({
 })
 
 config.window_frame = {
-  font = wezterm.font({
-    family = "Monaspace Krypton NF",
-    weight = 700,
-  }),
-  font_size = 14,
+	font = wezterm.font({
+		family = "Monaspace Krypton NF",
+		weight = 700,
+	}),
+	font_size = 14,
 }
 
 config.use_fancy_tab_bar = true
