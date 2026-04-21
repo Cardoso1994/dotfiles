@@ -1,0 +1,20 @@
+{
+  "enabledPlugins": {
+    "atlassian@claude-plugins-official": true
+  },
+  "alwaysThinkingEnabled": true,
+  "effortLevel": "medium",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "WebSearch|WebFetch",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo 'IMPORTANT: Always prefer official documentation and authoritative primary sources. For software/APIs use official docs sites. For cloud use provider docs (docs.aws.amazon.com, cloud.google.com/docs, learn.microsoft.com). For academic topics use peer-reviewed sources, institutional sites, or established encyclopedias. Avoid blogs, Stack Overflow, or tutorial sites as primary sources. Always return the source URL and title.'"
+          }
+        ]
+      }
+    ]
+  }
+}
