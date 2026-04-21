@@ -189,27 +189,27 @@ local solawarm_dark_scheme = {
 local solawarm_light_scheme = {
 	background = "#f9f1d0", -- base3  (warm cream bg)
 	foreground = "#717571", -- base00 (body text)
-	cursor_bg = "#9c6e50", -- orange (visible on light bg)
+	cursor_bg = "#9e6d4d", -- orange (visible on light bg)
 	cursor_fg = "#f9f1d0",
 	selection_bg = "#eae3c2", -- base2  (bg_hl)
 	selection_fg = "#716556", -- base01 (emphasized)
 	ansi = {
 		"#eae3c2", -- 0  black   base2   (bg_hl — Solarized light convention)
-		"#a66763", -- 1  red
-		"#4e663d", -- 2  green
-		"#6f6031", -- 3  yellow
-		"#0c718f", -- 4  blue
-		"#8f6a94", -- 5  magenta
-		"#026a68", -- 6  cyan
+		"#a96661", -- 1  red     C*=30
+		"#4c6738", -- 2  green   C*=30
+		"#6f5d2d", -- 3  yellow  C*=30
+		"#0c728f", -- 4  blue    C*=28 (gamut cap)
+		"#916996", -- 5  magenta C*=30
+		"#026a65", -- 6  cyan    C*=27 (gamut cap)
 		"#717571", -- 7  white   base00  (body text)
 	},
 	brights = {
 		"#f9f1d0", -- 8  brblack base3   (bg itself)
-		"#9c6e50", -- 9  brred   orange
+		"#9e6d4d", -- 9  brred   orange  C*=30
 		"#979b97", -- 10 brgreen base1   (comments/deemph)
 		"#716556", -- 11 bryellow base01 (emphasized)
 		"#717571", -- 12 brblue  base00  (primary fg)
-		"#5875a3", -- 13 brmag   violet
+		"#5575a7", -- 13 brmag   violet  C*=30
 		"#a59888", -- 14 brcyan  base1   (emphasized)
 		"#181616", -- 15 brwhite base03  (Dragon dark bg — darkest anchor)
 	},
