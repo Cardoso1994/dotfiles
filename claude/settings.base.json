@@ -5,6 +5,18 @@
   "alwaysThinkingEnabled": true,
   "effortLevel": "medium",
   "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/ruff-format.sh",
+            "statusMessage": "Formatting Python file with ruff..."
+          }
+        ]
+      }
+    ],
     "PreToolUse": [
       {
         "matcher": "WebSearch|WebFetch",

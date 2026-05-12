@@ -22,25 +22,46 @@ if [[ ! -f "$PROFILE_FILE" ]]; then
   exit 1
 fi
 
-# ── Skills symlink ────────────────────────────────────────────────────────────
+# ── Symlinks (skills, hooks) ──────────────────────────────────────────────────
 
-SKILLS_TARGET="$DOTFILES_CLAUDE/skills"
-SKILLS_LINK="$CLAUDE_DIR/skills"
+symlink_dir() {
+  local target="$1"
+  local link="$2"
+  local label="$3"
 
-if [[ -L "$SKILLS_LINK" ]]; then
-  current_target="$(readlink "$SKILLS_LINK")"
-  if [[ "$current_target" != "$SKILLS_TARGET" ]]; then
-    echo "Updating skills symlink: $SKILLS_LINK -> $SKILLS_TARGET"
-    ln -sf "$SKILLS_TARGET" "$SKILLS_LINK"
+  if [[ -L "$link" ]]; then
+    current_target="$(readlink "$link")"
+    if [[ "$current_target" != "$target" ]]; then
+      echo "Updating $label symlink: $link -> $target"
+      ln -sf "$target" "$link"
+    else
+      echo "$label symlink already correct."
+    fi
+  elif [[ -d "$link" ]]; then
+    echo "Error: $link is a real directory, not a symlink. Move it first."
+    exit 1
   else
-    echo "Skills symlink already correct."
+    echo "Creating $label symlink: $link -> $target"
+    ln -s "$target" "$link"
   fi
-elif [[ -d "$SKILLS_LINK" ]]; then
-  echo "Error: $SKILLS_LINK is a real directory, not a symlink. Move it first."
-  exit 1
-else
-  echo "Creating skills symlink: $SKILLS_LINK -> $SKILLS_TARGET"
-  ln -s "$SKILLS_TARGET" "$SKILLS_LINK"
+}
+
+symlink_dir "$DOTFILES_CLAUDE/skills"  "$CLAUDE_DIR/skills"  "skills"
+symlink_dir "$DOTFILES_CLAUDE/hooks"   "$CLAUDE_DIR/hooks"   "hooks"
+
+# Memory lives under a project path derived from $HOME (slashes → dashes)
+PROJECT_KEY=$(echo "$HOME" | sed 's|/|-|g')
+
+MEMORY_LINK="$CLAUDE_DIR/projects/${PROJECT_KEY}/memory"
+mkdir -p "$(dirname "$MEMORY_LINK")"
+symlink_dir "$DOTFILES_CLAUDE/memory" "$MEMORY_LINK" "memory"
+
+# Mirror memory into the personal Claude account if its data dir exists
+CLAUDE_PERSONAL_DIR="$HOME/.claude-personal"
+if [[ -d "$CLAUDE_PERSONAL_DIR" ]]; then
+  MEMORY_LINK_PERSONAL="$CLAUDE_PERSONAL_DIR/projects/${PROJECT_KEY}/memory"
+  mkdir -p "$(dirname "$MEMORY_LINK_PERSONAL")"
+  symlink_dir "$DOTFILES_CLAUDE/memory" "$MEMORY_LINK_PERSONAL" "memory (personal account)"
 fi
 
 # ── Merge settings ────────────────────────────────────────────────────────────
