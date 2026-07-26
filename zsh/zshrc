@@ -221,3 +221,7 @@ alias claude-work="CLAUDE_CONFIG_DIR=~/.claude claude"
 
 # Personal Account
 alias claude-pers="CLAUDE_CONFIG_DIR=~/.claude-personal claude"
+
+
+# Added by Antigravity CLI installer
+export PATH="/Users/marcoantoniocardosomoreno/.local/bin:$PATH"
