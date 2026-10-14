@@ -1,8 +1,10 @@
 # Loop (ORBIT) interview template
 
+Write in first person, in my voice ("I asked", "I followed up", "I could not validate"). Never write "the interviewer".
+
 A loop session is a behavioral interview on one or more ORBIT values. Avahi's BambooHR guidance: cover each ORBIT value assessed, include specific candidate examples in abbreviated STAR format, close with a recommendation. The format below keeps that and adds the ratings and evidence rules from SKILL.md.
 
-During the interview the interviewer captures notes per question (value, question number, abbreviated STAR, follow-up probes). The write-up turns those notes plus the transcript into the structure below. Use the same "Q:" and "Response and Observations" blocks as the technical template so both types read alike in BambooHR.
+During the interview I capture notes per question (value, question number, abbreviated STAR, follow-up probes). The write-up turns those notes plus the transcript into the structure below. Use the same "Q:" and "Response and Observations" blocks as the technical template so both types read alike in BambooHR.
 
 ```
 SUMMARY
@@ -28,7 +30,7 @@ DETAILED FEEDBACK
 Situation and Task: <One or two sentences. Name the client, project, team size, stakes.>
 Action: <What the candidate personally did. Separate "I" from "we". Note if a follow-up was needed to get to personal actions.>
 Result: <Outcome, with the metric or concrete consequence if given. Note if no result was offered.>
-Follow-ups: <Probes you asked and what the candidate answered. Omit if none.>
+Follow-ups: <Probes I asked and what the candidate answered. Omit if none.>
 Observation: <One plain verdict: ownership and depth versus the level, and versus the CV claim.>
 
 [ Q2 ] ...
@@ -61,7 +63,7 @@ Use the bank's own "what this looks like in practice" lists as the yardstick (de
 
 ## Writing rules specific to loop notes
 
-- Keep STAR labels short. If the candidate did not give a Result, write "No result offered, asked in follow-up: <answer>".
+- Keep STAR labels short. If the candidate did not give a Result, write "No result offered, I asked in follow-up: <answer>".
 - Distinguish what the candidate did from what the team did. This is the most common reason an answer is below bar.
 - If the same example is reused across values, say so.
 - Do not rate a value the candidate was not asked about, even if an example touched it in passing.

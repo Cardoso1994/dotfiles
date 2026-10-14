@@ -5,7 +5,7 @@ description: Write Avahi interview feedback (BambooHR-ready) from a transcript a
 
 # Avahi Interview Feedback
 
-Turns a transcript plus the interviewer's rough observations into a feedback file the hiring team can act on. The reader will make a hiring decision from it without re-watching the interview, so every claim has to be traceable to something the candidate said or did.
+Turns a transcript plus my (the interviewer's) rough observations into a feedback file the hiring team can act on. The reader will make a hiring decision from it without re-watching the interview, so every claim has to be traceable to something the candidate said or did.
 
 ## Step 1: Identify the interview type
 
@@ -20,7 +20,7 @@ Read the matching template before writing. For exact question wording, or to pre
 
 ## Step 2: Gather inputs
 
-Needed: transcript (or detailed notes), the interviewer's rough observations, the role and level (junior, mid, senior, manager). Strongly wanted: the interviewer's rating per section and their recommendation. If ratings or the recommendation are missing, infer ratings from the interviewer's comments and say so at the end. Never infer the recommendation silently: ask.
+Needed: transcript (or detailed notes), my rough observations, the role and level (junior, mid, senior, manager). Strongly wanted: my rating per section and my recommendation. If ratings or the recommendation are missing, infer ratings from my comments and say so at the end. Never infer the recommendation silently: ask.
 
 Special instructions to honor: output language, integrity concerns, process recommendation.
 
@@ -30,17 +30,19 @@ One Markdown file named `<Candidate_Name>_Interview_Feedback.md`. Present it, th
 
 ## Rules (they apply to both types)
 
-**Ratings.** Only At Bar, Above Bar, Below Bar, Inconclusive. Use Inconclusive when the evaluation could not be completed fairly (language barrier, nerves, technical problems, time) and say why in the section text. Use Invalidated only for documented integrity cases. The interviewer's ratings are ground truth: never overrule them. The rating goes in the section header. Per-question ratings only when the interviewer gave them or answers within a section differed a lot.
+**Voice (hard rule).** The user is the interviewer, and the file is their own write-up. Write everything in first person ("I asked", "I had to prompt", "I am inclined to proceed", "I could not validate") in the user's own writing style: plain, direct, short sentences. Never refer to the interviewer in third person ("the interviewer said", "the interviewer could not validate", "per the interviewer's notes", "the interviewer's judgment"), and never narrate the notes as someone else's. The candidate is the only third party in the text. Observations I made are stated as mine ("I noticed", "I did not see"). If the user's past write-ups or notes are available, mirror their phrasing and rhythm. Before presenting, scan the draft for "interviewer" and rewrite any hit.
 
-**Recommendation.** One of: Proceed, Proceed with secondary technical interview, Proceed with reservations, Do not proceed. It comes from the interviewer. Do not soften or harden it. For serious integrity cases add "Flagged for blacklist, no future re-interview." directly under it.
+**Ratings.** Only At Bar, Above Bar, Below Bar, Inconclusive. Use Inconclusive when the evaluation could not be completed fairly (language barrier, nerves, technical problems, time) and say why in the section text. Use Invalidated only for documented integrity cases. My ratings from the notes are ground truth: never overrule them. The rating goes in the section header. Per-question ratings only when I gave them or answers within a section differed a lot.
 
-**Evidence.** Every positive or negative statement carries an example: a named project, tool, bug, metric or phrase. Report what was said in order, including when a follow-up or redirect was needed, and when the interviewer had to supply the answer. Compare against the CV claim, the expected answer (question bank for ORBIT, interviewer's reference for tech) and the level expectation. Reuse the interviewer's own phrasing when it is already good. This matters because vague praise is useless in a debrief and an unsupported negative is unfair to the candidate.
+**Recommendation.** One of: Proceed, Proceed with secondary technical interview, Proceed with reservations, Do not proceed. It comes from me, the user. Do not soften or harden it. For serious integrity cases add "Flagged for blacklist, no future re-interview." directly under it.
+
+**Evidence.** Every positive or negative statement carries an example: a named project, tool, bug, metric or phrase. Report what was said in order, including when a follow-up or redirect was needed, and when I had to supply the answer. Compare against the CV claim, the expected answer (question bank for ORBIT, my reference for tech) and the level expectation. Reuse my own phrasing from the notes when it is already good. This matters because vague praise is useless in a debrief and an unsupported negative is unfair to the candidate.
 
 **Coverage.** Never invent coverage. Only write up values, questions and tests that were actually asked. Omit uncovered sections and mention why in the summary only if it affects the decision.
 
-**Tone.** Plain, factual, short sentences. No em dashes in body text: use commas, periods or parentheses (em dashes are allowed only in section headers like `SECTION 1: ORBIT VALUES — AT BAR`). English unless told otherwise, even if the interview was in Spanish. Use "Candidate" or the first name, consistently. State process problems neutrally and do not speculate about motives unless the interviewer's notes explicitly raise an integrity concern.
+**Tone.** Plain, factual, short sentences. No em dashes in body text: use commas, periods or parentheses (em dashes are allowed only in section headers like `SECTION 1: ORBIT VALUES — AT BAR`). English unless told otherwise, even if the interview was in Spanish. Use "Candidate" or the first name, consistently. State process problems neutrally and do not speculate about motives unless my notes explicitly raise an integrity concern.
 
-**Integrity cases (rare).** Only when the interviewer documents it. Add a note under the affected section headers saying responses are invalidated. Facts first (timeline, what was on screen, what was said, what records show), then the interviewer's inference. Factual, not emotional.
+**Integrity cases (rare).** Only when my notes document it. Add a note under the affected section headers saying responses are invalidated. Facts first (timeline, what was on screen, what was said, what records show), then my inference. Factual, not emotional.
 
 ## ORBIT values (current names)
 

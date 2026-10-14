@@ -49,6 +49,25 @@ symlink_dir() {
 symlink_dir "$DOTFILES_CLAUDE/skills"  "$CLAUDE_DIR/skills"  "skills"
 symlink_dir "$DOTFILES_CLAUDE/hooks"   "$CLAUDE_DIR/hooks"   "hooks"
 
+# Keybindings are one shared file for both accounts
+symlink_file() {
+  local target="$1"
+  local link="$2"
+
+  if [[ -e "$link" && ! -L "$link" ]]; then
+    echo "Error: $link is a real file, not a symlink. Move it first."
+    exit 1
+  fi
+  echo "Linking keybindings: $link -> $target"
+  ln -sfn "$target" "$link"
+}
+
+symlink_file "$DOTFILES_CLAUDE/keybindings.json" "$CLAUDE_DIR/keybindings.json"
+if [[ -d "$HOME/.claude-personal" ]]; then
+  symlink_file "$DOTFILES_CLAUDE/keybindings.json" \
+    "$HOME/.claude-personal/keybindings.json"
+fi
+
 # Memory lives under a project path derived from $HOME (slashes → dashes)
 PROJECT_KEY=$(echo "$HOME" | sed 's|/|-|g')
 

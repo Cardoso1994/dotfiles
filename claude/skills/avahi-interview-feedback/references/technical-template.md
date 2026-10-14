@@ -1,13 +1,13 @@
 # Technical interview template
 
-Copy the block, replace everything in <angle brackets>, delete sections that were not covered.
+All text is first person (I asked, I had to prompt, I could not validate). Never write "the interviewer". Copy the block, replace everything in <angle brackets>, delete sections that were not covered.
 
 ```
 SUMMARY
 
-<Sentence 1: overall verdict tied to the role level (junior, mid, senior).>
+<Sentence 1: my overall verdict tied to the role level (junior, mid, senior), first person, e.g. "I am inclined to proceed".>
 
-<Sentence(s) 2-3: the single most important strength and the single most important concern, each with the reason. Mention the exercise outcome and any process issue that affected the evaluation (language barrier, nerves, time, technical problems).>
+<Sentence(s) 2-3: the single most important strength and the single most important concern, each with the reason. Mention the exercise outcome and any process issue that affected my evaluation (language barrier, nerves, time, technical problems).>
 
 <Optional sentence: personal or cultural fit remark.>
 
@@ -29,7 +29,7 @@ Candidate was asked the following questions:
 Q: "<Question as asked, anchored to a named project or claim from the CV.>"
 
 Response and Observations:
-<What the candidate said, in order. Name the project, tool, metric or decision. Say whether a follow-up was needed. End with one plain verdict sentence versus the CV and the level expectation.>
+<What the candidate said, in order. Name the project, tool, metric or decision. Say whether I needed a follow-up. End with one plain verdict sentence versus the CV and the level expectation.>
 
 [repeat per value, and per question when a value had more than one (Q1, Q2)]
 
@@ -39,7 +39,7 @@ SECTION 2: TECH QUESTIONS (BREADTH) — <rating>
 
 <1-2 sentences: how many questions were asked, how many fully answered, and how that compares to the level.>
 
-[<Topic>] <What the candidate answered. State correct, partial or incorrect, and quote the key misconception if there was one.>
+[<Topic>] <What the candidate answered. State correct, partial or incorrect (my call), and quote the key misconception if there was one.>
 
 [repeat per question actually asked, one paragraph each]
 
@@ -63,13 +63,13 @@ Response and Observations:
 [ Question N: Closing, confrontational ]
 ...
 
-(Per-question rating, e.g. "Question 3: Escalating - Below Bar", only when the interviewer gave one or the difference matters.)
+(Per-question rating, e.g. "Question 3: Escalating - Below Bar", only when I gave one or the difference matters.)
 
 ------------------------------------------------------------------------------------
 
 SECTION 4: TECHNICAL EXERCISE — <rating>
 
-<2-4 sentences: the exercise (name it), the outcome, the interviewer's judgment. If inconclusive, say what blocked the evaluation and what the interviewer believes would have happened with more time or different conditions.>
+<2-4 sentences: the exercise (name it), the outcome, my judgment. If inconclusive, say what blocked the evaluation and what I believe would have happened with more time or different conditions.>
 
 Detailed breakdown (in order of events):
 
@@ -77,7 +77,7 @@ Detailed breakdown (in order of events):
 - <Approach: read the code, README or docs first? Planned before typing?>
 - <Progress: what worked, what did not, where they got stuck.>
 - <Thinking out loud and communication.>
-- <Use of tools, documentation or help, and response to interviewer hints.>
+- <Use of tools, documentation or help, and response to my hints.>
 - <How the exercise ended and the stated next step.>
 
 ------------------------------------------------------------------------------------

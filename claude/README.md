@@ -10,6 +10,7 @@ dotfiles/claude/
 ├── skills/                    # Personal skills (shared across all accounts)
 │   ├── authoritative-sources/ # Always cite official/authoritative sources
 │   └── python-style-guide/    # Google style guide + functional principles
+├── keybindings.json           # Shared by both accounts (symlinked)
 ├── settings.base.json         # Settings shared by all accounts
 ├── settings.work.json         # Work account overrides (permissions, etc.)
 ├── settings.pers.json         # Personal account overrides
@@ -30,6 +31,12 @@ mkdir dotfiles/claude/skills/my-skill
 # create dotfiles/claude/skills/my-skill/SKILL.md
 # restart Claude Code
 ```
+
+### Keybindings
+
+`~/.claude/keybindings.json` and `~/.claude-personal/keybindings.json` are both
+symlinks to `dotfiles/claude/keybindings.json`, so one edit applies to both
+accounts. Claude Code only reads it at startup; restart after editing.
 
 ### Settings
 

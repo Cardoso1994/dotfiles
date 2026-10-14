@@ -2,6 +2,7 @@
   "enabledPlugins": {
     "atlassian@claude-plugins-official": true
   },
+  "theme": "auto",
   "alwaysThinkingEnabled": true,
   "effortLevel": "medium",
   "hooks": {

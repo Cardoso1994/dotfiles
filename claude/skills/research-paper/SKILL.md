@@ -18,6 +18,9 @@ Different sections fail in different ways, so each gets a different toolset and 
 | Results | Numbers that trace to nothing, over-interpretation, weak statistics | Provenance, statistics, claim-to-evidence tracing |
 | Discussion, Limitations, Conclusions | Summary instead of analysis, no contrast with literature, conclusions stronger than evidence | Critical synthesis against the literature and the actual results |
 
+## Related skill: research-advisor
+If the user is not writing but evaluating a new idea, method or architecture change (feasibility, "has anyone done this", comparison against alternative routes, strength of a contribution), use `research-advisor` instead. Its search log and comparison matrix feed this skill's Related Work and novelty claims; when it ran in this project, read its notes (e.g., `docs/research_notes/`) and reuse its sources rather than searching again.
+
 ## Step 0. Intake (mandatory, never skip, never infer)
 Before any reading or writing, use AskUserQuestion, even if the user's message seems to imply an answer:
 
