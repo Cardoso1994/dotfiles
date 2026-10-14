@@ -58,7 +58,7 @@ symlink_file() {
     echo "Error: $link is a real file, not a symlink. Move it first."
     exit 1
   fi
-  echo "Linking keybindings: $link -> $target"
+  echo "Linking file: $link -> $target"
   ln -sfn "$target" "$link"
 }
 
@@ -66,6 +66,12 @@ symlink_file "$DOTFILES_CLAUDE/keybindings.json" "$CLAUDE_DIR/keybindings.json"
 if [[ -d "$HOME/.claude-personal" ]]; then
   symlink_file "$DOTFILES_CLAUDE/keybindings.json" \
     "$HOME/.claude-personal/keybindings.json"
+fi
+
+# Global instructions are one shared file for both accounts
+symlink_file "$DOTFILES_CLAUDE/CLAUDE.md" "$CLAUDE_DIR/CLAUDE.md"
+if [[ -d "$HOME/.claude-personal" ]]; then
+  symlink_file "$DOTFILES_CLAUDE/CLAUDE.md" "$HOME/.claude-personal/CLAUDE.md"
 fi
 
 # Memory lives under a project path derived from $HOME (slashes → dashes)
