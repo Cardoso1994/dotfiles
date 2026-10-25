@@ -1,8 +1,11 @@
 # Synthesis: turning the lens reports into one review
 
-You hold the six findings reports (FEA, PLN, CON, ACC, COM, SEC) and, when it ran, the
-delivery watchlist (DLV). The watchlist is a different kind of report: internal
-heads-ups with an act-by, not graded findings. Do this in order.
+You hold the engagement briefing, the six findings reports (FEA, PLN, CON, ACC, COM, SEC),
+the LOE alignment report (LOE) when an LOE existed, and, only in the final round, the
+delivery watchlist (DLV). The watchlist runs after you have merged and ranked the
+findings (step 4b of SKILL.md), so sections 1 to 4 below run first without it and are
+re-applied for the watchlist items once it returns. It is a different kind of report:
+internal heads-ups with an act-by, not graded findings. Do this in order.
 
 ## 1. Gate
 
@@ -29,6 +32,12 @@ heads-ups with an act-by, not graded findings. Do this in order.
 - **Resolve disagreements.** If two lenses conflict (one says an integration is fine, the
   other says it is not), re-verify with the AWS Knowledge MCP or the vendor doc yourself
   and report which is right.
+- **LOE overlaps.** Capacity and calendar numbers appear in both PLN and LOE. Keep the
+  LOE arithmetic and table, keep PLN's reading of what it does to the critical path, and
+  report one finding listing both IDs. A SoW commitment with no LOE hours is a COM or CON
+  finding only if the SoW text itself is inconsistent; otherwise it is an LOE finding.
+  When the LOE and the SoW state different totals, report which one the arithmetic
+  supports and which document must change.
 - **Rank.** CRITICAL, MAJOR, MINOR as defined in `lenses/_format.md`. When in doubt
   between CRITICAL and MAJOR, ask: can Avahi sign this as written and still deliver it?
   If not, CRITICAL.
@@ -75,6 +84,13 @@ Write in the voice of a peer who wants the SoW to succeed: direct, specific, quo
 SoW, give the replacement wording when it is short. Do not invent; every item traces to a
 lens finding or a verification you ran.
 
+0. **Engagement briefing recap** (before the header's verdict, internal; the user has
+   already read the full briefing): customer and size, use case and what is at stake in a
+   few lines, the headlines from the presales
+   call notes (motivation, funding, other ideas, future plans, prior issues) or "no
+   presales notes supplied", and the section D weighting. Where a finding is more or less
+   severe because of the briefing, say so in that finding's Why it matters, with the
+   briefing source.
 1. **Header:** SoW title and link, review date, lenses run, and one line on AWS
    verification ("N AWS claims checked through the AWS Knowledge MCP: X confirmed,
    Y contradicted, Z insufficient, W unverifiable"). If the MCP was unavailable, say it
@@ -90,8 +106,14 @@ lens finding or a verification you ran.
 6. **Plan check:** dependency problems (cycles, forward edges), timeline arithmetic, and
    the conditional estimate from PLN ("holds if ...; otherwise N weeks"), and any
    staging or splitting options with what each removes.
-7. **Delivery watchlist (internal, for the engineering team)**, only if DLV ran. Label it
-   internal. Group by Act-by (the SoW's week or phase labels). Each item: tag, heads-up,
+   **LOE check** (only if the LOE lens ran): the hours reconciliation table, the SoW-to-LOE
+   gaps (unfunded commitments, unscoped tasks), and the role x week table trimmed to the
+   rows that carry a flag (over 40 hours, over the stated ceiling, single person with
+   more than one person's hours, idle booking), with the one or two edits that would
+   align the SoW and the LOE.
+7. **Delivery watchlist (internal, for the engineering team)**, only if DLV ran (final
+   round). If it did not, write one line: "Delivery watchlist held until the final round
+   (open blockers: ...); say the word to run it." Label it internal. Group by Act-by (the SoW's week or phase labels). Each item: tag, heads-up,
    do, basis, with the retrieval date on AWS facts. Then the table of things the
    customer may ask for (ask, source, SoW status, prepared answer). Say how many items
    are DOCUMENTED, SOURCE-NOTE or INFERRED. If the context pack was empty, say that the
@@ -126,7 +148,8 @@ produce it on request, or offer it in one line:
   appendix. Lead with a two-line opener that credits what is solid.
 - Keep the tone peer-to-peer. Questions rather than verdicts where the author may know
   something the document does not say.
-- Do not include watchlist items; they are internal and have their own version below.
+- Do not include watchlist items or briefing content; they are internal and the
+  watchlist has its own version below.
 - Never post it. Show it to the user and let them send it.
 
 ## 7. Delivery-notes version (sales-to-delivery style)

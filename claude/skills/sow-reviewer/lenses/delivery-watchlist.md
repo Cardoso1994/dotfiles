@@ -72,6 +72,11 @@ owning lens carry the finding.
   transcripts, call notes, chat threads, ADRs, requirements, backlog and any supplied POC
   repository. Read the files it lists. If it is empty, say so in the first line of your
   report and limit the Customer-ask section to what the SoW text itself implies.
+- The **engagement briefing** `{WORK}/briefing.md` (customer, stakes, presales call
+  insights) and, when it exists, the final ranked findings `{WORK}/findings_final.md`.
+  You run in the final round: do not repeat a finding, point at it. Use the briefing to
+  decide what matters most to this customer (a funding date, a past partner failure, a
+  promise made on a call) and to attribute customer asks.
 
 ## Method
 

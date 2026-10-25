@@ -171,6 +171,33 @@ usual fix.
 - Regulated-data design that names services without checking they are eligible under the
   relevant agreement; verify per service in AWS documentation.
 
+## LOE alignment
+
+- **Commitment without hours.** The SoW promises two UAT rounds, a rollback rehearsal and
+  training; the LOE has a single "release" row of a few hours and no fix interval. Fix:
+  add the rows, or soften the SoW to what is funded.
+- **Hours without a commitment.** A package of tasks exists in the LOE that the SoW lists
+  as out of scope, or never mentions. Either it is hidden scope or a stale row.
+- **Hours per role are not hours per person.** A role showing 55 to 60 hours a week is fine
+  when the LOE and SoW state two people, each within their ceiling; judge demand against
+  stated headcount times ceiling, not against 40. It becomes a finding when the SoW roles
+  table still says one "Engineer", when the second person is not stated anywhere, or when
+  the stated people are at more than about 90% of their ceiling at the peak.
+- **Booked, not used.** Two slots are reserved at 90% for eleven weeks but the weekly
+  demand fills one slot plus a few hours in the last weeks. Release the second slot when
+  demand falls below one person.
+- **Total that cannot be reproduced.** The summary says 1,520, the rows add to 1,516, or a
+  SUM range stops a row early, or the buffer is applied to a subtotal that already
+  includes it. Recompute from the rows, never from the summary.
+- **Buffer in the wrong place.** The reserve is placed where nothing is uncertain (the
+  first weeks) and thin where the SoW's own risk sits (UAT, evaluation). Check by week.
+- **Calendar drift.** The SoW says 18 weeks; the LOE spreads hours over 16, or phase
+  boundaries differ by a week; hours land before the input they need exists.
+- **Counts do not scale.** The SoW says six integrations; the LOE sized for three. Check
+  every "N of" against the LOE.
+- **Proportions that do not match the promise.** Weekly steering and security testing
+  promised with 3% PM and no test hours.
+
 ## Delivery watchlist
 
 Heads-ups, not defects: facts the SoW cannot or should not contain, that the team building

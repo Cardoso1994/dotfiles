@@ -10,7 +10,7 @@ specific; quote the SoW; no filler.
 ## 1. Findings
 
 One block per finding, numbered with your lens prefix (FEA-1, PLN-1, CON-1, ACC-1,
-COM-1, SEC-1), most severe first:
+COM-1, SEC-1, LOE-1), most severe first:
 
 ```
 ### FEA-3 · CRITICAL · <short title>
