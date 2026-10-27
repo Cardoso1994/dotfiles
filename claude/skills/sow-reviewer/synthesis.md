@@ -139,17 +139,65 @@ If a lens found nothing, do not manufacture findings. Say what was checked.
 
 ## 6. Comment-ready version
 
-When the user wants to paste the review as peer-review comments (Slack or Confluence),
-produce it on request, or offer it in one line:
+When the user wants to paste the review as a Slack message or peer-review comments
+(Slack or Confluence), produce it on request, or offer it in one line.
 
-- Split by SoW section in document order, one chunk per section, each short enough to
-  paste as a single comment (about 3,000 characters; split a long section across chunks).
-- Each bullet: the quoted SoW phrase in italics, the problem, the fix. No lens IDs, no
-  appendix. Lead with a two-line opener that credits what is solid.
-- Keep the tone peer-to-peer. Questions rather than verdicts where the author may know
+**Which items go in.** Only the findings the user chose. If the user has gone through the
+report and said which blockers, sections or findings to include, skip or move to delivery
+notes, follow that exactly and do not add anything back. If they have not said, ask once
+which to include. Never include watchlist items or briefing content; they are internal and
+the watchlist has its own version below.
+
+**Format (the user's Slack style).** Write it as one plain-text message, in this shape:
+
+```
+Hi, @<author> here are some notes from my end:
+
+----------
+
+On <topic>
+
+<prose paragraph(s)>
+
+----------
+
+On <topic>
+
+<prose paragraph(s)>
+
+----------
+```
+
+- Opener is exactly "Hi, @<author> here are some notes from my end:" with the SoW
+  author's handle if known (ask once if not), then a line of ten hyphens.
+- Group by topic or theme, not by SoW section and not by lens. Each group has a plain
+  header line starting "On " (for example "On the test plan", "On the answer service",
+  "On commitments with no owner or hours") and ends with a line of ten hyphens. Put a
+  section reference inline ("in 4.1", "A2", "E6") when it saves a lookup.
+- Flowing prose, written in first person. Quote the SoW's own words in straight double
+  quotes (not italics) and say what is wrong in plain words: the quote, why it does not
+  hold, the consequence, then the fix as "I'd ..." in the same paragraph. One finding is
+  one to three short paragraphs. Use real numbers from the review (hours, seconds,
+  counts) and keep the arithmetic short.
+- Lists only where the items really are parallel: a set of unowned commitments, or the
+  questions for the customer. Use "- " bullets with no bold, no sub-bullets. A list can
+  follow a one-line lead-in, then one paragraph with the fix.
+- Questions to the author go in plain sentences ("One question for you here: ...") or,
+  when several are for the customer or AWS, as "Can we ask X the following?" followed by
+  a short bullet list. Prefer a question over a verdict where the author may know
   something the document does not say.
-- Do not include watchlist items or briefing content; they are internal and the
-  watchlist has its own version below.
+- Minor leftovers go in a closing "Some other points" group, written as "First, ...",
+  "Second, ..." paragraphs.
+- Label every estimate that is not sourced ("my estimate, not a sourced figure"), and say
+  plainly what was not verified. Do not state AWS limits without a source in the review.
+- No lens IDs, no severity labels, no markdown bold or italics, no headings with #, no
+  tables, no em dashes, no appendix, and no URLs unless one saves a lookup.
+- Tone: peer to peer, direct and plain, no filler or padding, no "great catch" language.
+  Credit what is solid only if the user asks for it; do not add an opener paragraph.
+- Length: keep each group short enough to paste as a single Slack comment (about 3,000
+  characters). If a group is longer, split it at a hyphen line into two messages.
+- Save it to a text file in the work directory if the user asks for the file, and give
+  the full absolute path.
 - Never post it. Show it to the user and let them send it.
 
 ## 7. Delivery-notes version (sales-to-delivery style)
