@@ -244,6 +244,19 @@ marked ESCALATE.
 The watchlist rewritten as plain bullets a delivery lead can paste into a handoff or
 sales-to-delivery document. Style rules:
 
+- **Voice: a colleague handing over, not a reviewer.** The reader is the
+  delivery team at kickoff. By then the SoW is signed, funding is settled and the
+  scope is fixed. Never mention LOE approval, holding or sending anything, SoW or
+  LOE changes, pushback, who raised what, or what the package or SoW lacks. Review
+  findings belong in the review, not here.
+- Each bullet helps delivery avoid losing time: what to know, prepare or request,
+  and when, so nobody meets it mid-build. Action and timing first, then the fact.
+- State facts plainly. Do not narrate how they were checked ("I haven't tested",
+  "this comes from the changelog", "nothing in the package mentions"). Something
+  unconfirmed becomes an action ("confirm in the week-1 probe whether X"), not a
+  disclaimer. A gap in the estimate becomes a planning tip ("if the customer picks
+  X, plan time for Y; raise it at the week-1 decision"), not a complaint.
+
 - one bullet per topic, starting with a plain-text label and a colon ("Quotas:",
   "Regions and models:", "Load-test windows:"), no bold, no lens IDs, no severity tags;
 - lead with the timing or the action when there is lead time ("request in Week 1, not when

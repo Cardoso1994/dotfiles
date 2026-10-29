@@ -277,5 +277,8 @@ user asks; a review sent to a colleague is outward-facing.
   presales calls). Keep it out of the comment-ready version and of anything that could
   reach the customer.
 - Do not run the Delivery watchlist before the final round (step 4b).
+- Delivery notes are written for the team at kickoff, after signature and
+  funding: no LOE approval, no pushback, no review voice, no narration of how a
+  fact was checked. Hints and tips that save delivery time, nothing else.
 - Do not soften findings, and do not pad. A lens with nothing to report says so in one
   line.

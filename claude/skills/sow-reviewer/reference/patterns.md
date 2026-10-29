@@ -274,6 +274,20 @@ Paste-ready style (the shape of the delivery notes), with placeholders:
   discovery call; the SoW only excludes managed support). Have the answer ready: who
   operates it after week 14, and what that takes.
 
+What delivery notes do not sound like (generic examples, review voice):
+
+- "If the customer picks the gateway route there are no hours for it, which is not
+  a reason to hold the LOE approval." Delivery has no approval to hold.
+- "Nothing in the package mentions the provider version. This comes from the
+  changelog and has not been tested." Narrates the review, not the work.
+
+The same facts in delivery voice:
+
+- Gateway route: if the customer chooses it, plan extra time for the gateway and
+  policy engine and the adapter's call path; raise it at the week-1 decision.
+- Provider version: use 6.58.0 or later; confirm the customer's constraint
+  allows it before the first deploy.
+
 ## What "solid" sounds like
 
 - "Every criterion already has a validation method."

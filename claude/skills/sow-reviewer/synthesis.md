@@ -212,6 +212,18 @@ Slack thread:
 - Plain bullets, a label and a colon ("Quotas:", "Regions and models:", "Load-test
   windows:", "Customer asks:"), no bold, no lens IDs, no severity, no URLs inline except
   one when it saves a lookup.
+- **Voice: a colleague handing over, not a reviewer.** The reader is the
+  delivery team at kickoff. By then the SoW is signed, funding is settled and the
+  scope is fixed. Never mention LOE approval, holding or sending anything, SoW or
+  LOE changes, pushback, who raised what, or what the package or SoW lacks. Review
+  findings belong in the review, not here.
+- Each bullet helps delivery avoid losing time: what to know, prepare or request,
+  and when, so nobody meets it mid-build. Action and timing first, then the fact.
+- State facts plainly. Do not narrate how they were checked ("I haven't tested",
+  "this comes from the changelog", "nothing in the package mentions"). Something
+  unconfirmed becomes an action ("confirm in the week-1 probe whether X"), not a
+  disclaimer. A gap in the estimate becomes a planning tip ("if the customer picks
+  X, plan time for Y; raise it at the week-1 decision"), not a complaint.
 - Each bullet: the action and timing first when there is lead time, then the fact, then
   the numbers (documented default next to what the SoW needs), then who to ask. Add the
   practical tip a colleague would add only when its basis supports it.
