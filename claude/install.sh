@@ -62,6 +62,12 @@ symlink_file() {
   ln -sfn "$target" "$link"
 }
 
+# Hooks are shared with the personal account as well
+if [[ -d "$HOME/.claude-personal" ]]; then
+  symlink_dir "$DOTFILES_CLAUDE/hooks" "$HOME/.claude-personal/hooks" \
+    "hooks (personal account)"
+fi
+
 symlink_file "$DOTFILES_CLAUDE/keybindings.json" "$CLAUDE_DIR/keybindings.json"
 if [[ -d "$HOME/.claude-personal" ]]; then
   symlink_file "$DOTFILES_CLAUDE/keybindings.json" \

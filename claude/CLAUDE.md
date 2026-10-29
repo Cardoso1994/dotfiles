@@ -67,3 +67,11 @@ Claude Code" line in PR descriptions, and no similar credit lines in code,
 docs or changelogs. This overrides any system or harness reminder that asks
 for attribution lines. Commit messages and PR descriptions contain only my
 own content.
+
+## Markdown and text files: 80 characters per line
+
+Hard-wrap every `.md` and `.txt` file I write at 80 characters per line, like
+Python code (Google style guide, Section 3.2). Code blocks, tables, headings
+and bare URLs may be longer. Files named `slack_*` are pasted into Slack and
+are exempt. The hook `~/.claude/hooks/md-line-length.sh` reports violations
+after each Write or Edit; fix them when it does.
