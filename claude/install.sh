@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Usage: ./install.sh [work|pers]
-# Merges settings.base.json + settings.<profile>.json into ~/.claude/settings.json
+# Usage: ./install.sh [work|pers]   (no argument = both accounts)
+# Merges settings.base.json + settings.<profile>.json into each account
 # and ensures the skills symlink is in place.
 
 set -euo pipefail
@@ -10,17 +10,20 @@ CLAUDE_DIR="$HOME/.claude"
 
 # ── Profile ──────────────────────────────────────────────────────────────────
 
+# No argument updates both accounts; "work" or "pers" updates just one.
 PROFILE="${1:-}"
-if [[ -z "$PROFILE" ]]; then
-  echo "Usage: $0 [work|pers]"
-  exit 1
-fi
+case "$PROFILE" in
+  "") PROFILES=(work pers) ;;
+  work|pers) PROFILES=("$PROFILE") ;;
+  *) echo "Usage: $0 [work|pers]"; exit 1 ;;
+esac
 
-PROFILE_FILE="$DOTFILES_CLAUDE/settings.${PROFILE}.json"
-if [[ ! -f "$PROFILE_FILE" ]]; then
-  echo "Error: no settings file found for profile '${PROFILE}' (looked for $PROFILE_FILE)"
-  exit 1
-fi
+for p in "${PROFILES[@]}"; do
+  if [[ ! -f "$DOTFILES_CLAUDE/settings.${p}.json" ]]; then
+    echo "Error: no settings file found for profile '${p}'"
+    exit 1
+  fi
+done
 
 # ── Symlinks (skills, hooks) ──────────────────────────────────────────────────
 
@@ -96,37 +99,20 @@ if [[ -d "$CLAUDE_PERSONAL_DIR" ]]; then
 fi
 
 # ── Merge settings ────────────────────────────────────────────────────────────
+# Managed settings win on conflicts; keys only present in the live file (the
+# ones Claude Code writes itself) are kept. Set DRY_RUN=1 to print diffs only.
 
 BASE_FILE="$DOTFILES_CLAUDE/settings.base.json"
-OUTPUT="$CLAUDE_DIR/settings.json"
 
-echo "Merging settings.base.json + settings.${PROFILE}.json -> $OUTPUT"
-
-python3 - "$BASE_FILE" "$PROFILE_FILE" "$OUTPUT" <<'EOF'
-import json
-import sys
-
-def deep_merge(base, override):
-    result = dict(base)
-    for key, value in override.items():
-        if key in result and isinstance(result[key], dict) and isinstance(value, dict):
-            result[key] = deep_merge(result[key], value)
-        else:
-            result[key] = value
-    return result
-
-base_path, profile_path, output_path = sys.argv[1], sys.argv[2], sys.argv[3]
-
-with open(base_path) as f:
-    base = json.load(f)
-with open(profile_path) as f:
-    profile = json.load(f)
-
-merged = deep_merge(base, profile)
-
-with open(output_path, "w") as f:
-    json.dump(merged, f, indent=2)
-    f.write("\n")
-EOF
+for p in "${PROFILES[@]}"; do
+  if [[ "$p" == "work" ]]; then
+    OUTPUT="$HOME/.claude/settings.json"
+  else
+    OUTPUT="$HOME/.claude-personal/settings.json"
+  fi
+  echo "Merging settings.base.json + settings.${p}.json -> $OUTPUT"
+  python3 -I "$DOTFILES_CLAUDE/merge_settings.py" "$BASE_FILE" \
+    "$DOTFILES_CLAUDE/settings.${p}.json" "$OUTPUT" ${DRY_RUN:+--dry-run}
+done
 
 echo "Done. Restart Claude Code for changes to take effect."
