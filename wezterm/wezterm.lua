@@ -14,11 +14,14 @@ local config = wezterm.config_builder and wezterm.config_builder() or {}
 -- Reload whenever the real dotfiles source changes (watching the symlink
 -- itself is not reliable across editors/tools).
 wezterm.add_to_config_reload_watch_list(wezterm.home_dir .. "/dotfiles/wezterm/wezterm.lua")
+for _, module in ipairs({ "colors", "theme", "fonts", "keys" }) do
+	wezterm.add_to_config_reload_watch_list(wezterm.home_dir .. "/dotfiles/wezterm/config/" .. module .. ".lua")
+end
 
 -- ============================================================
--- Theme family: "default" | "gruvboxMaterial" | "kanagawa" | "solawarm" | "solarized"
+-- Theme family: "default" | "gruvboxMaterial" | "kanagawa" | "solawarm" | "solarized" | "nightfox"
 -- ============================================================
-local theme_family_name = "gruvboxMaterial"
+local theme_family_name = "nightfox"
 
 config.color_schemes = colors.schemes
 theme.apply(config, colors.families[theme_family_name])
