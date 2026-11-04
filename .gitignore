@@ -81,3 +81,10 @@ zathurarc
 
 # Local secrets
 .zshrc.local
+
+# macOS
+.DS_Store
+
+# Claude Code managed skill caches
+claude/skills/synced/
+claude/skills/.trash/
