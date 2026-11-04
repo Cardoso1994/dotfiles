@@ -1,7 +1,8 @@
 #!/bin/bash
 # PostToolUse hook: report .md/.txt lines over 80 chars back to Claude.
 # Skips code fences, tables, headings and lines that are only a URL.
-f=$(jq -r '.tool_input.file_path // empty')
+# Claude Code sends tool_input.file_path; Kiro sends tool_input.path
+f=$(jq -r '.tool_input.file_path // .tool_input.path // empty')
 case "$(basename "$f")" in slack_*) exit 0 ;; esac  # pasted into Slack
 case "$f" in *.md|*.txt) ;; *) exit 0 ;; esac
 [ -f "$f" ] || exit 0

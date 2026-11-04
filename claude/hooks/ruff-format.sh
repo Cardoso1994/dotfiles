@@ -5,7 +5,8 @@ set -euo pipefail
 
 INPUT=$(cat)
 
-FILE_PATH=$(echo "$INPUT" | jq -r '.tool_input.file_path // empty')
+# Claude Code sends tool_input.file_path; Kiro sends tool_input.path
+FILE_PATH=$(echo "$INPUT" | jq -r '.tool_input.file_path // .tool_input.path // empty')
 
 # Skip if no file_path in this event, not a Python file, or file is gone
 [[ -z "$FILE_PATH" || "$FILE_PATH" != *.py || ! -f "$FILE_PATH" ]] && exit 0
