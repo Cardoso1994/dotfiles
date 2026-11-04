@@ -1,39 +1,35 @@
--- Time-of-day light/dark switching.
+-- Appearance-based light/dark switching.
 --
--- WezTerm does not poll the clock on its own, so an `update-right-status`
--- handler re-checks the hour on every status-bar refresh and nudges the user
--- to reload when the theme should flip (config reload actually swaps it).
+-- The light or dark half of the chosen family follows the OS appearance.
+-- WezTerm detects appearance changes and reloads the configuration itself
+-- (https://wezterm.org/config/lua/wezterm.gui/get_appearance.html), so no
+-- manual reload is needed.
 
 local wezterm = require("wezterm")
 
 local M = {}
 
-local LIGHT_START_HOUR = 7
-local LIGHT_END_HOUR = 18
-
-function M.current_period()
-	local hour = os.date("*t").hour
-	if hour >= LIGHT_START_HOUR and hour < LIGHT_END_HOUR then
-		return "light"
+-- `wezterm.gui` is not available to the mux server, so fall back to "Dark"
+-- when this config is evaluated there.
+local function get_appearance()
+	if wezterm.gui then
+		return wezterm.gui.get_appearance()
 	end
-	return "dark"
+	return "Dark"
+end
+
+-- "light" or "dark". Matches "Dark" and "DarkHighContrast" alike.
+function M.current_period()
+	if get_appearance():find("Dark") then
+		return "dark"
+	end
+	return "light"
 end
 
 -- Applies the given family's light/dark scheme (from colors.families) to
--- `config` based on the current time, and wires up the reload reminder.
+-- `config` based on the OS appearance.
 function M.apply(config, family)
 	config.color_scheme = M.current_period() == "light" and family.light or family.dark
-
-	wezterm.on("update-right-status", function(window, _pane)
-		local effective_scheme = window:effective_config().color_scheme
-		local expected_scheme = M.current_period() == "light" and family.light or family.dark
-
-		if effective_scheme ~= expected_scheme then
-			window:set_right_status("Theme change needed - please reload configuration")
-		else
-			window:set_right_status("")
-		end
-	end)
 end
 
 return M
