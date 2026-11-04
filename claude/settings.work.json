@@ -5,5 +5,10 @@
       "Bash(curl:*)",
       "WebFetch(domain:developer.intuit.com)"
     ]
+  },
+  "modelSettings": {
+    "claude-sonnet-5-5": {
+      "effortLevel": "medium"
+    }
   }
 }

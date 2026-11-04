@@ -4,5 +4,13 @@
       "WebSearch",
       "Bash(curl:*)"
     ]
+  },
+  "autoCompactEnabled": false,
+  "agentPushNotifEnabled": true,
+  "skipWorkflowUsageWarning": true,
+  "switchModelsOnFlag": true,
+  "enabledPlugins": {
+    "atlassian@claude-plugins-official": false,
+    "frontend-design@claude-plugins-official": false
   }
 }

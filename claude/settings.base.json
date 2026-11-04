@@ -6,6 +6,16 @@
   "alwaysThinkingEnabled": true,
   "effortLevel": "medium",
   "hooks": {
+    "Notification": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.claude/hooks/notify.sh"
+          }
+        ]
+      }
+    ],
     "PostToolUse": [
       {
         "matcher": "Write|Edit",
@@ -34,5 +44,12 @@
         ]
       }
     ]
-  }
+  },
+  "editorMode": "vim",
+  "tui": "fullscreen",
+  "statusLine": {
+    "type": "command",
+    "command": "bash ~/.claude/statusline-command.sh"
+  },
+  "model": "sonnet"
 }
