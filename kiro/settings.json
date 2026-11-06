@@ -1,0 +1,4 @@
+{
+  "chat.enableNotifications": true,
+  "chat.notificationMethod": "auto"
+}

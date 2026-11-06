@@ -1,0 +1,35 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "authoritative-sources-reminder",
+      "description": "Mirror of the Claude PreToolUse WebSearch|WebFetch hook in claude/settings.base.json",
+      "trigger": "PreToolUse",
+      "matcher": "^(web_fetch|remote_web_search|web_search)$",
+      "action": {
+        "type": "command",
+        "command": "echo 'IMPORTANT: Always prefer official documentation and authoritative primary sources. For software/APIs use official docs sites. For cloud use provider docs (docs.aws.amazon.com, cloud.google.com/docs, learn.microsoft.com). For academic topics use peer-reviewed sources, institutional sites, or established encyclopedias. Avoid blogs, Stack Overflow, or tutorial sites as primary sources. Always return the source URL and title.'"
+      }
+    },
+    {
+      "name": "ruff-format",
+      "description": "Format .py files with ruff after writes/edits (shared script)",
+      "trigger": "PostToolUse",
+      "matcher": "^(fs_write|fs_append|str_replace)$",
+      "action": {
+        "type": "command",
+        "command": "\"$HOME/dotfiles/claude/hooks/ruff-format.sh\""
+      }
+    },
+    {
+      "name": "md-line-length",
+      "description": "Report .md/.txt lines over 80 chars after writes/edits (shared script)",
+      "trigger": "PostToolUse",
+      "matcher": "^(fs_write|fs_append|str_replace)$",
+      "action": {
+        "type": "command",
+        "command": "\"$HOME/dotfiles/claude/hooks/md-line-length.sh\""
+      }
+    }
+  ]
+}
