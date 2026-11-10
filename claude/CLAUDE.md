@@ -59,6 +59,11 @@ Two separate Claude Code accounts run on this machine via shell aliases:
 `~/.claude/CLAUDE.md` and `~/.claude-personal/CLAUDE.md`, so edit it there
 (or through either symlink) and both accounts pick it up.
 
+Work-specific instructions that must not be public live outside this repo in
+`~/.claude/CLAUDE.work.md` (untracked) and are imported here:
+
+@~/.claude/CLAUDE.work.md
+
 ## No Claude co-authoring or attribution in my repos
 
 Never add Claude attribution to anything that lands in my repositories: no
