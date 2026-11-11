@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# i3blocks disk block: used space and percentage of /. Right click refreshes.
+case $BLOCK_BUTTON in
+    3) pkill -SIGRTMIN+3 i3blocks ;;
+esac
+echo " 󰋊 $(df -h / | awk 'NR==2 { print $3, $5 }') "

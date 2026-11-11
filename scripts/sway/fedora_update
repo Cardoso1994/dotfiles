@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# i3blocks updates block for Fedora (replaces ../i3/ubuntu_update).
+# Left click refreshes, right click lists the pending packages.
+updates=$(dnf check-upgrade -q 2>/dev/null | awk 'NF >= 3 && $1 ~ /\./ { print $1 }')
+total=$(grep -c . <<< "$updates")
+
+case $BLOCK_BUTTON in
+    3) [ "$total" -gt 0 ] && notify-send "Fedora updates ($total):" "$(head -n 30 <<< "$updates")" ;;
+esac
+
+if [ "$total" -eq 0 ]; then
+    echo "  "
+else
+    echo "  $total "
+fi
+[ "$total" -ge 20 ] && exit 33
+exit 0

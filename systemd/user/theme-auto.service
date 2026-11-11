@@ -1,0 +1,8 @@
+[Unit]
+Description=Switch light/dark theme by time of day
+PartOf=sway-session.target
+After=sway-session.target
+
+[Service]
+Type=oneshot
+ExecStart=%h/.config/scripts/sway/theme auto

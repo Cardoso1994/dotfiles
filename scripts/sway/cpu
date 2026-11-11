@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# i3blocks CPU block (based on ../i3/cpu). Apple Silicon exposes no CPU
+# core temperature through hwmon, so this shows usage and load only.
+# Right click: top CPU processes.
+case $BLOCK_BUTTON in
+    3) notify-send "Most CPU intensive processes:
+$(ps axch -o cmd:18,%cpu --sort=-%cpu | head -n 5)" ;;
+esac
+
+read -r _ a b c previdle _ < /proc/stat
+prevtotal=$((a + b + c + previdle))
+sleep 0.4
+read -r _ a b c idle _ < /proc/stat
+total=$((a + b + c + idle))
+cpu=$((100 * ((total - prevtotal) - (idle - previdle)) / (total - prevtotal)))
+
+load=$(cut -d' ' -f1 /proc/loadavg)
+echo "  $cpu%   $load "
+
+# urgent above 75% or load above the core count
+cores=$(nproc)
+[ "$cpu" -ge 75 ] || awk -v l="$load" -v c="$cores" 'BEGIN { exit !(l > c) }' && exit 33
+exit 0

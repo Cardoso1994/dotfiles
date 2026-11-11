@@ -1,0 +1,8 @@
+[Unit]
+Description=sway compositor session
+Documentation=man:systemd.special(7)
+# Activating graphical-session.target lets xdg-desktop-portal (and anything
+# else with Requisite=graphical-session.target) start under sway.
+BindsTo=graphical-session.target
+Wants=graphical-session-pre.target
+After=graphical-session-pre.target

@@ -1,0 +1,5 @@
+# Login environment for graphical sessions, sourced from ~/.zprofile and
+# ~/.bash_profile (the login manager starts sessions through a login shell).
+# KDE/Qt apps use the KDE platform theme (Breeze, kdeglobals colors and
+# fonts) under sway too. Plasma already behaves this way, so it is harmless there.
+export QT_QPA_PLATFORMTHEME=kde

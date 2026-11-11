@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# Screenshots for sway with grim + slurp (Wayland version of ../screenshot).
+# Usage: screenshot full|window|sel   Saves to ~/garbage and copies to clipboard.
+dir="$HOME/garbage"
+mkdir -p "$dir"
+file="$dir/screenshot_$(date +%d-%m-%H:%M:%S).png"
+
+case "$1" in
+    full)
+        geom=$(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .rect | "\(.x),\(.y) \(.width)x\(.height)"')
+        ;;
+    window)
+        geom=$(swaymsg -t get_tree | jq -r '.. | select(.focused? == true) | .rect | "\(.x),\(.y) \(.width)x\(.height)"')
+        ;;
+    sel)
+        geom=$(slurp) || exit 1
+        ;;
+    *)
+        echo "usage: $(basename "$0") full|window|sel" >&2; exit 2
+        ;;
+esac
+
+grim -g "$geom" "$file" && wl-copy < "$file" && notify-send -u low "Screenshot saved" "$file"

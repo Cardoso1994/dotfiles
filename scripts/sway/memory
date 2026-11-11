@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# i3blocks memory block (../i3/memory with a current Nerd Font icon).
+case $BLOCK_BUTTON in
+    3) notify-send "Most memory intensive processes:
+$(ps axch -o cmd:18,%mem --sort=-%mem | head -n 5)" ;;
+esac
+
+used=$(free -m | awk '/^Mem/ { print $3 }')
+total=$(free -m | awk '/^Mem/ { print $2 }')
+percent=$((used * 100 / total))
+
+echo " 󰍛 $used Mb $percent% "
+[ "$percent" -ge 85 ] && exit 33
+exit 0

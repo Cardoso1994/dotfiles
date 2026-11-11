@@ -1,0 +1,428 @@
+# vim: filetype=swayconfig
+#################################################################
+# Sway config, migrated from ../i3/i3.config
+#
+# Target: Fedora Asahi Remix (Apple Silicon). The Asahi platform services
+# (speakersafetyd, asahi-audio DSP in PipeWire, bluez, tuned, upower,
+# udisks2, NetworkManager) are system services and run the same under sway
+# as under Plasma. This file only replaces what Plasma's session used to
+# start: polkit agent, kwallet unlock, notifications, tray applets, idle.
+#
+# Lives in ~/dotfiles/sway; ~/.config/sway is a symlink to it.
+#################################################################
+
+###############################################################################
+##########################      VARIABLES   ###################################
+###############################################################################
+# Mod4 = Super / Command key, Mod1 = Alt / Option key
+set $mod Mod4
+
+# Applications
+set $term       wezterm
+set $term_exec  wezterm start --
+set $editor     wezterm start -- nvim
+set $files      wezterm start -- yazi
+set $scripts    ~/.config/scripts/sway
+
+# gaps (built into sway, no i3-gaps needed)
+set $inner_gaps     4
+set $outer_gaps     4
+set $outer_delta    2
+set $inner_delta    2
+
+# movement keys
+set $left   h
+set $down   j
+set $up     k
+set $right  l
+
+# resize
+set $resize_delta 1
+
+# Colors: Nightfox. The default is terafox (dark); $mod+Shift+t switches
+# between terafox and dawnfox (light) via scripts/sway/theme, which links
+# ~/.local/state/sway/theme.conf to one of themes/*.conf.
+# Sway has no set_from_resource, so colors come from these files instead of
+# ~/.Xresources.
+include ~/.config/sway/themes/terafox.conf
+include ~/.local/state/sway/theme.conf
+
+# Workspaces (icons: Nerd Fonts v3 codepoints)
+set $ws1    "1:  "
+set $ws2    "2: 󰌠 "
+set $ws3    "3:  "
+set $ws4    "4: 󰈦 "
+set $ws5    "5: 5 "
+set $ws6    "6: 6 "
+set $ws7    "7: 7 "
+set $ws8    "8: 8 "
+set $ws9    "9: 9 "
+set $ws10   "0: 0 "
+
+# tiling parameters
+set $default_orientation horizontal
+
+# fonts (Monaspace NF, same family as WezTerm and nvim)
+set $wm_font    Monaspace Krypton NF 8
+set $bar_font   pango:Monaspace Krypton NF Medium 14
+
+# refresh the i3blocks volume block
+set $update_sound_module pkill -RTMIN+10 i3blocks
+
+###############################################################################
+##############################   SESSION   ####################################
+###############################################################################
+# Give systemd/D-Bus activated services (portals, pipewire clients, apps
+# started by D-Bus) the Wayland session environment.
+exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP XDG_SESSION_TYPE QT_QPA_PLATFORMTHEME
+
+# Activate graphical-session.target (via ~/.config/systemd/user/sway-session.target)
+# so xdg-desktop-portal can start; WezTerm reads light/dark from the portal.
+# Also starts theme-auto.timer. Stopped again when sway exits.
+# Waits on the sway process until it exits. No nested quotes: sway passes \"
+# through with the backslash, which broke the old '[\"shutdown\"]' subscribe
+# (invalid JSON, returned at once, target and theme timer stopped at login).
+exec "systemctl --user reset-failed; systemctl --user start sway-session.target; tail --pid=$(pgrep -nxU $(id -u) sway) -f /dev/null; systemctl --user stop sway-session.target"
+# pick light/dark for the current time at login (theme-auto.timer does 07:00/19:00)
+exec $scripts/theme auto
+
+###############################################################################
+##############################   INPUT / OUTPUT   ##############################
+###############################################################################
+input type:keyboard {
+    xkb_layout      us
+    repeat_delay    400
+    repeat_rate     15
+}
+
+input type:touchpad {
+    tap             enabled
+}
+
+# wallpaper (~/Pictures/wallpaper.jpg symlink), scaled to fill the screen
+output * bg ~/Pictures/wallpaper.jpg fill
+
+###############################################################################
+##############################   WORKSPACES   #################################
+###############################################################################
+workspace_layout        tabbed
+
+# switch to workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
+
+# move focused container to workspace and go to workspace
+bindsym $mod+Shift+1 move container to workspace $ws1;  workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2;  workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3;  workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4;  workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5;  workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6;  workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7;  workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8;  workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9;  workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10; workspace $ws10
+
+# move focused container to workspace and stay in current workspace
+bindsym $mod+Ctrl+1 move container to workspace $ws1
+bindsym $mod+Ctrl+2 move container to workspace $ws2
+bindsym $mod+Ctrl+3 move container to workspace $ws3
+bindsym $mod+Ctrl+4 move container to workspace $ws4
+bindsym $mod+Ctrl+5 move container to workspace $ws5
+bindsym $mod+Ctrl+6 move container to workspace $ws6
+bindsym $mod+Ctrl+7 move container to workspace $ws7
+bindsym $mod+Ctrl+8 move container to workspace $ws8
+bindsym $mod+Ctrl+9 move container to workspace $ws9
+bindsym $mod+Ctrl+0 move container to workspace $ws10
+
+# move to other screen
+bindsym $mod+Shift+m move workspace to output right
+bindsym $mod+m focus output right
+
+# navigate workspaces next / previous
+bindsym Mod1+Tab        workspace next
+bindsym Mod1+Shift+Tab  workspace prev
+bindsym $mod+Tab        workspace back_and_forth
+
+############################################################
+#################        menus      ########################
+############################################################
+# wmenu is a native Wayland dmenu; same look, colors passed like before
+bindsym $mod+d       exec NB=$bg NF=$orange SB=$orange SF=$bg $scripts/menu run
+bindsym $mod+Shift+d exec NB=$bg NF=$blue SB=$blue SF=$bg $scripts/menu apps
+
+# exit / lock / suspend menu
+bindsym $mod+Shift+x exec NB=$bg NF=$red SB=$red SF=$bg LOCK_BG=$red $scripts/exit
+
+# screen layouts (arandr replacement)
+bindsym $mod+Shift+s exec wdisplays
+
+# light / dark theme (terafox <-> dawnfox), also flips WezTerm, GTK and KDE apps
+bindsym $mod+Shift+t exec $scripts/theme toggle
+
+############################################################
+#################          apps             ################
+############################################################
+bindsym $mod+Return         exec $term
+bindsym $mod+Shift+e        exec $editor
+bindsym $mod+Shift+Return   exec $files
+bindsym $mod+c              exec $term_exec python3
+
+# kill focused window
+bindsym $mod+Shift+q kill
+bindsym $mod+Shift+p kill
+
+# play the URL in the clipboard
+bindsym $mod+Shift+v exec mpv "$(wl-paste)"
+
+# touchpad on / off (Magic Trackpad or laptop touchpad)
+bindsym $mod+p input type:touchpad events disabled
+bindsym $mod+o input type:touchpad events enabled
+
+# screenshots (saved to ~/garbage like before)
+bindsym $mod+s exec $scripts/screenshot window
+bindsym $mod+x exec $scripts/screenshot sel
+bindsym Print exec $scripts/screenshot full
+bindsym Shift+Print exec $scripts/screenshot sel
+
+####################################################################
+#################   reload changed configuration   #################
+####################################################################
+# sway has no in-place restart; both keys reload
+bindsym $mod+Shift+r reload
+bindsym $mod+Shift+c reload
+
+###########################################################
+#################   Moving around   #######################
+###########################################################
+floating_modifier $mod normal
+
+bindsym $mod+Shift+space floating toggle
+
+# change focus
+bindsym $mod+$left          focus left
+bindsym $mod+$down          focus down
+bindsym $mod+$up            focus up
+bindsym $mod+$right         focus right
+bindsym $mod+Left           focus left
+bindsym $mod+Down           focus down
+bindsym $mod+Up             focus up
+bindsym $mod+Right          focus right
+
+# focus urgent window
+bindsym $mod+u [urgent=latest] focus
+
+# move focused window
+bindsym $mod+Shift+$left    move left
+bindsym $mod+Shift+$down    move down
+bindsym $mod+Shift+$up      move up
+bindsym $mod+Shift+$right   move right
+bindsym $mod+Shift+Left     move left
+bindsym $mod+Shift+Down     move down
+bindsym $mod+Shift+Up       move up
+bindsym $mod+Shift+Right    move right
+
+focus_wrapping force
+
+#########################################################
+#################   Tiling parameters   #################
+#########################################################
+default_orientation $default_orientation
+
+bindsym $mod+f fullscreen toggle
+
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+bindsym $mod+n split horizontal
+bindsym $mod+v split vertical
+
+bindsym $mod+space focus mode_toggle
+bindsym $mod+a focus parent
+bindsym $mod+z focus child
+
+# scratchpad
+bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+minus scratchpad show
+
+##############################################
+#################   resize   #################
+##############################################
+bindsym $mod+Ctrl+$left  resize shrink width  $resize_delta px or $resize_delta ppt
+bindsym $mod+Ctrl+$down  resize shrink height $resize_delta px or $resize_delta ppt
+bindsym $mod+Ctrl+$up    resize grow   height $resize_delta px or $resize_delta ppt
+bindsym $mod+Ctrl+$right resize grow   width  $resize_delta px or $resize_delta ppt
+
+#######################################################
+#################   font   ############################
+#######################################################
+font pango:$wm_font
+titlebar_border_thickness 0
+titlebar_padding 4 0
+
+##########################################################################
+#################   assign applications to workspaces   ##################
+##########################################################################
+# class= matches X11 apps running under XWayland, app_id= matches native
+# Wayland apps. Most apps are native now, so both are listed.
+
+# 2: code / science
+assign [class="(?i)^(spyder|rstudio|texstudio|octave-gui|gnu octave|sublime_text|subl3)$"]  $ws2
+assign [class="^MATLAB"]                                                                     $ws2
+assign [class="sun-awt-X11-XFramePeer"]                                                      $ws2
+assign [app_id="(?i)^(spyder|rstudio|texstudio|org\.octave\.octave)$"]                       $ws2
+
+# 3: browsers
+assign [class="(?i)^(firefox|navigator|brave-browser|chromium|chromium-browser)$"]           $ws3
+assign [app_id="(?i)^(firefox|org\.mozilla\.firefox|brave-browser|chromium|chromium-browser)$"] $ws3
+
+# 4: documents
+assign [class="(?i)^(xreader|zathura)$"]                                                     $ws4
+assign [app_id="^(org\.pwmt\.zathura|org\.kde\.okular)$"]                                    $ws4
+
+# 5: office / mail
+assign [class="(?i)^(libreoffice.*|soffice|thunderbird)$"]                                   $ws5
+assign [app_id="(?i)^(libreoffice.*|soffice|thunderbird|org\.mozilla\.thunderbird)$"]        $ws5
+
+# 6: media / calls
+assign [class="(?i)^(gl|mpv|vlc|zoom|skype|microsoft teams - preview)$"]                     $ws6
+assign [app_id="(?i)^(mpv|vlc|org\.videolan\.vlc|zoom)$"]                                    $ws6
+
+# 7: graphics / plots / CAD
+assign [class="(?i)^(inkscape|org\.inkscape\.inkscape|pix|freecad|feh|matplotlib|paraview)$"] $ws7
+assign [app_id="(?i)^(org\.inkscape\.inkscape|org\.freecad\.freecad|paraview)$"]             $ws7
+
+#########################################################################
+#################   execute applications at login   ######################
+#########################################################################
+# KDE's polkit agent (password prompts for system actions and 1Password)
+exec /usr/libexec/polkit-kde-authentication-agent-1
+
+# unlock KWallet with the login password (pam_kwallet), as in Plasma
+exec /usr/libexec/pam_kwallet_init
+
+# notifications
+exec dunst
+
+# tray applets: network, bluetooth (also provides the pairing agent)
+exec nm-applet --indicator
+exec blueman-applet
+
+# automount external drives
+exec udiskie
+
+# 1Password, minimized to the tray
+exec 1password --silent
+
+# KDE Connect daemon (phone integration), uncomment if you use it
+# exec kdeconnectd
+
+# night light (redshift replacement), uncomment to enable
+# exec gammastep -O 5000
+
+# idle: screen off after 15 min, lock before suspend
+exec swayidle -w \
+    timeout 900 'swaymsg "output * power off"' \
+    resume 'swaymsg "output * power on"' \
+    before-sleep '$scripts/exit lock'
+
+#########################################################
+#################   floating or tiled   #################
+#########################################################
+# X11 apps (XWayland)
+for_window [class="(?i)^(matplotlib|galculator|gpick|imagewriter|font-manager|pavucontrol|peek|system-config-printer.py|unetbootin.elf|usb-creator-gtk|xfce4-appfinder|xfce4-taskmanager|arandr|zoom|blueberry.py)$"] floating enable
+for_window [class="^Gnome-font-viewer$"] floating enable
+for_window [instance="script-fu"] border normal
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="^Preferences$"] floating enable
+for_window [window_role="setup"] floating enable
+
+# native Wayland apps
+for_window [app_id="(?i)^(org\.pulseaudio\.pavucontrol|pavucontrol|wdisplays|nm-connection-editor|\.?blueman-manager.*|org\.kde\.polkit-kde-authentication-agent-1)$"] floating enable
+
+# any app
+for_window [title="^(Copying|Deleting|Moving)"] floating enable
+
+#######################################################
+#################    audio / media    #################
+#######################################################
+# PipeWire (the Asahi speaker DSP is the default sink, so this drives it)
+bindsym XF86AudioRaiseVolume exec "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 2%+; $update_sound_module"
+bindsym XF86AudioLowerVolume exec "wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%-; $update_sound_module"
+bindsym XF86AudioMute        exec "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle; $update_sound_module"
+bindsym XF86AudioMicMute     exec wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86AudioStop exec playerctl stop
+
+# Brightness: an external monitor on a Mac mini has no backlight device.
+# On a MacBook, install brightnessctl and uncomment:
+# bindsym XF86MonBrightnessUp   exec brightnessctl set 2%+
+# bindsym XF86MonBrightnessDown exec brightnessctl set 2%-
+
+######################################################
+#################   borders / popups   ###############
+######################################################
+default_border pixel 4
+default_floating_border pixel 4
+bindsym $mod+Shift+b border toggle
+popup_during_fullscreen smart
+
+####################################################
+#################   gaps   #########################
+####################################################
+gaps inner $inner_gaps
+gaps outer $outer_gaps
+bindsym $mod+Mod1+k     gaps outer current plus  $outer_delta
+bindsym $mod+Mod1+j     gaps outer current minus $outer_delta
+bindsym $mod+Mod1+0     gaps outer current set   $outer_gaps
+bindsym Ctrl+Mod1+k     gaps inner current plus  $inner_delta
+bindsym Ctrl+Mod1+j     gaps inner current minus $inner_delta
+bindsym Ctrl+Mod1+0     gaps inner current set   $inner_gaps
+
+######################################################
+#################   bar   ############################
+######################################################
+bar {
+    status_command          i3blocks -c ~/.config/sway/i3blocks.conf
+    workspace_buttons       yes
+    font                    $bar_font
+    mode                    dock
+    hidden_state            hide
+    modifier                Mod1
+    strip_workspace_numbers yes
+    separator_symbol        "|"
+    position                bottom
+
+    colors {
+        background  $bg_trans
+        statusline  $fg
+        separator   $fg_dim
+        #                    border     backgr.     text
+        focused_workspace    $accent    $accent     $bg
+        inactive_workspace   $fg        $bg         $fg
+        active_workspace     $aqua      $aqua       $bg
+        urgent_workspace     $red       $red        $bg
+    }
+}
+
+bindsym $mod+b bar mode toggle
+
+######################################################
+#################   window colors   ##################
+######################################################
+# <class>               <border> <background> <text> <indicator> <child_border>
+# text = background on purpose: tab titles stay hidden, as in the i3 config
+client.focused          $accent  $accent      $accent $accent    $accent
+client.focused_inactive $aqua    $aqua        $aqua   $aqua      $aqua
+client.unfocused        $bg      $bg          $bg     $bg        $bg
+client.urgent           $red     $red         $red    $red       $red
+client.placeholder      $bg      $bg          $bg     $bg        $bg

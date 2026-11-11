@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# dmenu-style launchers for sway using wmenu (native Wayland dmenu clone).
+# Usage: menu run|apps   Colors come from NB/NF/SB/SF, like ../j4_dmenu.
+[ "$NB" ] || NB="#152528"
+[ "$NF" ] || NF="#ff8349"
+[ "$SB" ] || SB="#ff8349"
+[ "$SF" ] || SF="#152528"
+[ "$FN" ] || FN="Monaspace Krypton NF 16"
+
+flags=(-i -N "$NB" -n "$NF" -S "$SB" -s "$SF" -f "$FN" -p "program: ")
+
+case "$1" in
+    run)  exec wmenu-run "${flags[@]}" ;;
+    apps) exec j4-dmenu-desktop --term=wezterm --dmenu="wmenu ${flags[*]@Q}" ;;
+    *)    echo "usage: $(basename "$0") run|apps" >&2; exit 2 ;;
+esac

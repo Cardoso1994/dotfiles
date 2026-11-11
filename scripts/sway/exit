@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+# Exit menu for sway: shutdown, suspend, reboot, logout, lock.
+# Wayland version of ../exit (wmenu + swaylock instead of dmenu + i3lock).
+# "exit lock" locks directly (used by swayidle before suspend).
+[ "$NB" ] || NB="#152528"
+[ "$NF" ] || NF="#e85c51"
+[ "$SB" ] || SB="#e85c51"
+[ "$SF" ] || SF="#152528"
+[ "$FN" ] || FN="Monaspace Krypton NF Bold 18"
+[ "$LOCK_BG" ] || LOCK_BG="#e85c51"
+
+lock() {
+    # -f: fork once the screen is locked, so suspend waits for the lock
+    swaylock -f -c "$LOCK_BG"
+}
+
+if [ "$1" = lock ]; then
+    lock
+    exit 0
+fi
+
+flags=(-i -N "$NB" -n "$NF" -S "$SB" -s "$SF" -f "$FN")
+
+operation=$(printf 'shutdown\nsuspend\nreboot\nlogout\nlock\n' | wmenu "${flags[@]}" -p "Action:")
+[ -z "$operation" ] && exit 1
+
+confirmation=$(printf 'No\nYes\n' | wmenu "${flags[@]}" -p "Are you sure you want to $operation?")
+[ "$confirmation" = Yes ] || exit 2
+
+case $operation in
+    shutdown) systemctl poweroff ;;
+    suspend)  lock && systemctl suspend ;;
+    reboot)   systemctl reboot ;;
+    logout)   swaymsg exit ;;
+    lock)     lock ;;
+esac

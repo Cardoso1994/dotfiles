@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# i3blocks volume block for PipeWire (Wayland version of ../i3/sound).
+# Left click opens pavucontrol.
+case $BLOCK_BUTTON in
+    1) pavucontrol >/dev/null 2>&1 & ;;
+esac
+
+out=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ 2>/dev/null) || { echo " 󰖁 -- "; exit 0; }
+level=$(awk '{ printf "%d%%", $2 * 100 }' <<< "$out")
+
+if [[ $out == *MUTED* ]]; then
+    echo " 󰖁 $level "
+else
+    echo "  $level "
+fi
