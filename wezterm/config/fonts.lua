@@ -32,7 +32,7 @@ function M.apply(config)
 			family = "Monaspace Krypton NF",
 			weight = 700,
 		}),
-		font_size = 14,
+		font_size = 12,
 	}
 
 	config.font_rules = {
