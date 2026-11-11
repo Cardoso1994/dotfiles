@@ -11,7 +11,8 @@ FILE_PATH=$(echo "$INPUT" | jq -r '.tool_input.file_path // .tool_input.path // 
 # Skip if no file_path in this event, not a Python file, or file is gone
 [[ -z "$FILE_PATH" || "$FILE_PATH" != *.py || ! -f "$FILE_PATH" ]] && exit 0
 
-RUFF=/opt/homebrew/bin/ruff
+RUFF=$(command -v ruff || echo /opt/homebrew/bin/ruff)
+[[ -x "$RUFF" ]] || exit 0
 
 # Organize imports first, then format (matches conform.nvim pipeline)
 "$RUFF" check --select I --fix --quiet "$FILE_PATH" 2>/dev/null || true

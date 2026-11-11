@@ -65,8 +65,10 @@ symlink_file() {
   ln -sfn "$target" "$link"
 }
 
-# Hooks are shared with the personal account as well
+# Skills and hooks are shared with the personal account as well
 if [[ -d "$HOME/.claude-personal" ]]; then
+  symlink_dir "$DOTFILES_CLAUDE/skills" "$HOME/.claude-personal/skills" \
+    "skills (personal account)"
   symlink_dir "$DOTFILES_CLAUDE/hooks" "$HOME/.claude-personal/hooks" \
     "hooks (personal account)"
 fi
@@ -77,14 +79,19 @@ if [[ -d "$HOME/.claude-personal" ]]; then
     "$HOME/.claude-personal/keybindings.json"
 fi
 
+# Status line script is one shared file; both accounts' settings point at
+# ~/.claude/statusline-command.sh and it branches on CLAUDE_CONFIG_DIR
+symlink_file "$DOTFILES_CLAUDE/statusline-command.sh" \
+  "$CLAUDE_DIR/statusline-command.sh"
+
 # Global instructions are one shared file for both accounts
 symlink_file "$DOTFILES_CLAUDE/CLAUDE.md" "$CLAUDE_DIR/CLAUDE.md"
 if [[ -d "$HOME/.claude-personal" ]]; then
   symlink_file "$DOTFILES_CLAUDE/CLAUDE.md" "$HOME/.claude-personal/CLAUDE.md"
 fi
 
-# Memory lives under a project path derived from $HOME (slashes → dashes)
-PROJECT_KEY=$(echo "$HOME" | sed 's|/|-|g')
+# Memory lives under a project path derived from $HOME (non-alphanumerics → dashes)
+PROJECT_KEY=$(echo "$HOME" | sed 's|[^a-zA-Z0-9]|-|g')
 
 MEMORY_LINK="$CLAUDE_DIR/projects/${PROJECT_KEY}/memory"
 mkdir -p "$(dirname "$MEMORY_LINK")"
