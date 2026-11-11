@@ -5,7 +5,7 @@ local wezterm = require("wezterm")
 local M = {}
 
 function M.apply(config)
-	config.font_size = 13.8
+	config.font_size = 15.8
 	config.warn_about_missing_glyphs = true
 	config.freetype_load_target = "HorizontalLcd"
 	config.use_fancy_tab_bar = true

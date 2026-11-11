@@ -26,6 +26,9 @@ local theme_family_name = "nightfox"
 config.color_schemes = colors.schemes
 theme.apply(config, colors.families[theme_family_name])
 
+-- a little transparency: background only, text stays fully opaque
+config.window_background_opacity = 0.97
+
 fonts.apply(config)
 keys.apply(config)
 

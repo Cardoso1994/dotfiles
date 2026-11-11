@@ -142,7 +142,7 @@ source $HOME/dotfiles/zsh/alias.zsh
 #
 # eval "$(pyenv init -)"
 
-. "$HOME/.local/bin/env"
+[ -f "$HOME/.local/bin/env" ] && . "$HOME/.local/bin/env"
 
 export PATH="/opt/homebrew/bin:$PATH"
 export PATH="/opt/homebrew/:$PATH"
