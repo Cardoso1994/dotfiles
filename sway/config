@@ -101,6 +101,11 @@ input type:touchpad {
     tap             enabled
 }
 
+# macOS-style "natural" scrolling for mouse wheels
+input type:pointer {
+    natural_scroll  enabled
+}
+
 # wallpaper (~/Pictures/wallpaper.jpg symlink), scaled to fill the screen
 output * bg ~/Pictures/wallpaper.jpg fill
 
