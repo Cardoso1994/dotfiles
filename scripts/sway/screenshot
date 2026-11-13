@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Screenshots for sway with grim + slurp (Wayland version of ../screenshot).
-# Usage: screenshot full|window|sel   Saves to ~/garbage and copies to clipboard.
+# Usage: screenshot full|window|sel [--clip]
+# Saves to ~/garbage and copies to clipboard; with --clip, only copies.
 dir="$HOME/garbage"
 mkdir -p "$dir"
 file="$dir/screenshot_$(date +%d-%m-%H:%M:%S).png"
@@ -19,5 +20,11 @@ case "$1" in
         echo "usage: $(basename "$0") full|window|sel" >&2; exit 2
         ;;
 esac
+
+if [[ "$2" == "--clip" ]]; then
+    grim -g "$geom" - | wl-copy --type image/png \
+        && notify-send -u low "Screenshot copied to clipboard"
+    exit
+fi
 
 grim -g "$geom" "$file" && wl-copy < "$file" && notify-send -u low "Screenshot saved" "$file"

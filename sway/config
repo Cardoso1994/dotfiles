@@ -194,9 +194,9 @@ bindsym $mod+Shift+v exec mpv "$(wl-paste)"
 bindsym $mod+p input type:touchpad events disabled
 bindsym $mod+o input type:touchpad events enabled
 
-# screenshots (saved to ~/garbage like before)
+# screenshots (saved to ~/garbage like before; $mod+x only copies to clipboard)
 bindsym $mod+s exec $scripts/screenshot window
-bindsym $mod+x exec $scripts/screenshot sel
+bindsym $mod+x exec $scripts/screenshot sel --clip
 bindsym Print exec $scripts/screenshot full
 bindsym Shift+Print exec $scripts/screenshot sel
 
