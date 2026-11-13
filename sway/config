@@ -91,6 +91,8 @@ exec $scripts/theme auto
 ###############################################################################
 input type:keyboard {
     xkb_layout      us
+    xkb_variant     mac
+    xkb_options     lv3:alt_switch
     repeat_delay    400
     repeat_rate     15
 }
@@ -148,8 +150,8 @@ bindsym $mod+Shift+m move workspace to output right
 bindsym $mod+m focus output right
 
 # navigate workspaces next / previous
-bindsym Mod1+Tab        workspace next
-bindsym Mod1+Shift+Tab  workspace prev
+bindsym $mod+Ctrl+Tab        workspace next
+bindsym $mod+Ctrl+Shift+Tab  workspace prev
 bindsym $mod+Tab        workspace back_and_forth
 
 ############################################################
@@ -249,8 +251,11 @@ bindsym $mod+a focus parent
 bindsym $mod+z focus child
 
 # scratchpad
-bindsym $mod+Shift+minus move scratchpad
-bindsym $mod+minus scratchpad show
+bindsym $mod+Shift+grave move scratchpad
+bindsym $mod+grave scratchpad show
+
+# Slack (Chromium app window): lives in the scratchpad, toggle with $mod+grave
+for_window [app_id="chrome-app.slack.com__client-Default"] move scratchpad, resize set 1100 750, move position center
 
 ##############################################
 #################   resize   #################
@@ -381,12 +386,12 @@ popup_during_fullscreen smart
 ####################################################
 gaps inner $inner_gaps
 gaps outer $outer_gaps
-bindsym $mod+Mod1+k     gaps outer current plus  $outer_delta
-bindsym $mod+Mod1+j     gaps outer current minus $outer_delta
-bindsym $mod+Mod1+0     gaps outer current set   $outer_gaps
-bindsym Ctrl+Mod1+k     gaps inner current plus  $inner_delta
-bindsym Ctrl+Mod1+j     gaps inner current minus $inner_delta
-bindsym Ctrl+Mod1+0     gaps inner current set   $inner_gaps
+bindsym $mod+Ctrl+Shift+k     gaps outer current plus  $outer_delta
+bindsym $mod+Ctrl+Shift+j     gaps outer current minus $outer_delta
+bindsym $mod+Ctrl+Shift+0     gaps outer current set   $outer_gaps
+bindsym $mod+Ctrl+Shift+equal     gaps inner current plus  $inner_delta
+bindsym $mod+Ctrl+Shift+minus     gaps inner current minus $inner_delta
+bindsym $mod+Ctrl+Shift+BackSpace     gaps inner current set   $inner_gaps
 
 ######################################################
 #################   bar   ############################
@@ -397,7 +402,6 @@ bar {
     font                    $bar_font
     mode                    dock
     hidden_state            hide
-    modifier                Mod1
     strip_workspace_numbers yes
     separator_symbol        "|"
     position                bottom
