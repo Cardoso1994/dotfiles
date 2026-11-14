@@ -100,11 +100,13 @@ input type:keyboard {
 
 input type:touchpad {
     tap             enabled
+    pointer_accel   0.4
 }
 
 # macOS-style "natural" scrolling for mouse wheels
 input type:pointer {
     natural_scroll  enabled
+    pointer_accel   0.4
 }
 
 # wallpaper (~/Pictures/wallpaper.jpg symlink), scaled to fill the screen
