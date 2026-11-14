@@ -2,7 +2,8 @@
 # Switch the desktop between Nightfox dark (terafox) and light (dawnfox).
 # Usage: theme dark|light|toggle|auto
 #   auto: light from LIGHT_FROM to DARK_FROM (hours, default 7 and 19), else
-#         dark. Run at login and by theme-auto.timer.
+#         dark. Fallback only: darkman (sunrise/sunset)
+#         calls dark|light through darkman/scripts/theme.sh.
 #
 # - sway colors: links ~/.local/state/sway/theme.conf to a themes/*.conf
 # - GTK apps, browsers and WezTerm (through the desktop portal): gsettings

@@ -78,13 +78,14 @@ exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSO
 
 # Activate graphical-session.target (via ~/.config/systemd/user/sway-session.target)
 # so xdg-desktop-portal can start; WezTerm reads light/dark from the portal.
-# Also starts theme-auto.timer. Stopped again when sway exits.
+# Stopped again when sway exits.
 # Waits on the sway process until it exits. No nested quotes: sway passes \"
 # through with the backslash, which broke the old '[\"shutdown\"]' subscribe
-# (invalid JSON, returned at once, target and theme timer stopped at login).
+# (invalid JSON, returned at once, target stopped at login).
 exec "systemctl --user reset-failed; systemctl --user start sway-session.target; tail --pid=$(pgrep -nxU $(id -u) sway) -f /dev/null; systemctl --user stop sway-session.target"
-# pick light/dark for the current time at login (theme-auto.timer does 07:00/19:00)
-exec $scripts/theme auto
+# light/dark follows sunrise/sunset: darkman (systemd user service) applies the
+# current mode when it starts and at every transition via
+# ~/.local/share/darkman/theme.sh. Lat/lng are in ~/.config/darkman/config.yaml.
 
 ###############################################################################
 ##############################   INPUT / OUTPUT   ##############################
