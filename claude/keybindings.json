@@ -19,6 +19,41 @@
         "alt+j": "scroll:lineDown",
         "alt+k": "scroll:lineUp"
       }
+    },
+    {
+      "context": "Pane",
+      "bindings": {
+        "escape": null,
+        "ctrl+x tab": "abovePrompt:leave"
+      }
+    },
+    {
+      "context": "AbovePromptInput",
+      "bindings": {
+        "escape": null,
+        "ctrl+x tab": "abovePrompt:leave"
+      }
+    },
+    {
+      "context": "AbovePromptSelect",
+      "bindings": {
+        "escape": null,
+        "ctrl+x tab": "abovePrompt:leave"
+      }
+    },
+    {
+      "context": "AbovePrompt",
+      "bindings": {
+        "escape": null,
+        "ctrl+x tab": "abovePrompt:leave"
+      }
+    },
+    {
+      "context": "PaneField",
+      "bindings": {
+        "escape": null,
+        "ctrl+x tab": "abovePrompt:leave"
+      }
     }
   ]
 }

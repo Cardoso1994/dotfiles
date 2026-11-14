@@ -88,3 +88,9 @@ zathurarc
 # Claude Code managed skill caches
 claude/skills/synced/
 claude/skills/.trash/
+
+############
+# claude
+############
+# Work mods: their own private repo (claude/mods/.git), never part of this one.
+claude/mods/
