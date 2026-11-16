@@ -90,8 +90,11 @@ if [[ -d "$HOME/.claude-personal" ]]; then
   symlink_file "$DOTFILES_CLAUDE/CLAUDE.md" "$HOME/.claude-personal/CLAUDE.md"
 fi
 
-# Memory lives under a project path derived from $HOME (non-alphanumerics → dashes)
-PROJECT_KEY=$(echo "$HOME" | sed 's|[^a-zA-Z0-9]|-|g')
+# Memory lives under a project path derived from $HOME. Claude Code replaces
+# every non-alphanumeric character with a dash (not just slashes), so
+# /Users/marco.cardoso -> -Users-marco-cardoso. See "Where transcripts are
+# stored" in https://code.claude.com/docs/en/sessions
+PROJECT_KEY=$(printf '%s' "$HOME" | sed 's|[^A-Za-z0-9]|-|g')
 
 MEMORY_LINK="$CLAUDE_DIR/projects/${PROJECT_KEY}/memory"
 mkdir -p "$(dirname "$MEMORY_LINK")"

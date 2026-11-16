@@ -45,6 +45,7 @@
       }
     ]
   },
+  "cleanupPeriodDays": 365,
   "editorMode": "vim",
   "tui": "fullscreen",
   "statusLine": {
