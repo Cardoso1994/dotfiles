@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 # Claude Code status line, shared by both accounts.
-#   model · dir (branch) · context bar
+#   model · effort · dir (branch) · context bar
 #   + work account (~/.claude):              session cost in USD
 #   + personal account (~/.claude-personal): 5h and 7d usage with reset times
-# Reads the status line JSON on stdin; field names checked against 2.1.322.
+# Reads the status line JSON on stdin; field names checked against 2.1.325.
+# effort.level is absent when the model does not support effort.
 set -uo pipefail
 
 INPUT=$(cat)
@@ -59,7 +60,7 @@ CTX_USED=$(get '.context_window.total_input_tokens')
 CTX_SIZE=$(get '.context_window.context_window_size')
 
 parts=()
-parts+=("${BOLD}${CYAN}${MODEL:-Claude}${RESET}${EFFORT:+${DIM} ${EFFORT}${RESET}}")
+parts+=("${BOLD}${CYAN}${MODEL:-Claude}${RESET}${EFFORT:+ ${DIM}effort${RESET} ${EFFORT}}")
 parts+=("${MAGENTA}${DIR_NAME}${RESET}${BRANCH:+${DIM} (${BRANCH})${RESET}}")
 
 if [[ -n "$CTX_PCT" ]]; then
