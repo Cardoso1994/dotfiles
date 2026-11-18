@@ -1,0 +1,16 @@
+[Unit]
+Description=Warm screen (night light) while the dark theme is active
+Documentation=man:gammastep(1)
+# Driven by darkman through darkman/scripts/theme.sh (dark: restart, light:
+# stop). Not enabled at login: darkman re-applies the current mode when it
+# starts, which starts or stops this unit. Ends with the sway session.
+PartOf=graphical-session.target
+After=graphical-session.target
+Requisite=graphical-session.target
+
+[Service]
+# -O holds one fixed temperature until the process exits; the gamma ramp is
+# reset on exit, so stopping the unit restores neutral colors.
+ExecStart=/usr/bin/gammastep -m wayland -O 4000
+Restart=on-failure
+RestartSec=2
