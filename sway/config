@@ -39,12 +39,12 @@ set $right  l
 # resize
 set $resize_delta 1
 
-# Colors: Nightfox. The default is terafox (dark); $mod+Shift+t switches
-# between terafox and dawnfox (light) via scripts/sway/theme, which links
+# Colors: Gruvbox Material (medium, material). Dark by default; $mod+Shift+t switches
+# between the dark and light variants via scripts/sway/theme, which links
 # ~/.local/state/sway/theme.conf to one of themes/*.conf.
 # Sway has no set_from_resource, so colors come from these files instead of
 # ~/.Xresources.
-include ~/.config/sway/themes/terafox.conf
+include ~/.config/sway/themes/gruvbox-material-dark.conf
 include ~/.local/state/sway/theme.conf
 
 # Workspaces (icons: Nerd Fonts v3 codepoints)
@@ -175,7 +175,7 @@ bindsym $mod+Shift+x exec NB=$bg NF=$red SB=$red SF=$bg LOCK_BG=$red $scripts/ex
 # screen layouts (arandr replacement)
 bindsym $mod+Shift+s exec wdisplays
 
-# light / dark theme (terafox <-> dawnfox), also flips WezTerm, GTK and KDE apps
+# light / dark theme (dark <-> light), also flips WezTerm, GTK and KDE apps
 bindsym $mod+Shift+t exec $scripts/theme toggle
 
 ############################################################

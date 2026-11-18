@@ -21,7 +21,7 @@ end
 -- ============================================================
 -- Theme family: "default" | "gruvboxMaterial" | "kanagawa" | "solawarm" | "solarized" | "nightfox"
 -- ============================================================
-local theme_family_name = "nightfox"
+local theme_family_name = "gruvboxMaterial"
 
 config.color_schemes = colors.schemes
 theme.apply(config, colors.families[theme_family_name])

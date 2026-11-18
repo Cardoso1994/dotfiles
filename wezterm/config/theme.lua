@@ -18,8 +18,34 @@ local function get_appearance()
 	return "Dark"
 end
 
+-- The sway theme script links this file to the active themes/*.conf. It is
+-- more reliable than the portal signal, which a long-lived GUI process can
+-- miss (it then keeps handing the stale scheme to new windows).
+local state_link = (os.getenv("XDG_STATE_HOME") or (os.getenv("HOME") .. "/.local/state"))
+	.. "/sway/theme.conf"
+
+-- Returns "light", "dark" or nil when the link is missing.
+local function state_period()
+	local p = io.popen("readlink " .. state_link .. " 2>/dev/null")
+	if not p then
+		return nil
+	end
+	local out = p:read("*a") or ""
+	p:close()
+	if out:find("dark") then
+		return "dark"
+	elseif out:find("light") then
+		return "light"
+	end
+	return nil
+end
+
 -- "light" or "dark". Matches "Dark" and "DarkHighContrast" alike.
 function M.current_period()
+	local from_state = state_period()
+	if from_state then
+		return from_state
+	end
 	if get_appearance():find("Dark") then
 		return "dark"
 	end

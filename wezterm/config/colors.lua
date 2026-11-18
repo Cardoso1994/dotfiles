@@ -312,7 +312,7 @@ local neosolarized_light = {
 
 -- Nightfox, matching lua/custom/plugins/nightfox.lua in the nvim config.
 -- Copied verbatim from the plugin's own WezTerm exports
--- (extra/dawnfox/wezterm.toml and extra/terafox/wezterm.toml in
+-- (extra/dawnfox/wezterm.toml and extra/carbonfox/wezterm.toml in
 -- EdenEast/nightfox.nvim, commit 4dacd3f).
 local function nightfox_tab_bar(c)
 	return {
@@ -356,32 +356,32 @@ local dawnfox = {
 	}),
 }
 
--- Terafox (Dark)
-local terafox = {
-	foreground = "#e6eaea",
-	background = "#152528",
-	cursor_bg = "#e6eaea",
-	cursor_border = "#e6eaea",
-	cursor_fg = "#152528",
-	compose_cursor = "#ff8349",
-	selection_bg = "#293e40",
-	selection_fg = "#e6eaea",
-	scrollbar_thumb = "#587b7b",
-	split = "#0f1c1e",
-	visual_bell = "#e6eaea",
-	ansi = { "#2f3239", "#e85c51", "#7aa4a1", "#fda47f", "#5a93aa", "#ad5c7c", "#a1cdd8", "#ebebeb" },
-	brights = { "#4e5157", "#eb746b", "#8eb2af", "#fdb292", "#73a3b7", "#b97490", "#afd4de", "#eeeeee" },
-	indexed = { [16] = "#cb7985", [17] = "#ff8349" },
+-- Carbonfox (Dark)
+local carbonfox = {
+	foreground = "#f2f4f8",
+	background = "#161616",
+	cursor_bg = "#f2f4f8",
+	cursor_border = "#f2f4f8",
+	cursor_fg = "#161616",
+	compose_cursor = "#3ddbd9",
+	selection_bg = "#2a2a2a",
+	selection_fg = "#f2f4f8",
+	scrollbar_thumb = "#7b7c7e",
+	split = "#0c0c0c",
+	visual_bell = "#f2f4f8",
+	ansi = { "#282828", "#ee5396", "#25be6a", "#08bdba", "#78a9ff", "#be95ff", "#33b1ff", "#dfdfe0" },
+	brights = { "#484848", "#f16da6", "#46c880", "#2dc7c4", "#8cb6ff", "#c8a5ff", "#52bdff", "#e4e4e5" },
+	indexed = { [16] = "#ff7eb6", [17] = "#3ddbd9" },
 	tab_bar = nightfox_tab_bar({
-		bar = "#0f1c1e",
-		bg = "#152528",
-		fg = "#e6eaea",
-		dim_fg = "#cbd9d8",
-		active_bg = "#587b7b",
-		active_fg = "#152528",
-		inactive_bg = "#1d3337",
-		hover_bg = "#254147",
-		hover_edge = "#1d3337",
+		bar = "#0c0c0c",
+		bg = "#161616",
+		fg = "#f2f4f8",
+		dim_fg = "#b6b8bb",
+		active_bg = "#7b7c7e",
+		active_fg = "#161616",
+		inactive_bg = "#252525",
+		hover_bg = "#353535",
+		hover_edge = "#252525",
 	}),
 }
 
@@ -398,7 +398,7 @@ M.schemes = {
 	["SolarizedLight"] = neosolarized_light,
 	["SolarizedDark"] = neosolarized_dark,
 	["Dawnfox"] = dawnfox,
-	["Terafox"] = terafox,
+	["Carbonfox"] = carbonfox,
 }
 
 -- Light/dark scheme name pairs, keyed by the `theme_family` setting in
@@ -409,7 +409,7 @@ M.families = {
 	kanagawa = { light = "KanagawaLight", dark = "KanagawaDark" },
 	solawarm = { light = "SolawarmLight", dark = "SolawarmDark" },
 	solarized = { light = "SolarizedLight", dark = "SolarizedDark" },
-	nightfox = { light = "Dawnfox", dark = "Terafox" },
+	nightfox = { light = "Dawnfox", dark = "Carbonfox" },
 }
 
 return M

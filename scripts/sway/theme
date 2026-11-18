@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Switch the desktop between Nightfox dark (terafox) and light (dawnfox).
+# Switch the desktop between Gruvbox Material dark and light (medium, material).
 # Usage: theme dark|light|toggle|auto
 #   auto: light from LIGHT_FROM to DARK_FROM (hours, default 7 and 19), else
 #         dark. Fallback only: darkman (sunrise/sunset)
@@ -7,26 +7,26 @@
 #
 # - sway colors: links ~/.local/state/sway/theme.conf to a themes/*.conf
 # - GTK apps, browsers and WezTerm (through the desktop portal): gsettings
-#   color-scheme. WezTerm then picks dawnfox/terafox by itself.
+#   color-scheme. WezTerm then picks its Gruvbox Material variant by itself.
 # - KDE/Qt apps: Breeze Light / Breeze Dark color scheme
 state_dir="${XDG_STATE_HOME:-$HOME/.local/state}/sway"
 link="$state_dir/theme.conf"
 themes="$HOME/.config/sway/themes"
 
 current=$(basename "$(readlink "$link" 2>/dev/null)" .conf)
-[ -n "$current" ] || current=terafox
+[ -n "$current" ] || current=gruvbox-material-dark
 
 case "${1:-toggle}" in
-    dark)   want=terafox ;;
-    light)  want=dawnfox ;;
-    toggle) if [ "$current" = terafox ]; then want=dawnfox; else want=terafox; fi ;;
+    dark)   want=gruvbox-material-dark ;;
+    light)  want=gruvbox-material-light ;;
+    toggle) if [ "$current" = gruvbox-material-dark ]; then want=gruvbox-material-light; else want=gruvbox-material-dark; fi ;;
     auto)   hour=$((10#$(date +%H)))
             if [ "$hour" -ge "${LIGHT_FROM:-7}" ] && [ "$hour" -lt "${DARK_FROM:-19}" ]
-            then want=dawnfox; else want=terafox; fi ;;
+            then want=gruvbox-material-light; else want=gruvbox-material-dark; fi ;;
     *)      echo "usage: $(basename "$0") dark|light|toggle|auto" >&2; exit 2 ;;
 esac
 
-if [ "$want" = terafox ]; then
+if [ "$want" = gruvbox-material-dark ]; then
     scheme=prefer-dark; kde=BreezeDark
 else
     scheme=prefer-light; kde=BreezeLight
@@ -38,6 +38,9 @@ ln -sfn "$themes/$want.conf" "$link"
 gsettings set org.gnome.desktop.interface color-scheme "$scheme" 2>/dev/null \
     || gsettings set org.gnome.desktop.interface color-scheme default
 command -v plasma-apply-colorscheme >/dev/null && plasma-apply-colorscheme "$kde" >/dev/null 2>&1
+
+# WezTerm can miss the portal signal: force every GUI instance to re-evaluate
+touch "$HOME/.config/wezterm/wezterm.lua" 2>/dev/null
 
 # sway already has the right colors: skip the reload and the notification
 [ "$want" = "$current" ] && [ -e "$link" ] && exit 0
