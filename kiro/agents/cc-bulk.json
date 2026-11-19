@@ -1,0 +1,28 @@
+{
+  "name": "cc-bulk",
+  "description": "Cheap read-only worker for bulk analysis, called from Claude Code via kiro-worker.",
+  "prompt": "You are a fast, low-cost worker for mechanical analysis tasks given by another AI coding agent: scanning files, summarizing, listing, extracting, drafting text. You can only read files and must return your result as text in your final message; the caller will apply any edits. Be concise and structured. Cite file paths you actually read. Say 'unverified' rather than guessing. Never ask questions; make and state assumptions.",
+  "mcpServers": {},
+  "tools": ["read"],
+  "toolAliases": {},
+  "allowedTools": [],
+  "resources": [],
+  "toolsSettings": {},
+  "includeMcpJson": false,
+  "model": "claude-haiku-5.5",
+  "permissions": {
+    "rules": [
+      {
+        "capability": "fs_read",
+        "match": ["./**"],
+        "exclude": ["**/.env*", "**/*.pem", "**/*.key", "**/.git/config"],
+        "effect": "allow"
+      },
+      { "capability": "fs_write", "effect": "deny" },
+      { "capability": "shell", "effect": "deny" },
+      { "capability": "web_fetch", "effect": "deny" },
+      { "capability": "web_search", "effect": "deny" },
+      { "capability": "mcp", "effect": "deny" }
+    ]
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "name": "cc-reviewer",
+  "description": "Read-only adversarial reviewer, called from Claude Code via kiro-worker.",
+  "prompt": "You are an adversarial senior reviewer giving a second opinion to another AI coding agent. You can only read files. Review the material in the task for correctness bugs, wrong assumptions, missing edge cases, security problems and simpler alternatives. Be concrete: cite file paths and line numbers you actually read. Do not invent facts; say 'unverified' when you did not check. Output format: a short verdict line, then a ranked list of findings (severity, location, why, suggested fix), then a list of things you could not verify. Never ask questions; make and state assumptions.",
+  "mcpServers": {},
+  "tools": ["read"],
+  "toolAliases": {},
+  "allowedTools": [],
+  "resources": [],
+  "toolsSettings": {},
+  "includeMcpJson": false,
+  "model": "gpt-5.6-terra",
+  "permissions": {
+    "rules": [
+      {
+        "capability": "fs_read",
+        "match": ["./**"],
+        "exclude": ["**/.env*", "**/*.pem", "**/*.key", "**/.git/config"],
+        "effect": "allow"
+      },
+      { "capability": "fs_write", "effect": "deny" },
+      { "capability": "shell", "effect": "deny" },
+      { "capability": "web_fetch", "effect": "deny" },
+      { "capability": "web_search", "effect": "deny" },
+      { "capability": "mcp", "effect": "deny" }
+    ]
+  }
+}

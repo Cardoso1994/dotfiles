@@ -1,0 +1,22 @@
+{
+  "name": "personal",
+  "description": "Kiro personal context with portable shared guidance only.",
+  "prompt": "Follow the globally configured portable steering. Do not load ~/.claude/CLAUDE.work.md or ~/dotfiles/claude/CLAUDE.work-wrapper.md.",
+  "mcpServers": {},
+  "tools": ["*"],
+  "toolAliases": {},
+  "allowedTools": [],
+  "resources": [],
+  "toolsSettings": {},
+  "includeMcpJson": true,
+  "model": null,
+  "permissions": {
+    "rules": [
+      {
+        "capability": "fs_read",
+        "match": ["./**"],
+        "effect": "allow"
+      }
+    ]
+  }
+}

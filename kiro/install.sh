@@ -1,15 +1,14 @@
 #!/usr/bin/env bash
 # Usage: ./install.sh
-# Symlinks Kiro CLI global config (~/.kiro) to this dotfiles directory and
-# applies managed CLI settings. Shared content (instructions, memory, skills,
-# hook scripts) lives in ../claude and is reused, not copied.
-# Set DRY_RUN=1 to print what would change without touching anything.
+# Installs stable Kiro configuration as symlinks into ~/.kiro. Shared content
+# lives in ../claude; Kiro-owned identity, sessions, logs, and cli.json stay
+# local. Set DRY_RUN=1 to show intended changes without writing.
 
 set -euo pipefail
 
 DOTFILES_KIRO="$(cd "$(dirname "$0")" && pwd)"
 DOTFILES_CLAUDE="$(cd "$DOTFILES_KIRO/../claude" && pwd)"
-KIRO_DIR="${KIRO_HOME:-$HOME/.kiro}"
+KIRO_DIR="$HOME/.kiro"
 
 run() {
   if [[ -n "${DRY_RUN:-}" ]]; then
@@ -19,49 +18,40 @@ run() {
   fi
 }
 
-# Create or fix a symlink; refuse to replace a real file or directory.
+# Create or fix a symlink. Existing real paths are never replaced because Kiro
+# may own them; move and inspect those paths before rerunning this installer.
 link() {
   local target="$1"
-  local link="$2"
+  local link_path="$2"
 
-  if [[ -L "$link" ]]; then
-    if [[ "$(readlink "$link")" == "$target" ]]; then
-      echo "ok      $link"
+  if [[ -L "$link_path" ]]; then
+    if [[ "$(/usr/bin/readlink "$link_path")" == "$target" ]]; then
+      echo "ok      $link_path"
       return
     fi
-    echo "update  $link -> $target"
-    run ln -sfn "$target" "$link"
-  elif [[ -e "$link" ]]; then
-    echo "Error: $link exists and is not a symlink. Move it first." >&2
+    echo "update  $link_path -> $target"
+    run ln -sfn "$target" "$link_path"
+  elif [[ -e "$link_path" ]]; then
+    echo "Error: $link_path is not a symlink. Inspect and move it first." >&2
     exit 1
   else
-    echo "create  $link -> $target"
-    run mkdir -p "$(dirname "$link")"
-    run ln -s "$target" "$link"
+    echo "create  $link_path -> $target"
+    run mkdir -p "$(dirname "$link_path")"
+    run ln -s "$target" "$link_path"
   fi
 }
 
-# ── Symlinks ─────────────────────────────────────────────────────────────────
-
-# Steering: Kiro-only notes plus in-repo symlinks to claude/CLAUDE.md and
-# selected claude/memory files (see kiro/steering/).
+# Kiro reads these stable files. Agent JSON includes only the work-only
+# Clockify server; includeMcpJson makes the shared global MCP file available to
+# both agents.
 link "$DOTFILES_KIRO/steering" "$KIRO_DIR/steering"
-
-# Skills: the same directory Claude Code uses.
 link "$DOTFILES_CLAUDE/skills" "$KIRO_DIR/skills"
-
-# Hooks: JSON definitions here, scripts shared from claude/hooks.
 link "$DOTFILES_KIRO/hooks" "$KIRO_DIR/hooks"
-
-# MCP servers. Note: `kiro-cli mcp add` may replace this symlink with a
-# regular file; re-run this script (it will refuse) and merge by hand.
+link "$DOTFILES_KIRO/agents" "$KIRO_DIR/agents"
 link "$DOTFILES_KIRO/mcp.json" "$KIRO_DIR/settings/mcp.json"
 
-# ── CLI settings ─────────────────────────────────────────────────────────────
-# cli.json is rewritten by Kiro itself (/settings, /model, session filters),
-# so it is not symlinked. Managed keys from settings.json are applied on top
-# through `kiro-cli settings`; keys Kiro writes on its own are left alone.
-
+# cli.json is deliberately not symlinked. Kiro rewrites it for model and
+# session preferences, while settings.json defines the small managed subset.
 jq -c 'to_entries[]' "$DOTFILES_KIRO/settings.json" | while read -r entry; do
   key=$(jq -r '.key' <<<"$entry")
   value=$(jq -r '.value | if type == "string" then . else tojson end' \
@@ -70,4 +60,4 @@ jq -c 'to_entries[]' "$DOTFILES_KIRO/settings.json" | while read -r entry; do
   run kiro-cli settings --global "$key" "$value" >/dev/null
 done
 
-echo "Done. Start a new Kiro session and run /config to verify."
+echo "Done. Start Kiro manually with --agent work or --agent personal."

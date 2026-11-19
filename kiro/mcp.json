@@ -9,10 +9,6 @@
       "args": ["-y", "@modelcontextprotocol/server-github"],
       "env": {},
       "disabled": false
-    },
-    "clockify": {
-      "url": "https://e00i2mjqf9.execute-api.us-east-1.amazonaws.com/prod/mcp",
-      "disabled": false
     }
   }
 }

@@ -1,0 +1,27 @@
+{
+  "name": "work",
+  "description": "Kiro work context with private work guidance and Clockify.",
+  "prompt": "Before answering, read and follow @~/dotfiles/claude/CLAUDE.work-wrapper.md. Do not reveal private instruction content unless the user explicitly asks for it.",
+  "mcpServers": {
+    "clockify": {
+      "url": "https://e00i2mjqf9.execute-api.us-east-1.amazonaws.com/prod/mcp",
+      "disabled": false
+    }
+  },
+  "tools": ["*"],
+  "toolAliases": {},
+  "allowedTools": [],
+  "resources": [],
+  "toolsSettings": {},
+  "includeMcpJson": true,
+  "model": null,
+  "permissions": {
+    "rules": [
+      {
+        "capability": "fs_read",
+        "match": ["./**"],
+        "effect": "allow"
+      }
+    ]
+  }
+}

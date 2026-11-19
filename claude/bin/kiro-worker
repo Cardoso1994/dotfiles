@@ -1,0 +1,156 @@
+#!/usr/bin/env python3
+"""Runs a read-only Kiro CLI worker on behalf of Claude Code.
+
+Reads the task prompt from stdin, runs `kiro-cli chat --v3 --no-interactive`
+with a fixed, locked-down agent profile, and prints Kiro's final answer on
+stdout followed by one footer line. Arbitrary kiro flags are deliberately not
+accepted, so the caller cannot enable `--trust-all-tools`.
+
+Usage:
+    kiro-worker ROLE [--model MODEL] [--timeout SECONDS] < prompt.txt
+"""
+
+import argparse
+import datetime
+import os
+import pathlib
+import re
+import signal
+import subprocess
+import sys
+import time
+
+GUARD_ENV = "KIRO_WORKER_ACTIVE"
+ROLE_AGENTS = {"reviewer": "cc-reviewer", "bulk": "cc-bulk"}
+MODEL_ALLOWLIST = frozenset({
+    "claude-haiku-5.5",
+    "claude-sonnet-5.5",
+    "claude-opus-5.5",
+    "gpt-5.6-luna",
+    "gpt-5.6-terra",
+    "gpt-5.6-sol",
+    "deepseek-3.2",
+    "glm-5",
+    "minimax-m2.5",
+    "qwen3-coder-next",
+})
+ANSI_RE = re.compile(r"\x1b\[[0-?]*[ -/]*[@-~]")
+AUTH_MARKERS = ("kiro-cli login", "not logged in", "sign in", "unauthorized")
+DEFAULT_TIMEOUT_S = 600
+MAX_OUTPUT_CHARS = 60000
+RUN_DIR = pathlib.Path.home() / ".cache" / "kiro-worker" / "runs"
+EXIT_USAGE = 2
+EXIT_TIMEOUT = 124
+EXIT_AUTH = 77
+
+
+def strip_ansi(text: str) -> str:
+    """Removes ANSI escape sequences from text."""
+    return ANSI_RE.sub("", text)
+
+
+def clean_answer(raw: str, limit: int = MAX_OUTPUT_CHARS) -> str:
+    """Normalizes Kiro stdout: strips ANSI and a leading '> ', caps size.
+
+    Args:
+        raw: Raw stdout from kiro-cli.
+        limit: Maximum characters to keep.
+
+    Returns:
+        The cleaned answer text.
+    """
+    text = strip_ansi(raw).strip()
+    text = text[2:] if text.startswith("> ") else text
+    return text[:limit] + ("\n[truncated]" if len(text) > limit else "")
+
+
+def looks_like_auth_failure(text: str) -> bool:
+    """Returns True if the text suggests an expired or missing login."""
+    lowered = text.lower()
+    return any(marker in lowered for marker in AUTH_MARKERS)
+
+
+def build_command(agent: str, model: str | None) -> list[str]:
+    """Builds the fixed kiro-cli argv; the prompt is sent on stdin."""
+    base = ["kiro-cli", "chat", "--v3", "--no-interactive", "--agent", agent]
+    return base + (["--model", model] if model else [])
+
+
+def parse_args(argv: list[str]) -> argparse.Namespace:
+    """Parses command-line arguments."""
+    parser = argparse.ArgumentParser(prog="kiro-worker", description=__doc__)
+    parser.add_argument("role", choices=sorted(ROLE_AGENTS))
+    parser.add_argument("--model", choices=sorted(MODEL_ALLOWLIST))
+    parser.add_argument("--timeout", type=int, default=DEFAULT_TIMEOUT_S)
+    return parser.parse_args(argv)
+
+
+def run_child(
+    cmd: list[str], prompt: str, timeout_s: int
+) -> tuple[int, str, str]:
+    """Runs the child in its own process group, killing the group on timeout.
+
+    Args:
+        cmd: Command to execute.
+        prompt: Text sent on the child's stdin.
+        timeout_s: Seconds before the whole process group is killed.
+
+    Returns:
+        Tuple of (return code, stdout, stderr); the code is EXIT_TIMEOUT if
+        the time limit was hit.
+    """
+    env = {**os.environ, GUARD_ENV: "1", "NO_COLOR": "1"}
+    proc = subprocess.Popen(
+        cmd,
+        stdin=subprocess.PIPE,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+        env=env,
+        start_new_session=True,
+    )
+    try:
+        out, err = proc.communicate(prompt, timeout=timeout_s)
+        return proc.returncode, out, err
+    except subprocess.TimeoutExpired:
+        os.killpg(proc.pid, signal.SIGKILL)
+        out, err = proc.communicate()
+        return EXIT_TIMEOUT, out or "", err or ""
+
+
+def write_logs(role: str, out: str, err: str) -> pathlib.Path:
+    """Writes raw stdout and stderr to the run directory; returns the stem."""
+    RUN_DIR.mkdir(parents=True, exist_ok=True)
+    stamp = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+    stem = RUN_DIR / f"{stamp}-{role}-{os.getpid()}"
+    stem.with_suffix(".out").write_text(out)
+    stem.with_suffix(".err").write_text(err)
+    return stem
+
+
+def main(argv: list[str]) -> int:
+    """Entry point."""
+    args = parse_args(argv)
+    if os.environ.get(GUARD_ENV):
+        print("kiro-worker: nested call refused", file=sys.stderr)
+        return EXIT_USAGE
+    prompt = sys.stdin.read().strip()
+    if not prompt:
+        print("kiro-worker: empty prompt on stdin", file=sys.stderr)
+        return EXIT_USAGE
+    cmd = build_command(ROLE_AGENTS[args.role], args.model)
+    started = time.monotonic()
+    code, out, err = run_child(cmd, prompt, args.timeout)
+    stem = write_logs(args.role, out, err)
+    if code != 0 and looks_like_auth_failure(out + err):
+        code = EXIT_AUTH
+        print("kiro-worker: login expired; ask the user to run "
+              "`! kiro-cli login`", file=sys.stderr)
+    print(clean_answer(out))
+    print(f"[kiro-worker role={args.role} model={args.model or 'agent'} "
+          f"exit={code} secs={time.monotonic() - started:.0f} log={stem}]")
+    return code
+
+
+if __name__ == "__main__":
+    sys.exit(main(sys.argv[1:]))
